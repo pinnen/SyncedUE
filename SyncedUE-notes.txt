@@ -1,0 +1,38 @@
+SyncedUE Notes
+==============
+(div. notering om SyncedUE-arbetet -nyaste överst, använd tangent F5 för att time-tagga nytt entry!)
+
+
+20:28 2015-02-24/GF
+- Om man direkt då man tagit ned SyncedUE från GitHub försöker starta VS2013-solution SyncedUE.sln
+så kommer man att få felet:
+
+SyncedUE (load failed) 
+"The Project File cannot be loaded"
+
+Det beror på att projektfilen ligger i "Intermediate\ProjectFiles\SyncedUE.vcxproj" som ej exister just nu eftersom denna katalog (Intermediate) ej är med i GitHub!
+
+Istället får man först start UNreal-projektet: SyncedUE.uproject
+som kommer att rapportera:
+
+
+---------------------------
+Missing SyncedUE Modules
+---------------------------
+The following modules are missing or built with a different engine version:
+
+UE4Editor-SyncedUE.dll
+
+Would you like to rebuild them now?
+---------------------------
+Yes   No   
+---------------------------
+
+
+
+-> svara YES!
+Nu skapas Intermediate-katalogen mm. 
+
+(men VS2013 kan fortfarande inte startas, ens efter fullt ombygge i UE - ngt annat fel???...)
+
+
