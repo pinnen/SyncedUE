@@ -39,13 +39,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Game Actors\IGameActor.cs" />
-    <Compile Include="InputCommands\Command.cs" />
-    <Compile Include="InputCommands\FireCommand.cs" />
-    <Compile Include="InputCommands\MoveCommand.cs" />
-    <Compile Include="InputCommands\PauseCommand.cs" />
-    <Compile Include="InputCommands\SelectCommand.cs" />
-    <Compile Include="InputCommands\SwitchCommand.cs" />
-    <Compile Include="InputCommands\TrailCommand.cs" />
     <Compile Include="State Machine\State.cs" />
     <Compile Include="State Machine\GameStateMachine.cs" />
     <Compile Include="Game\Player\Ability.cs" />
