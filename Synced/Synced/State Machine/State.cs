@@ -14,11 +14,11 @@ namespace Synced.State_Machine
 {
     abstract class State
     {
-        public abstract void Play(GameStateMachine gameStateMachine);
-        public abstract void Pause(GameStateMachine gameStateMachine);
-        public abstract void Resume(GameStateMachine gameStateMachine);
-        public abstract void Finish(GameStateMachine gameStateMachine);
-        public abstract void Rematch(GameStateMachine gameStateMachine);
-        public abstract void ReturnToMenu(GameStateMachine gameStateMachine);
+        public virtual void Play(GameStateMachine gameStateMachine) { }
+        public virtual void Pause(GameStateMachine gameStateMachine) { }
+        public virtual void Resume(GameStateMachine gameStateMachine) { }
+        public virtual void Finish(GameStateMachine gameStateMachine) { }
+        public virtual void Rematch(GameStateMachine gameStateMachine) { }
+        public virtual void ReturnToMenu(GameStateMachine gameStateMachine) { }
     }
 }

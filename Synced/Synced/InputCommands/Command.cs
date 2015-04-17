@@ -9,11 +9,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Synced.Game_Actors;
 
-namespace Synced.Input
+namespace Synced.InputCommands
 {
     abstract class Command
     {
-        public abstract void Execute();
+        public abstract void Execute(GameActor actor);
     }
 }

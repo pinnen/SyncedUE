@@ -38,6 +38,16 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Game Actors\IGameActor.cs" />
+    <Compile Include="InputCommands\Command.cs" />
+    <Compile Include="InputCommands\FireCommand.cs" />
+    <Compile Include="InputCommands\MoveCommand.cs" />
+    <Compile Include="InputCommands\PauseCommand.cs" />
+    <Compile Include="InputCommands\SelectCommand.cs" />
+    <Compile Include="InputCommands\SwitchCommand.cs" />
+    <Compile Include="InputCommands\TrailCommand.cs" />
+    <Compile Include="State Machine\State.cs" />
+    <Compile Include="State Machine\GameStateMachine.cs" />
     <Compile Include="Game\Player\Ability.cs" />
     <Compile Include="Game\ParticleEngine.cs" />
     <Compile Include="Game\Player\Player.cs" />
@@ -50,6 +60,10 @@
     <Compile Include="Game1.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="State Machine\GameState.cs" />
+    <Compile Include="State Machine\MenuState.cs" />
+    <Compile Include="State Machine\PauseState.cs" />
+    <Compile Include="State Machine\ScoreState.cs" />
     <Compile Include="Static Classes\AudioManager.cs" />
     <Compile Include="Static Classes\CollisionManager.cs" />
     <Compile Include="Static Classes\InputManager.cs" />
