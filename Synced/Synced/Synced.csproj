@@ -53,6 +53,7 @@
     <Compile Include="Static Classes\AudioManager.cs" />
     <Compile Include="Static Classes\CollisionManager.cs" />
     <Compile Include="Static Classes\InputManager.cs" />
+    <Compile Include="Static Classes\ResolutionManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">

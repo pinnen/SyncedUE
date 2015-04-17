@@ -1,6 +1,14 @@
-﻿using Microsoft.Xna.Framework;
+﻿// Game1.cs
+// Introduced: 2015-04-14
+// Last edited: 2015-04-14
+// Edited by:
+// Pontus Magnusson
+//
+// 
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Synced.State_Machine;
 
 namespace Synced
 {
