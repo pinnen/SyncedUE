@@ -18,5 +18,7 @@ namespace Synced.State_Machine
         {
             gameStateMachine.CurrentState = new MenuState();
         }
+        public override string GetStateName() { return "Score State"; }
+
     }
 }

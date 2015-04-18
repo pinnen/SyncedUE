@@ -8,7 +8,9 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Synced.Menu;
 using Synced.State_Machine;
+using Synced.Static_Classes;
 
 namespace Synced
 {
@@ -17,13 +19,21 @@ namespace Synced
     /// </summary>
     public class Game1 : Game
     {
-        GraphicsDeviceManager graphics;
-        SpriteBatch spriteBatch;
+// State debug
+        SpriteFont _debugSpriteFont;
+// State debug end
+        GraphicsDeviceManager _graphics;
+        SpriteBatch _spriteBatch;
+
+        GameStateMachine _gameStateMachine;
+
+        MenuScreen _menu;
+        
 
         public Game1()
             : base()
         {
-            graphics = new GraphicsDeviceManager(this);
+            _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
         }
 
@@ -36,8 +46,15 @@ namespace Synced
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
+            //_gameStateMachine = new GameStateMachine(new MenuState());
 
-            base.Initialize();
+            ResolutionManager.Init(ref _graphics);
+            ResolutionManager.SetVirtualResolution(1920, 1080);
+            ResolutionManager.SetResolution(GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width, GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height, false);
+
+            _menu = new MenuScreen("Interface/ControllerSelectionBackground", this);
+            _gameStateMachine = new GameStateMachine(new MenuState());
+            base.Initialize(); // Initializes all components
         }
 
         /// <summary>
@@ -47,9 +64,10 @@ namespace Synced
         protected override void LoadContent()
         {
             // Create a new SpriteBatch, which can be used to draw textures.
-            spriteBatch = new SpriteBatch(GraphicsDevice);
+            _spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
+            _debugSpriteFont = Content.Load<SpriteFont>("spritefont_debug");
         }
 
         /// <summary>
@@ -68,8 +86,11 @@ namespace Synced
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.A == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
+
+            if (GamePad.GetState(PlayerIndex.One).Buttons.A == ButtonState.Pressed)
+                _gameStateMachine.Play();
 
             // TODO: Add your update logic here
 
@@ -82,9 +103,12 @@ namespace Synced
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
-
             // TODO: Add your drawing code here
+
+            ResolutionManager.BeginDraw(); // Clear and viewport fix
+            _spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.LinearWrap, DepthStencilState.None, RasterizerState.CullNone, null, ResolutionManager.GetTransformationMatrix());
+            _spriteBatch.DrawString(_debugSpriteFont, _gameStateMachine.GetStateName(), new Vector2(50, 50), Color.Black);
+            _spriteBatch.End();
 
             base.Draw(gameTime);
         }

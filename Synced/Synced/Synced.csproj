@@ -38,7 +38,8 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Game Actors\IGameActor.cs" />
+    <Compile Include="Menu\MenuScreen.cs" />
+    <Compile Include="Game\Sprite.cs" />
     <Compile Include="State Machine\State.cs" />
     <Compile Include="State Machine\GameStateMachine.cs" />
     <Compile Include="Game\Player\Ability.cs" />

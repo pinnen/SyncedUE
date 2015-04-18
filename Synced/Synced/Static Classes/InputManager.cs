@@ -11,7 +11,6 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework;
-using Synced.Game_Actors;
 
 namespace Synced.Static_Classes
 {

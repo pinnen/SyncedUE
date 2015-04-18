@@ -14,6 +14,9 @@ namespace Synced.State_Machine
 {
     class GameState : State
     {
+        public GameState()
+        {
+        }
         public override void Pause(GameStateMachine gameStateMachine)
         {
             gameStateMachine.CurrentState = new PauseState();
@@ -23,5 +26,6 @@ namespace Synced.State_Machine
         {
             gameStateMachine.CurrentState = new ScoreState();
         }
+        public override string GetStateName() { return "Game State"; }
     }
 }

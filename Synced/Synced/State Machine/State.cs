@@ -20,5 +20,6 @@ namespace Synced.State_Machine
         public virtual void Finish(GameStateMachine gameStateMachine) { }
         public virtual void Rematch(GameStateMachine gameStateMachine) { }
         public virtual void ReturnToMenu(GameStateMachine gameStateMachine) { }
+        public virtual string GetStateName() { return "No State"; }
     }
 }

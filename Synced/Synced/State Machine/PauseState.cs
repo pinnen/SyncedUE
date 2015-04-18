@@ -18,5 +18,6 @@ namespace Synced.State_Machine
         {
             gameStateMachine.CurrentState = new GameState();
         }
+        public override string GetStateName() { return "Pause State"; }
     }
 }

@@ -22,8 +22,8 @@ namespace Synced.State_Machine
 
         public State CurrentState
         {
-            get;
-            set;
+            get { return _currentState; }
+            set { _currentState = value;}
         }
 
         public void Play()
@@ -49,6 +49,10 @@ namespace Synced.State_Machine
         public void ReturnToMenu()
         {
             _currentState.ReturnToMenu(this);
+        }
+        public string GetStateName()
+        {
+            return _currentState.GetStateName();
         }
     }
 }
