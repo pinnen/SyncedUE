@@ -14,7 +14,7 @@ using Microsoft.Xna.Framework;
 
 namespace Synced.Static_Classes
 {
-    class InputManager
+    static class InputManager
     {
 
 

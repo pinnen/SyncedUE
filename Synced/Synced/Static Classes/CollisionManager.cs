@@ -12,7 +12,7 @@ using System.Text;
 
 namespace Synced.Static_Classes
 {
-    class CollisionManager
+    static class CollisionManager
     {
     }
 }

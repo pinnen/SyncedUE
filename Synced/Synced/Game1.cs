@@ -54,6 +54,11 @@ namespace Synced
 
             _menu = new MenuScreen("Interface/ControllerSelectionBackground", this);
             _gameStateMachine = new GameStateMachine(new MenuState());
+
+            // Create a new spritebatch and add it as service for access by other classes
+            _spriteBatch = new SpriteBatch(GraphicsDevice);
+            Services.AddService(typeof(SpriteBatch), _spriteBatch);
+
             base.Initialize(); // Initializes all components
         }
 
@@ -63,8 +68,6 @@ namespace Synced
         /// </summary>
         protected override void LoadContent()
         {
-            // Create a new SpriteBatch, which can be used to draw textures.
-            _spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
             _debugSpriteFont = Content.Load<SpriteFont>("spritefont_debug");
