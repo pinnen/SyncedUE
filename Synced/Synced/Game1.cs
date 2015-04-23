@@ -46,10 +46,8 @@ namespace Synced
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-            //_gameStateMachine = new GameStateMachine(new MenuState());
-
             ResolutionManager.Init(ref _graphics);
-            ResolutionManager.SetVirtualResolution(1920, 1080);
+            ResolutionManager.SetVirtualResolution(1920, 1080); // TODO magic resolution values.
             ResolutionManager.SetResolution(GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width, GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height, false);
 
             _menu = new MenuScreen("Interface/ControllerSelectionBackground", this);

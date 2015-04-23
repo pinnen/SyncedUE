@@ -8,26 +8,26 @@ namespace Synced.Static_Classes
 {
     static class GameColors
     {
-        public static enum RedTeam
-        {
-            Left = Color.Red,
-            Right = Color.DarkRed,
-            Crystal = Color.Maroon
-        }
+        //public enum RedTeam
+        //{
+        //    Left = Color.Red,
+        //    Right = Color.DarkRed,
+        //    Crystal = Color.Maroon
+        //}
 
-        public static enum BlueTeam
-        {
-            Left = Color.Blue,
-            Right = Color.DarkBlue,
-            Crystal = Color.Navy
-        }
+        //public enum BlueTeam
+        //{
+        //    Left = Color.Blue,
+        //    Right = Color.DarkBlue,
+        //    Crystal = Color.Navy
+        //}
 
-        public static enum GreenTeam
-        {
-        }
+        //public enum GreenTeam
+        //{
+        //}
 
-        public static enum YellowTeam
-        {
-        }
+        //public enum YellowTeam
+        //{
+        //}
     }
 }

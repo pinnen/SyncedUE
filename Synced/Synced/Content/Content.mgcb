@@ -173,3 +173,9 @@
 /processorParam:TextureFormat=Color
 /build:Interface/zoneAbilityText.png
 
+#begin menufont.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:TextureFormat=Compressed
+/build:menufont.spritefont
+
