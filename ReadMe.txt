@@ -1,7 +1,7 @@
 Notes on Build Environment.
 ===========================
 
-16:05 2015-04-26/GF
+16:23 2015-04-26/GF
 
 
 In NetCenter PC:s the used files are stored here: 
