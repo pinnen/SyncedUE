@@ -68,7 +68,7 @@ namespace Synced
         {
 
             // TODO: use this.Content to load your game content here
-            _debugSpriteFont = Content.Load<SpriteFont>("spritefont_debug");
+            _debugSpriteFont = Content.Load<SpriteFont>("Fonts/spritefont_debug");
         }
 
         /// <summary>

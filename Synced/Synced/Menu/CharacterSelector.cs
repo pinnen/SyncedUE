@@ -88,7 +88,7 @@ namespace Synced.Menu
 
         protected override void LoadContent()
         {
-            _font = Game.Content.Load<SpriteFont>("menufont");
+            _font = Game.Content.Load<SpriteFont>("Fonts/menufont");
             base.LoadContent();
         }
         public override void Update(GameTime gameTime)
