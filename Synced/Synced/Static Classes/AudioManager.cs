@@ -5,6 +5,7 @@
 // Göran F
 //
 // 
+// ToDo: Status: just started....
 
 using System;
 using System.Collections.Generic;
@@ -13,6 +14,7 @@ using System.Text;
 
 // using MonoGame.Framework;
 // using MonoGame.Framework.Content.Pipeline;  "Content"" felar???
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 
 namespace Synced.Static_Classes
@@ -34,15 +36,27 @@ namespace Synced.Static_Classes
         static Cue mBlowUpZoneCue;
         static Cue mBarrierBreakCue;
         static Cue mBarrierCrystalCaptureCue;
-
+        static SoundEffect mSoundEffect;
         static bool mGameIsRunning;
-
-        static public void AudioLoadContent()
+        static void xxx(int i)
         {
-            mAudioEngine = new AudioEngine(@"Content\Audio\GameAudio.xgs"); // sic! compiled version of .xap
-            mWaveBank = new WaveBank(mAudioEngine, @"Content\Audio\Wave Bank.xwb");
-            mSoundBank = new SoundBank(mAudioEngine, @"Content\Audio\Sound Bank.xsb"); ;
-            PlayStartSound();
+
+        }
+    
+        static public void AudioLoadContent(Game _game)
+        {
+
+            mSoundEffect = _game.Content.Load<SoundEffect>(@"Audio\Busy");
+            mSoundEffect.Play();
+
+           //  mAudioEngine = new AudioEngine(@"Content\Audio\GameAudio.xgs"); // sic! compiled version of .xap
+            
+            //mAudioEngine = new AudioEngine(@"Content\Audio\"); 
+  
+
+            //mWaveBank = new WaveBank(mAudioEngine, @"Content\Audio\Wave Bank.xwb");
+            //mSoundBank = new SoundBank(mAudioEngine, @"Content\Audio\Sound Bank.xsb"); ;
+            //PlayStartSound();
         }
 
         static public void AudioUpdate()
