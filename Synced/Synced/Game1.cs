@@ -69,6 +69,9 @@ namespace Synced
 
             // TODO: use this.Content to load your game content here
             _debugSpriteFont = Content.Load<SpriteFont>("Fonts/spritefont_debug");
+
+            // KB29: AudioManager...
+            AudioManager.AudioLoadContent(this);
         }
 
         /// <summary>
