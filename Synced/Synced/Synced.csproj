@@ -61,6 +61,7 @@
     <Compile Include="State Machine\ScoreState.cs" />
     <Compile Include="Static Classes\AudioManager.cs" />
     <Compile Include="Static Classes\CollisionManager.cs" />
+    <Compile Include="Static Classes\DebuggingHelper.cs" />
     <Compile Include="Static Classes\DrawingHelper.cs" />
     <Compile Include="Static Classes\GameColors.cs" />
     <Compile Include="Static Classes\InputManager.cs" />
