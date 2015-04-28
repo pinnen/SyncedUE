@@ -9,6 +9,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Synced.Menu;
+using Synced.Player;
 using Synced.State_Machine;
 using Synced.Static_Classes;
 
@@ -28,7 +29,8 @@ namespace Synced
         GameStateMachine _gameStateMachine;
 
         MenuScreen _menu;
-        
+
+        Unit unitTest;
 
         public Game1()
             : base()
@@ -52,6 +54,8 @@ namespace Synced
 
             _menu = new MenuScreen("Interface/ControllerSelectionBackground", this);
             _gameStateMachine = new GameStateMachine(new MenuState());
+
+            unitTest = new Unit("Game Objects/Characters/Hexagon", this);
 
             // Create a new spritebatch and add it as service for access by other classes
             _spriteBatch = new SpriteBatch(GraphicsDevice);
