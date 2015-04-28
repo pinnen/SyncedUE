@@ -127,7 +127,7 @@ namespace Synced.Static_Classes
                 mStartSoundEffect.IsLooped = true;
 
                 // ToDo experiments...
-                mStartSoundEffect.Volume = 1.0f;
+                mStartSoundEffect.Volume = 0.2f;
                 mStartSoundEffect.Pan = -0.5f;
                 mStartSoundEffect.Pitch = 0.1f;
 
