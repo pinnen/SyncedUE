@@ -1,11 +1,21 @@
 ﻿// AudioManager.cs
 // Introduced: 2015-04-14
-// Last edited: 2015-04-26
+// Last edited: 2015-04-28
 // Edited by:
 // Göran F
 //
 // 
-// ToDo: Status: just started....
+// Status: Adapted for MonoGames without .xgs-file
+// Info from:
+// http://rbwhitaker.wikidot.com/playing-sound-effects
+// http://www.codeproject.com/Articles/577375/TheplusdifferencesplusbetweenplusSoundEffectplusan
+// https://www.youtube.com/watch?v=inJK28LdGbI&index=27
+// 
+// Notes:
+// Use "SoundEffectInstance" instead of "SoundEffect" for higher level of control.
+//
+
+// ToDo: bara två ljudeffekter aktiva f.n.
 
 using System;
 using System.Collections.Generic;
@@ -22,22 +32,21 @@ namespace Synced.Static_Classes
     static class AudioManager
     {
         // KB29: AudioManager...
-        static AudioEngine mAudioEngine;
-        static WaveBank mWaveBank;
-        static SoundBank mSoundBank;
-        static Cue mStartCue;
-        static Cue mGameCue;
-        static Cue mCrystalCaptureCue;
-        static Cue mCrystalShootCue;
-        static Cue mApplauseCue;
-        static Cue mScoreCue;
-        static Cue mScoreContCue;
-        static Cue mExpandZoneCue;
-        static Cue mBlowUpZoneCue;
-        static Cue mBarrierBreakCue;
-        static Cue mBarrierCrystalCaptureCue;
-        static SoundEffect mSoundEffect;
+        static SoundEffectInstance mStartSoundEffect;
+        static SoundEffectInstance mGameSoundEffect;
+        static SoundEffectInstance mCrystalCaptureSoundEffect;
+        static SoundEffectInstance mCrystalShootSoundEffect;
+        static SoundEffectInstance mApplauseSoundEffect;
+        static SoundEffectInstance mScoreSoundEffect;
+        static SoundEffectInstance mScoreContSoundEffect;
+        static SoundEffectInstance mExpandZoneSoundEffect;
+        static SoundEffectInstance mBlowUpZoneSoundEffect;
+        static SoundEffectInstance mBarrierBreakSoundEffect;
+        static SoundEffectInstance mBarrierCrystalCaptureSoundEffect;
+
         static bool mGameIsRunning;
+
+
         static void xxx(int i)
         {
 
@@ -45,23 +54,68 @@ namespace Synced.Static_Classes
     
         static public void AudioLoadContent(Game _game)
         {
+            // Prepare by loading used sound effects from xnb.-files (created by MonoGame tool "MonoGame Pileline")
 
-            mSoundEffect = _game.Content.Load<SoundEffect>(@"Audio\Busy");
-            mSoundEffect.Play();
+            SoundEffect soundEffect; // ToDo: Behövs bara temp???
 
-           //  mAudioEngine = new AudioEngine(@"Content\Audio\GameAudio.xgs"); // sic! compiled version of .xap
+            soundEffect = _game.Content.Load<SoundEffect>(@"Audio\start");
+            mStartSoundEffect = soundEffect.CreateInstance();
+
+            soundEffect = _game.Content.Load<SoundEffect>(@"Audio\game");
+            mGameSoundEffect = soundEffect.CreateInstance();
+
+            soundEffect = _game.Content.Load<SoundEffect>(@"Audio\crystalCapture");
+            mCrystalCaptureSoundEffect = soundEffect.CreateInstance();
+
+            soundEffect = _game.Content.Load<SoundEffect>(@"Audio\crystalShoot-2");
+            mCrystalShootSoundEffect = soundEffect.CreateInstance();
+
+            soundEffect = _game.Content.Load<SoundEffect>(@"Audio\goalApplause");
+            mApplauseSoundEffect = soundEffect.CreateInstance();
+
+            soundEffect = _game.Content.Load<SoundEffect>(@"Audio\goal");
+            mScoreSoundEffect = soundEffect.CreateInstance();
+
+            soundEffect = _game.Content.Load<SoundEffect>(@"Audio\splash-to-drop");
+            mScoreContSoundEffect = soundEffect.CreateInstance();
+
+            soundEffect = _game.Content.Load<SoundEffect>(@"Audio\expand_zone");
+            mExpandZoneSoundEffect = soundEffect.CreateInstance();
+
+            soundEffect = _game.Content.Load<SoundEffect>(@"Audio\blow-up-zone");
+            mBlowUpZoneSoundEffect = soundEffect.CreateInstance();
+
+            soundEffect = _game.Content.Load<SoundEffect>(@"Audio\barrier_break");
+            mBarrierBreakSoundEffect = soundEffect.CreateInstance();
+
+            soundEffect = _game.Content.Load<SoundEffect>(@"Audio\barrier_crystal_capture");
+            mBarrierCrystalCaptureSoundEffect = soundEffect.CreateInstance();
             
-            //mAudioEngine = new AudioEngine(@"Content\Audio\"); 
-  
 
-            //mWaveBank = new WaveBank(mAudioEngine, @"Content\Audio\Wave Bank.xwb");
-            //mSoundBank = new SoundBank(mAudioEngine, @"Content\Audio\Sound Bank.xsb"); ;
-            //PlayStartSound();
+            PlayStartSound();
+        }
+
+        static public void UnloadAudioContent()
+        {
+            // ...
+            mStartSoundEffect.Dispose();
+            mGameSoundEffect.Dispose();
+            mCrystalCaptureSoundEffect.Dispose();
+            mCrystalShootSoundEffect.Dispose();
+            mApplauseSoundEffect.Dispose();
+            mScoreSoundEffect.Dispose();
+            mScoreContSoundEffect.Dispose();
+            mExpandZoneSoundEffect.Dispose();
+            mBlowUpZoneSoundEffect.Dispose();
+            mBarrierBreakSoundEffect.Dispose();
+            mBarrierCrystalCaptureSoundEffect.Dispose();
+            // ...
         }
 
         static public void AudioUpdate()
         {
-            mAudioEngine.Update(); // As recommended on page 85
+            // ToDo: not used in MonoGame???
+            // mAudioEngine.Update(); // As recommended on page 85 in XNA-book!
         }
 
 
@@ -70,8 +124,15 @@ namespace Synced.Static_Classes
             if (false == mGameIsRunning)
             {
                 DebuggingHelper.AddLog("Audio - PlayStartSound", 0);
-                mStartCue = mSoundBank.GetCue("start");
-                mStartCue.Play();
+                mStartSoundEffect.IsLooped = true;
+
+                // ToDo experiments...
+                mStartSoundEffect.Volume = 1.0f;
+                mStartSoundEffect.Pan = -0.5f;
+                mStartSoundEffect.Pitch = 0.1f;
+
+                mStartSoundEffect.Play();
+                mGameSoundEffect.Stop();
             }
         }
 
@@ -80,9 +141,9 @@ namespace Synced.Static_Classes
             if (false == mGameIsRunning)
             {
                 DebuggingHelper.AddLog("Audio - PlayGameSound", 0);
-                mGameCue = mSoundBank.GetCue("game");
-                mGameCue.Play();
-                mStartCue.Stop(AudioStopOptions.Immediate);
+                mGameSoundEffect.IsLooped = true;
+                mGameSoundEffect.Play();
+                mStartSoundEffect.Stop();
                 mGameIsRunning = true;
             }
         }
@@ -90,59 +151,50 @@ namespace Synced.Static_Classes
         static public void PlayCrystalCaptureSound()
         {
             DebuggingHelper.AddLog("Audio - PlayCrystalCaptureSound", 0);
-            mCrystalCaptureCue = mSoundBank.GetCue("crystalCapture");
-            mCrystalCaptureCue.Play();
+            mCrystalCaptureSoundEffect.Play();
         }
 
         static public void PlayCrystalShootSound()
         {
             DebuggingHelper.AddLog("Audio - PlayCrystalShootSound", 0);
-            mCrystalShootCue = mSoundBank.GetCue("crystalShoot-2");
-            mCrystalShootCue.Play();
+            mCrystalShootSoundEffect.Play();
         }
 
         static public void PlayScoreSound()
         {
             DebuggingHelper.AddLog("Audio - PlayScoreSound", 0);
-            mScoreCue = mSoundBank.GetCue("goal");
-            mScoreCue.Play();
-            mApplauseCue = mSoundBank.GetCue("goalApplause");
-            mApplauseCue.Play();
+            mScoreSoundEffect.Play();
+            mApplauseSoundEffect.Play();
         }
 
         static public void PlayScoreContSound()
         {
             DebuggingHelper.AddLog("Audio - PlayScoreContSound", 0);
-            mScoreContCue = mSoundBank.GetCue("splash-to-drop");
-            mScoreContCue.Play();
+            mScoreContSoundEffect.Play();
         }
 
         static public void PlayExpandZoneSound()
         {
             DebuggingHelper.AddLog("Audio - PlayExpandZoneSound", 0);
-            mExpandZoneCue = mSoundBank.GetCue("expand-zone");
-            mExpandZoneCue.Play();
+            mExpandZoneSoundEffect.Play();
         }
 
         static public void PlayBlowUpZoneSound()
         {
             DebuggingHelper.AddLog("Audio - PlayBlowUpZoneSound", 0);
-            mBlowUpZoneCue = mSoundBank.GetCue("blow-up-zone");
-            mBlowUpZoneCue.Play();
+            mBlowUpZoneSoundEffect.Play();
         }
 
         static public void PlayBarrierBreakSound()
         {
             DebuggingHelper.AddLog("Audio - PlayBarrierBreakSound", 0);
-            mBarrierBreakCue = mSoundBank.GetCue("barrier_break");
-            mBarrierBreakCue.Play();
+            mBarrierBreakSoundEffect.Play();
         }
 
         static public void PlayBarrierCrystalCaptureSound()
         {
             DebuggingHelper.AddLog("Audio - PlayBarrierCrystalCaptureSound", 0);
-            mBarrierCrystalCaptureCue = mSoundBank.GetCue("barrier_crystal_capture");
-            mBarrierCrystalCaptureCue.Play();
+            mBarrierCrystalCaptureSoundEffect.Play();
         }
 
     }

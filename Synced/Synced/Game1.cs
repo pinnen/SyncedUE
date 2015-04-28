@@ -81,6 +81,9 @@ namespace Synced
         protected override void UnloadContent()
         {
             // TODO: Unload any non ContentManager content here
+
+            // KB29: AudioManager...
+            AudioManager.UnloadAudioContent();
         }
 
         /// <summary>
@@ -97,6 +100,12 @@ namespace Synced
                 _gameStateMachine.Play();
 
             // TODO: Add your update logic here
+            
+            // Update the debugger
+            DebuggingHelper.Update();
+
+            // KB29: Audio...
+            AudioManager.AudioUpdate();
 
             base.Update(gameTime);
         }
