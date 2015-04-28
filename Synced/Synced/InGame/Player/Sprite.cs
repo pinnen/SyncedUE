@@ -15,7 +15,6 @@ namespace Synced.Player
         string _texturePath;
         Vector2 _position;
         
-        
         // Provide access to the spritebatch through game services. 
         SpriteBatch _spriteBatch
         {
@@ -28,24 +27,6 @@ namespace Synced.Player
             _position = position;
             _texturePath = texturePath;
             DrawOrder = (int)drawingLevel;
-        }
-
-        /// <summary>
-        /// Add the sprite to the components list
-        /// </summary>
-        public void Enable()
-        {
-            //if (!Game.Components.Contains(this)) Game.Components.Add(this);
-            Enabled = true;
-        }
-
-        /// <summary>
-        /// Remove the sprite from the components list
-        /// </summary>
-        public void Disable()
-        {
-            //if(Game.Components.Contains(this)) Game.Components.Remove(this);
-            Enabled = false;
         }
 
         public override void Initialize()

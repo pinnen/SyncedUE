@@ -14,5 +14,6 @@ namespace Synced.Player
 {
     class Zone
     {
+        public enum Name { Circle, Triangle, Square, Pentagon, Hexagon }
     }
 }
