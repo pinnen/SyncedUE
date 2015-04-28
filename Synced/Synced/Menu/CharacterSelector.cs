@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Synced.InGame.Player;
 using Synced.Player;
 using Synced.Static_Classes;
 using System;
@@ -62,27 +63,22 @@ namespace Synced.Menu
 
         public override void Initialize()
         {
-            _pressToJoin = new Sprite("Interface/PressAToJoin", new Vector2(_rectangle.X + _rectangle.Width / 2, _rectangle.Y + _rectangle.Height / 2), DrawingHelper.DrawingLevel.Interface, Game);
-            _arrows = new Sprite("Interface/SelectionArrows", new Vector2(_rectangle.X + _rectangle.Width / 2, _rectangle.Y + _rectangle.Height / 2), DrawingHelper.DrawingLevel.Interface, Game);
+            float posX = _rectangle.X + _rectangle.Width / 2;
+            float posY = _rectangle.Y + _rectangle.Height / 2;
+            _pressToJoin = new Sprite("Interface/PressAToJoin", new Vector2(posX, posY), DrawingHelper.DrawingLevel.Interface, Game);
+            _arrows = new Sprite("Interface/SelectionArrows", new Vector2(posX, posY), DrawingHelper.DrawingLevel.Interface, Game);
 
-            _characterSprites = new List<Sprite>()
+            
+            _characterSprites = new List<Sprite>();
+            _abilityTexts = new List<Sprite>();
+            for (int i = 0; i < Enum.GetNames(typeof(Library.Character.Name)).Length; i++)
             {
-                new Sprite("SelectCircle", new Vector2(_rectangle.X + _rectangle.Width / 2, _rectangle.Y + _rectangle.Height / 2), DrawingHelper.DrawingLevel.Interface, Game),
-                new Sprite("SelectTriangle", new Vector2(_rectangle.X + _rectangle.Width / 2, _rectangle.Y + _rectangle.Height / 2), DrawingHelper.DrawingLevel.Interface, Game),
-                new Sprite("SelectSquare", new Vector2(_rectangle.X + _rectangle.Width / 2, _rectangle.Y + _rectangle.Height / 2), DrawingHelper.DrawingLevel.Interface, Game),
-                new Sprite("SelectPentagon", new Vector2(_rectangle.X + _rectangle.Width / 2, _rectangle.Y + _rectangle.Height / 2), DrawingHelper.DrawingLevel.Interface, Game),
-                new Sprite("SelectHexagon", new Vector2(_rectangle.X + _rectangle.Width / 2, _rectangle.Y + _rectangle.Height / 2), DrawingHelper.DrawingLevel.Interface, Game)                
-            };
+                _characterSprites.Add(new Sprite(Library.Character.InterfacePath[(Library.Character.Name)i], new Vector2(posX, posY), DrawingHelper.DrawingLevel.Interface, Game));
+                _abilityTexts.Add(new Sprite(Library.Character.InterfaceTextPath[(Library.Character.Name)i], new Vector2(posX, posY), DrawingHelper.DrawingLevel.Interface, Game));
+            }
 
-            _zone = new Sprite("zoneAbilityText", new Vector2((_rectangle.X + _rectangle.Width / 2) - 100, (_rectangle.Y + _rectangle.Height / 2) + 50), DrawingHelper.DrawingLevel.Interface, Game);
-            _abilityTexts = new List<Sprite>()
-            {
-                new Sprite("CirkelText", new Vector2((_rectangle.X + _rectangle.Width / 2) + 65, (_rectangle.Y + _rectangle.Height / 2) + 47), DrawingHelper.DrawingLevel.Interface, Game),
-                new Sprite("TriangelText", new Vector2((_rectangle.X + _rectangle.Width / 2) + 90, (_rectangle.Y + _rectangle.Height / 2) + 51), DrawingHelper.DrawingLevel.Interface, Game),
-                new Sprite("FyrkantText", new Vector2((_rectangle.X + _rectangle.Width / 2) + 80, (_rectangle.Y + _rectangle.Height / 2) + 51), DrawingHelper.DrawingLevel.Interface, Game),
-                new Sprite("PentagonText", new Vector2((_rectangle.X + _rectangle.Width / 2) + 105, (_rectangle.Y + _rectangle.Height / 2) + 52), DrawingHelper.DrawingLevel.Interface, Game),
-                new Sprite("HexagonText", new Vector2((_rectangle.X + _rectangle.Width / 2) + 50, (_rectangle.Y + _rectangle.Height / 2) + 52), DrawingHelper.DrawingLevel.Interface, Game)   
-            };
+            // TODO magic values :(
+            _zone = new Sprite("Interface/zoneAbilityText", new Vector2(posX - 100, posY + 50), DrawingHelper.DrawingLevel.Interface, Game);
 
             base.Initialize();
         }
@@ -120,15 +116,15 @@ namespace Synced.Menu
             switch (_currentState)
             {
                 case State.Unconnected:
-                    DrawingHelper.DrawString(_spriteBatch, _font, "Unconnected", _rectangle, Synced.Static_Classes.DrawingHelper.Alignment.Center, Color.White);
+                    DrawingHelper.DrawString(_spriteBatch, _font, "Unconnected", _rectangle, DrawingHelper.Alignment.Center, Color.White);
                     break;
                 case State.Connected:
-                    DrawingHelper.DrawString(_spriteBatch, _font, "Press A to Join", _rectangle, Synced.Static_Classes.DrawingHelper.Alignment.Center, Color.White);
+                    DrawingHelper.DrawString(_spriteBatch, _font, "Press A to Join", _rectangle, DrawingHelper.Alignment.Center, Color.White);
                     break;
                 case State.Joined:
                     break;
                 case State.Ready:
-                    DrawingHelper.DrawString(_spriteBatch, _font, "Ready!", _rectangle, Synced.Static_Classes.DrawingHelper.Alignment.Center, Color.White);
+                    DrawingHelper.DrawString(_spriteBatch, _font, "Ready!", _rectangle,DrawingHelper.Alignment.Center, Color.White);
                     break;
             }
 
