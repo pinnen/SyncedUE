@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Synced.Player;
 using Synced.Static_Classes;
 using System;
 using System.Collections.Generic;
@@ -61,26 +62,26 @@ namespace Synced.Menu
 
         public override void Initialize()
         {
-            _pressToJoin = new Sprite("Interface/PressAToJoin", new Vector2(_rectangle.X + _rectangle.Width / 2, _rectangle.Y + _rectangle.Height / 2), Game);
-            _arrows = new Sprite("Interface/SelectionArrows", new Vector2(_rectangle.X + _rectangle.Width / 2, _rectangle.Y + _rectangle.Height / 2), Game);
+            _pressToJoin = new Sprite("Interface/PressAToJoin", new Vector2(_rectangle.X + _rectangle.Width / 2, _rectangle.Y + _rectangle.Height / 2), DrawingHelper.DrawingLevel.Interface, Game);
+            _arrows = new Sprite("Interface/SelectionArrows", new Vector2(_rectangle.X + _rectangle.Width / 2, _rectangle.Y + _rectangle.Height / 2), DrawingHelper.DrawingLevel.Interface, Game);
 
             _characterSprites = new List<Sprite>()
             {
-                new Sprite("SelectCircle", new Vector2(_rectangle.X + _rectangle.Width / 2, _rectangle.Y + _rectangle.Height / 2), Game),
-                new Sprite("SelectTriangle", new Vector2(_rectangle.X + _rectangle.Width / 2, _rectangle.Y + _rectangle.Height / 2), Game),
-                new Sprite("SelectSquare", new Vector2(_rectangle.X + _rectangle.Width / 2, _rectangle.Y + _rectangle.Height / 2), Game),
-                new Sprite("SelectPentagon", new Vector2(_rectangle.X + _rectangle.Width / 2, _rectangle.Y + _rectangle.Height / 2), Game),
-                new Sprite("SelectHexagon", new Vector2(_rectangle.X + _rectangle.Width / 2, _rectangle.Y + _rectangle.Height / 2), Game)                
+                new Sprite("SelectCircle", new Vector2(_rectangle.X + _rectangle.Width / 2, _rectangle.Y + _rectangle.Height / 2), DrawingHelper.DrawingLevel.Interface, Game),
+                new Sprite("SelectTriangle", new Vector2(_rectangle.X + _rectangle.Width / 2, _rectangle.Y + _rectangle.Height / 2), DrawingHelper.DrawingLevel.Interface, Game),
+                new Sprite("SelectSquare", new Vector2(_rectangle.X + _rectangle.Width / 2, _rectangle.Y + _rectangle.Height / 2), DrawingHelper.DrawingLevel.Interface, Game),
+                new Sprite("SelectPentagon", new Vector2(_rectangle.X + _rectangle.Width / 2, _rectangle.Y + _rectangle.Height / 2), DrawingHelper.DrawingLevel.Interface, Game),
+                new Sprite("SelectHexagon", new Vector2(_rectangle.X + _rectangle.Width / 2, _rectangle.Y + _rectangle.Height / 2), DrawingHelper.DrawingLevel.Interface, Game)                
             };
 
-            _zone = new Sprite("zoneAbilityText", new Vector2((_rectangle.X + _rectangle.Width / 2) - 100, (_rectangle.Y + _rectangle.Height / 2) + 50), Game);
+            _zone = new Sprite("zoneAbilityText", new Vector2((_rectangle.X + _rectangle.Width / 2) - 100, (_rectangle.Y + _rectangle.Height / 2) + 50), DrawingHelper.DrawingLevel.Interface, Game);
             _abilityTexts = new List<Sprite>()
             {
-                new Sprite("CirkelText", new Vector2((_rectangle.X + _rectangle.Width / 2) + 65, (_rectangle.Y + _rectangle.Height / 2) + 47), Game),
-                new Sprite("TriangelText", new Vector2((_rectangle.X + _rectangle.Width / 2) + 90, (_rectangle.Y + _rectangle.Height / 2) + 51), Game),
-                new Sprite("FyrkantText", new Vector2((_rectangle.X + _rectangle.Width / 2) + 80, (_rectangle.Y + _rectangle.Height / 2) + 51), Game),
-                new Sprite("PentagonText", new Vector2((_rectangle.X + _rectangle.Width / 2) + 105, (_rectangle.Y + _rectangle.Height / 2) + 52), Game),
-                new Sprite("HexagonText", new Vector2((_rectangle.X + _rectangle.Width / 2) + 50, (_rectangle.Y + _rectangle.Height / 2) + 52), Game)   
+                new Sprite("CirkelText", new Vector2((_rectangle.X + _rectangle.Width / 2) + 65, (_rectangle.Y + _rectangle.Height / 2) + 47), DrawingHelper.DrawingLevel.Interface, Game),
+                new Sprite("TriangelText", new Vector2((_rectangle.X + _rectangle.Width / 2) + 90, (_rectangle.Y + _rectangle.Height / 2) + 51), DrawingHelper.DrawingLevel.Interface, Game),
+                new Sprite("FyrkantText", new Vector2((_rectangle.X + _rectangle.Width / 2) + 80, (_rectangle.Y + _rectangle.Height / 2) + 51), DrawingHelper.DrawingLevel.Interface, Game),
+                new Sprite("PentagonText", new Vector2((_rectangle.X + _rectangle.Width / 2) + 105, (_rectangle.Y + _rectangle.Height / 2) + 52), DrawingHelper.DrawingLevel.Interface, Game),
+                new Sprite("HexagonText", new Vector2((_rectangle.X + _rectangle.Width / 2) + 50, (_rectangle.Y + _rectangle.Height / 2) + 52), DrawingHelper.DrawingLevel.Interface, Game)   
             };
 
             base.Initialize();

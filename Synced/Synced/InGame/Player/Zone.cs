@@ -1,4 +1,4 @@
-﻿// Unit.cs
+﻿// Zone.cs
 // Introduced: 2015-04-14
 // Last edited: 2015-04-14
 // Edited by:
@@ -12,7 +12,8 @@ using System.Text;
 
 namespace Synced.Player
 {
-    class Unit
+    class Zone
     {
+        public enum Name { Circle, Triangle, Square, Pentagon, Hexagon }
     }
 }

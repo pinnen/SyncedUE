@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Synced.Player;
 using Synced.Static_Classes;
 using System;
 using System.Collections.Generic;
@@ -23,11 +24,12 @@ namespace Synced.Menu
         public MenuScreen(string texturePath, Game game)
             : base(game)
         {
-            _background = new Sprite(texturePath, Vector2.Zero, game);
+            _background = new Sprite(texturePath, Vector2.Zero, DrawingHelper.DrawingLevel.Background, game);
 
             // Temporary screen variables (Half of screen)
             int w = GraphicsDevice.DisplayMode.Width / 2;
             int h = GraphicsDevice.DisplayMode.Height / 2;
+
             // Add character selectors
             _characterSelectors = new List<CharacterSelector>();
             _characterSelectors.Add(new CharacterSelector(PlayerIndex.One, new Rectangle(0, 0, w, h), Game));

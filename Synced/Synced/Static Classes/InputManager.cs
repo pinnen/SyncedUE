@@ -17,7 +17,5 @@ namespace Synced.Static_Classes
     static class InputManager
     {
 
-
-
     }
 }
