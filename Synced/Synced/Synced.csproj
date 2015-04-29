@@ -41,6 +41,8 @@
     <Compile Include="InGame\Player\Library.cs" />
     <Compile Include="InGame\Text.cs" />
     <Compile Include="Menu\CharacterSelector.cs" />
+    <Compile Include="Menu\Controls.cs" />
+    <Compile Include="Menu\IControl.cs" />
     <Compile Include="Menu\MenuScreen.cs" />
     <Compile Include="InGame\Player\Sprite.cs" />
     <Compile Include="State Machine\State.cs" />
