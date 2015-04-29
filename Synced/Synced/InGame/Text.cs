@@ -1,4 +1,11 @@
-﻿using Microsoft.Xna.Framework;
+﻿// Text.cs
+// Introduced: 2015-04-28
+// Last edited: 2015-04-29
+// Edited by:
+// Pontus Magnusson
+//
+// 
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Synced.Static_Classes;
 using System;
@@ -10,36 +17,48 @@ namespace Synced.InGame
 {
     class Text : DrawableGameComponent
     {
-        string _text;
+        #region Variables
+        string _content;
         Rectangle _rectangle;
         SpriteFont _font;
+        DrawingHelper.Alignment _alignment;
+        #endregion
 
-        public string Text1
-        {
-            get { return _text; }
-            set { _text = value; }
-        }
+        #region Properties
         SpriteBatch _spriteBatch
         {
             get { return (SpriteBatch)Game.Services.GetService(typeof(SpriteBatch)); }
         } 
-        public Text(string text, Game game)
-            :  base (game)
+        public DrawingHelper.Alignment Alignment
         {
-            _text = text;
+            get { return _alignment; }
+            set { _alignment = value; }
         }
-        public override void Initialize()
+        public string Content
         {
-            base.Initialize();
+            get { return _content; }
+            set { _content = value; }
         }
-        protected override void LoadContent()
+        public SpriteFont SetFont
         {
-            base.LoadContent();
+            set { _font = value; }
         }
+        #endregion
+
+        public Text(string content, Rectangle rectangle, Game game)
+            : base(game)
+        {
+            _content = content;
+            _rectangle = rectangle;
+            _alignment = DrawingHelper.Alignment.Center;
+            DrawOrder = (int)DrawingHelper.DrawingLevel.Interface;
+            Game.Components.Add(this);
+        }
+
         public override void Draw(GameTime gameTime)
         {
             _spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.LinearWrap, DepthStencilState.None, RasterizerState.CullNone, null, ResolutionManager.GetTransformationMatrix());
-            DrawingHelper.DrawString(_spriteBatch, _font, _text, _rectangle, DrawingHelper.Alignment.Center, Color.White);
+            DrawingHelper.DrawString(_spriteBatch, _font, _content, _rectangle, DrawingHelper.Alignment.Center, 3, Color.Black);
             _spriteBatch.End();
 
             base.Draw(gameTime);

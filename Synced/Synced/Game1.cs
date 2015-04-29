@@ -1,6 +1,6 @@
 ﻿// Game1.cs
 // Introduced: 2015-04-14
-// Last edited: 2015-04-14
+// Last edited: 2015-04-29
 // Edited by:
 // Pontus Magnusson
 //
@@ -47,10 +47,12 @@ namespace Synced
         /// </summary>
         protected override void Initialize()
         {
+            bool fullscreen = false;
+
             // TODO: Add your initialization logic here
             ResolutionManager.Init(ref _graphics);
             ResolutionManager.SetVirtualResolution(1920, 1080); // TODO magic resolution values.
-            ResolutionManager.SetResolution(GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width, GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height, false);
+            ResolutionManager.SetResolution(GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width, GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height, fullscreen);
 
             _menu = new MenuScreen("Interface/ControllerSelectionBackground", this);
             _gameStateMachine = new GameStateMachine(new MenuState());

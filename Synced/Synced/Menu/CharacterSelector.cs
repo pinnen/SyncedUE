@@ -1,6 +1,14 @@
-﻿using Microsoft.Xna.Framework;
+﻿// CharacterSelector.cs
+// Introduced: 2015-04-14
+// Last edited: 2015-04-14
+// Edited by:
+// Pontus Magnusson
+//
+// 
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Synced.InGame;
 using Synced.InGame.Player;
 using Synced.Player;
 using Synced.Static_Classes;
@@ -35,13 +43,20 @@ namespace Synced.Menu
         PlayerIndex _playerIndex;
         int _selectedIndex;
         GamePadState _previousState;
+        
+        // Texts
+        /* Unconnected!
+         * Press A to join!
+         * Ready!
+         */
+        Text _stateText;
+        #endregion
+
+        #region Properties
         SpriteBatch _spriteBatch
         {
             get { return (SpriteBatch)Game.Services.GetService(typeof(SpriteBatch)); }
         } 
-        #endregion
-
-        #region Properties
         public State GetState
         {
             get { return _currentState; }
@@ -63,8 +78,8 @@ namespace Synced.Menu
 
         public override void Initialize()
         {
-            float posX = _rectangle.X + _rectangle.Width / 2;
-            float posY = _rectangle.Y + _rectangle.Height / 2;
+            int posX = _rectangle.X + _rectangle.Width / 2;
+            int posY = _rectangle.Y + _rectangle.Height / 2;
             _pressToJoin = new Sprite("Interface/PressAToJoin", new Vector2(posX, posY), DrawingHelper.DrawingLevel.Interface, Game);
             _arrows = new Sprite("Interface/SelectionArrows", new Vector2(posX, posY), DrawingHelper.DrawingLevel.Interface, Game);
 
@@ -77,6 +92,8 @@ namespace Synced.Menu
                 _abilityTexts.Add(new Sprite(Library.Character.InterfaceTextPath[(Library.Character.Name)i], new Vector2(posX, posY), DrawingHelper.DrawingLevel.Interface, Game));
             }
 
+            _stateText = new Text("Unconnected!", new Rectangle(posX, posY, 50, 50), Game);
+
             // TODO magic values :(
             _zone = new Sprite("Interface/zoneAbilityText", new Vector2(posX - 100, posY + 50), DrawingHelper.DrawingLevel.Interface, Game);
 
@@ -86,6 +103,7 @@ namespace Synced.Menu
         protected override void LoadContent()
         {
             _font = Game.Content.Load<SpriteFont>("Fonts/menufont");
+            _stateText.SetFont = _font;
             base.LoadContent();
         }
         public override void Update(GameTime gameTime)
@@ -116,15 +134,12 @@ namespace Synced.Menu
             switch (_currentState)
             {
                 case State.Unconnected:
-                    DrawingHelper.DrawString(_spriteBatch, _font, "Unconnected", _rectangle, DrawingHelper.Alignment.Center, Color.White);
                     break;
                 case State.Connected:
-                    DrawingHelper.DrawString(_spriteBatch, _font, "Press A to Join", _rectangle, DrawingHelper.Alignment.Center, Color.White);
                     break;
                 case State.Joined:
                     break;
                 case State.Ready:
-                    DrawingHelper.DrawString(_spriteBatch, _font, "Ready!", _rectangle,DrawingHelper.Alignment.Center, Color.White);
                     break;
             }
 
@@ -135,14 +150,17 @@ namespace Synced.Menu
         void Connect()
         {
             _currentState = State.Connected;
+            _stateText.Content = "Press A to join!";
         }
         void Join()
         {
             _currentState = State.Joined;
+            _stateText.Content = "Joined! Select your things!";
         }
         void Ready()
         {
             _currentState = State.Ready;
+            _stateText.Content = "Ready!";
         }
     }
 }

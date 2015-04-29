@@ -1,4 +1,11 @@
-﻿using Microsoft.Xna.Framework;
+﻿// MenuScreen.cs
+// Introduced: 2015-04-16
+// Last edited: 2015-04-29
+// Edited by:
+// Pontus Magnusson
+//
+// 
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Synced.Player;
 using Synced.Static_Classes;
@@ -27,8 +34,8 @@ namespace Synced.Menu
             _background = new Sprite(texturePath, Vector2.Zero, DrawingHelper.DrawingLevel.Background, game);
 
             // Temporary screen variables (Half of screen)
-            int w = GraphicsDevice.DisplayMode.Width / 2;
-            int h = GraphicsDevice.DisplayMode.Height / 2;
+            int w = ResolutionManager.GetWidth / 2;
+            int h = ResolutionManager.GetHeight / 2;
 
             // Add character selectors
             _characterSelectors = new List<CharacterSelector>();
