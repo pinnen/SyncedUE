@@ -65,16 +65,18 @@ namespace Synced.Menu
         {
             float posX = _rectangle.X + _rectangle.Width / 2;
             float posY = _rectangle.Y + _rectangle.Height / 2;
+            Vector2 position = new Vector2(posX, posY);
+
             _pressToJoin = new Sprite("Interface/PressAToJoin", new Vector2(posX, posY), DrawingHelper.DrawingLevel.Interface, Game);
             _arrows = new Sprite("Interface/SelectionArrows", new Vector2(posX, posY), DrawingHelper.DrawingLevel.Interface, Game);
-
             
             _characterSprites = new List<Sprite>();
             _abilityTexts = new List<Sprite>();
+
             for (int i = 0; i < Enum.GetNames(typeof(Library.Character.Name)).Length; i++)
             {
-                _characterSprites.Add(new Sprite(Library.Character.InterfacePath[(Library.Character.Name)i], new Vector2(posX, posY), DrawingHelper.DrawingLevel.Interface, Game));
-                _abilityTexts.Add(new Sprite(Library.Character.InterfaceTextPath[(Library.Character.Name)i], new Vector2(posX, posY), DrawingHelper.DrawingLevel.Interface, Game));
+                _characterSprites.Add(new Sprite(Library.Character.InterfacePath[(Library.Character.Name)i], position, DrawingHelper.DrawingLevel.Interface, Game));
+                _abilityTexts.Add(new Sprite(Library.Character.InterfaceTextPath[(Library.Character.Name)i], position, DrawingHelper.DrawingLevel.Interface, Game));
             }
 
             // TODO magic values :(
