@@ -16,11 +16,20 @@ namespace Synced.State_Machine
     {
         public MenuState()
         {
+
         }
+
+        public override void Update()
+        {
+
+            base.Update();
+        }
+
         public override void Play(GameStateMachine gameStateMachine)
         {
             gameStateMachine.CurrentState = new GameState();
         }
         public override string GetStateName() { return "Menu State"; }
+        
     }
 }

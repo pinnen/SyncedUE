@@ -1,4 +1,11 @@
-﻿using Microsoft.Xna.Framework;
+﻿// MenuScreen.cs
+// Introduced: 2015-04-16
+// Last edited: 2015-04-29
+// Edited by:
+// Pontus Magnusson
+//
+// 
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Synced.Player;
 using Synced.Static_Classes;
@@ -9,7 +16,7 @@ using System.Text;
 
 namespace Synced.Menu
 {
-    class MenuScreen : DrawableGameComponent
+    class MenuScreen : Screen
     {
         const int _minimumPlayersConstant = 1;
 
@@ -21,14 +28,14 @@ namespace Synced.Menu
             get { return (SpriteBatch)Game.Services.GetService(typeof(SpriteBatch)); }
         } 
 
-        public MenuScreen(string texturePath, Game game)
+        public MenuScreen(Texture2D texture, Game game)
             : base(game)
         {
-            _background = new Sprite(texturePath, Vector2.Zero, DrawingHelper.DrawingLevel.Background, game);
+            _background = new Sprite(texture, Vector2.Zero, DrawingHelper.DrawingLevel.Background, game);
 
             // Temporary screen variables (Half of screen)
-            int w = GraphicsDevice.DisplayMode.Width / 2;
-            int h = GraphicsDevice.DisplayMode.Height / 2;
+            int w = ResolutionManager.GetWidth / 2;
+            int h = ResolutionManager.GetHeight / 2;
 
             // Add character selectors
             _characterSelectors = new List<CharacterSelector>();
@@ -42,14 +49,11 @@ namespace Synced.Menu
         }
         public override void Initialize()
         {
-
-
             base.Initialize();
         }
 
         protected override void LoadContent()
-        {
-            
+        {   
             base.LoadContent();
         }
 

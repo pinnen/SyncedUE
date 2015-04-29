@@ -41,23 +41,25 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="InGame\Player\Character.cs" />
-    <Compile Include="Menu\CharacterSelector.cs" />
-    <Compile Include="Menu\MenuScreen.cs" />
-    <Compile Include="InGame\Player\Sprite.cs" />
-    <Compile Include="State Machine\State.cs" />
-    <Compile Include="State Machine\GameStateMachine.cs" />
+    <Compile Include="InGame\Text.cs" />
+    <Compile Include="InGame\Player\Library.cs" />
     <Compile Include="InGame\Player\Ability.cs" />
     <Compile Include="InGame\Player\ParticleEngine.cs" />
     <Compile Include="InGame\Player\Player.cs" />
     <Compile Include="InGame\Player\Unit.cs" />
     <Compile Include="InGame\Player\Zone.cs" />
+    <Compile Include="InGame\Player\Sprite.cs" />
     <Compile Include="Map\Goal.cs" />
     <Compile Include="Map\Map.cs" />
     <Compile Include="Map\Wall.cs" />
+    <Compile Include="Menu\CharacterSelector.cs" />
+    <Compile Include="Menu\Controls.cs" />
+    <Compile Include="Menu\IDrawableObject.cs" />
+    <Compile Include="Menu\MenuScreen.cs" />
+    <Compile Include="Menu\Screen.cs" />
     <Compile Include="Menu\Button.cs" />
-    <Compile Include="Game1.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="State Machine\State.cs" />
+    <Compile Include="State Machine\GameStateMachine.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="State Machine\GameState.cs" />
     <Compile Include="State Machine\MenuState.cs" />
@@ -70,6 +72,8 @@
     <Compile Include="Static Classes\GameColors.cs" />
     <Compile Include="Static Classes\InputManager.cs" />
     <Compile Include="Static Classes\ResolutionManager.cs" />
+    <Compile Include="Game1.cs" />
+    <Compile Include="Program.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">

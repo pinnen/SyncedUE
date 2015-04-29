@@ -1,6 +1,15 @@
-﻿using Microsoft.Xna.Framework;
+﻿// CharacterSelector.cs
+// Introduced: 2015-04-14
+// Last edited: 2015-04-14
+// Edited by:
+// Pontus Magnusson
+//
+// 
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Synced.InGame;
+using Synced.InGame.Player;
 using Synced.Player;
 using Synced.Static_Classes;
 using System;
@@ -34,13 +43,20 @@ namespace Synced.Menu
         PlayerIndex _playerIndex;
         int _selectedIndex;
         GamePadState _previousState;
+        
+        // Texts
+        /* Unconnected!
+         * Press A to join!
+         * Ready!
+         */
+        Text _stateText;
+        #endregion
+
+        #region Properties
         SpriteBatch _spriteBatch
         {
             get { return (SpriteBatch)Game.Services.GetService(typeof(SpriteBatch)); }
         } 
-        #endregion
-
-        #region Properties
         public State GetState
         {
             get { return _currentState; }
@@ -50,10 +66,8 @@ namespace Synced.Menu
         public CharacterSelector(PlayerIndex playerIndex, Rectangle rectangle, Game game)
             : base(game)
         {
-            // TODO This constructor looks very ugly. It is the same as the old code.
             _currentState = State.Unconnected;
             _rectangle = rectangle;
-
             _playerIndex = playerIndex;
 
             // Add this component
@@ -62,27 +76,21 @@ namespace Synced.Menu
 
         public override void Initialize()
         {
-            _pressToJoin = new Sprite("Interface/PressAToJoin", new Vector2(_rectangle.X + _rectangle.Width / 2, _rectangle.Y + _rectangle.Height / 2), DrawingHelper.DrawingLevel.Interface, Game);
-            _arrows = new Sprite("Interface/SelectionArrows", new Vector2(_rectangle.X + _rectangle.Width / 2, _rectangle.Y + _rectangle.Height / 2), DrawingHelper.DrawingLevel.Interface, Game);
+            int posX = _rectangle.X + _rectangle.Width / 2;
+            int posY = _rectangle.Y + _rectangle.Height / 2;
+            Vector2 position = new Vector2(posX, posY);
 
-            _characterSprites = new List<Sprite>()
-            {
-                new Sprite("SelectCircle", new Vector2(_rectangle.X + _rectangle.Width / 2, _rectangle.Y + _rectangle.Height / 2), DrawingHelper.DrawingLevel.Interface, Game),
-                new Sprite("SelectTriangle", new Vector2(_rectangle.X + _rectangle.Width / 2, _rectangle.Y + _rectangle.Height / 2), DrawingHelper.DrawingLevel.Interface, Game),
-                new Sprite("SelectSquare", new Vector2(_rectangle.X + _rectangle.Width / 2, _rectangle.Y + _rectangle.Height / 2), DrawingHelper.DrawingLevel.Interface, Game),
-                new Sprite("SelectPentagon", new Vector2(_rectangle.X + _rectangle.Width / 2, _rectangle.Y + _rectangle.Height / 2), DrawingHelper.DrawingLevel.Interface, Game),
-                new Sprite("SelectHexagon", new Vector2(_rectangle.X + _rectangle.Width / 2, _rectangle.Y + _rectangle.Height / 2), DrawingHelper.DrawingLevel.Interface, Game)                
-            };
+            
+            _characterSprites = new List<Sprite>();
+            _abilityTexts = new List<Sprite>();
 
-            _zone = new Sprite("zoneAbilityText", new Vector2((_rectangle.X + _rectangle.Width / 2) - 100, (_rectangle.Y + _rectangle.Height / 2) + 50), DrawingHelper.DrawingLevel.Interface, Game);
-            _abilityTexts = new List<Sprite>()
+            for (int i = 0; i < Enum.GetNames(typeof(Library.Character.Name)).Length; i++)
             {
-                new Sprite("CirkelText", new Vector2((_rectangle.X + _rectangle.Width / 2) + 65, (_rectangle.Y + _rectangle.Height / 2) + 47), DrawingHelper.DrawingLevel.Interface, Game),
-                new Sprite("TriangelText", new Vector2((_rectangle.X + _rectangle.Width / 2) + 90, (_rectangle.Y + _rectangle.Height / 2) + 51), DrawingHelper.DrawingLevel.Interface, Game),
-                new Sprite("FyrkantText", new Vector2((_rectangle.X + _rectangle.Width / 2) + 80, (_rectangle.Y + _rectangle.Height / 2) + 51), DrawingHelper.DrawingLevel.Interface, Game),
-                new Sprite("PentagonText", new Vector2((_rectangle.X + _rectangle.Width / 2) + 105, (_rectangle.Y + _rectangle.Height / 2) + 52), DrawingHelper.DrawingLevel.Interface, Game),
-                new Sprite("HexagonText", new Vector2((_rectangle.X + _rectangle.Width / 2) + 50, (_rectangle.Y + _rectangle.Height / 2) + 52), DrawingHelper.DrawingLevel.Interface, Game)   
-            };
+                _characterSprites.Add(new Sprite(Library.Character.InterfacePath[(Library.Character.Name)i], position, DrawingHelper.DrawingLevel.Interface, Game));
+                _abilityTexts.Add(new Sprite(Library.Character.InterfaceTextPath[(Library.Character.Name)i], position, DrawingHelper.DrawingLevel.Interface, Game));
+            }
+
+            _stateText = new Text("Unconnected!", new Rectangle(posX, posY, 50, 50), Game);
 
             base.Initialize();
         }
@@ -90,6 +98,7 @@ namespace Synced.Menu
         protected override void LoadContent()
         {
             _font = Game.Content.Load<SpriteFont>("Fonts/menufont");
+            _stateText.SetFont = _font;
             base.LoadContent();
         }
         public override void Update(GameTime gameTime)
@@ -120,15 +129,12 @@ namespace Synced.Menu
             switch (_currentState)
             {
                 case State.Unconnected:
-                    DrawingHelper.DrawString(_spriteBatch, _font, "Unconnected", _rectangle, Synced.Static_Classes.DrawingHelper.Alignment.Center, Color.White);
                     break;
                 case State.Connected:
-                    DrawingHelper.DrawString(_spriteBatch, _font, "Press A to Join", _rectangle, Synced.Static_Classes.DrawingHelper.Alignment.Center, Color.White);
                     break;
                 case State.Joined:
                     break;
                 case State.Ready:
-                    DrawingHelper.DrawString(_spriteBatch, _font, "Ready!", _rectangle, Synced.Static_Classes.DrawingHelper.Alignment.Center, Color.White);
                     break;
             }
 
@@ -139,14 +145,17 @@ namespace Synced.Menu
         void Connect()
         {
             _currentState = State.Connected;
+            _stateText.Content = "Press A to join!";
         }
         void Join()
         {
             _currentState = State.Joined;
+            _stateText.Content = "Joined! Select your things!";
         }
         void Ready()
         {
             _currentState = State.Ready;
+            _stateText.Content = "Ready!";
         }
     }
 }

@@ -47,6 +47,15 @@ namespace Synced.Static_Classes
         static private bool _FullScreen = false;
         static private bool _DirtyMatrix = true;
 
+        static public int GetWidth
+        {
+            get { return _VWidth; }
+        }
+        static public int GetHeight
+        {
+            get { return _VHeight; }
+        }
+
         static public void Init(ref GraphicsDeviceManager device)
         {
             _Width = device.PreferredBackBufferWidth;

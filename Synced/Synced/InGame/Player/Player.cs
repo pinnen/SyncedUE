@@ -19,11 +19,11 @@ namespace Synced.Player
         Unit _left;
         Unit _right;
 
-        public Player(Character.Name character, Game game)
+        public Player(Library.Character.Name character, Game game)
             : base(game)
         {
-            _left = new Unit(Character.GamePath[character], game);
-            _right = new Unit(Character.GamePath[character], game);
+            _left = new Unit(Library.Character.GamePath[character], game);
+            _right = new Unit(Library.Character.GamePath[character], game);
             game.Components.Add(this);
         }
 
