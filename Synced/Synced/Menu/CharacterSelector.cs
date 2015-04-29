@@ -66,10 +66,8 @@ namespace Synced.Menu
         public CharacterSelector(PlayerIndex playerIndex, Rectangle rectangle, Game game)
             : base(game)
         {
-            // TODO This constructor looks very ugly. It is the same as the old code.
             _currentState = State.Unconnected;
             _rectangle = rectangle;
-
             _playerIndex = playerIndex;
 
             // Add this component
@@ -80,16 +78,18 @@ namespace Synced.Menu
         {
             int posX = _rectangle.X + _rectangle.Width / 2;
             int posY = _rectangle.Y + _rectangle.Height / 2;
-            _pressToJoin = new Sprite("Interface/PressAToJoin", new Vector2(posX, posY), DrawingHelper.DrawingLevel.Interface, Game);
-            _arrows = new Sprite("Interface/SelectionArrows", new Vector2(posX, posY), DrawingHelper.DrawingLevel.Interface, Game);
+            Vector2 position = new Vector2(posX, posY);
 
+            _pressToJoin = new Sprite("Interface/PressAToJoin", position, DrawingHelper.DrawingLevel.Interface, Game);
+            _arrows = new Sprite("Interface/SelectionArrows", position, DrawingHelper.DrawingLevel.Interface, Game);
             
             _characterSprites = new List<Sprite>();
             _abilityTexts = new List<Sprite>();
+
             for (int i = 0; i < Enum.GetNames(typeof(Library.Character.Name)).Length; i++)
             {
-                _characterSprites.Add(new Sprite(Library.Character.InterfacePath[(Library.Character.Name)i], new Vector2(posX, posY), DrawingHelper.DrawingLevel.Interface, Game));
-                _abilityTexts.Add(new Sprite(Library.Character.InterfaceTextPath[(Library.Character.Name)i], new Vector2(posX, posY), DrawingHelper.DrawingLevel.Interface, Game));
+                _characterSprites.Add(new Sprite(Library.Character.InterfacePath[(Library.Character.Name)i], position, DrawingHelper.DrawingLevel.Interface, Game));
+                _abilityTexts.Add(new Sprite(Library.Character.InterfaceTextPath[(Library.Character.Name)i], position, DrawingHelper.DrawingLevel.Interface, Game));
             }
 
             _stateText = new Text("Unconnected!", new Rectangle(posX, posY, 50, 50), Game);
