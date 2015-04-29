@@ -45,6 +45,7 @@
     <Compile Include="Menu\IControl.cs" />
     <Compile Include="Menu\MenuScreen.cs" />
     <Compile Include="InGame\Player\Sprite.cs" />
+    <Compile Include="Menu\Screen.cs" />
     <Compile Include="State Machine\State.cs" />
     <Compile Include="State Machine\GameStateMachine.cs" />
     <Compile Include="InGame\Player\Ability.cs" />
