@@ -9,8 +9,8 @@ namespace Synced.Menu
 {
     interface IDrawableObject
     {
-        Vector2 Position { get; set; }
-        Texture2D Texture { get; set; }
+        Vector2 Position { get; }
+        Texture2D Texture { get; }
         
     }
 }

@@ -8,6 +8,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Synced.InGame.Player;
 using Synced.Menu;
 using Synced.Player;
 using Synced.State_Machine;
@@ -49,15 +50,21 @@ namespace Synced
         {
             bool fullscreen = false;
 
-            // TODO: Add your initialization logic here
             ResolutionManager.Init(ref _graphics);
             ResolutionManager.SetVirtualResolution(1920, 1080); // TODO magic resolution values.
             ResolutionManager.SetResolution(GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width, GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height, fullscreen);
 
-            _menu = new MenuScreen("Interface/ControllerSelectionBackground", this);
+            // Load all content into a static library
+            Library.Loader.Initialize(Content);
+            // ------------------------------------------------------------
+            // Initialize all content below
+            // ------------------------------------------------------------
+
+            _menu = new MenuScreen(Library.Interface.MenuBackground, this);
             _gameStateMachine = new GameStateMachine(new MenuState());
 
-            unitTest = new Unit("Game Objects/Characters/Hexagon", this);
+            unitTest = new Unit(Library.Character.GamePath[Library.Character.Name.Hexagon], this);
+
 
             // Create a new spritebatch and add it as service for access by other classes
             _spriteBatch = new SpriteBatch(GraphicsDevice);
@@ -72,12 +79,10 @@ namespace Synced
         /// </summary>
         protected override void LoadContent()
         {
-
-            // TODO: use this.Content to load your game content here
-            _debugSpriteFont = Content.Load<SpriteFont>("Fonts/spritefont_debug");
-
             // KB29: AudioManager...
             AudioManager.AudioLoadContent(this);
+
+            base.LoadContent();
         }
 
         /// <summary>
@@ -116,9 +121,6 @@ namespace Synced
             // TODO: Add your drawing code here
 
             ResolutionManager.BeginDraw(); // Clear and viewport fix
-            _spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.LinearWrap, DepthStencilState.None, RasterizerState.CullNone, null, ResolutionManager.GetTransformationMatrix());
-            _spriteBatch.DrawString(_debugSpriteFont, _gameStateMachine.GetStateName(), new Vector2(50, 50), Color.Black);
-            _spriteBatch.End();
 
             base.Draw(gameTime);
         }

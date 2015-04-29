@@ -16,7 +16,7 @@ using System.Text;
 
 namespace Synced.Menu
 {
-    class MenuScreen : DrawableGameComponent
+    class MenuScreen : Screen
     {
         const int _minimumPlayersConstant = 1;
 
@@ -28,10 +28,10 @@ namespace Synced.Menu
             get { return (SpriteBatch)Game.Services.GetService(typeof(SpriteBatch)); }
         } 
 
-        public MenuScreen(string texturePath, Game game)
+        public MenuScreen(Texture2D texture, Game game)
             : base(game)
         {
-            _background = new Sprite(texturePath, Vector2.Zero, DrawingHelper.DrawingLevel.Background, game);
+            _background = new Sprite(texture, Vector2.Zero, DrawingHelper.DrawingLevel.Background, game);
 
             // Temporary screen variables (Half of screen)
             int w = ResolutionManager.GetWidth / 2;
@@ -49,14 +49,11 @@ namespace Synced.Menu
         }
         public override void Initialize()
         {
-
-
             base.Initialize();
         }
 
         protected override void LoadContent()
-        {
-            
+        {   
             base.LoadContent();
         }
 

@@ -9,34 +9,23 @@ namespace Synced.Menu
 {
     class Controls : DrawableGameComponent, IDrawableObject
     {
+        string _texturePath;
 
-        public Controls(Game game) : base(game)
+        public Controls(Game game, string texturePath) : base(game)
         {
-
+            _texturePath = texturePath;
         }
 
         public Vector2 Position
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
+            get;
+            protected set;
         }
 
         public Texture2D Texture
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
+            get;
+            protected set;
         }
 
         #region Events
@@ -49,6 +38,17 @@ namespace Synced.Menu
             base.OnEnabledChanged(sender, args);
         }
         #endregion
+
+        public override void Initialize()
+        {
+            base.Initialize();
+        }
+
+        protected override void LoadContent()
+        {
+            Texture = Game.Content.Load<Texture2D>(_texturePath);
+            base.LoadContent();
+        }
 
         public override void Update(GameTime gameTime)
         {

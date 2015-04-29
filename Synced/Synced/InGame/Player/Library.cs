@@ -1,4 +1,6 @@
-﻿// Library.cs
+﻿using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Graphics;
+// Library.cs
 // Introduced: 2015-04-14
 // Last edited: 2015-04-26
 // Edited by:
@@ -14,36 +16,59 @@ namespace Synced.InGame.Player
 {
     static class Library
     {
+        public static class Loader
+        {
+            public static void Initialize(ContentManager content)
+            {
+                // Initialize
+                Library.Interface.MenuBackground = content.Load<Texture2D>("Interface/ControllerSelectionBackground");
+
+                #region Dictionarys
+
+                Library.Character.InterfacePath = new Dictionary<Library.Character.Name, Texture2D>()
+                {
+                    {Library.Character.Name.Circle,   content.Load<Texture2D>("Interface/Character/Circle")},
+                    {Library.Character.Name.Triangle, content.Load<Texture2D>("Interface/Character/Triangle")},
+                    {Library.Character.Name.Square,   content.Load<Texture2D>("Interface/Character/Square")},
+                    {Library.Character.Name.Pentagon, content.Load<Texture2D>("Interface/Character/Pentagon")},
+                    {Library.Character.Name.Hexagon,  content.Load<Texture2D>("Interface/Character/Hexagon")}
+                };
+
+                Library.Character.GamePath = new Dictionary<Library.Character.Name, Texture2D>()
+                {
+                    {Library.Character.Name.Circle,   content.Load<Texture2D>("GameObjects/Characters/Circle")},
+                    {Library.Character.Name.Triangle, content.Load<Texture2D>("GameObjects/Characters/Triangle")},
+                    {Library.Character.Name.Square,   content.Load<Texture2D>("GameObjects/Characters/Square")},
+                    {Library.Character.Name.Pentagon, content.Load<Texture2D>("GameObjects/Characters/Pentagon")},
+                    {Library.Character.Name.Hexagon,  content.Load<Texture2D>("GameObjects/Characters/Hexagon")}
+                };
+
+                
+
+                Library.Character.InterfaceTextPath = new Dictionary<Library.Character.Name, Texture2D>()
+                {
+                    {Library.Character.Name.Circle,   content.Load<Texture2D>("Interface/CharacterText/Circle")},
+                    {Library.Character.Name.Triangle, content.Load<Texture2D>("Interface/CharacterText/Triangle")},
+                    {Library.Character.Name.Square,   content.Load<Texture2D>("Interface/CharacterText/Square")},
+                    {Library.Character.Name.Pentagon, content.Load<Texture2D>("Interface/CharacterText/Pentagon")},
+                    {Library.Character.Name.Hexagon,  content.Load<Texture2D>("Interface/CharacterText/Hexagon")}
+                };
+                #endregion
+
+            }
+        }
         public static class Character
         {
+            // TODO: XML formatting
             public enum Name { Circle, Triangle, Square, Pentagon, Hexagon }
 
-            public static Dictionary<Name, string> GamePath = new Dictionary<Name, string>()
-            {
-                {Name.Circle,   "Game Objects/Character/Circle"},
-                {Name.Triangle, "Game Objects/Character/Triangle"},
-                {Name.Square,   "Game Objects/Character/Square"},
-                {Name.Pentagon, "Game Objects/Character/Pentagon"},
-                {Name.Hexagon,  "Game Objects/Character/Hexagon"}
-            };
-
-            public static Dictionary<Name, string> InterfacePath = new Dictionary<Name, string>()
-            {
-                {Name.Circle,   "Interface/Character/Circle"},
-                {Name.Triangle, "Interface/Character/Triangle"},
-                {Name.Square,   "Interface/Character/Square"},
-                {Name.Pentagon, "Interface/Character/Pentagon"},
-                {Name.Hexagon,  "Interface/Character/Hexagon"}
-            };
-
-            public static Dictionary<Name, string> InterfaceTextPath = new Dictionary<Name, string>()
-            {
-                {Name.Circle,   "Interface/CharacterText/Circle"},
-                {Name.Triangle, "Interface/CharacterText/Triangle"},
-                {Name.Square,   "Interface/CharacterText/Square"},
-                {Name.Pentagon, "Interface/CharacterText/Pentagon"},
-                {Name.Hexagon,  "Interface/CharacterText/Hexagon"}
-            };
+            public static Dictionary<Name, Texture2D> GamePath;
+            public static Dictionary<Name, Texture2D> InterfacePath;
+            public static Dictionary<Name, Texture2D> InterfaceTextPath;
+        }
+        public static class Interface
+        {
+            public static Texture2D MenuBackground;
         }
         public static class Font
         {

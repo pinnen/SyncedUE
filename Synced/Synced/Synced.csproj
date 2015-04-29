@@ -42,7 +42,7 @@
     <Compile Include="InGame\Text.cs" />
     <Compile Include="Menu\CharacterSelector.cs" />
     <Compile Include="Menu\Controls.cs" />
-    <Compile Include="Menu\IControl.cs" />
+    <Compile Include="Menu\IDrawableObject.cs" />
     <Compile Include="Menu\MenuScreen.cs" />
     <Compile Include="InGame\Player\Sprite.cs" />
     <Compile Include="Menu\Screen.cs" />

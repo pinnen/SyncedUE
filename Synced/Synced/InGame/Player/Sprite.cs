@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Synced.Menu;
 using Synced.Static_Classes;
 using System;
 using System.Collections.Generic;
@@ -8,24 +9,19 @@ using System.Text;
 
 namespace Synced.Player
 {
-    class Sprite : DrawableGameComponent
+    class Sprite : DrawableGameComponent, IDrawableObject
     {
-        
-        Texture2D _texture;
-        string _texturePath;
-        Vector2 _position;
-        
         // Provide access to the spritebatch through game services. 
         SpriteBatch _spriteBatch
         {
             get { return (SpriteBatch)Game.Services.GetService(typeof(SpriteBatch)); }
-        } 
+        }
 
-        public Sprite(string texturePath, Vector2 position, DrawingHelper.DrawingLevel drawingLevel, Game game)
+        public Sprite(Texture2D texture, Vector2 position, DrawingHelper.DrawingLevel drawingLevel, Game game)
             : base(game)
         {
-            _position = position;
-            _texturePath = texturePath;
+            Position = position;
+            Texture = texture;
             DrawOrder = (int)drawingLevel;
         }
 
@@ -35,20 +31,28 @@ namespace Synced.Player
         }
         protected override void LoadContent()
         {
-            _texture = Game.Content.Load<Texture2D>(_texturePath);
-
             base.LoadContent();
         }
 
         public override void Draw(GameTime gameTime)
         {
             _spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.LinearWrap, DepthStencilState.None, RasterizerState.CullNone, null, ResolutionManager.GetTransformationMatrix());
-            _spriteBatch.Draw(_texture, _position, Color.White);
+            _spriteBatch.Draw(Texture, Position, Color.White);
             _spriteBatch.End();
 
             base.Draw(gameTime);
         }
 
+        public Vector2 Position
+        {
+            get;
+            protected set;
+        }
 
+        public Texture2D Texture
+        {
+            get;
+            protected set;
+        }
     }
 }

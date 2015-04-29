@@ -80,8 +80,6 @@ namespace Synced.Menu
             int posY = _rectangle.Y + _rectangle.Height / 2;
             Vector2 position = new Vector2(posX, posY);
 
-            _pressToJoin = new Sprite("Interface/PressAToJoin", position, DrawingHelper.DrawingLevel.Interface, Game);
-            _arrows = new Sprite("Interface/SelectionArrows", position, DrawingHelper.DrawingLevel.Interface, Game);
             
             _characterSprites = new List<Sprite>();
             _abilityTexts = new List<Sprite>();
@@ -93,9 +91,6 @@ namespace Synced.Menu
             }
 
             _stateText = new Text("Unconnected!", new Rectangle(posX, posY, 50, 50), Game);
-
-            // TODO magic values :(
-            _zone = new Sprite("Interface/zoneAbilityText", new Vector2(posX - 100, posY + 50), DrawingHelper.DrawingLevel.Interface, Game);
 
             base.Initialize();
         }

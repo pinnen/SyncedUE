@@ -13,7 +13,6 @@ namespace Synced.Menu
 
         public Screen(Game game) :base(game)
         {
-
             GameComponents = new GameComponentCollection();
         }
 
@@ -34,7 +33,6 @@ namespace Synced.Menu
         {
             base.UnloadContent();
         }
-
 
         public override void Update(GameTime gameTime)
         {
@@ -62,26 +60,14 @@ namespace Synced.Menu
 
         public Vector2 Position
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
+            get;
+            protected set;
         }
 
         public Texture2D Texture
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
+            get;
+            protected set;
         }
     }
 }
