@@ -7,10 +7,10 @@ using System.Text;
 
 namespace Synced.Menu
 {
-    interface IControl
+    interface IDrawableObject
     {
-        Vector2 Position;
-        Texture2D Texture;
+        Vector2 Position { get; set; }
+        Texture2D Texture { get; set; }
         
     }
 }
