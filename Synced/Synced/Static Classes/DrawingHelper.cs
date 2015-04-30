@@ -1,4 +1,9 @@
-﻿using Microsoft.Xna.Framework;
+﻿// Drawinghelper.cs
+// Introduced: 2015-04-26
+// Last edited: 2015-04-26
+// Edited by:
+// Pontus Magnusson
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;

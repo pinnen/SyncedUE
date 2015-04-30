@@ -1,4 +1,10 @@
-﻿using Microsoft.Xna.Framework;
+﻿// Sprite.cs
+// Introduced: 2015-04-14
+// Last edited: 2015-04-30
+// Edited by:
+// Pontus Magnusson
+//
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Synced.Menu;
 using Synced.Static_Classes;

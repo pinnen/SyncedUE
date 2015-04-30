@@ -8,7 +8,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using Synced.InGame.Player;
+using Synced.Content;
 using Synced.Menu;
 using Synced.Player;
 using Synced.State_Machine;

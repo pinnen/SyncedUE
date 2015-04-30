@@ -7,8 +7,6 @@
 //[DllImport("user32.dll", CharSet = CharSet.Auto)]
 //public static extern uint MessageBox(IntPtr hWnd, String text, String caption, uint type);
 
-
-
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;

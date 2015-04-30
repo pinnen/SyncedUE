@@ -42,7 +42,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="InGame\Text.cs" />
-    <Compile Include="InGame\Player\Library.cs" />
+    <Compile Include="Content\Library.cs" />
     <Compile Include="InGame\Player\Ability.cs" />
     <Compile Include="InGame\Player\ParticleEngine.cs" />
     <Compile Include="InGame\Player\Player.cs" />

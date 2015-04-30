@@ -8,8 +8,8 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Synced.Content;
 using Synced.InGame;
-using Synced.InGame.Player;
 using Synced.Player;
 using Synced.Static_Classes;
 using System;
@@ -27,15 +27,13 @@ namespace Synced.Menu
         }
 
         #region Variables
-        State _currentState;
         Rectangle _rectangle;
         Vector2 _center;
 
-        // TODO This is a very restricted design
-        Sprite _pressToJoin;
-        Sprite _zone;
-        Sprite _arrows;
-        SpriteFont _font;
+        Sprite _characterHolder;
+        Sprite _zoneHolder;
+        Sprite _arrowHolder;
+
         List<Sprite> _characterSprites;
         List<Sprite> _abilityTexts;
 
@@ -56,17 +54,18 @@ namespace Synced.Menu
         SpriteBatch _spriteBatch
         {
             get { return (SpriteBatch)Game.Services.GetService(typeof(SpriteBatch)); }
-        } 
-        public State GetState
+        }
+        public State CurrentState
         {
-            get { return _currentState; }
+            get;
+            private set;
         }
         #endregion
 
         public CharacterSelector(PlayerIndex playerIndex, Rectangle rectangle, Game game)
             : base(game)
         {
-            _currentState = State.Unconnected;
+            CurrentState = State.Unconnected;
             _rectangle = rectangle;
             _playerIndex = playerIndex;
 
@@ -97,13 +96,12 @@ namespace Synced.Menu
 
         protected override void LoadContent()
         {
-            _font = Game.Content.Load<SpriteFont>("Fonts/menufont");
-            _stateText.SetFont = _font;
+            _stateText.SetFont = Library.Font.MenuFont;
             base.LoadContent();
         }
         public override void Update(GameTime gameTime)
         {
-            switch (_currentState)
+            switch (CurrentState)
             {
                 case State.Unconnected:
                     if (GamePad.GetState(_playerIndex).IsConnected) Connect();
@@ -126,7 +124,7 @@ namespace Synced.Menu
         {
             _spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.LinearWrap, DepthStencilState.None, RasterizerState.CullNone, null, ResolutionManager.GetTransformationMatrix());
 
-            switch (_currentState)
+            switch (CurrentState)
             {
                 case State.Unconnected:
                     break;
@@ -144,18 +142,22 @@ namespace Synced.Menu
 
         void Connect()
         {
-            _currentState = State.Connected;
+            CurrentState = State.Connected;
             _stateText.Content = "Press A to join!";
         }
         void Join()
         {
-            _currentState = State.Joined;
+            CurrentState = State.Joined;
             _stateText.Content = "Joined! Select your things!";
         }
         void Ready()
         {
-            _currentState = State.Ready;
+            CurrentState = State.Ready;
             _stateText.Content = "Ready!";
+        }
+        void NextCharacter()
+        {
+
         }
     }
 }

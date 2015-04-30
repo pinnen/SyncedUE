@@ -21,9 +21,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
-// using MonoGame.Framework;
-// using MonoGame.Framework.Content.Pipeline;  "Content"" felar???
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 
@@ -46,12 +43,11 @@ namespace Synced.Static_Classes
 
         static bool mGameIsRunning;
 
-
         static void xxx(int i)
         {
 
         }
-    
+
         static public void AudioLoadContent(Game _game)
         {
             // Prepare by loading used sound effects from xnb.-files (created by MonoGame tool "MonoGame Pileline")
@@ -90,7 +86,7 @@ namespace Synced.Static_Classes
 
             soundEffect = _game.Content.Load<SoundEffect>(@"Audio\barrier_crystal_capture");
             mBarrierCrystalCaptureSoundEffect = soundEffect.CreateInstance();
-            
+
 
             PlayStartSound();
         }
