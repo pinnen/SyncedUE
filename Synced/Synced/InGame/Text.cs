@@ -51,7 +51,7 @@ namespace Synced.InGame
             _content = content;
             _rectangle = rectangle;
             _alignment = DrawingHelper.Alignment.Center;
-            DrawOrder = (int)DrawingHelper.DrawingLevel.Interface;
+            DrawOrder = (int)DrawingHelper.DrawingLevel.High;
             Game.Components.Add(this);
         }
 

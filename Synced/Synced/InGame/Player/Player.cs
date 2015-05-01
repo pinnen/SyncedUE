@@ -21,8 +21,8 @@ namespace Synced.Player
         public Player(Library.Character.Name character, Game game)
             : base(game)
         {
-            _left = new Unit(Library.Character.GamePath[character], game);
-            _right = new Unit(Library.Character.GamePath[character], game);
+            _left = new Unit(Library.Character.GameTexture[character], game);
+            _right = new Unit(Library.Character.GameTexture[character], game);
             game.Components.Add(this);
         }
 

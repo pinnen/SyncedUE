@@ -14,8 +14,8 @@ namespace Synced.Static_Classes
 {
     static class DrawingHelper
     {
-        public enum DrawingLevel { Background = 1, Effect = 2, Game = 3 , Interface = 4 }
-
+        public enum DrawingLevel { Back = 1, Low = 2, Medium = 3 , High = 4, Top = 5 }
+        
         [Flags]
         public enum Alignment { Center = 0, Left = 1, Right = 2, Top = 4, Bottom = 8 }
 

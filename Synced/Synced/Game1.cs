@@ -33,6 +33,8 @@ namespace Synced
 
         Unit unitTest;
 
+        KeyboardState _lastState;
+
         public Game1()
             : base()
         {
@@ -63,7 +65,7 @@ namespace Synced
             _menu = new MenuScreen(Library.Interface.MenuBackground, this);
             _gameStateMachine = new GameStateMachine(new MenuState());
 
-            unitTest = new Unit(Library.Character.GamePath[Library.Character.Name.Hexagon], this);
+            unitTest = new Unit(Library.Character.GameTexture[Library.Character.Name.Hexagon], this);
 
 
             // Create a new spritebatch and add it as service for access by other classes
@@ -110,6 +112,11 @@ namespace Synced
             if (GamePad.GetState(PlayerIndex.One).Buttons.A == ButtonState.Pressed)
                 _gameStateMachine.Play();
 
+            if (Keyboard.GetState().IsKeyDown(Keys.F11) && _lastState.IsKeyUp(Keys.F11))
+            {
+                _graphics.ToggleFullScreen();
+            }
+
             // TODO: Add your update logic here
             
             // Update the debugger
@@ -117,6 +124,8 @@ namespace Synced
 
             // KB29: Audio...
             AudioManager.AudioUpdate();
+
+            _lastState = Keyboard.GetState();
 
             base.Update(gameTime);
         }

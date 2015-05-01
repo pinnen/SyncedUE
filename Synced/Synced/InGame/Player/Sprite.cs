@@ -22,6 +22,7 @@ namespace Synced.Player
         {
             get { return (SpriteBatch)Game.Services.GetService(typeof(SpriteBatch)); }
         }
+        public Vector2 Origin { get; set; }
 
         public Sprite(Texture2D texture, Vector2 position, DrawingHelper.DrawingLevel drawingLevel, Game game)
             : base(game)
@@ -43,7 +44,7 @@ namespace Synced.Player
         public override void Draw(GameTime gameTime)
         {
             _spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.LinearWrap, DepthStencilState.None, RasterizerState.CullNone, null, ResolutionManager.GetTransformationMatrix());
-            _spriteBatch.Draw(Texture, Position, Color.White);
+            _spriteBatch.Draw(Texture, Position, null, Color.White, 0.0f, Origin, 1.0f, SpriteEffects.None, 1.0f);
             _spriteBatch.End();
 
             base.Draw(gameTime);
@@ -58,7 +59,8 @@ namespace Synced.Player
         public Texture2D Texture
         {
             get;
-            protected set;
+            set;
         }
+
     }
 }

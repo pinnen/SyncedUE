@@ -16,7 +16,7 @@ namespace Synced.Player
     class Unit : Sprite
     {
         public Unit(Texture2D texture, Game game)
-            : base (texture, Vector2.Zero, DrawingHelper.DrawingLevel.Game, game)
+            : base (texture, Vector2.Zero, DrawingHelper.DrawingLevel.Medium, game)
         {
             game.Components.Add(this);
         }

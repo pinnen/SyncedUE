@@ -28,26 +28,15 @@ namespace Synced.Menu
 
         #region Variables
         Rectangle _rectangle;
-        Vector2 _center;
 
-        Sprite _characterHolder;
-        Sprite _zoneHolder;
-        Sprite _arrowHolder;
-
-        List<Sprite> _characterSprites;
-        List<Sprite> _abilityTexts;
-
-        Color _color;
-        PlayerIndex _playerIndex;
-        int _selectedIndex;
-        GamePadState _previousState;
-        
-        // Texts
-        /* Unconnected!
-         * Press A to join!
-         * Ready!
-         */
+        // Objects/Texts/Controllers
+        Sprite _characterHolder;    // Sprite that displays the character
+        Sprite _zoneHolder;         // Sprite that displays the zone
+        Sprite _arrowHolder;        // Sprite that displays the selection arrows
         Text _stateText;
+
+        PlayerIndex _playerIndex;
+        GamePadState _previousState;
         #endregion
 
         #region Properties
@@ -59,6 +48,11 @@ namespace Synced.Menu
         {
             get;
             private set;
+        }
+        Library.Character.Name SelectedCharacter
+        {
+            get;
+            set;
         }
         #endregion
 
@@ -79,17 +73,21 @@ namespace Synced.Menu
             int posY = _rectangle.Y + _rectangle.Height / 2;
             Vector2 position = new Vector2(posX, posY);
 
-            
-            _characterSprites = new List<Sprite>();
-            _abilityTexts = new List<Sprite>();
+            // Position of elements
+            Vector2 characterPosition = new Vector2(posX, posY - 50);
+            Vector2 zoneTextPosition = new Vector2(posX, posY + 50);
+            Vector2 arrowPosition = characterPosition;
 
-            for (int i = 0; i < Enum.GetNames(typeof(Library.Character.Name)).Length; i++)
-            {
-                _characterSprites.Add(new Sprite(Library.Character.InterfacePath[(Library.Character.Name)i], position, DrawingHelper.DrawingLevel.Interface, Game));
-                _abilityTexts.Add(new Sprite(Library.Character.InterfaceTextPath[(Library.Character.Name)i], position, DrawingHelper.DrawingLevel.Interface, Game));
-            }
+            _characterHolder = new Sprite(Library.Character.InterfaceTexture[(Library.Character.Name)0], characterPosition, DrawingHelper.DrawingLevel.Medium, Game);
+            _zoneHolder = new Sprite(Library.Character.InterfaceTextTexture[(Library.Character.Name)0], zoneTextPosition, DrawingHelper.DrawingLevel.Medium, Game);
+            _arrowHolder = new Sprite(Library.Interface.Arrows, arrowPosition, DrawingHelper.DrawingLevel.Medium, Game);
 
-            _stateText = new Text("Unconnected!", new Rectangle(posX, posY, 50, 50), Game);
+            // TODO temporary origin fix. Include somewhere nice later
+            _characterHolder.Origin = new Vector2(_characterHolder.Texture.Width / 2, _characterHolder.Texture.Height / 2);
+            _zoneHolder.Origin = new Vector2(_zoneHolder.Texture.Width / 2, _zoneHolder.Texture.Height / 2);
+            _arrowHolder.Origin = new Vector2(_arrowHolder.Texture.Width / 2, _arrowHolder.Texture.Height / 2);
+
+            _stateText = new Text("Unconnected!", new Rectangle(posX, posY, 0, 0), Game);
 
             base.Initialize();
         }
@@ -104,15 +102,26 @@ namespace Synced.Menu
             switch (CurrentState)
             {
                 case State.Unconnected:
-                    if (GamePad.GetState(_playerIndex).IsConnected) Connect();
+                    if (GamePad.GetState(_playerIndex).IsConnected) _connect();
                     break;
                 case State.Connected:
-                    if (GamePad.GetState(_playerIndex).IsButtonDown(Buttons.A)) Join();
+                    if (GamePad.GetState(_playerIndex).IsButtonDown(Buttons.A) && _previousState.IsButtonUp(Buttons.A))
+                    {
+                        _join();
+                    }
                     break;
                 case State.Joined:
-                    if (GamePad.GetState(_playerIndex).IsButtonDown(Buttons.Start)) Ready();
+                    if (GamePad.GetState(_playerIndex).IsButtonDown(Buttons.A) && _previousState.IsButtonUp(Buttons.A))
+                    {
+                        _ready();
+                    }
+                    _readInput();
                     break;
                 case State.Ready:
+                    if (GamePad.GetState(_playerIndex).IsButtonDown(Buttons.B) && _previousState.IsButtonUp(Buttons.B))
+                    {
+                        _join();
+                    }
                     break;
             }
 
@@ -122,42 +131,53 @@ namespace Synced.Menu
 
         public override void Draw(GameTime gameTime)
         {
-            _spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.LinearWrap, DepthStencilState.None, RasterizerState.CullNone, null, ResolutionManager.GetTransformationMatrix());
-
-            switch (CurrentState)
-            {
-                case State.Unconnected:
-                    break;
-                case State.Connected:
-                    break;
-                case State.Joined:
-                    break;
-                case State.Ready:
-                    break;
-            }
-
-            _spriteBatch.End();
             base.Draw(gameTime);
         }
 
-        void Connect()
+        void _connect()
         {
             CurrentState = State.Connected;
             _stateText.Content = "Press A to join!";
         }
-        void Join()
+        void _join() 
         {
             CurrentState = State.Joined;
-            _stateText.Content = "Joined! Select your things!";
+            _stateText.Content = "";
+
+            Game.Components.Add(_characterHolder);
+            Game.Components.Add(_zoneHolder);
+            Game.Components.Add(_arrowHolder);
         }
-        void Ready()
+        void _ready()
         {
             CurrentState = State.Ready;
             _stateText.Content = "Ready!";
-        }
-        void NextCharacter()
-        {
 
+            Game.Components.Remove(_characterHolder);
+            Game.Components.Remove(_zoneHolder);
+            Game.Components.Remove(_arrowHolder);
+        }
+        void _nextCharacter(int direction)
+        {
+            int index = (int)SelectedCharacter + direction;
+            if (index >= Enum.GetNames(typeof(Library.Character.Name)).Length)
+                index = 0;
+            else if (index < 0)
+                index = Enum.GetNames(typeof(Library.Character.Name)).Length - 1;
+
+            SelectedCharacter = (Library.Character.Name)index;
+
+            _characterHolder.Texture = Library.Character.InterfaceTexture[(Library.Character.Name)index];
+            _zoneHolder.Texture = Library.Character.InterfaceTextTexture[(Library.Character.Name)index];
+        }
+
+        void _readInput()
+        {
+            if (GamePad.GetState(_playerIndex).ThumbSticks.Left.X > 0f && _previousState.ThumbSticks.Left.X <= 0f)
+                _nextCharacter(-1);
+
+            if (GamePad.GetState(_playerIndex).ThumbSticks.Left.X < 0f && _previousState.ThumbSticks.Left.X >= 0f)
+                _nextCharacter(1);
         }
     }
 }

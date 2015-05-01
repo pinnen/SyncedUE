@@ -638,17 +638,6 @@
 /processorParam:TextureFormat=Color
 /build:GameObjects/Characters/Triangle.png
 
-#begin GameObjects/Zones/CirkelZon.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:TextureFormat=Color
-/build:GameObjects/Zones/CirkelZon.png
-
 #begin GameObjects/Zones/CompactCircleZone.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -747,4 +736,26 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:TextureFormat=Color
 /build:GameObjects/Zones/star.png
+
+#begin GameObjects/Zones/CircleZone.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:TextureFormat=Color
+/build:GameObjects/Zones/CircleZone.png
+
+#begin GameObjects/Zones/TriangleZone.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:TextureFormat=Color
+/build:GameObjects/Zones/TriangleZone.png
 

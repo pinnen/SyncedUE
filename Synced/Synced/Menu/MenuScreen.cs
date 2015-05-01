@@ -31,7 +31,7 @@ namespace Synced.Menu
         public MenuScreen(Texture2D texture, Game game)
             : base(game)
         {
-            _background = new Sprite(texture, Vector2.Zero, DrawingHelper.DrawingLevel.Background, game);
+            _background = new Sprite(texture, Vector2.Zero, DrawingHelper.DrawingLevel.Back, game);
 
             // Temporary screen variables (Half of screen)
             int w = ResolutionManager.GetWidth / 2;
