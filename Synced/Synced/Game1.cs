@@ -21,9 +21,6 @@ namespace Synced
     /// </summary>
     public class Game1 : Game
     {
-// State debug
-        SpriteFont _debugSpriteFont;
-// State debug end
         GraphicsDeviceManager _graphics;
         SpriteBatch _spriteBatch;
 
@@ -71,6 +68,7 @@ namespace Synced
             // Create a new spritebatch and add it as service for access by other classes
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             Services.AddService(typeof(SpriteBatch), _spriteBatch);
+
 
             base.Initialize(); // Initializes all components
         }
@@ -128,6 +126,9 @@ namespace Synced
             _lastState = Keyboard.GetState();
 
             base.Update(gameTime);
+
+            // Must be called after base. (This updates LastState)
+            InputManager.Update(); 
         }
 
         /// <summary>

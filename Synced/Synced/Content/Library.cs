@@ -43,13 +43,13 @@ namespace Synced.Content
                     {Character.Name.Pentagon, content.Load<Texture2D>("GameObjects/Characters/Pentagon")},
                     {Character.Name.Hexagon,  content.Load<Texture2D>("GameObjects/Characters/Hexagon")}
                 };
-                Character.InterfaceTextTexture = new Dictionary<Character.Name, Texture2D>()
+                Character.AbilityText = new Dictionary<Character.Name, string>()
                 {
-                    {Character.Name.Circle,   content.Load<Texture2D>("Interface/CharacterText/Circle")},
-                    {Character.Name.Triangle, content.Load<Texture2D>("Interface/CharacterText/Triangle")},
-                    {Character.Name.Square,   content.Load<Texture2D>("Interface/CharacterText/Square")},
-                    {Character.Name.Pentagon, content.Load<Texture2D>("Interface/CharacterText/Pentagon")},
-                    {Character.Name.Hexagon,  content.Load<Texture2D>("Interface/CharacterText/Hexagon")}
+                    {Character.Name.Circle,   "Tar Circle"},
+                    {Character.Name.Triangle, "Bermuda Triangle"},
+                    {Character.Name.Square,   "Prison Square"},
+                    {Character.Name.Pentagon, "Pentagons Secret"},
+                    {Character.Name.Hexagon,  "Hexacopy"}
                 };
                 #endregion
                 #region Audio
@@ -101,7 +101,7 @@ namespace Synced.Content
 
             public static Dictionary<Name, Texture2D> GameTexture;
             public static Dictionary<Name, Texture2D> InterfaceTexture;
-            public static Dictionary<Name, Texture2D> InterfaceTextTexture;
+            public static Dictionary<Name, string> AbilityText;
         }
         public static class Interface
         {
