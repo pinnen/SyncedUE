@@ -45,5 +45,13 @@ namespace Synced.Static_Classes
         {
             return (GamePad.GetState(playerIndex).ThumbSticks.Left.Y < 0f && _LastStates[playerIndex].ThumbSticks.Left.Y >= 0f);
         }
+        public static Vector2 LeftStickDirection(PlayerIndex playerIndex)
+        {
+            return GamePad.GetState(playerIndex).ThumbSticks.Left;
+        }
+        public static Vector2 RightStickDirection(PlayerIndex playerIndex)
+        {
+            return GamePad.GetState(playerIndex).ThumbSticks.Right;
+        }
     }
 }

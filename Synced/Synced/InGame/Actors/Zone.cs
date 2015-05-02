@@ -1,4 +1,4 @@
-﻿// ParticleEngine.cs
+﻿// Zone.cs
 // Introduced: 2015-04-14
 // Last edited: 2015-04-14
 // Edited by:
@@ -10,9 +10,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Synced.Player
+namespace Synced.Actors
 {
-    class ParticleEngine
+    class Zone
     {
+        public enum Name { Circle, Triangle, Square, Pentagon, Hexagon }
     }
 }

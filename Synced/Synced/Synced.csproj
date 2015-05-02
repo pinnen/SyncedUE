@@ -41,14 +41,17 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="InGame\Crystal.cs" />
+    <Compile Include="InGame\ICollidable.cs" />
+    <Compile Include="InGame\IGrabbable.cs" />
     <Compile Include="InGame\Text.cs" />
     <Compile Include="Content\Library.cs" />
-    <Compile Include="InGame\Player\Ability.cs" />
-    <Compile Include="InGame\Player\ParticleEngine.cs" />
-    <Compile Include="InGame\Player\Player.cs" />
-    <Compile Include="InGame\Player\Unit.cs" />
-    <Compile Include="InGame\Player\Zone.cs" />
-    <Compile Include="InGame\Player\Sprite.cs" />
+    <Compile Include="InGame\Actors\Ability.cs" />
+    <Compile Include="InGame\Actors\ParticleEngine.cs" />
+    <Compile Include="InGame\Actors\Player.cs" />
+    <Compile Include="InGame\Actors\Unit.cs" />
+    <Compile Include="InGame\Actors\Zone.cs" />
+    <Compile Include="InGame\Actors\Sprite.cs" />
     <Compile Include="Map\Goal.cs" />
     <Compile Include="Map\Map.cs" />
     <Compile Include="Map\Wall.cs" />
@@ -69,7 +72,6 @@
     <Compile Include="Static Classes\CollisionManager.cs" />
     <Compile Include="Static Classes\DebuggingHelper.cs" />
     <Compile Include="Static Classes\DrawingHelper.cs" />
-    <Compile Include="Static Classes\GameColors.cs" />
     <Compile Include="Static Classes\InputManager.cs" />
     <Compile Include="Static Classes\ResolutionManager.cs" />
     <Compile Include="Game1.cs" />

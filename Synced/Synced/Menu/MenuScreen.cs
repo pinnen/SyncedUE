@@ -7,7 +7,7 @@
 // 
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Synced.Player;
+using Synced.Actors;
 using Synced.Static_Classes;
 using System;
 using System.Collections.Generic;

@@ -12,6 +12,7 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Media;
+using Microsoft.Xna.Framework;
 
 namespace Synced.Content
 {
@@ -93,7 +94,14 @@ namespace Synced.Content
                     {Zone.Name.Triangle, content.Load<Texture2D>("GameObjects/Zones/CompactTriangleZone")}
                 };
                 #endregion
+                #region Crystal
+                Crystal.Texture = content.Load<Texture2D>("GameObjects/Crystal");
+                #endregion
             }
+        }
+        public static class Crystal
+        {
+            public static Texture2D Texture;
         }
         public static class Character
         {
@@ -146,6 +154,20 @@ namespace Synced.Content
             public static Dictionary<Name, Texture2D> CompactTexture;
             public static Dictionary<Name, Texture2D> Texture;
         }
-        
+        public static class Colors
+        {
+                public static Color RedLeft { get { return Color.Red; } }
+                public static Color RedRight { get { return Color.DarkRed; }}
+                public static Color RedCrystal { get { return new Color(180, 0, 0, 255); }}
+                public static Color BlueLeft { get { return Color.Blue; }}
+                public static Color BlueRight { get { return Color.DarkBlue; }}
+                public static Color BlueCrystal { get { return new Color(0, 0, 180, 255); }}
+                public static Color GreenLeft { get { return new Color(0, 255, 0, 255); }}
+                public static Color GreenRight { get { return new Color(0, 139, 0, 255); }}
+                public static Color GreenCrystal { get { return new Color(0, 180, 0, 255); }}
+                public static Color YellowLeft { get { return Color.Yellow; }}
+                public static Color YellowRight { get { return new Color(139, 139, 0, 255); }}
+                public static Color YellowCrystal { get { return new Color(180, 180, 0, 255); }}
+        }
     }
 }

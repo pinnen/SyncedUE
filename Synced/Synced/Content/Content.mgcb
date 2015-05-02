@@ -517,17 +517,6 @@
 /processorParam:TextureFormat=Color
 /build:GameObjects/BarrierParticle.png
 
-#begin GameObjects/Kristall.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:TextureFormat=Color
-/build:GameObjects/Kristall.png
-
 #begin GameObjects/Mål1.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -758,4 +747,15 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:TextureFormat=Color
 /build:GameObjects/Zones/TriangleZone.png
+
+#begin GameObjects/Crystal.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:TextureFormat=Color
+/build:GameObjects/Crystal.png
 

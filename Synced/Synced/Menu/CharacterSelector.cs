@@ -10,7 +10,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Synced.Content;
 using Synced.InGame;
-using Synced.Player;
+using Synced.Actors;
 using Synced.Static_Classes;
 using System;
 using System.Collections.Generic;
@@ -139,9 +139,13 @@ namespace Synced.Menu
         void CheckForDisconnect()
         {
             if (!GamePad.GetState(_playerIndex).IsConnected)
+            {
                 CurrentState = State.Unconnected;
-            _stateText.Content = "Unconnected";
-            _abilityTextHolder.Content = "";
+                _stateText.Content = "Unconnected";
+                _abilityTextHolder.Content = "";
+                if (Game.Components.Contains(_characterHolder)) Game.Components.Remove(_characterHolder);
+                if (Game.Components.Contains(_arrowHolder)) Game.Components.Remove(_arrowHolder);
+            }
         }
         void _connect()
         {
@@ -160,6 +164,7 @@ namespace Synced.Menu
         {
             CurrentState = State.Ready;
             _stateText.Content = "Ready!";
+            _abilityTextHolder.Content = "";
 
             Game.Components.Remove(_characterHolder);
             Game.Components.Remove(_arrowHolder);
@@ -183,7 +188,7 @@ namespace Synced.Menu
             if (InputManager.LeftStickLeft(_playerIndex))
                 _nextCharacter(-1);
 
-            if (InputManager.LeftStickRight(_playerIndex))
+            else if (InputManager.LeftStickRight(_playerIndex))
                 _nextCharacter(1);
         }
     }
