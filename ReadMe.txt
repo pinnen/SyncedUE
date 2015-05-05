@@ -30,3 +30,12 @@ C:\Users\netcenter\Documents\GitHub\InstallationsFiles\MonoGameSetup.exe
 From:
 http://www.monogame.net/downloads/
 
+
+3)
+Install XBox 360 support (om det inte kommer in automatiskt...)
+------------------------
+
+File:
+C:\Users\netcenter\Documents\GitHub\NetCenter\InstallationsFiles\Xbox360_64Eng.exe
+From:
+https://www.microsoft.com/hardware/sv-se/d/xbox-360-controller-for-windows
