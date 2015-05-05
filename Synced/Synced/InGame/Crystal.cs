@@ -43,8 +43,14 @@ namespace Synced.InGame
         {
             if (_owner != null) // TODO a better formula for a more consistent Crystal Position
             {
-                Position = new Vector2(_owner.Position.X - (_distanceToOwner * _owner.Direction.X),
-                                       _owner.Position.Y - (_distanceToOwner * -_owner.Direction.Y));
+                if (_owner.Direction  != Vector2.Zero)
+                {
+
+                    Position = new Vector2(_owner.Position.X - (_distanceToOwner * _owner.Direction.X),
+                                           _owner.Position.Y - (_distanceToOwner * -_owner.Direction.Y));
+                }
+                //Position = new Vector2(_owner.Position.X - (_distanceToOwner),
+                //                     _owner.Position.Y - (_distanceToOwner));
             }
             base.Update(gameTime);
         }
