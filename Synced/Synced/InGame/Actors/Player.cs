@@ -17,9 +17,17 @@ namespace Synced.Actors
 {
     class Player : GameComponent
     {
-        public Unit Left;
-        public Unit Right;
+        public Unit Left
+        { get; set; }
+
+        public Unit Right
+        {
+            get;
+            set;
+        }
+
         PlayerIndex _playerIndex;
+
 
         public Player(PlayerIndex playerIndex, Library.Character.Name character, Game game)
             : base(game)
@@ -38,9 +46,14 @@ namespace Synced.Actors
 
         public override void Update(GameTime gameTime)
         {
-            // TODO This resets direction when thumbstick is released. Fix!!!
             Left.Direction = InputManager.LeftStickDirection(_playerIndex);
             Right.Direction = InputManager.RightStickDirection(_playerIndex);
+
+            if (InputManager.LeftShoulderPressed(_playerIndex))
+                Left.Shoot();
+
+            if (InputManager.RightShoulderPressed(_playerIndex))
+                Right.Shoot();
 
             base.Update(gameTime);
         }

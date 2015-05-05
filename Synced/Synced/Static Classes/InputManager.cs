@@ -47,11 +47,27 @@ namespace Synced.Static_Classes
         }
         public static Vector2 LeftStickDirection(PlayerIndex playerIndex)
         {
-            return GamePad.GetState(playerIndex).ThumbSticks.Left;
+            return GamePad.GetState(playerIndex, GamePadDeadZone.Circular).ThumbSticks.Left;
         }
         public static Vector2 RightStickDirection(PlayerIndex playerIndex)
         {
-            return GamePad.GetState(playerIndex).ThumbSticks.Right;
+            return GamePad.GetState(playerIndex, GamePadDeadZone.Circular).ThumbSticks.Right;
+        }
+        public static bool LeftTriggerPressed(PlayerIndex playerIndex)
+        {
+            return GamePad.GetState(playerIndex).IsButtonDown(Buttons.LeftTrigger);
+        }
+        public static bool RightTriggerPressed(PlayerIndex playerIndex)
+        {
+            return GamePad.GetState(playerIndex).IsButtonDown(Buttons.RightTrigger);
+        }
+        public static bool LeftShoulderPressed(PlayerIndex playerIndex)
+        {
+            return GamePad.GetState(playerIndex).IsButtonDown(Buttons.LeftShoulder);
+        }
+        public static bool RightShoulderPressed(PlayerIndex playerIndex)
+        {
+            return GamePad.GetState(playerIndex).IsButtonDown(Buttons.RightShoulder);
         }
     }
 }

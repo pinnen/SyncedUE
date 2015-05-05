@@ -28,12 +28,12 @@ namespace Synced
 
         GameStateMachine _gameStateMachine;
 
-        MenuScreen _menu;
-
-        Player playerTest;
-        Crystal crystalTest;
-
         KeyboardState _lastState;
+
+        // Test objects
+        Player player;
+        Crystal crystal;
+        
 
         public Game1()
             : base()
@@ -63,17 +63,14 @@ namespace Synced
             Library.Loader.Initialize(Content);
 
             // ------------------------------------------------------------
-            // Initialize all content below
+            // Use the states in the state machine to edit the game
             // ------------------------------------------------------------
 
-            _menu = new MenuScreen(Library.Interface.MenuBackground, this);
-            _gameStateMachine = new GameStateMachine(new MenuState());
+            _gameStateMachine = new GameStateMachine(new MenuState(this));
 
             // Tests
-            playerTest = new Player(PlayerIndex.One, Library.Character.Name.Square, this);
-            crystalTest = new Crystal(Library.Crystal.Texture, new Vector2(400, 400), DrawingHelper.DrawingLevel.Top, this);
-
-
+            player = new Player(PlayerIndex.One, Library.Character.Name.Circle, this);
+            crystal = new Crystal(Library.Crystal.Texture, new Vector2(100, 100), DrawingHelper.DrawingLevel.Medium, this);
 
             base.Initialize(); // Initializes all components
         }
@@ -112,9 +109,6 @@ namespace Synced
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            if (GamePad.GetState(PlayerIndex.One).Buttons.A == ButtonState.Pressed)
-                _gameStateMachine.Play();
-
             if (Keyboard.GetState().IsKeyDown(Keys.F11) && _lastState.IsKeyUp(Keys.F11))
             {
                 _graphics.ToggleFullScreen();
@@ -122,20 +116,22 @@ namespace Synced
 
             // TODO Object orient collision somehow...
             // Collision checks 
-            CollisionManager.CircleCircleCollision(playerTest.Left, crystalTest);
-            CollisionManager.CircleCircleCollision(playerTest.Right, crystalTest);
+            CollisionManager.CircleCircleCollision(player.Left, crystal);
+            CollisionManager.CircleCircleCollision(player.Right, crystal);
             
+            // Update the statemachine
+            _gameStateMachine.Update();
+
             // Update the debugger
             DebuggingHelper.Update();
 
             // KB29: Audio...
             AudioManager.AudioUpdate();
 
-
             _lastState = Keyboard.GetState();
             base.Update(gameTime);
 
-            // Must be called after base. (This updates LastState)
+            // Must be called after base. (This updates InputManager._LastStates)
             InputManager.Update(); 
         }
 

@@ -26,14 +26,19 @@ namespace Synced.Actors
         public Color Color { get; protected set; }
         public float Rotation { get; protected set; }
 
-        public Sprite(Texture2D texture, Vector2 position, DrawingHelper.DrawingLevel drawingLevel, Game game)
+        public Sprite(Texture2D texture, Vector2 position, Color color, DrawingHelper.DrawingLevel drawingLevel, bool centered, Game game)
             : base(game)
         {
-            Color = Color.White;
+            Color = color;
             Position = position;
             Texture = texture;
+            
+            if (centered) Origin = new Vector2(texture.Width / 2, texture.Height / 2);
+
             DrawOrder = (int)drawingLevel;
         }
+        public Sprite(Texture2D texture, Vector2 position, DrawingHelper.DrawingLevel drawingLevel, Game game)
+            : this(texture, position, Color.White, drawingLevel, false, game) { }
 
         public override void Initialize()
         {

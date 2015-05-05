@@ -17,11 +17,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+// TODO:
+// Create controls for all objects/texts/controllers
+// Update the list to hide/show objects with:
+// myList.ForEach(c => c.Enabled = false);
+// http://stackoverflow.com/questions/1883920/call-a-function-for-each-value-in-a-generic-c-sharp-collection
+
 namespace Synced.Menu
 {
     class CharacterSelector : DrawableGameComponent
     {
-        public enum State 
+        public enum State
         {
             Unconnected, Connected, Joined, Ready
         }
@@ -44,22 +50,24 @@ namespace Synced.Menu
         {
             get { return (SpriteBatch)Game.Services.GetService(typeof(SpriteBatch)); }
         }
-        public State CurrentState
+        State _currentState
         {
             get;
-            private set;
+            set;
         }
         public Library.Character.Name SelectedCharacter
         {
             get;
             private set;
         }
+        Color _color { get; set; }
         #endregion
 
-        public CharacterSelector(PlayerIndex playerIndex, Rectangle rectangle, Game game)
+        public CharacterSelector(PlayerIndex playerIndex, Rectangle rectangle, Color color, Game game)
             : base(game)
         {
-            CurrentState = State.Unconnected;
+            _color = color;
+            _currentState = State.Unconnected;
             _rectangle = rectangle;
             _playerIndex = playerIndex;
 
@@ -78,19 +86,14 @@ namespace Synced.Menu
             Rectangle abilityTextRectangle = new Rectangle(posX, posY + 50, 0, 0);
             Vector2 arrowPosition = characterPosition;
 
-            _characterHolder = new Sprite(Library.Character.InterfaceTexture[(Library.Character.Name)0], characterPosition, DrawingHelper.DrawingLevel.Medium, Game);
+            _characterHolder = new Sprite(Library.Character.InterfaceTexture[(Library.Character.Name)0], characterPosition, _color, DrawingHelper.DrawingLevel.Medium, true, Game);
             _abilityTextHolder = new Text("", abilityTextRectangle, Game);
-            _arrowHolder = new Sprite(Library.Interface.Arrows, arrowPosition, DrawingHelper.DrawingLevel.Medium, Game);
-
-            // TODO temporary origin fix. Include somewhere nice later
-            _characterHolder.Origin = new Vector2(_characterHolder.Texture.Width / 2, _characterHolder.Texture.Height / 2);
-            _arrowHolder.Origin = new Vector2(_arrowHolder.Texture.Width / 2, _arrowHolder.Texture.Height / 2);
+            _arrowHolder = new Sprite(Library.Interface.Arrows, arrowPosition, _color, DrawingHelper.DrawingLevel.Medium, true, Game);
 
             _stateText = new Text("Unconnected!", new Rectangle(posX, posY, 0, 0), Game);
 
             base.Initialize();
         }
-
         protected override void LoadContent()
         {
             _stateText.SetFont = Library.Font.MenuFont;
@@ -99,7 +102,7 @@ namespace Synced.Menu
         }
         public override void Update(GameTime gameTime)
         {
-            switch (CurrentState)
+            switch (_currentState)
             {
                 case State.Unconnected:
                     if (GamePad.GetState(_playerIndex).IsConnected) _connect();
@@ -130,17 +133,15 @@ namespace Synced.Menu
             _previousState = GamePad.GetState(_playerIndex);
             base.Update(gameTime);
         }
-
-        public override void Draw(GameTime gameTime)
+        public bool IsReady()
         {
-            base.Draw(gameTime);
+            return _currentState == State.Ready;
         }
-
         void CheckForDisconnect()
         {
             if (!GamePad.GetState(_playerIndex).IsConnected)
             {
-                CurrentState = State.Unconnected;
+                _currentState = State.Unconnected;
                 _stateText.Content = "Unconnected";
                 _abilityTextHolder.Content = "";
                 if (Game.Components.Contains(_characterHolder)) Game.Components.Remove(_characterHolder);
@@ -149,20 +150,20 @@ namespace Synced.Menu
         }
         void _connect()
         {
-            CurrentState = State.Connected;
+            _currentState = State.Connected;
             _stateText.Content = "Press A to join!";
         }
-        void _join() 
+        void _join()
         {
-            CurrentState = State.Joined;
+            _currentState = State.Joined;
             _stateText.Content = "";
-            _abilityTextHolder.Content = Library.Character.AbilityText[(Library.Character.Name)0];
+            _abilityTextHolder.Content = Library.Character.AbilityText[SelectedCharacter];
             Game.Components.Add(_characterHolder);
             Game.Components.Add(_arrowHolder);
         }
         void _ready()
         {
-            CurrentState = State.Ready;
+            _currentState = State.Ready;
             _stateText.Content = "Ready!";
             _abilityTextHolder.Content = "";
 
