@@ -39,27 +39,18 @@ namespace Synced.Menu
 
             // Add character selectors
             _characterSelectors = new List<CharacterSelector>();
-            _characterSelectors.Add(new CharacterSelector(PlayerIndex.One, new Rectangle(0, 0, w, h), Game));
-            _characterSelectors.Add(new CharacterSelector(PlayerIndex.Two, new Rectangle(w, 0, w, h), Game));
-            _characterSelectors.Add(new CharacterSelector(PlayerIndex.Three, new Rectangle(0, h, w, h), Game));
-            _characterSelectors.Add(new CharacterSelector(PlayerIndex.Four, new Rectangle(w, h, w, h), Game));
+            _characterSelectors.Add(new CharacterSelector(PlayerIndex.One, new Rectangle(0, 0, w, h), Color.Blue, Game));
+            _characterSelectors.Add(new CharacterSelector(PlayerIndex.Two, new Rectangle(w, 0, w, h), Color.Green, Game));
+            _characterSelectors.Add(new CharacterSelector(PlayerIndex.Three, new Rectangle(0, h, w, h), Color.Red, Game));
+            _characterSelectors.Add(new CharacterSelector(PlayerIndex.Four, new Rectangle(w, h, w, h), Color.Yellow, Game));
 
             Game.Components.Add(_background);
-            Game.Components.Add(this); // TODO should it add itself?
-        }
-        public override void Initialize()
-        {
-            base.Initialize();
+            Game.Components.Add(this);
         }
 
-        protected override void LoadContent()
-        {   
-            base.LoadContent();
-        }
-
-        public override void Draw(GameTime gameTime)
+        public bool IsEveryoneReady()
         {
-            base.Draw(gameTime);
+            return (_characterSelectors.Where(p => p.IsReady()).Count() >= _minimumPlayersConstant);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿// PauseState.cs
+﻿using Microsoft.Xna.Framework;
+// PauseState.cs
 // Introduced: 2015-04-17
 // Last edited: 2015-04-17
 // Edited by:
@@ -14,9 +15,14 @@ namespace Synced.State_Machine
 {
     class PauseState : State
     {
+        public PauseState(Game game)
+            : base(game)
+        {
+
+        }
         public override void Resume(GameStateMachine gameStateMachine)
         {
-            gameStateMachine.CurrentState = new GameState();
+            gameStateMachine.CurrentState = new GameState(Game);
         }
         public override string GetStateName() { return "Pause State"; }
     }

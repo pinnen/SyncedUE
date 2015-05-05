@@ -26,6 +26,10 @@ namespace Synced.State_Machine
             set { _currentState = value;}
         }
 
+        public void Update()
+        {
+            _currentState.Update(this);
+        }
         public void Play()
         {
             _currentState.Play(this);

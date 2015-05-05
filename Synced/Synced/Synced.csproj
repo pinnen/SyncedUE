@@ -44,6 +44,7 @@
     <Compile Include="InGame\Crystal.cs" />
     <Compile Include="InGame\ICollidable.cs" />
     <Compile Include="InGame\IGrabbable.cs" />
+    <Compile Include="InGame\Movable.cs" />
     <Compile Include="InGame\Text.cs" />
     <Compile Include="Content\Library.cs" />
     <Compile Include="InGame\Actors\Ability.cs" />
@@ -57,6 +58,7 @@
     <Compile Include="Map\Wall.cs" />
     <Compile Include="Menu\CharacterSelector.cs" />
     <Compile Include="Menu\Controls.cs" />
+    <Compile Include="Menu\GameScreen.cs" />
     <Compile Include="Menu\IDrawableObject.cs" />
     <Compile Include="Menu\MenuScreen.cs" />
     <Compile Include="Menu\Screen.cs" />

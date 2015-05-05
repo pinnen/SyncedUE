@@ -8,7 +8,8 @@ namespace Synced.InGame
 {
     interface IGrabbable
     {
-        IGrabbable PickUp(Sprite owner);
+        IGrabbable PickUp(Movable owner);
         void Release();
+        void Shoot();
     }
 }

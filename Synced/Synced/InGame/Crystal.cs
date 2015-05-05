@@ -9,19 +9,20 @@ using System.Text;
 
 namespace Synced.InGame
 {
-    class Crystal : Sprite, IGrabbable, ICollidable
+    class Crystal : Movable, IGrabbable, ICollidable
     {
-        Sprite _owner = null;
-
+        Movable _owner = null;
+        float _distanceToOwner;
         public Crystal(Texture2D texture, Vector2 position, DrawingHelper.DrawingLevel drawingLevel, Game1 game)
             : base(texture, position, drawingLevel, game)
         {
             Origin = new Vector2(Texture.Width / 2, Texture.Height / 2);
+            _distanceToOwner = 50; // TODO hardcoded distance
 
             Game.Components.Add(this);
         }
 
-        public IGrabbable PickUp(Sprite owner)
+        public IGrabbable PickUp(Movable owner)
         {
             _owner = owner;
             return this;
@@ -32,13 +33,19 @@ namespace Synced.InGame
             _owner = null;
         }
 
+        public void Shoot()
+        {
+            Release();
+            Direction = -Direction;
+        }
+
         public override void Update(GameTime gameTime)
         {
-            if (_owner != null)
+            if (_owner != null) // TODO a better formula for a more consistent Crystal Position
             {
-                Position = _owner.Position;
+                Position = new Vector2(_owner.Position.X - (_distanceToOwner * _owner.Direction.X),
+                                       _owner.Position.Y - (_distanceToOwner * -_owner.Direction.Y));
             }
-
             base.Update(gameTime);
         }
 
@@ -52,10 +59,8 @@ namespace Synced.InGame
             get { return Texture.Width / 2; } 
         }
 
-
         public void Response(ICollidable c)
         {
-            // TODO Temporary stuff here
         }
     }
 }
