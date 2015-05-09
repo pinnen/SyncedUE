@@ -1,9 +1,10 @@
 ﻿// Library.cs
 // Introduced: 2015-04-14
-// Last edited: 2015-04-30
+// Last edited: 2015-05-09
 // Edited by:
 // Pontus Magnusson
-//
+// Göran Forsström
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -54,24 +55,29 @@ namespace Synced.Content
                 };
                 #endregion
                 #region Audio
-                //Audio.SongDictionary = new Dictionary<Audio.Songs, Song>()
-                //{
-                //    {Audio.Songs.InGame, content.Load<Song>("")},
-                //    {Audio.Songs.Menu, content.Load<Song>("")}
-                //};
+ //                Audio.SongDictionary = new Dictionary<Audio.Songs, Song>()
+                Audio.SongDictionary = new Dictionary<Audio.Songs, SoundEffect>()
+                {
+                    {Audio.Songs.InGame, content.Load<SoundEffect>(@"Audio\game")},
+                    {Audio.Songs.Menu, content.Load<SoundEffect>(@"Audio\start")}
+                };
 
-                //Audio.MenuSelect = content.Load<SoundEffect>("");
-                //Audio.MenuConfirm = content.Load<SoundEffect>("");
-                //Audio.GameStart = content.Load<SoundEffect>("");
-                //Audio.GameFinished = content.Load<SoundEffect>("");
-                //Audio.UnitMove = content.Load<SoundEffect>("");
-                //Audio.BallShoot = content.Load<SoundEffect>("");
-                //Audio.BallPickUp = content.Load<SoundEffect>("");
-                //Audio.ZoneShoot = content.Load<SoundEffect>("");
-                //Audio.ZonePickUp = content.Load<SoundEffect>("");
-                //Audio.ZoneCreate = content.Load<SoundEffect>("");
-                //Audio.ZoneExplosion = content.Load<SoundEffect>("");
-                //Audio.Score = content.Load<SoundEffect>("");
+                Audio.SoundEffectDictionary = new Dictionary<Audio.SoundEffects, SoundEffect>()
+                {
+                    { Audio.SoundEffects.MenuSelect,    content.Load<SoundEffect>(@"Audio\splash-to-drop")}, // ToDo: other sound?
+                    { Audio.SoundEffects.MenuConfirm,   content.Load<SoundEffect>(@"Audio\splash-to-drop")}, // ToDo: other sound?
+                    { Audio.SoundEffects.GameStart,     content.Load<SoundEffect>(@"Audio\splash-to-drop")}, // ToDo: other sound?
+                    { Audio.SoundEffects.GameFinished,  content.Load<SoundEffect>(@"Audio\goalApplause")},
+                    { Audio.SoundEffects.UnitMove,      content.Load<SoundEffect>(@"Audio\splash-to-drop")}, // ToDo: other sound?
+                    { Audio.SoundEffects.BallShoot,     content.Load<SoundEffect>(@"Audio\crystalShoot-2")},
+                    { Audio.SoundEffects.BallPickUp,    content.Load<SoundEffect>(@"Audio\crystalCapture")},
+                    { Audio.SoundEffects.ZoneShoot,     content.Load<SoundEffect>(@"Audio\crystalShoot-2")}, // ToDo: other sound?
+                    { Audio.SoundEffects.ZonePickUp,    content.Load<SoundEffect>(@"Audio\crystalCapture")}, // ToDo: other sound?
+                    { Audio.SoundEffects.ZoneCreate,    content.Load<SoundEffect>(@"Audio\expand_zone")},
+                    { Audio.SoundEffects.ZoneExplosion, content.Load<SoundEffect>(@"Audio\blow-up-zone")},
+                    { Audio.SoundEffects.Score,         content.Load<SoundEffect>(@"Audio\goal")},
+                };
+
                 #endregion
                 #region Font
                 Font.MenuFont = content.Load<SpriteFont>("Fonts/menufont");
@@ -121,8 +127,14 @@ namespace Synced.Content
             public enum Songs { Menu, InGame };
             //private static Song _Menu;
             //private static Song _InGame;
-            public static Dictionary<Songs, Song> SongDictionary;
-            //public static SoundEffect MenuClick;
+ //           public static Dictionary<Songs, Song> SongDictionary;
+            public static Dictionary<Songs, SoundEffect> SongDictionary;
+
+            public enum SoundEffects { MenuSelect, MenuConfirm, GameStart, GameFinished, UnitMove, BallShoot, BallPickUp, ZoneShoot, ZonePickUp, ZoneCreate, ZoneExplosion, Score }
+            public static Dictionary<SoundEffects, SoundEffect> SoundEffectDictionary;
+
+            // Lines below not required?
+            //public static SoundEffect MenuSelect;
             //public static SoundEffect MenuConfirm;
             //public static SoundEffect GameStart;
             //public static SoundEffect GameFinished;
@@ -135,11 +147,20 @@ namespace Synced.Content
             //public static SoundEffect ZoneExplosion;
             //public static SoundEffect Score;
 
+ //           public static void PlaySong(Songs song)
             public static void PlaySong(Songs song)
             {
-                if (MediaPlayer.State == MediaState.Playing)
-                    MediaPlayer.Stop();
-                MediaPlayer.Play(SongDictionary[song]);
+                // ToDo: tmp patch
+                //if (MediaPlayer.State == MediaState.Playing)
+                //    MediaPlayer.Stop();
+                //MediaPlayer.Play(SongDictionary[song]);
+                SongDictionary[song].Play();
+                //SongDictionary[song].IsLooped = true;
+            }
+
+            public static void PlaySoundEffect(SoundEffects soundEffect)
+            {
+                SoundEffectDictionary[soundEffect].Play();
             }
         }
         public static class Font
