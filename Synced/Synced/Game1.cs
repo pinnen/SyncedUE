@@ -61,6 +61,8 @@ namespace Synced
 
             // Load all content into a static library
             Library.Loader.Initialize(Content);
+            Library.Audio.PlaySoundEffect(Library.Audio.SoundEffects.GameStart); // ToDo: just a test
+            Library.Audio.PlaySong(Library.Audio.Songs.Menu); // ToDo: just a test
 
             // ------------------------------------------------------------
             // Use the states in the state machine to edit the game
@@ -82,7 +84,7 @@ namespace Synced
         protected override void LoadContent()
         {
             // KB29: AudioManager...
-            AudioManager.AudioLoadContent(this);
+            //AudioManager.AudioLoadContent(this);
 
             base.LoadContent();
         }
@@ -96,7 +98,7 @@ namespace Synced
             // TODO: Unload any non ContentManager content here
 
             // KB29: AudioManager...
-            AudioManager.UnloadAudioContent();
+            //AudioManager.UnloadAudioContent();
         }
 
         /// <summary>
@@ -126,7 +128,7 @@ namespace Synced
             DebuggingHelper.Update();
 
             // KB29: Audio...
-            AudioManager.AudioUpdate();
+            // AudioManager.AudioUpdate();
 
             _lastState = Keyboard.GetState();
             base.Update(gameTime);
