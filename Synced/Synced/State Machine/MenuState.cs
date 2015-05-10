@@ -3,10 +3,10 @@ using Synced.Content;
 using Synced.Menu;
 // MenuState.cs
 // Introduced: 2015-04-17
-// Last edited: 2015-04-17
+// Last edited: 2015-05-10
 // Edited by:
 // Pontus Magnusson
-//
+// Göran Forsström
 // 
 using System;
 using System.Collections.Generic;
@@ -22,6 +22,7 @@ namespace Synced.State_Machine
         public MenuState(Game game)
             : base(game)
         {
+            Library.Audio.PlaySong(Library.Audio.Songs.Menu);
             _menu = new MenuScreen(Library.Interface.MenuBackground, game);
         }
 
@@ -29,6 +30,7 @@ namespace Synced.State_Machine
         {
             if (_menu.IsEveryoneReady())
             {
+                Library.Audio.PlaySong(Library.Audio.Songs.InGame);
                 gameStateMachine.CurrentState = new GameState(Game);
             } 
         }

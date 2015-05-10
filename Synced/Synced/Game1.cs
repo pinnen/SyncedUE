@@ -62,7 +62,7 @@ namespace Synced
 
             // Load all content into a static library
             Library.Loader.Initialize(Content);
-            Library.Audio.PlaySong(Library.Audio.Songs.Menu); // ToDo: here ?
+            Library.Audio.PlaySoundEffect(Library.Audio.SoundEffects.GameStart); // ToDo: Test
 
             // ------------------------------------------------------------
             // Use the states in the state machine to edit the game
