@@ -1,9 +1,9 @@
 ﻿// CharacterSelector.cs
 // Introduced: 2015-04-14
-// Last edited: 2015-04-14
+// Last edited: 2015-05-10
 // Edited by:
 // Pontus Magnusson
-//
+// Göran Forsström
 // 
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -160,6 +160,8 @@ namespace Synced.Menu
             _abilityTextHolder.Content = Library.Character.AbilityText[SelectedCharacter];
             Game.Components.Add(_characterHolder);
             Game.Components.Add(_arrowHolder);
+
+            Library.Audio.PlaySoundEffect(Library.Audio.SoundEffects.MenuConfirm);
         }
         void _ready()
         {
@@ -182,6 +184,8 @@ namespace Synced.Menu
 
             _characterHolder.Texture = Library.Character.InterfaceTexture[(Library.Character.Name)index];
             _abilityTextHolder.Content = Library.Character.AbilityText[(Library.Character.Name)index];
+
+            Library.Audio.PlaySoundEffect(Library.Audio.SoundEffects.MenuSelect);
         }
 
         void _readInput()
