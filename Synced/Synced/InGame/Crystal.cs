@@ -1,4 +1,11 @@
-﻿using Microsoft.Xna.Framework;
+﻿// Crystal.cs
+// Introduced: 2015-04-14
+// Last edited: 2015-05-10
+// Edited by:
+// Pontus Magnusson
+// Göran Forsström
+
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Synced.Actors;
 using Synced.Static_Classes;
@@ -6,6 +13,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+
+using Synced.Content;
 
 namespace Synced.InGame
 {
@@ -25,6 +34,7 @@ namespace Synced.InGame
         public IGrabbable PickUp(Movable owner)
         {
             _owner = owner;
+            Library.Audio.PlaySoundEffect(Library.Audio.SoundEffects.BallPickUp);
             return this;
         }
         
@@ -37,6 +47,7 @@ namespace Synced.InGame
         {
             Release();
             Direction = -Direction;
+            Library.Audio.PlaySoundEffect(Library.Audio.SoundEffects.BallShoot);
         }
 
         public override void Update(GameTime gameTime)
