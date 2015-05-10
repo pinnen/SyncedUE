@@ -59,10 +59,10 @@ namespace Synced
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             Services.AddService(typeof(SpriteBatch), _spriteBatch);
 
+
             // Load all content into a static library
             Library.Loader.Initialize(Content);
-            Library.Audio.PlaySoundEffect(Library.Audio.SoundEffects.GameStart); // ToDo: just a test
-            Library.Audio.PlaySong(Library.Audio.Songs.Menu); // ToDo: just a test
+            Library.Audio.PlaySong(Library.Audio.Songs.Menu); // ToDo: here ?
 
             // ------------------------------------------------------------
             // Use the states in the state machine to edit the game

@@ -80,7 +80,7 @@
 
 #begin Audio/game.wav
 /importer:WavImporter
-/processor:SoundEffectProcessor
+/processor:SongProcessor
 /processorParam:Quality=Best
 /build:Audio/game.wav
 
@@ -170,7 +170,7 @@
 
 #begin Audio/start.wav
 /importer:WavImporter
-/processor:SoundEffectProcessor
+/processor:SongProcessor
 /processorParam:Quality=Best
 /build:Audio/start.wav
 
@@ -758,4 +758,10 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:TextureFormat=Color
 /build:GameObjects/Crystal.png
+
+#begin Audio/menu_click.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/menu_click.wav
 

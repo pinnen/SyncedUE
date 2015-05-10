@@ -23,6 +23,7 @@ namespace Synced.Content
         {
             public static void Initialize(ContentManager content)
             {
+
                 // TODO: XML formatting maybe?
                 // Initialize
                 Interface.MenuBackground = content.Load<Texture2D>("Interface/ControllerSelectionBackground");
@@ -55,17 +56,17 @@ namespace Synced.Content
                 };
                 #endregion
                 #region Audio
- //                Audio.SongDictionary = new Dictionary<Audio.Songs, Song>()
-                Audio.SongDictionary = new Dictionary<Audio.Songs, SoundEffect>()
+                // Ref: http://rbwhitaker.wikidot.com/playing-background-music
+                Audio.SongDictionary = new Dictionary<Audio.Songs, Song>()
                 {
-                    {Audio.Songs.InGame, content.Load<SoundEffect>(@"Audio\game")},
-                    {Audio.Songs.Menu, content.Load<SoundEffect>(@"Audio\start")}
+                    {Audio.Songs.InGame, content.Load<Song>(@"Audio\game")},
+                    {Audio.Songs.Menu, content.Load<Song>(@"Audio\start")}
                 };
 
                 Audio.SoundEffectDictionary = new Dictionary<Audio.SoundEffects, SoundEffect>()
                 {
-                    { Audio.SoundEffects.MenuSelect,    content.Load<SoundEffect>(@"Audio\splash-to-drop")}, // ToDo: other sound?
-                    { Audio.SoundEffects.MenuConfirm,   content.Load<SoundEffect>(@"Audio\splash-to-drop")}, // ToDo: other sound?
+                    { Audio.SoundEffects.MenuSelect,    content.Load<SoundEffect>(@"Audio\menu_click")}, // ToDo: other sound?
+                    { Audio.SoundEffects.MenuConfirm,   content.Load<SoundEffect>(@"Audio\menu_confirm")}, // ToDo: other sound?
                     { Audio.SoundEffects.GameStart,     content.Load<SoundEffect>(@"Audio\splash-to-drop")}, // ToDo: other sound?
                     { Audio.SoundEffects.GameFinished,  content.Load<SoundEffect>(@"Audio\goalApplause")},
                     { Audio.SoundEffects.UnitMove,      content.Load<SoundEffect>(@"Audio\splash-to-drop")}, // ToDo: other sound?
@@ -127,8 +128,7 @@ namespace Synced.Content
             public enum Songs { Menu, InGame };
             //private static Song _Menu;
             //private static Song _InGame;
- //           public static Dictionary<Songs, Song> SongDictionary;
-            public static Dictionary<Songs, SoundEffect> SongDictionary;
+            public static Dictionary<Songs, Song> SongDictionary;
 
             public enum SoundEffects { MenuSelect, MenuConfirm, GameStart, GameFinished, UnitMove, BallShoot, BallPickUp, ZoneShoot, ZonePickUp, ZoneCreate, ZoneExplosion, Score }
             public static Dictionary<SoundEffects, SoundEffect> SoundEffectDictionary;
@@ -147,15 +147,12 @@ namespace Synced.Content
             //public static SoundEffect ZoneExplosion;
             //public static SoundEffect Score;
 
- //           public static void PlaySong(Songs song)
             public static void PlaySong(Songs song)
             {
-                // ToDo: tmp patch
-                //if (MediaPlayer.State == MediaState.Playing)
-                //    MediaPlayer.Stop();
-                //MediaPlayer.Play(SongDictionary[song]);
-                SongDictionary[song].Play();
-                //SongDictionary[song].IsLooped = true;
+                if (MediaPlayer.State == MediaState.Playing)
+                    MediaPlayer.Stop();
+                MediaPlayer.Play(SongDictionary[song]);
+                MediaPlayer.IsRepeating = true;
             }
 
             public static void PlaySoundEffect(SoundEffects soundEffect)
