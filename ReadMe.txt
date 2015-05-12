@@ -39,3 +39,41 @@ File:
 C:\Users\netcenter\Documents\GitHub\NetCenter\InstallationsFiles\Xbox360_64Eng.exe
 From:
 https://www.microsoft.com/hardware/sv-se/d/xbox-360-controller-for-windows
+
+
+
+
+
+
+Notes on GITHUB
+===============
+
+How to get old versions
+
+See:
+http://githowto.com/getting_old_versions
+
+FIRST: Requires addition in C:\Users\netcenter\.gitconfig (or other pas as sepcified in "Git Shell" shortcut!
+[alias]
+  hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+
+
+Commands in Git Shell:
+1) git hist
+	Will show a long list of history
+
+2) Select hexvalue in relevant point in history:
+| | | * 610337a 2014-09-30 | Crystal Update [Dennis]
+| | | *   cf3d3ef 2014-09-30 | Merge with main [Göran]
+| | | |\
+| | | * | 2249eca 2014-09-30 | Added release [Göran]
+	e.g. "cf3d3ef"
+
+3) git checkout cf3d3ef
+
+4) Now you can experiment with the old version...
+
+5) Restore to presnet state withh command:
+git checkout master
+
+
