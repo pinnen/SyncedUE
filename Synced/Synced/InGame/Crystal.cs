@@ -34,7 +34,7 @@ namespace Synced.InGame
         public IGrabbable PickUp(Movable owner)
         {
             _owner = owner;
-            Library.Audio.PlaySoundEffect(Library.Audio.SoundEffects.BallPickUp);
+            Library.Audio.PlaySoundEffect(Library.Audio.SoundEffects.CrystalPickUp);
             return this;
         }
         
@@ -47,7 +47,7 @@ namespace Synced.InGame
         {
             Release();
             Direction = -Direction;
-            Library.Audio.PlaySoundEffect(Library.Audio.SoundEffects.BallShoot);
+            Library.Audio.PlaySoundEffect(Library.Audio.SoundEffects.CrystalShoot);
         }
 
         public override void Update(GameTime gameTime)

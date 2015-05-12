@@ -65,15 +65,16 @@ namespace Synced.Content
 
                 Audio.SoundEffectDictionary = new Dictionary<Audio.SoundEffects, SoundEffect>()
                 {
-                    { Audio.SoundEffects.MenuSelect,    content.Load<SoundEffect>(@"Audio\menu_click")}, // ToDo: other sound?
-                    { Audio.SoundEffects.MenuConfirm,   content.Load<SoundEffect>(@"Audio\menu_confirm")}, // ToDo: other sound?
-                    { Audio.SoundEffects.GameStart,     content.Load<SoundEffect>(@"Audio\splash-to-drop")}, // ToDo: other sound?
+                    // ToDo: other sound?
+                    { Audio.SoundEffects.MenuSelect,    content.Load<SoundEffect>(@"Audio\menu_click")}, 
+                    { Audio.SoundEffects.MenuConfirm,   content.Load<SoundEffect>(@"Audio\menu_confirm")}, 
+                    { Audio.SoundEffects.GameStart,     content.Load<SoundEffect>(@"Audio\splash-to-drop")},
                     { Audio.SoundEffects.GameFinished,  content.Load<SoundEffect>(@"Audio\goalApplause")},
-                    { Audio.SoundEffects.UnitMove,      content.Load<SoundEffect>(@"Audio\splash-to-drop")}, // ToDo: other sound?
-                    { Audio.SoundEffects.BallShoot,     content.Load<SoundEffect>(@"Audio\crystalShoot-2")},
-                    { Audio.SoundEffects.BallPickUp,    content.Load<SoundEffect>(@"Audio\crystalCapture")},
-                    { Audio.SoundEffects.ZoneShoot,     content.Load<SoundEffect>(@"Audio\crystalShoot-2")}, // ToDo: other sound?
-                    { Audio.SoundEffects.ZonePickUp,    content.Load<SoundEffect>(@"Audio\crystalCapture")}, // ToDo: other sound?
+                    { Audio.SoundEffects.UnitMove,      content.Load<SoundEffect>(@"Audio\splash-to-drop")},
+                    { Audio.SoundEffects.CrystalShoot,  content.Load<SoundEffect>(@"Audio\crystalShoot-2")},
+                    { Audio.SoundEffects.CrystalPickUp, content.Load<SoundEffect>(@"Audio\crystalCapture")},
+                    { Audio.SoundEffects.ZoneShoot,     content.Load<SoundEffect>(@"Audio\crystalShoot-2")},
+                    { Audio.SoundEffects.ZonePickUp,    content.Load<SoundEffect>(@"Audio\crystalCapture")},
                     { Audio.SoundEffects.ZoneCreate,    content.Load<SoundEffect>(@"Audio\expand_zone")},
                     { Audio.SoundEffects.ZoneExplosion, content.Load<SoundEffect>(@"Audio\blow-up-zone")},
                     { Audio.SoundEffects.Score,         content.Load<SoundEffect>(@"Audio\goal")},
@@ -126,26 +127,10 @@ namespace Synced.Content
         public static class Audio
         {
             public enum Songs { Menu, InGame };
-            //private static Song _Menu;
-            //private static Song _InGame;
             public static Dictionary<Songs, Song> SongDictionary;
 
-            public enum SoundEffects { MenuSelect, MenuConfirm, GameStart, GameFinished, UnitMove, BallShoot, BallPickUp, ZoneShoot, ZonePickUp, ZoneCreate, ZoneExplosion, Score }
+            public enum SoundEffects { MenuSelect, MenuConfirm, GameStart, GameFinished, UnitMove, CrystalShoot, CrystalPickUp, ZoneShoot, ZonePickUp, ZoneCreate, ZoneExplosion, Score }
             public static Dictionary<SoundEffects, SoundEffect> SoundEffectDictionary;
-
-            // Lines below not required?
-            //public static SoundEffect MenuSelect;
-            //public static SoundEffect MenuConfirm;
-            //public static SoundEffect GameStart;
-            //public static SoundEffect GameFinished;
-            //public static SoundEffect UnitMove; // ?
-            //public static SoundEffect BallShoot;
-            //public static SoundEffect BallPickUp;
-            //public static SoundEffect ZoneShoot;
-            //public static SoundEffect ZonePickUp;
-            //public static SoundEffect ZoneCreate;
-            //public static SoundEffect ZoneExplosion;
-            //public static SoundEffect Score;
 
             public static void PlaySong(Songs song)
             {
