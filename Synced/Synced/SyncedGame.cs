@@ -20,7 +20,7 @@ namespace Synced
     /// <summary>
     /// This is the main type for your game
     /// </summary>
-    public class Game1 : Game
+    public class SyncedGame : Game
     {
         GraphicsDeviceManager _graphics;
         SpriteBatch _spriteBatch;
@@ -35,7 +35,7 @@ namespace Synced
         Crystal crystal;
         
 
-        public Game1()
+        public SyncedGame()
             : base()
         {
             _graphics = new GraphicsDeviceManager(this);

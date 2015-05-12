@@ -76,10 +76,13 @@
     <Compile Include="Static Classes\DrawingHelper.cs" />
     <Compile Include="Static Classes\InputManager.cs" />
     <Compile Include="Static Classes\ResolutionManager.cs" />
-    <Compile Include="Game1.cs" />
+    <Compile Include="SyncedGame.cs" />
     <Compile Include="Program.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="FarseerPhysics MonoGame">
+      <HintPath>..\Farseer Physics Engine 3.5\bin\WindowsGL\Debug\FarseerPhysics MonoGame.dll</HintPath>
+    </Reference>
     <Reference Include="MonoGame.Framework">
       <HintPath>$(MSBuildProgramFiles32)\MonoGame\v3.0\Assemblies\Windows\MonoGame.Framework.dll</HintPath>
     </Reference>
@@ -92,7 +95,6 @@
   <ItemGroup>
     <MonoGameContentReference Include="Content\Content.mgcb" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Content.Builder.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

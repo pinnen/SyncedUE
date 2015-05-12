@@ -22,7 +22,7 @@ namespace Synced.InGame
     {
         Movable _owner = null;
         float _distanceToOwner;
-        public Crystal(Texture2D texture, Vector2 position, DrawingHelper.DrawingLevel drawingLevel, Game1 game)
+        public Crystal(Texture2D texture, Vector2 position, DrawingHelper.DrawingLevel drawingLevel, SyncedGame game)
             : base(texture, position, drawingLevel, game)
         {
             Origin = new Vector2(Texture.Width / 2, Texture.Height / 2);
