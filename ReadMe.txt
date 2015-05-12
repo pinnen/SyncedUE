@@ -73,7 +73,7 @@ Commands in Git Shell:
 
 4) Now you can experiment with the old version...
 
-5) Restore to presnet state withh command:
+5) Restore to original state with command:
 git checkout master
 
 
