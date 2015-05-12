@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Synced.Content;
-using Synced.Menu;
+using Synced.Interface;
 using Synced.Actors;
 using Synced.State_Machine;
 using Synced.Static_Classes;

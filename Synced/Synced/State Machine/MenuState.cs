@@ -1,6 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Synced.Content;
-using Synced.Menu;
+using Synced.Interface;
 // MenuState.cs
 // Introduced: 2015-04-17
 // Last edited: 2015-05-10

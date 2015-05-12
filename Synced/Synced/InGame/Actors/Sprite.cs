@@ -6,7 +6,7 @@
 //
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Synced.Menu;
+using Synced.Interface;
 using Synced.Static_Classes;
 using System;
 using System.Collections.Generic;

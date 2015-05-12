@@ -23,7 +23,7 @@ using System.Text;
 // myList.ForEach(c => c.Enabled = false);
 // http://stackoverflow.com/questions/1883920/call-a-function-for-each-value-in-a-generic-c-sharp-collection
 
-namespace Synced.Menu
+namespace Synced.Interface
 {
     class CharacterSelector : DrawableGameComponent
     {

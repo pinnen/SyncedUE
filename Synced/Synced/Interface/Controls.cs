@@ -11,7 +11,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Synced.Menu
+namespace Synced.Interface
 {
     class Controls : DrawableGameComponent, IDrawableObject
     {
