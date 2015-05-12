@@ -76,4 +76,3 @@ Commands in Git Shell:
 5) Restore to original state with command:
 git checkout master
 
-
