@@ -8,12 +8,9 @@ using System.Xml.Serialization;
 namespace Synced.MapNamespace
 {
     [Serializable]
-    public class MapObject
+    public class PlayerStart : MapObject
     {
-        [XmlElement("Position")]
-        public Vector2 Position;
-
-        [XmlElement("TexturePath")]
-        public string TexturePath;
+        [XmlElement("PlayerIndex")]
+        public PlayerIndex PlayerIndex;
     }
 }

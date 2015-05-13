@@ -13,7 +13,7 @@ using Synced.Interface;
 using Synced.Actors;
 using Synced.Static_Classes;
 using Synced.InGame;
-using Synced.Map;
+using Synced.MapNamespace;
 
 namespace Synced
 {
@@ -65,10 +65,8 @@ namespace Synced
             // ------------------------------------------------------------
             ScreenManager.AddScreen(new MenuScreen(Library.Interface.MenuBackground,this));
 
-
-
             // Tests
-            Library.Serialization<MapObject>.SerializeToXmlFile(new MapObject(), "XMLFILE.xml");
+            //Map m = new Map(Library.Map.Path[Library.Map.Name.Paper]);
 
             base.Initialize(); // Initializes all components
         }

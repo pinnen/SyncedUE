@@ -7,24 +7,35 @@
 using FarseerPhysics.Common;
 using FarseerPhysics.Dynamics;
 using Microsoft.Xna.Framework;
+using Synced.Content;
 using System;
 using System.Collections.Generic;
 using System.Xml.Serialization;
 
-namespace Synced.Map
+namespace Synced.MapNamespace
 {
-    [Serializable]
-    abstract class Map
+    class Map
     {
         #region Variables
-        [XmlElement("MapObjects")]
-        List<GameComponent> _mapObjects;
+        public MapData Data
+        {
+            get;
+            private set;
+        }
         #endregion
         #region Properties
-        World World
+        
+        public World World
         {
             get;
             set;
+        }
+
+        public Map(string path)
+        {
+            Data = Library.Serialization<MapData>.DeserializeFromXmlFile(path);
+
+            World = new World(Vector2.Zero); // Topdown games have no gravity
         }
         #endregion
     }

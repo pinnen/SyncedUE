@@ -113,7 +113,7 @@ namespace Synced.Content
                 #region Map
                 Map.Path = new Dictionary<Map.Name, string>()
                 {
-                    {Map.Name.Paper, "Maps/Paper"}
+                    {Map.Name.Paper, "Maps/Paper/map.xml"}
                 };
                 #endregion
             }
@@ -195,7 +195,7 @@ namespace Synced.Content
 
             public static Dictionary<Name, string> Path;
 
-            public static Synced.Map.Map LoadMap()
+            public static Synced.MapNamespace.Map LoadMap()
             {
                 return null;
             }
@@ -210,11 +210,10 @@ namespace Synced.Content
                     return null;
                 }
 
-                DataContractSerializer deserializer = new DataContractSerializer(typeof(T));
-
                 using (Stream stream = File.OpenRead(fileName))
                 {
-                    return (T)deserializer.ReadObject(stream);
+                    var serializer = new XmlSerializer(typeof(T));
+                    return serializer.Deserialize(stream) as T;
                 }
             }
             public static void SerializeToXmlFile(T obj, string fileName)

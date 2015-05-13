@@ -1,4 +1,5 @@
-﻿// Goal.cs
+﻿using FarseerPhysics.Dynamics;
+// Wall.cs
 // Introduced: 2015-04-14
 // Last edited: 2015-04-14
 // Edited by:
@@ -14,9 +15,9 @@ using System.Xml.Serialization;
 namespace Synced.MapNamespace
 {
     [Serializable]
-    public class Goal : Obstacle
+    public class Obstacle : MapObject
     {
-        [XmlElement("Radius")]
-        public int Radius;
+        [XmlElement("CollisionCategory")]
+        public Category CollisionCategory;
     }
 }
