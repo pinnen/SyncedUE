@@ -11,7 +11,6 @@ using Microsoft.Xna.Framework.Input;
 using Synced.Content;
 using Synced.Interface;
 using Synced.Actors;
-using Synced.State_Machine;
 using Synced.Static_Classes;
 using Synced.InGame;
 
@@ -25,8 +24,6 @@ namespace Synced
         GraphicsDeviceManager _graphics;
         SpriteBatch _spriteBatch;
         bool fullscreen = false;
-
-        GameStateMachine _gameStateMachine;
 
 
         KeyboardState _lastState;
@@ -66,10 +63,11 @@ namespace Synced
             Library.Audio.PlaySoundEffect(Library.Audio.SoundEffects.GameStart); // ToDo: Test
 
             // ------------------------------------------------------------
-            // Use the states in the state machine to edit the game
+            // Adds menu screen to ScreenManager
             // ------------------------------------------------------------
+            ScreenManager.AddScreen(new MenuScreen(Library.Interface.MenuBackground,this));
 
-            _gameStateMachine = new GameStateMachine(new MenuState(this));
+
 
             // Tests
 

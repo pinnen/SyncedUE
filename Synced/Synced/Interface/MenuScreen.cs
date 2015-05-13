@@ -79,12 +79,17 @@ namespace Synced.Interface
 
         public override void Activated()
         {
-            
+            foreach (DrawableGameComponent gc in GameComponents)
+            {
+                gc.Enabled = true;
+                gc.Visible = true;
+            }
+   
         }
 
         public override void Deactivated()
         {
-            
+            GameComponents.Clear();
         }
     }
 }

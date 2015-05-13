@@ -76,6 +76,7 @@ namespace Synced.Interface
         public Screen(Game game) :base(game)
         {
             GameComponents = new GameComponentCollection();
+            
         }
 
 
@@ -120,6 +121,7 @@ namespace Synced.Interface
         /// </summary>
         public virtual void Activated()
         {
+            
         }
 
         /// <summary>

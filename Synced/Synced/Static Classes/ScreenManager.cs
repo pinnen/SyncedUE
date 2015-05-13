@@ -9,22 +9,13 @@ namespace Synced.Static_Classes
 {
     static class ScreenManager
     {
-        public static Stack<Screen> Screens
-        {
-            get
-            {
-                if (Screens == null)
-                    _screens = new Stack<Screen>();
-                return _screens;
-            }
-        }
-        private static Stack<Screen> _screens;
+        public static Stack<Screen> Screens = new Stack<Screen>();
 
         public static int Count
         {
             get
             {
-                return _screens.Count;
+                return Screens.Count;
             }
         }
 
