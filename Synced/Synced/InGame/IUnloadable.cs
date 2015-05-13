@@ -7,6 +7,6 @@ namespace Synced.InGame
 {
     interface IUnloadable
     {
-        public void Unload();
+        void Unload();
     }
 }
