@@ -7,13 +7,37 @@ using System.Text;
 
 namespace Synced.Static_Classes
 {
-    static class ScreenManager : DrawableGameComponent
+    static class ScreenManager
     {
-        public static Stack<Screen> Screens
+        public static Stack<Screen> Screens = new Stack<Screen>();
+
+        public static int Count
+        {
+            get
+            {
+                return Screens.Count;
+            }
+        }
+
+        public static bool Initialized
         {
             get;
-            set;
+            private set;
         }
+
+        public static void AddScreen(Screen screen)
+        {
+            Screens.Push(screen);
+        }
+        public static void AddScreen(List<Screen> screens)
+        {
+            screens.ForEach(Screens.Push);
+        }
+        public static void AddScreen(Screen[] screens)
+        {
+            Array.ForEach(screens, Screens.Push);
+        }
+
         public static Screen ActiveScreen
         {
             get { return Screens.Peek(); }
@@ -21,6 +45,7 @@ namespace Synced.Static_Classes
 
         public static Screen Pop()
         {
+
             if (Screens.Count < 1)
                 return null;
             Screen prev = Screens.Pop();
@@ -29,5 +54,7 @@ namespace Synced.Static_Classes
 
             return prev;
         }
+
+        
     }
 }

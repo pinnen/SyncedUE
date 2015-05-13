@@ -72,6 +72,7 @@
     <Compile Include="Static Classes\DrawingHelper.cs" />
     <Compile Include="Static Classes\InputManager.cs" />
     <Compile Include="Static Classes\ResolutionManager.cs" />
+    <Compile Include="Static Classes\ScreenManager.cs" />
     <Compile Include="SyncedGame.cs" />
     <Compile Include="Program.cs" />
   </ItemGroup>

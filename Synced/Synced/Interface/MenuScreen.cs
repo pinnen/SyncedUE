@@ -33,7 +33,7 @@ namespace Synced.Interface
             : base(game)
         {
             _background = new Sprite(texture, Vector2.Zero, DrawingHelper.DrawingLevel.Back, game);
-
+            
             // Temporary screen variables (Half of screen)
             int w = ResolutionManager.GetCenterPointWidth;
             int h = ResolutionManager.GetCenterPointHeight;
@@ -79,12 +79,17 @@ namespace Synced.Interface
 
         public override void Activated()
         {
-            throw new NotImplementedException();
+            foreach (DrawableGameComponent gc in GameComponents)
+            {
+                gc.Enabled = true;
+                gc.Visible = true;
+            }
+   
         }
 
         public override void Deactivated()
         {
-            throw new NotImplementedException();
+            GameComponents.Clear();
         }
     }
 }

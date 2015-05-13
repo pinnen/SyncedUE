@@ -61,8 +61,10 @@ namespace Synced
             Library.Audio.PlaySoundEffect(Library.Audio.SoundEffects.GameStart); // ToDo: Test
 
             // ------------------------------------------------------------
-            // Custom initialization here
+            // Adds menu screen to ScreenManager
             // ------------------------------------------------------------
+            ScreenManager.AddScreen(new MenuScreen(Library.Interface.MenuBackground,this));
+
 
 
             // Tests

@@ -58,12 +58,25 @@ namespace Synced.Interface
             get;
             set;
         }
+
+        public TimeSpan FadeOutTime
+        {
+            get;
+            set;
+        }
+
+        public TimeSpan FadeInTime
+        {
+            get;
+            set;
+        }
         #endregion
 
 
         public Screen(Game game) :base(game)
         {
             GameComponents = new GameComponentCollection();
+            
         }
 
 
@@ -108,6 +121,7 @@ namespace Synced.Interface
         /// </summary>
         public virtual void Activated()
         {
+            
         }
 
         /// <summary>
