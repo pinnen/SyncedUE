@@ -28,11 +28,12 @@ namespace Synced
 
         GameStateMachine _gameStateMachine;
 
+
         KeyboardState _lastState;
 
-        // Test objects
-        Player player;
-        Crystal crystal;
+        //// Test objects
+        //Player player;
+        //Crystal crystal;
         
 
         public SyncedGame()
@@ -71,8 +72,9 @@ namespace Synced
             _gameStateMachine = new GameStateMachine(new MenuState(this));
 
             // Tests
-            player = new Player(PlayerIndex.One, Library.Character.Name.Circle, this);
-            crystal = new Crystal(Library.Crystal.Texture, new Vector2(100, 100), DrawingHelper.DrawingLevel.Medium, this);
+
+            //player = new Player(PlayerIndex.One, Library.Character.Name.Circle, this);
+            //crystal = new Crystal(Library.Crystal.Texture, new Vector2(100, 100), DrawingHelper.DrawingLevel.Medium, this);
 
             base.Initialize(); // Initializes all components
         }
@@ -81,24 +83,18 @@ namespace Synced
         /// LoadContent will be called once per game and is the place to load
         /// all of your content.
         /// </summary>
+        /// 
         protected override void LoadContent()
         {
-            // KB29: AudioManager...
-            //AudioManager.AudioLoadContent(this);
-
             base.LoadContent();
         }
-
         /// <summary>
         /// UnloadContent will be called once per game and is the place to unload
         /// all content.
         /// </summary>
         protected override void UnloadContent()
         {
-            // TODO: Unload any non ContentManager content here
-
-            // KB29: AudioManager...
-            //AudioManager.UnloadAudioContent();
+            base.UnloadContent();
         }
 
         /// <summary>
@@ -118,11 +114,11 @@ namespace Synced
 
             // TODO Object orient collision somehow...
             // Collision checks 
-            CollisionManager.CircleCircleCollision(player.Left, crystal);
-            CollisionManager.CircleCircleCollision(player.Right, crystal);
+            //CollisionManager.CircleCircleCollision(player.Left, crystal);
+            //CollisionManager.CircleCircleCollision(player.Right, crystal);
             
             // Update the statemachine
-            _gameStateMachine.Update();
+            //_gameStateMachine.Update();
 
             // Update the debugger
             DebuggingHelper.Update();

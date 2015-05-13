@@ -1,11 +1,11 @@
-﻿using Microsoft.Xna.Framework;
-// InGameState.cs
+﻿// InGameState.cs
 // Introduced: 2015-04-17
-// Last edited: 2015-04-17
+// Last edited: 2015-05-12
 // Edited by:
 // Pontus Magnusson
 //
-// 
+using Synced.Content;
+using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +17,7 @@ namespace Synced.State_Machine
     {
         public GameState(Game game) : base(game)
         {
+            Library.Audio.PlaySong(Library.Audio.Songs.InGame);
         }
         public override void Pause(GameStateMachine gameStateMachine)
         {

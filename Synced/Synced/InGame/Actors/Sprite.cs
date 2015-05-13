@@ -48,6 +48,14 @@ namespace Synced.Actors
         {
             base.LoadContent();
         }
+        public void Unload()
+        {
+            if (Game.Components.Contains(this)) Game.Components.Remove(this);
+        }
+        protected override void Dispose(bool disposing)
+        {
+            base.Dispose(disposing);
+        }
 
         public override void Draw(GameTime gameTime)
         {

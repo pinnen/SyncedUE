@@ -25,7 +25,7 @@ using System.Text;
 
 namespace Synced.Interface
 {
-    class CharacterSelector : DrawableGameComponent
+    class CharacterSelector : DrawableGameComponent, IUnloadable
     {
         public enum State
         {
@@ -99,6 +99,15 @@ namespace Synced.Interface
             _stateText.SetFont = Library.Font.MenuFont;
             _abilityTextHolder.SetFont = Library.Font.MenuFont;
             base.LoadContent();
+        }
+        protected override void Dispose(bool disposing)
+        {
+            _characterHolder.Dispose();
+            _abilityTextHolder.Dispose();
+            _arrowHolder.Dispose();
+            _stateText.Dispose();
+            if (Game.Components.Contains(this)) Game.Components.Remove(this);
+            base.Dispose(disposing);
         }
         public override void Update(GameTime gameTime)
         {
@@ -195,6 +204,15 @@ namespace Synced.Interface
 
             else if (InputManager.LeftStickRight(_playerIndex))
                 _nextCharacter(1);
+        }
+
+        public void Unload()
+        {
+            _characterHolder.Unload();
+            _abilityTextHolder.Unload();
+            _arrowHolder.Unload();
+            _stateText.Unload();
+            if (Game.Components.Contains(this)) Game.Components.Remove(this);
         }
     }
 }

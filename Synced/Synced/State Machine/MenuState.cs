@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Synced.Content;
+using Synced.InGame;
 using Synced.Interface;
 // MenuState.cs
 // Introduced: 2015-04-17
@@ -15,7 +16,7 @@ using System.Text;
 
 namespace Synced.State_Machine
 {
-    class MenuState : State
+    class MenuState : State, IUnloadable
     {
         MenuScreen _menu;
 
@@ -30,7 +31,7 @@ namespace Synced.State_Machine
         {
             if (_menu.IsEveryoneReady())
             {
-                Library.Audio.PlaySong(Library.Audio.Songs.InGame);
+                Game.Components.Remove(_menu);
                 gameStateMachine.CurrentState = new GameState(Game);
             } 
         }
@@ -39,6 +40,10 @@ namespace Synced.State_Machine
         {
         }
         public override string GetStateName() { return "Menu State"; }
-        
+
+        public void Unload()
+        {
+            _menu.Unload();
+        }
     }
 }

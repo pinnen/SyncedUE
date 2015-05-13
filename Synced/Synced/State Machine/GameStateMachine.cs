@@ -14,49 +14,48 @@ namespace Synced.State_Machine
 {
     class GameStateMachine
     {
-        private State _currentState;
         public GameStateMachine(State gameState)
         {
-            _currentState = gameState;
+            CurrentState = gameState;
         }
 
         public State CurrentState
         {
-            get { return _currentState; }
-            set { _currentState = value;}
+            get;
+            set;
         }
 
         public void Update()
         {
-            _currentState.Update(this);
+            CurrentState.Update(this);
         }
         public void Play()
         {
-            _currentState.Play(this);
+            CurrentState.Play(this);
         }
         public void Pause()
         {
-            _currentState.Pause(this);
+            CurrentState.Pause(this);
         }
         public void Resume()
         {
-            _currentState.Resume(this);
+            CurrentState.Resume(this);
         }
         public void Finish()
         {
-            _currentState.Finish(this);
+            CurrentState.Finish(this);
         }
         public void Rematch()
         {
-            _currentState.Rematch(this);
+            CurrentState.Rematch(this);
         }
         public void ReturnToMenu()
         {
-            _currentState.ReturnToMenu(this);
+            CurrentState.ReturnToMenu(this);
         }
         public string GetStateName()
         {
-            return _currentState.GetStateName();
+            return CurrentState.GetStateName();
         }
     }
 }

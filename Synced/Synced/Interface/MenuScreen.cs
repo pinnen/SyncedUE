@@ -8,6 +8,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Synced.Actors;
+using Synced.InGame;
 using Synced.Static_Classes;
 using System;
 using System.Collections.Generic;
@@ -16,7 +17,7 @@ using System.Text;
 
 namespace Synced.Interface
 {
-    class MenuScreen : Screen
+    class MenuScreen : Screen, IUnloadable
     {
         const int _minimumPlayersConstant = 1;
 
@@ -47,10 +48,23 @@ namespace Synced.Interface
             Game.Components.Add(_background);
             Game.Components.Add(this);
         }
+        protected override void Dispose(bool disposing)
+        {
+            foreach (var c in _characterSelectors)
+                Game.Components.Remove(c);
+            Game.Components.Remove(_background);
+            if (Game.Components.Contains(this)) Game.Components.Remove(this);
+            base.Dispose(disposing);
+        }
 
         public bool IsEveryoneReady()
         {
             return (_characterSelectors.Where(p => p.IsReady()).Count() >= _minimumPlayersConstant);
+        }
+        public void Unload()
+        {
+            _characterSelectors.ForEach(x => x.Unload());
+            if (Game.Components.Contains(this)) Game.Components.Remove(this);
         }
     }
 }
