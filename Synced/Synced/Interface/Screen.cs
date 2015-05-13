@@ -58,6 +58,18 @@ namespace Synced.Interface
             get;
             set;
         }
+
+        public TimeSpan FadeOutTime
+        {
+            get;
+            set;
+        }
+
+        public TimeSpan FadeInTime
+        {
+            get;
+            set;
+        }
         #endregion
 
 
