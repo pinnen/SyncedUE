@@ -28,16 +28,8 @@ namespace Synced.Interface
             get;
             set;
         }
-        public TimeSpan FadeOutTime
-        {
-            get;
-            set;
-        }
-        public TimeSpan FadeInTime
-        {
-            get;
-            set;
-        }
+        
+
         #endregion
 
 
@@ -49,6 +41,11 @@ namespace Synced.Interface
             int h = ResolutionManager.GetCenterPointHeight;
             //Splash screen members
 
+            //TEST SPLASH SCREEN
+            //How long to fade in & out
+            FadeInTime = TimeSpan.FromSeconds(0.5); 
+            FadeOutTime = TimeSpan.FromSeconds(0.5);
+
             //Adds members to game components
             GameComponents.Add(_background);
             Game.Components.Add(this);
@@ -57,10 +54,13 @@ namespace Synced.Interface
         public override void Update(GameTime gameTime)
         {
             //TODO: Fix fade in fade out 
+            foreach (IUpdateable gc in this.GameComponents.OfType<IUpdateable>().Where<IUpdateable>(x => x.Enabled).OrderBy<IUpdateable, int>(x => x.UpdateOrder))
+                gc.Update(gameTime);
             base.Update(gameTime);
         }
         public override void Draw(GameTime gameTime)
         {
+
             base.Draw(gameTime);
         }
 
