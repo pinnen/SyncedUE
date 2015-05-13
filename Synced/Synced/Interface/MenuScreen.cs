@@ -35,8 +35,8 @@ namespace Synced.Interface
             _background = new Sprite(texture, Vector2.Zero, DrawingHelper.DrawingLevel.Back, game);
 
             // Temporary screen variables (Half of screen)
-            int w = ResolutionManager.GetWidth / 2;
-            int h = ResolutionManager.GetHeight / 2;
+            int w = ResolutionManager.GetCenterPointWidth;
+            int h = ResolutionManager.GetCenterPointHeight;
 
             // Add character selectors
             _characterSelectors = new List<CharacterSelector>();
@@ -49,7 +49,7 @@ namespace Synced.Interface
             Game.Components.Add(this);
         }
         protected override void Dispose(bool disposing)
-        {
+        { 
             foreach (var c in _characterSelectors)
                 Game.Components.Remove(c);
             Game.Components.Remove(_background);

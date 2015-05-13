@@ -55,6 +55,14 @@ namespace Synced.Static_Classes
         {
             get { return _VHeight; }
         }
+        static public int GetCenterPointWidth
+        {
+            get { return _VWidth / 2; }
+        }
+        static public int GetCenterPointHeight
+        {
+            get { return _VHeight / 2; }
+        }
 
         static public void Init(ref GraphicsDeviceManager device)
         {

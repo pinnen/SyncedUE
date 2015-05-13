@@ -15,7 +15,7 @@ namespace Synced.Interface
 {
     class Screen : DrawableGameComponent, IDrawableObject
     {
-        public GameComponentCollection GameComponents { get; private set; }
+        public GameComponentCollection GameComponents { get; protected set; }
 
         public Screen(Game game) :base(game)
         {
