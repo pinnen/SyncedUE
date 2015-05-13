@@ -81,7 +81,7 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="FarseerPhysics MonoGame">
-      <HintPath>..\Farseer Physics Engine 3.5\bin\WindowsGL\Debug\FarseerPhysics MonoGame.dll</HintPath>
+      <HintPath>..\FarseerPhysics MonoGame.dll</HintPath>
     </Reference>
     <Reference Include="MonoGame.Framework">
       <HintPath>$(MSBuildProgramFiles32)\MonoGame\v3.0\Assemblies\Windows\MonoGame.Framework.dll</HintPath>

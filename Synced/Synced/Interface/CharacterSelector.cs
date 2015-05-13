@@ -100,15 +100,6 @@ namespace Synced.Interface
             _abilityTextHolder.SetFont = Library.Font.MenuFont;
             base.LoadContent();
         }
-        protected override void Dispose(bool disposing)
-        {
-            _characterHolder.Dispose();
-            _abilityTextHolder.Dispose();
-            _arrowHolder.Dispose();
-            _stateText.Dispose();
-            if (Game.Components.Contains(this)) Game.Components.Remove(this);
-            base.Dispose(disposing);
-        }
         public override void Update(GameTime gameTime)
         {
             switch (_currentState)
