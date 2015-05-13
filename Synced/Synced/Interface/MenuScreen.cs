@@ -52,6 +52,12 @@ namespace Synced.Interface
             Game.Components.Add(_background);
             Game.Components.Add(this);
         }
+
+        public override void Initialize()
+        {
+            base.Initialize();
+        }
+
         protected override void Dispose(bool disposing)
         { 
             foreach (var c in _characterSelectors)
@@ -69,6 +75,16 @@ namespace Synced.Interface
         {
             _characterSelectors.ForEach(x => x.Unload());
             if (Game.Components.Contains(this)) Game.Components.Remove(this);
+        }
+
+        public override void Activated()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Deactivated()
+        {
+            throw new NotImplementedException();
         }
     }
 }

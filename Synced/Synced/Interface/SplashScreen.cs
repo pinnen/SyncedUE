@@ -23,17 +23,17 @@ namespace Synced.Interface
         #endregion
 
         #region Properties
-        public float SplashTime
+        public TimeSpan SplashTime
         {
             get;
             set;
         }
-        public float FadeOutTime
+        public TimeSpan FadeOutTime
         {
             get;
             set;
         }
-        public float FadeInTime
+        public TimeSpan FadeInTime
         {
             get;
             set;

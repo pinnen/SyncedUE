@@ -51,6 +51,13 @@ namespace Synced.Interface
             get; 
             private set;
         }
+
+
+        public bool IsPopUp
+        {
+            get;
+            set;
+        }
         #endregion
 
 
@@ -96,11 +103,24 @@ namespace Synced.Interface
             base.Draw(gameTime);
         }
 
+        /// <summary>
+        /// Virtual method, this method is called when a screen is activated 
+        /// </summary>
+        public virtual void Activated()
+        {
+        }
+
+        /// <summary>
+        /// Virtual method, this method is called when a screen is deactivated 
+        /// </summary>
+        public virtual void Deactivated()
+        {
+        }
+
 
         protected override void Dispose(bool disposing)
         {
             base.Dispose(disposing);
         }
-
     }
 }
