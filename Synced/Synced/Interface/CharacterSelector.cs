@@ -4,18 +4,14 @@
 // Edited by:
 // Pontus Magnusson
 // Göran Forsström
-// 
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Synced.Actors;
 using Synced.Content;
 using Synced.InGame;
-using Synced.Actors;
 using Synced.Static_Classes;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 // TODO:
 // Create controls for all objects/texts/controllers

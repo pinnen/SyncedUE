@@ -66,13 +66,7 @@
     <Compile Include="Interface\MenuScreen.cs" />
     <Compile Include="Interface\Screen.cs" />
     <Compile Include="Interface\Button.cs" />
-    <Compile Include="State Machine\State.cs" />
-    <Compile Include="State Machine\GameStateMachine.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="State Machine\GameState.cs" />
-    <Compile Include="State Machine\MenuState.cs" />
-    <Compile Include="State Machine\PauseState.cs" />
-    <Compile Include="State Machine\ScoreState.cs" />
     <Compile Include="Static Classes\DebuggingHelper.cs" />
     <Compile Include="Static Classes\DrawingHelper.cs" />
     <Compile Include="Static Classes\InputManager.cs" />
