@@ -14,6 +14,11 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Media;
 using Microsoft.Xna.Framework;
+using System.IO;
+using System.Runtime.Serialization;
+using System.Xml.Serialization;
+using FarseerPhysics.Common;
+using FarseerPhysics.Dynamics;
 
 namespace Synced.Content
 {
@@ -105,6 +110,12 @@ namespace Synced.Content
                 #region Crystal
                 Crystal.Texture = content.Load<Texture2D>("GameObjects/Crystal");
                 #endregion
+                #region Map
+                Map.Path = new Dictionary<Map.Name, string>()
+                {
+                    {Map.Name.Paper, "Maps/Paper"}
+                };
+                #endregion
             }
         }
         public static class Crystal
@@ -162,15 +173,61 @@ namespace Synced.Content
                 public static Color RedLeft { get { return Color.Red; } }
                 public static Color RedRight { get { return Color.DarkRed; }}
                 public static Color RedCrystal { get { return new Color(180, 0, 0, 255); }}
+
                 public static Color BlueLeft { get { return Color.Blue; }}
                 public static Color BlueRight { get { return Color.DarkBlue; }}
                 public static Color BlueCrystal { get { return new Color(0, 0, 180, 255); }}
+
                 public static Color GreenLeft { get { return new Color(0, 255, 0, 255); }}
                 public static Color GreenRight { get { return new Color(0, 139, 0, 255); }}
                 public static Color GreenCrystal { get { return new Color(0, 180, 0, 255); }}
+
                 public static Color YellowLeft { get { return Color.Yellow; }}
                 public static Color YellowRight { get { return new Color(139, 139, 0, 255); }}
                 public static Color YellowCrystal { get { return new Color(180, 180, 0, 255); }}
+        }
+        public static class Map
+        {
+            public enum Name
+            {
+                Paper
+            }
+
+            public static Dictionary<Name, string> Path;
+
+            public static Synced.Map.Map LoadMap()
+            {
+                return null;
+            }
+        }
+        public static class Serialization<T> where T : class
+        {
+
+            public static T DeserializeFromXmlFile(string fileName)
+            {
+                if (!File.Exists(fileName))
+                {
+                    return null;
+                }
+
+                DataContractSerializer deserializer = new DataContractSerializer(typeof(T));
+
+                using (Stream stream = File.OpenRead(fileName))
+                {
+                    return (T)deserializer.ReadObject(stream);
+                }
+            }
+            public static void SerializeToXmlFile(T obj, string fileName)
+            {
+                var serializer = new XmlSerializer(typeof(T));
+                XmlSerializerNamespaces ns = new XmlSerializerNamespaces();
+                ns.Add("", "");
+
+                using (var writer = new StreamWriter(fileName))
+                {
+                    serializer.Serialize(writer, obj, ns);
+                }
+            }
         }
     }
 }

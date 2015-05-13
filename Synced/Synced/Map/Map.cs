@@ -4,16 +4,21 @@
 // Edited by:
 // Pontus Magnusson
 
+using FarseerPhysics.Common;
 using FarseerPhysics.Dynamics;
 using Microsoft.Xna.Framework;
+using System;
 using System.Collections.Generic;
+using System.Xml.Serialization;
 
 namespace Synced.Map
 {
+    [Serializable]
     abstract class Map
     {
         #region Variables
-        List<GameComponent> _obstacles;
+        [XmlElement("MapObjects")]
+        List<GameComponent> _mapObjects;
         #endregion
         #region Properties
         World World

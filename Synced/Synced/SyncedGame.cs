@@ -11,9 +11,9 @@ using Microsoft.Xna.Framework.Input;
 using Synced.Content;
 using Synced.Interface;
 using Synced.Actors;
-using Synced.State_Machine;
 using Synced.Static_Classes;
 using Synced.InGame;
+using Synced.Map;
 
 namespace Synced
 {
@@ -26,14 +26,9 @@ namespace Synced
         SpriteBatch _spriteBatch;
         bool fullscreen = false;
 
-        GameStateMachine _gameStateMachine;
-
-
         KeyboardState _lastState;
 
-        //// Test objects
-        //Player player;
-        //Crystal crystal;
+        // Test objects
         
 
         public SyncedGame()
@@ -66,15 +61,12 @@ namespace Synced
             Library.Audio.PlaySoundEffect(Library.Audio.SoundEffects.GameStart); // ToDo: Test
 
             // ------------------------------------------------------------
-            // Use the states in the state machine to edit the game
+            // Custom initialization here
             // ------------------------------------------------------------
 
-            _gameStateMachine = new GameStateMachine(new MenuState(this));
 
             // Tests
-
-            //player = new Player(PlayerIndex.One, Library.Character.Name.Circle, this);
-            //crystal = new Crystal(Library.Crystal.Texture, new Vector2(100, 100), DrawingHelper.DrawingLevel.Medium, this);
+            Library.Serialization<MapObject>.SerializeToXmlFile(new MapObject(), "XMLFILE.xml");
 
             base.Initialize(); // Initializes all components
         }

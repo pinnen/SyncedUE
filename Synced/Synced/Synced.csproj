@@ -58,6 +58,7 @@
     <Compile Include="Interface\SplashScreen.cs" />
     <Compile Include="Map\Goal.cs" />
     <Compile Include="Map\Map.cs" />
+    <Compile Include="Map\MapObject.cs" />
     <Compile Include="Map\Wall.cs" />
     <Compile Include="Interface\CharacterSelector.cs" />
     <Compile Include="Interface\Controls.cs" />
@@ -82,6 +83,7 @@
       <HintPath>$(MSBuildProgramFiles32)\MonoGame\v3.0\Assemblies\Windows\MonoGame.Framework.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
