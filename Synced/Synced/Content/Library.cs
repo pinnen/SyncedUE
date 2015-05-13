@@ -134,15 +134,15 @@ namespace Synced.Content
 
             public static void PlaySong(Songs song)
             {
-                if (MediaPlayer.State == MediaState.Playing)
-                    MediaPlayer.Stop();
-                MediaPlayer.Play(SongDictionary[song]);
-                MediaPlayer.IsRepeating = true;
+                //if (MediaPlayer.State == MediaState.Playing)
+                //    MediaPlayer.Stop();
+                //MediaPlayer.Play(SongDictionary[song]);
+                //MediaPlayer.IsRepeating = true;
             }
 
             public static void PlaySoundEffect(SoundEffects soundEffect)
             {
-                SoundEffectDictionary[soundEffect].Play();
+                //SoundEffectDictionary[soundEffect].Play();
             }
         }
         public static class Font
