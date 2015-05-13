@@ -13,9 +13,46 @@ using System.Text;
 
 namespace Synced.Interface
 {
-    class Screen : DrawableGameComponent, IDrawableObject
+    abstract class Screen : DrawableGameComponent, IDrawableObject
     {
-        public GameComponentCollection GameComponents { get; protected set; }
+        #region Properties
+        /// <summary>
+        /// Screen Position
+        /// </summary>
+        public Vector2 Position
+        {
+            get;
+            protected set;
+        }
+
+        /// <summary>
+        /// Screen texture
+        /// </summary>
+        public Texture2D Texture
+        {
+            get;
+            protected set;
+        }
+
+        /// <summary>
+        /// List of Components that this screen contains
+        /// </summary>
+        public GameComponentCollection GameComponents
+        {
+            get;
+            protected set;
+        }
+
+        /// <summary>
+        /// Used to check if this screen is Initialized.
+        /// </summary>
+        public bool Initialized
+        { 
+            get; 
+            private set;
+        }
+        #endregion
+
 
         public Screen(Game game) :base(game)
         {
@@ -27,6 +64,7 @@ namespace Synced.Interface
         {
             foreach (GameComponent gc in this.GameComponents)
                 gc.Initialize();
+            Initialized = true;
             base.Initialize();
         }
 
@@ -64,16 +102,5 @@ namespace Synced.Interface
             base.Dispose(disposing);
         }
 
-        public Vector2 Position
-        {
-            get;
-            protected set;
-        }
-
-        public Texture2D Texture
-        {
-            get;
-            protected set;
-        }
     }
 }
