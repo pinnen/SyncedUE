@@ -14,6 +14,7 @@ using Synced.Actors;
 using Synced.State_Machine;
 using Synced.Static_Classes;
 using Synced.InGame;
+using FarseerPhysics.Dynamics;
 
 namespace Synced
 {
@@ -28,12 +29,12 @@ namespace Synced
 
         GameStateMachine _gameStateMachine;
 
-
         KeyboardState _lastState;
 
-        //// Test objects
-        //Player player;
-        //Crystal crystal;
+        // Test objects // TODO: Remove later
+        World world;
+        Player player;
+        Crystal crystal;
         
 
         public SyncedGame()
@@ -71,10 +72,11 @@ namespace Synced
 
             _gameStateMachine = new GameStateMachine(new MenuState(this));
 
-            // Tests
-
-            //player = new Player(PlayerIndex.One, Library.Character.Name.Circle, this);
-            //crystal = new Crystal(Library.Crystal.Texture, new Vector2(100, 100), DrawingHelper.DrawingLevel.Medium, this);
+            // Tests    // TODO: Remove later
+            world = new World(new Vector2(0, 0));
+            player = new Player(PlayerIndex.One, Library.Character.Name.Circle, this, world);
+            crystal = new Crystal(Library.Crystal.Texture, new Vector2(100, 100), DrawingHelper.DrawingLevel.Medium, this, world);
+            
 
             base.Initialize(); // Initializes all components
         }
@@ -111,6 +113,9 @@ namespace Synced
             {
                 _graphics.ToggleFullScreen();
             }
+
+            // Test     // TODO: Remove later
+            world.Step(0.33333f);
 
             // TODO Object orient collision somehow...
             // Collision checks 

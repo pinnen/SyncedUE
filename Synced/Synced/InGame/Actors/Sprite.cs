@@ -18,7 +18,7 @@ namespace Synced.Actors
     class Sprite : DrawableGameComponent, IDrawableObject
     {
         // Provide access to the spritebatch through game services. 
-        SpriteBatch _spriteBatch
+        protected SpriteBatch _spriteBatch
         {
             get { return (SpriteBatch)Game.Services.GetService(typeof(SpriteBatch)); }
         }
