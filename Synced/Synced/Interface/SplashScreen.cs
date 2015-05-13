@@ -1,4 +1,10 @@
-﻿using Microsoft.Xna.Framework;
+﻿// CharacterSelector.cs
+// Introduced: 2015-05-13
+// Last edited: 2015-05-13
+// Edited by:
+// Robin Calmegård
+//
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Synced.Actors;
 using Synced.InGame;
@@ -12,13 +18,28 @@ namespace Synced.Interface
 {
     class SplashScreen : Screen, IUnloadable
     {
+        #region Member variables
         Sprite _background;
+        #endregion
 
+        #region Properties
         public float SplashTime
         {
             get;
             set;
         }
+        public float FadeOutTime
+        {
+            get;
+            set;
+        }
+        public float FadeInTime
+        {
+            get;
+            set;
+        }
+        #endregion
+
 
         public SplashScreen(Texture2D texture, Game game) : base (game)
         {
@@ -29,8 +50,18 @@ namespace Synced.Interface
             //Splash screen members
 
             //Adds members to game components
-            Game.Components.Add(_background);
+            GameComponents.Add(_background);
             Game.Components.Add(this);
+        }
+
+        public override void Update(GameTime gameTime)
+        {
+            //TODO: Fix fade in fade out 
+            base.Update(gameTime);
+        }
+        public override void Draw(GameTime gameTime)
+        {
+            base.Draw(gameTime);
         }
 
         protected override void Dispose(bool disposing)
@@ -39,10 +70,10 @@ namespace Synced.Interface
             base.Dispose(disposing);
         }
 
-
         public void Unload()
         {
-            throw new NotImplementedException();
+           
         }
+
     }
 }
