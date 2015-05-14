@@ -52,7 +52,6 @@ namespace Synced.MapNamespace
                 }
                 else if (mapObject is PlayerStart)
                 {
-                    _components.Add(new Sprite(game.Content.Load<Texture2D>(mapObject.TexturePath), mapObject.Position, Static_Classes.DrawingHelper.DrawingLevel.Back, game));
                 }
                 else if (mapObject is MapObject)
                 {

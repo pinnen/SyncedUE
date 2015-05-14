@@ -63,11 +63,11 @@ namespace Synced
             // ------------------------------------------------------------
             // Adds menu screen to ScreenManager
             // ------------------------------------------------------------
-            //ScreenManager.AddScreen(new MenuScreen(Library.Interface.MenuBackground,this));
+            ScreenManager.AddScreen(new MenuScreen(Library.Interface.MenuBackground,this));
 
             // Tests
-            MapData a = new MapData();
-            Map m = new Map(Library.Map.Path[Library.Map.Name.Paper], this);
+            //MapData a = new MapData();
+            //Map m = new Map(Library.Map.Path[Library.Map.Name.Paper], this);
 
             base.Initialize(); // Initializes all components
         }
