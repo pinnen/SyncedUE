@@ -47,7 +47,11 @@ namespace Synced.Static_Classes
         {
 
             if (Screens.Count < 1)
+            {
+                //Something has gone wrong.
                 return null;
+            }
+
             Screen prev = Screens.Pop();
             if (ActiveScreen != null)
                 ActiveScreen.Activated();
