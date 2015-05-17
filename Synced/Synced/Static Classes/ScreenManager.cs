@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using Synced.Interface;
 using System;
 using System.Collections.Generic;
@@ -37,17 +38,21 @@ namespace Synced.Static_Classes
         {
             Array.ForEach(screens, Screens.Push);
         }
-
         public static Screen ActiveScreen
         {
-            get { return Screens.Peek(); }
+            get
+            {
+                if (Screens.Count < 0) return Screens.Peek();
+                else return null;
+            }
         }
-
         public static Screen Pop()
         {
-
             if (Screens.Count < 1)
+            {
                 return null;
+            }
+
             Screen prev = Screens.Pop();
             if (ActiveScreen != null)
                 ActiveScreen.Activated();
@@ -55,6 +60,23 @@ namespace Synced.Static_Classes
             return prev;
         }
 
+        public static void Update(GameTime gameTime)
+        {
+            foreach (var item in Screens)
+            {
+                if (item.Enabled)
+                    item.Update(gameTime);
+            }
+        }
         
+        public static void Draw(GameTime gameTime, SpriteBatch spriteBatch)
+        {
+            foreach (var item in Screens)
+            {
+                if (item.Enabled)
+                    item.Draw(gameTime);
+            }
+        }
+
     }
 }

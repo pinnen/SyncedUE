@@ -15,7 +15,7 @@ using System.Text;
 
 namespace Synced.InGame
 {
-    class Text : DrawableGameComponent, IUnloadable
+    class Text : DrawableGameComponent
     {
         #region Variables
         string _content;
@@ -62,11 +62,6 @@ namespace Synced.InGame
             _spriteBatch.End();
 
             base.Draw(gameTime);
-        }
-
-        public void Unload()
-        {
-
         }
     }
 }

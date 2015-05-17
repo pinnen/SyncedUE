@@ -28,7 +28,6 @@ namespace Synced.Content
         {
             public static void Initialize(ContentManager content)
             {
-
                 // TODO: XML formatting maybe?
                 // Initialize
                 Interface.MenuBackground = content.Load<Texture2D>("Interface/ControllerSelectionBackground");
@@ -113,7 +112,7 @@ namespace Synced.Content
                 #region Map
                 Map.Path = new Dictionary<Map.Name, string>()
                 {
-                    {Map.Name.Paper, "Maps/Paper/map.xml"}
+                    {Map.Name.Paper, "Content/Maps/Paper/map.xml"}
                 };
                 #endregion
             }

@@ -37,7 +37,7 @@ namespace Synced.Interface
         /// <summary>
         /// List of Components that this screen contains
         /// </summary>
-        public GameComponentCollection GameComponents
+        public List<DrawableGameComponent> GameComponents
         {
             get;
             protected set;
@@ -72,13 +72,10 @@ namespace Synced.Interface
         }
         #endregion
 
-
         public Screen(Game game) :base(game)
         {
-            GameComponents = new GameComponentCollection();
-            
+            GameComponents = new List<DrawableGameComponent>();
         }
-
 
         public override void Initialize()
         {
@@ -86,16 +83,6 @@ namespace Synced.Interface
                 gc.Initialize();
             Initialized = true;
             base.Initialize();
-        }
-
-        protected override void LoadContent()
-        {
-            base.LoadContent();
-        }
-
-        protected override void UnloadContent()
-        {
-            base.UnloadContent();
         }
 
         public override void Update(GameTime gameTime)
@@ -108,8 +95,6 @@ namespace Synced.Interface
 
         public override void Draw(GameTime gameTime)
         {
-            //TODO: Need to draw itself
-
             //Draws every component in GameComponents
             foreach (IDrawable gc in this.GameComponents.OfType<IDrawable>().Where<IDrawable>(x => x.Visible).OrderBy<IDrawable, int>(x => x.DrawOrder))
                 gc.Draw(gameTime);

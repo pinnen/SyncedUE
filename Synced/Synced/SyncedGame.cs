@@ -34,7 +34,6 @@ namespace Synced
         World world;
         Player player;
         Crystal crystal;
-        
 
         public SyncedGame()
             : base()
@@ -60,7 +59,6 @@ namespace Synced
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             Services.AddService(typeof(SpriteBatch), _spriteBatch);
 
-
             // Load all content into a static library
             Library.Loader.Initialize(Content);
             Library.Audio.PlaySoundEffect(Library.Audio.SoundEffects.GameStart); // ToDo: Test
@@ -68,7 +66,7 @@ namespace Synced
             // ------------------------------------------------------------
             // Adds menu screen to ScreenManager
             // ------------------------------------------------------------
-            ScreenManager.AddScreen(new MenuScreen(Library.Interface.MenuBackground,this));
+            ScreenManager.AddScreen(new MenuScreen(this));
 
             // Tests
             //Map m = new Map(Library.Map.Path[Library.Map.Name.Paper]);
@@ -107,10 +105,12 @@ namespace Synced
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
-
+            #region Debug
             if (Keyboard.GetState().IsKeyDown(Keys.F11) && _lastState.IsKeyUp(Keys.F11))
             {
-                _graphics.ToggleFullScreen();
+                //_graphics.ToggleFullScreen();
+                ScreenManager.Pop();
+                ScreenManager.AddScreen(new GameScreen(this, world));
             }
 
             // Test     // TODO: Remove later
@@ -121,15 +121,12 @@ namespace Synced
 
             // Update the debugger
             DebuggingHelper.Update();
-
-            // KB29: Audio...
-            // AudioManager.AudioUpdate();
-
             _lastState = Keyboard.GetState();
-            base.Update(gameTime);
+            #endregion
 
-            // Must be called after base. (This updates InputManager._LastStates)
-            InputManager.Update(); 
+            base.Update(gameTime);
+            InputManager.Update(); // Must be called after base. (This updates InputManager._LastStates)
+            ScreenManager.Update(gameTime);// Update Screen Manager (Must be called after inputmanager)
         }
 
         /// <summary>
@@ -138,8 +135,10 @@ namespace Synced
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            // TODO: Add your drawing code here
             ResolutionManager.BeginDraw(); // Clear and viewport fix
+            
+            // Draw Screen Manager
+            ScreenManager.Draw(gameTime, _spriteBatch);
 
             base.Draw(gameTime);
         }

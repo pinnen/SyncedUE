@@ -4,9 +4,6 @@
 // Edited by:
 // Göran F
 
-//[DllImport("user32.dll", CharSet = CharSet.Auto)]
-//public static extern uint MessageBox(IntPtr hWnd, String text, String caption, uint type);
-
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -14,11 +11,7 @@ using System.IO;
 
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
-// FINNS EJ! using Microsoft.Xna.Framework.GamerServices;
-// FINNS EJ: using System.Windows;
 using MonoGame.Framework;
-
-
 
 namespace Synced.Static_Classes
 {
@@ -30,23 +23,6 @@ namespace Synced.Static_Classes
         static bool mMsgIsDisplayed = false;
         const int C_MAX_ENTRIES_IN_LOG = 100000;
         const int C_REMOVAL_CHUNK_OF_ENTRIES_IN_LOG_WHEN_FULL = 1000;
-
-        public static void ShowMessageBox(string i_Message)
-        {
-            // ToDo: hur göra detta...
-            //         BeginShowMessageBox (
-            //         PlayerIndex player,
-            //         string title,
-            //         string text,
-            //         IEnumerable<string> buttons,
-            //         int focusButton,
-            //         MessageBoxIcon icon,
-            //         AsyncCallback callback,
-            //         Object state
-            //          )
-            // MessageBox.Show(i_Message);
-            //    UIAlertView alert = new UIAlertView(i_Message, ".", null, "OK", null);
-        }
 
         public static void Add(string _text, object _value)
         {
@@ -71,7 +47,6 @@ namespace Synced.Static_Classes
             {
                 if (false == mMsgIsDisplayed)
                 {
-                    ShowMessageBox("ERR: Cannot use Log Function without a Console!");
                     mMsgIsDisplayed = true;
                 }
             }
