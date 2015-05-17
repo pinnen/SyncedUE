@@ -5,7 +5,6 @@
 // Pontus Magnusson
 // Göran Forsström
 
-
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Synced.Actors;
@@ -78,8 +77,8 @@ namespace Synced.InGame
             base.Update(gameTime);
         }
 
-        public bool OnCollision(Fixture f1, Fixture f2, Contact contact)
-        {
+        public override bool OnCollision(Fixture f1, Fixture f2, Contact contact)
+        { 
             return true;
         }
     }

@@ -21,7 +21,7 @@ namespace Synced.InGame
         public Movable(Texture2D texture, Vector2 position, DrawingHelper.DrawingLevel drawingLevel, Game game, World world)
             : base(texture, position, drawingLevel, game, world)
         {
-            Force = 500000f;
+            Force = 40f; // TODO: research a good ratio for farseer units etc to make this "normal"
         }
 
         public override void Update(GameTime gameTime)
@@ -29,8 +29,6 @@ namespace Synced.InGame
             if (Direction != Vector2.Zero)
                 body.ApplyForce(Force * new Vector2(Direction.X, -Direction.Y));
                 body.Rotation = (float)Math.Atan2(body.LinearVelocity.Y, body.LinearVelocity.X);
-
-            world.Step(Math.Min((float)gameTime.ElapsedGameTime.TotalSeconds, (1f / 30f)));
 
             base.Update(gameTime);
         }

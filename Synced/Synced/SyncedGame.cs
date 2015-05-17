@@ -116,12 +116,7 @@ namespace Synced
             }
 
             // Test     // TODO: Remove later
-            //world.Step(Math.Min((float)gameTime.ElapsedGameTime.TotalSeconds, (1f / 30f)));
-
-            // TODO Object orient collision somehow...
-            // Collision checks 
-            //CollisionManager.CircleCircleCollision(player.Left, crystal);
-            //CollisionManager.CircleCircleCollision(player.Right, crystal);
+            world.Step(Math.Min((float)gameTime.ElapsedGameTime.TotalSeconds, (1f / 30f)));
             
             // Update the statemachine
             //_gameStateMachine.Update();

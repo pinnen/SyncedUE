@@ -46,7 +46,7 @@ namespace Synced.Actors
                 Item.Shoot();
         }
 
-        public bool OnCollision(Fixture f1, Fixture f2, Contact contact)
+        public override bool OnCollision(Fixture f1, Fixture f2, Contact contact)
         {
              //Item = (f1 as Crystal).PickUp(this);
             return true;
