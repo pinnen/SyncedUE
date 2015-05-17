@@ -37,15 +37,6 @@ namespace Synced.InGame
         {
             this.world = world;
 
-            body = BodyFactory.CreateBody(world, position, 0f);
-            body.BodyType = BodyType.Dynamic;
-            body.CollisionCategories = Category.All;
-
-            shape = new CircleShape(ConvertUnits.ToSimUnits(texture.Width / 2), 1f);
-
-            fixture = body.CreateFixture(shape);
-            fixture.OnCollision = this.OnCollision;
-
             Origin = new Vector2(Texture.Width / 2, Texture.Height / 2);
             _distanceToOwner = 50; // TODO hardcoded distance
 

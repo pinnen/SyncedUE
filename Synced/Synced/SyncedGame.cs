@@ -15,6 +15,7 @@ using Synced.State_Machine;
 using Synced.Static_Classes;
 using Synced.InGame;
 using FarseerPhysics.Dynamics;
+using System;
 
 namespace Synced
 {
@@ -115,7 +116,7 @@ namespace Synced
             }
 
             // Test     // TODO: Remove later
-            world.Step(0.33333f);
+            //world.Step(Math.Min((float)gameTime.ElapsedGameTime.TotalSeconds, (1f / 30f)));
 
             // TODO Object orient collision somehow...
             // Collision checks 

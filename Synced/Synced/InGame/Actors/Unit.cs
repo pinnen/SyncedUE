@@ -32,15 +32,6 @@ namespace Synced.Actors
         {
             this.world = world;
 
-            body = BodyFactory.CreateBody(world, position, 0f);
-            body.BodyType = BodyType.Dynamic;
-            body.CollisionCategories = Category.All;
-
-            shape = new CircleShape(texture.Width / 2, 1f);
-
-            fixture = body.CreateFixture(shape);
-            fixture.OnCollision = this.OnCollision;
-
             // Centered origin
             Origin = new Vector2(ConvertUnits.ToSimUnits(Texture.Width / 2), ConvertUnits.ToSimUnits(texture.Height / 2));
 
