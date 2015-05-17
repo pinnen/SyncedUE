@@ -24,6 +24,13 @@ namespace Synced.Static_Classes
             get;
             private set;
         }
+        public static void InitializeScreenManager(Screen screen)
+        {
+            Initialized = true;
+            screen.Activated();
+            Screens.Push(screen);
+
+        }
 
         public static void AddScreen(Screen screen)
         {
@@ -38,6 +45,7 @@ namespace Synced.Static_Classes
             Array.ForEach(screens, Screens.Push);
         }
 
+
         public static Screen ActiveScreen
         {
             get
@@ -47,16 +55,20 @@ namespace Synced.Static_Classes
             }
         }
 
+        /// <summary>
+        /// Pops the current screen and returns it if needed.
+        /// </summary>
+        /// <returns>Previous screen</returns>
         public static Screen Pop()
         {
             if (Screens.Count < 1)
             {
                 return null;
             }
-
-            Screen prev = Screens.Pop();
+            Screens.Peek().Deactivated(); //NOT SURE WHAT TO DO HERE.
+            Screen prev = Screens.Pop(); // RETURN OR NOT RETURN IS THE QUESTION
             if (ActiveScreen != null)
-                ActiveScreen.Activated();
+                Screens.Peek().Activated();
 
             return prev;
         }

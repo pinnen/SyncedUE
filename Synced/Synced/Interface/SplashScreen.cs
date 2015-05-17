@@ -45,18 +45,36 @@ namespace Synced.Interface
             //How long to fade in & out
             FadeInTime = TimeSpan.FromSeconds(0.5); 
             FadeOutTime = TimeSpan.FromSeconds(0.5);
-
-            //Adds members to game components
-            GameComponents.Add(_background);
-            Game.Components.Add(this);
+            SplashTime = TimeSpan.FromSeconds(2.0);
         }
 
         public override void Update(GameTime gameTime)
         {
             //TODO: Fix fade in fade out 
+            SplashTime -= gameTime.ElapsedGameTime;
+
+            if (SplashTime < TimeSpan.Zero)
+            {
+                ScreenManager.Pop();
+            }
             foreach (IUpdateable gc in this.GameComponents.OfType<IUpdateable>().Where<IUpdateable>(x => x.Enabled).OrderBy<IUpdateable, int>(x => x.UpdateOrder))
                 gc.Update(gameTime);
             base.Update(gameTime);
+        }
+
+
+        public override void Activated()
+        {
+            //Adds members to game components
+            GameComponents.Add(_background);
+            Game.Components.Add(this);
+            base.Activated();
+        }
+        public override void Deactivated()
+        {
+            Dispose(true);
+            Game.Components.Remove(this);
+            base.Deactivated();
         }
     }
 }

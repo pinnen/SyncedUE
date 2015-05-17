@@ -6,6 +6,7 @@
 //
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Synced.InGame;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +14,7 @@ using System.Text;
 
 namespace Synced.Interface
 {
-    abstract class Screen : DrawableGameComponent, IDrawableObject
+    abstract class Screen : DrawableGameComponent, IDrawableObject, IActive
     {
         #region Properties
         /// <summary>
@@ -121,7 +122,12 @@ namespace Synced.Interface
         /// </summary>
         public virtual void Activated()
         {
-            
+            foreach (DrawableGameComponent gc in GameComponents)
+            {
+                gc.Enabled = true;
+                gc.Visible = true;
+                
+            }
         }
 
         /// <summary>
@@ -129,6 +135,7 @@ namespace Synced.Interface
         /// </summary>
         public virtual void Deactivated()
         {
+            GameComponents.Clear();
         }
 
 

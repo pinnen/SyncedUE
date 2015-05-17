@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="InGame\Actors\CollidingSprite.cs" />
     <Compile Include="InGame\Crystal.cs" />
+    <Compile Include="InGame\IActive.cs" />
     <Compile Include="InGame\ICollidable.cs" />
     <Compile Include="InGame\IGrabbable.cs" />
     <Compile Include="InGame\Movable.cs" />
