@@ -10,16 +10,16 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Synced.Actors;
 using Synced.Content;
+using Synced.Interface;
 using System;
 using System.Collections.Generic;
 using System.Xml.Serialization;
 
 namespace Synced.MapNamespace
 {
-    class Map
+    class Map : Screen
     {
         #region Variables
-        List<GameComponent> _components;
         #endregion
         #region Properties
         public MapData Data
@@ -34,9 +34,8 @@ namespace Synced.MapNamespace
         }
         #endregion
 
-        public Map(string path, Game game)
+        public Map(string path, Game game) : base (game)
         {
-            _components = new List<GameComponent>();
             Data = Library.Serialization<MapData>.DeserializeFromXmlFile(path);
             World = new World(Vector2.Zero); // Topdown games have no gravity
 
@@ -45,21 +44,20 @@ namespace Synced.MapNamespace
             {
                 if (mapObject is Obstacle)
                 {
-                    _components.Add(new Sprite(game.Content.Load<Texture2D>(mapObject.TexturePath), mapObject.Position, Static_Classes.DrawingHelper.DrawingLevel.Back, game));
+                    GameComponents.Add(new Sprite(game.Content.Load<Texture2D>(mapObject.TexturePath), mapObject.Position, Static_Classes.DrawingHelper.DrawingLevel.Back, game));
                 }
                 else if (mapObject is Goal)
                 {
-                    _components.Add(new Sprite(game.Content.Load<Texture2D>(mapObject.TexturePath), mapObject.Position, Static_Classes.DrawingHelper.DrawingLevel.Back, game));
+                    GameComponents.Add(new Sprite(game.Content.Load<Texture2D>(mapObject.TexturePath), mapObject.Position, Static_Classes.DrawingHelper.DrawingLevel.Back, game));
                 }
                 else if (mapObject is PlayerStart)
                 {
                 }
                 else if (mapObject is MapObject)
                 {
-                    _components.Add(new Sprite(game.Content.Load<Texture2D>(mapObject.TexturePath), mapObject.Position, Static_Classes.DrawingHelper.DrawingLevel.Back, game));
+                    GameComponents.Add(new Sprite(game.Content.Load<Texture2D>(mapObject.TexturePath), mapObject.Position, Static_Classes.DrawingHelper.DrawingLevel.Back, game));
                 }
             }
-            _components.ForEach(x => game.Components.Add(x));
         }
     }
 }

@@ -17,7 +17,7 @@ namespace Synced.Interface
     class Button : Controls
 
     {
-        string _texturePath;
+        //string _texturePath;
 
         public Button(Game game,Vector2 position, string texturePath) : base(game, texturePath)
         {

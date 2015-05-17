@@ -26,7 +26,7 @@ namespace Synced.Static_Classes
 
         public static bool IsButtonPressed(Buttons button, PlayerIndex playerIndex)
         {
-            return (GamePad.GetState(playerIndex).IsButtonDown(button) && _LastStates[playerIndex].IsButtonUp(button)) ;
+            return (GamePad.GetState(playerIndex).IsButtonDown(button) && _LastStates[playerIndex].IsButtonUp(button));
         }
 
         public static bool LeftStickLeft(PlayerIndex playerIndex)
