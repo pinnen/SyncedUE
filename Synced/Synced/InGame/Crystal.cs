@@ -36,6 +36,8 @@ namespace Synced.InGame
         {
             this.world = world;
 
+            body.UserData = "CRYSTAL";
+
             Origin = new Vector2(Texture.Width / 2, Texture.Height / 2);
             _distanceToOwner = 50; // TODO hardcoded distance
 
@@ -78,7 +80,11 @@ namespace Synced.InGame
         }
 
         public override bool OnCollision(Fixture f1, Fixture f2, Contact contact)
-        { 
+        {
+            if (f2.Body.UserData.ToString() == "UNIT") // TODO: better way to do this?
+            {
+                world.BodyList.ElementAt[1];
+            }
             return true;
         }
     }

@@ -32,6 +32,8 @@ namespace Synced.Actors
         {
             this.world = world;
 
+            body.UserData = "UNIT";
+
             // Centered origin
             Origin = new Vector2(ConvertUnits.ToSimUnits(Texture.Width / 2), ConvertUnits.ToSimUnits(texture.Height / 2));
 
@@ -48,7 +50,11 @@ namespace Synced.Actors
 
         public override bool OnCollision(Fixture f1, Fixture f2, Contact contact)
         {
-             //Item = (f1 as Crystal).PickUp(this);
+            if (f2.Body.UserData.ToString() == "UNIT") // TODO: maybe find better way to do this. 
+            {
+                // TODO: need to be able to cast object to collision class or fetch it in another way. 
+                //Item = (f2 as Crystal).PickUp(this);
+            }
             return true;
         }
     }
