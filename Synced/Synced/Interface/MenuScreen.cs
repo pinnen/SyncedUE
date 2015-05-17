@@ -17,7 +17,7 @@ using System.Text;
 
 namespace Synced.Interface
 {
-    class MenuScreen : Screen, IUnloadable
+    class MenuScreen : Screen
     {
         const int _minimumPlayersConstant = 1;
 
@@ -71,12 +71,6 @@ namespace Synced.Interface
         {
             return (_characterSelectors.Where(p => p.IsReady()).Count() >= _minimumPlayersConstant);
         }
-        public void Unload()
-        {
-            _characterSelectors.ForEach(x => x.Unload());
-            if (Game.Components.Contains(this)) Game.Components.Remove(this);
-        }
-
         public override void Activated()
         {
             foreach (DrawableGameComponent gc in GameComponents)

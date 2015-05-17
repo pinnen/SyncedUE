@@ -16,7 +16,7 @@ using System.Text;
 
 namespace Synced.Interface
 {
-    class SplashScreen : Screen, IUnloadable
+    class SplashScreen : Screen
     {
         #region Member variables
         Sprite _background;
@@ -58,22 +58,5 @@ namespace Synced.Interface
                 gc.Update(gameTime);
             base.Update(gameTime);
         }
-        public override void Draw(GameTime gameTime)
-        {
-
-            base.Draw(gameTime);
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            
-            base.Dispose(disposing);
-        }
-
-        public void Unload()
-        {
-           
-        }
-
     }
 }

@@ -21,7 +21,7 @@ using System;
 
 namespace Synced.Interface
 {
-    class CharacterSelector : DrawableGameComponent, IUnloadable
+    class CharacterSelector : DrawableGameComponent
     {
         public enum State
         {
@@ -191,15 +191,6 @@ namespace Synced.Interface
 
             else if (InputManager.LeftStickRight(_playerIndex))
                 _nextCharacter(1);
-        }
-
-        public void Unload()
-        {
-            _characterHolder.Unload();
-            _abilityTextHolder.Unload();
-            _arrowHolder.Unload();
-            _stateText.Unload();
-            if (Game.Components.Contains(this)) Game.Components.Remove(this);
         }
     }
 }

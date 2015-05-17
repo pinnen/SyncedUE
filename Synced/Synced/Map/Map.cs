@@ -32,6 +32,7 @@ namespace Synced.MapNamespace
             get;
             set;
         }
+        #endregion
 
         public Map(string path, Game game)
         {
@@ -60,6 +61,5 @@ namespace Synced.MapNamespace
             }
             _components.ForEach(x => game.Components.Add(x));
         }
-        #endregion
     }
 }

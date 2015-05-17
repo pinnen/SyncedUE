@@ -40,15 +40,17 @@ namespace Synced.Static_Classes
 
         public static Screen ActiveScreen
         {
-            get { return Screens.Peek(); }
+            get
+            {
+                if (Screens.Count < 0) return Screens.Peek();
+                else return null;
+            }
         }
 
         public static Screen Pop()
         {
-
             if (Screens.Count < 1)
             {
-                //Something has gone wrong.
                 return null;
             }
 
@@ -59,6 +61,6 @@ namespace Synced.Static_Classes
             return prev;
         }
 
-        
+
     }
 }

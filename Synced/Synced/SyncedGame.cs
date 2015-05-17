@@ -29,7 +29,6 @@ namespace Synced
         KeyboardState _lastState;
 
         // Test objects
-        
 
         public SyncedGame()
             : base()
@@ -66,8 +65,6 @@ namespace Synced
             ScreenManager.AddScreen(new MenuScreen(Library.Interface.MenuBackground,this));
 
             // Tests
-            //MapData a = new MapData();
-            //Map m = new Map(Library.Map.Path[Library.Map.Name.Paper], this);
 
             base.Initialize(); // Initializes all components
         }
@@ -104,20 +101,9 @@ namespace Synced
             {
                 _graphics.ToggleFullScreen();
             }
-
-            // TODO Object orient collision somehow...
-            // Collision checks 
-            //CollisionManager.CircleCircleCollision(player.Left, crystal);
-            //CollisionManager.CircleCircleCollision(player.Right, crystal);
             
-            // Update the statemachine
-            //_gameStateMachine.Update();
-
             // Update the debugger
             DebuggingHelper.Update();
-
-            // KB29: Audio...
-            // AudioManager.AudioUpdate();
 
             _lastState = Keyboard.GetState();
             base.Update(gameTime);
@@ -132,7 +118,6 @@ namespace Synced
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            // TODO: Add your drawing code here
             ResolutionManager.BeginDraw(); // Clear and viewport fix
 
             base.Draw(gameTime);

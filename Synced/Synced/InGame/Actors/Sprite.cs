@@ -40,23 +40,6 @@ namespace Synced.Actors
         public Sprite(Texture2D texture, Vector2 position, DrawingHelper.DrawingLevel drawingLevel, Game game)
             : this(texture, position, Color.White, drawingLevel, false, game) { }
 
-        public override void Initialize()
-        {
-            base.Initialize(); // Calls LoadContent
-        }
-        protected override void LoadContent()
-        {
-            base.LoadContent();
-        }
-        public void Unload()
-        {
-            if (Game.Components.Contains(this)) Game.Components.Remove(this);
-        }
-        protected override void Dispose(bool disposing)
-        {
-            base.Dispose(disposing);
-        }
-
         public override void Draw(GameTime gameTime)
         {
             _spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.LinearWrap, DepthStencilState.None, RasterizerState.CullNone, null, ResolutionManager.GetTransformationMatrix());

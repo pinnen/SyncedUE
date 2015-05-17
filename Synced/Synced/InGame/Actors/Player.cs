@@ -39,11 +39,6 @@ namespace Synced.Actors
             game.Components.Add(this);
         }
 
-        public override void Initialize()
-        {
-            base.Initialize();
-        }
-
         public override void Update(GameTime gameTime)
         {
             Left.Direction = InputManager.LeftStickDirection(_playerIndex);
