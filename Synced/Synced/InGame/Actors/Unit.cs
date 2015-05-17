@@ -13,41 +13,43 @@ using Synced.Static_Classes;
 using Microsoft.Xna.Framework.Graphics;
 using Synced.Content;
 using Synced.InGame;
+using FarseerPhysics.Dynamics;
+using FarseerPhysics.Factories;
+using FarseerPhysics.Collision.Shapes;
+using FarseerPhysics.Dynamics.Contacts;
+using FarseerPhysics;
 namespace Synced.Actors
 {
-    class Unit : Movable, ICollidable
+    class Unit : Movable
     {
+        #region Variables
+        #endregion
+
+
         public IGrabbable Item { get; set; }
-        public Unit(Texture2D texture, Color color, Game game)
-            : base(texture, Vector2.Zero, DrawingHelper.DrawingLevel.Medium, game)
+        public Unit(Texture2D texture, Vector2 position, Color color, Game game, World world)
+            : base(texture, position, DrawingHelper.DrawingLevel.Medium, game, world)
         {
+            this.world = world;
+
             // Centered origin
-            Origin = new Vector2(Texture.Width / 2, Texture.Height / 2);
+            Origin = new Vector2(ConvertUnits.ToSimUnits(Texture.Width / 2), ConvertUnits.ToSimUnits(texture.Height / 2));
 
             Color = color;
 
             game.Components.Add(this);
         }
 
-        public Vector2 Center
-        {
-            get { return new Vector2(Position.X + Texture.Width / 2, Position.Y + Texture.Height / 2); }
-        }
-
-        public float Radius
-        {
-            get { return Texture.Width / 2; }
-        }
-
-        public void Response(ICollidable c)
-        {
-            Item = (c as Crystal).PickUp(this);
-        }
-
         public void Shoot()
         {
             if (Item != null)
                 Item.Shoot();
+        }
+
+        public override bool OnCollision(Fixture f1, Fixture f2, Contact contact)
+        {
+             //Item = (f1 as Crystal).PickUp(this);
+            return true;
         }
     }
 }

@@ -13,18 +13,29 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using FarseerPhysics.Dynamics;
+using FarseerPhysics.Factories;
+using FarseerPhysics.Collision.Shapes;
+using FarseerPhysics.Dynamics.Contacts;
 
 using Synced.Content;
+using FarseerPhysics;
 
 namespace Synced.InGame
 {
-    class Crystal : Movable, IGrabbable, ICollidable
+    class Crystal : Movable, IGrabbable
     {
+        #region Variables
+        // General Variables
         Movable _owner = null;
         float _distanceToOwner;
-        public Crystal(Texture2D texture, Vector2 position, DrawingHelper.DrawingLevel drawingLevel, SyncedGame game)
-            : base(texture, position, drawingLevel, game)
+        #endregion
+
+        public Crystal(Texture2D texture, Vector2 position, DrawingHelper.DrawingLevel drawingLevel, SyncedGame game, World world)
+            : base(texture, position, drawingLevel, game, world)
         {
+            this.world = world;
+
             Origin = new Vector2(Texture.Width / 2, Texture.Height / 2);
             _distanceToOwner = 50; // TODO hardcoded distance
 
@@ -66,18 +77,9 @@ namespace Synced.InGame
             base.Update(gameTime);
         }
 
-        public Vector2 Center
-        {
-            get { return new Vector2(Position.X + Texture.Width / 2, Position.Y + Texture.Height / 2); }
-        }
-
-        public float Radius 
+        public override bool OnCollision(Fixture f1, Fixture f2, Contact contact)
         { 
-            get { return Texture.Width / 2; } 
-        }
-
-        public void Response(ICollidable c)
-        {
+            return true;
         }
     }
 }

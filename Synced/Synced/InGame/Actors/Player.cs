@@ -12,6 +12,7 @@ using Microsoft.Xna.Framework;
 using Synced.Content;
 using Synced.Static_Classes;
 using Microsoft.Xna.Framework.Input;
+using FarseerPhysics.Dynamics;
 
 namespace Synced.Actors
 {
@@ -29,12 +30,12 @@ namespace Synced.Actors
         PlayerIndex _playerIndex;
 
 
-        public Player(PlayerIndex playerIndex, Library.Character.Name character, Game game)
+        public Player(PlayerIndex playerIndex, Library.Character.Name character, Game game, World world)
             : base(game)
         {
             _playerIndex = playerIndex;
-            Left = new Unit(Library.Character.GameTexture[character], Color.Red, game);
-            Right = new Unit(Library.Character.GameTexture[character], Color.DarkRed, game);
+            Left = new Unit(Library.Character.GameTexture[character], new Vector2(200, 200), Color.Red, game, world);       // TODO: fix hardcoded values for positions. 
+            Right = new Unit(Library.Character.GameTexture[character], new Vector2(200, 120), Color.DarkRed, game, world);
 
             game.Components.Add(this);
         }
