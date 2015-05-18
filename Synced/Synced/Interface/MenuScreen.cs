@@ -57,8 +57,8 @@ namespace Synced.Interface
             //GameComponents.Add(new CharacterSelector(PlayerIndex.Two, new Rectangle(w, 0, w, h), Color.Green, Game));
             //GameComponents.Add(new CharacterSelector(PlayerIndex.Three, new Rectangle(0, h, w, h), Color.Red, Game));
             //GameComponents.Add(new CharacterSelector(PlayerIndex.Four, new Rectangle(w, h, w, h), Color.Yellow, Game));
-            //Game.Components.Add(_background);
-            //Game.Components.Add(this);
+            Game.Components.Add(_background);
+            Game.Components.Add(this);
         }
 
         public override void Initialize()
@@ -81,7 +81,13 @@ namespace Synced.Interface
         }
         public override void Activated()
         {
-            
+            _background.Enabled = true;
+            _background.Visible = true;
+            foreach (CharacterSelector characterSelect in _characterSelectors)
+            {
+                characterSelect.Enabled = false;
+                characterSelect.Visible = false;
+            }
             base.Activated();
    
         }

@@ -134,12 +134,17 @@ namespace Synced.Interface
         /// </summary>
         public virtual void Deactivated()
         {
-            GameComponents.Clear();
+            foreach (DrawableGameComponent gc in GameComponents)
+            {
+                gc.Enabled = false;
+                gc.Visible = false;
+            }
         }
 
 
         protected override void Dispose(bool disposing)
         {
+            GameComponents.Clear();
             base.Dispose(disposing);
         }
     }

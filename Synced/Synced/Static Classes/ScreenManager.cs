@@ -33,6 +33,8 @@ namespace Synced.Static_Classes
             Screen screen = new SplashScreen(Library.Interface.Arrows, game);
             screen.Activated();
             _screenManager.Screens.Push(screen);
+            screen = new MenuScreen(Library.Interface.MenuBackground, game);
+            _screenManager.Screens.Push(screen);
             //Loads menu screen
 
         }
@@ -47,7 +49,11 @@ namespace Synced.Static_Classes
         #endregion
 
         #region Screens
+        /// <summary>
+        /// Backgrounds screen for the applications
+        /// </summary>
         public Stack<Screen> Screens = new Stack<Screen>();
+        
         public int Count
         {
             get
@@ -85,7 +91,8 @@ namespace Synced.Static_Classes
         {
             get
             {
-                if (ScreenManager.Instance.Screens.Count < 0) return ScreenManager.Instance.Screens.Peek();
+                if (ScreenManager.Instance.Screens.Count >= 1)
+                    return ScreenManager.Instance.Screens.Peek();
                 else return null;
             }
         }

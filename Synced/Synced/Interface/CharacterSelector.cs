@@ -98,36 +98,40 @@ namespace Synced.Interface
         }
         public override void Update(GameTime gameTime)
         {
-            switch (_currentState)
+            if (Enabled)
             {
-                case State.Unconnected:
-                    if (GamePad.GetState(_playerIndex).IsConnected) _connect();
-                    break;
-                case State.Connected:
-                    if (InputManager.IsButtonPressed(Buttons.A, _playerIndex))
-                    {
-                        _join();
-                    }
-                    break;
-                case State.Joined:
-                    if (InputManager.IsButtonPressed(Buttons.A, _playerIndex))
-                    {
-                        _ready();
-                    }
-                    _readInput();
-                    break;
-                case State.Ready:
-                    if (InputManager.IsButtonPressed(Buttons.B, _playerIndex))
-                    {
-                        _join();
-                    }
-                    break;
+                switch (_currentState)
+                {
+                    case State.Unconnected:
+                        if (GamePad.GetState(_playerIndex).IsConnected) _connect();
+                        break;
+                    case State.Connected:
+                        if (InputManager.IsButtonPressed(Buttons.A, _playerIndex))
+                        {
+                            _join();
+                        }
+                        break;
+                    case State.Joined:
+                        if (InputManager.IsButtonPressed(Buttons.A, _playerIndex))
+                        {
+                            _ready();
+                        }
+                        _readInput();
+                        break;
+                    case State.Ready:
+                        if (InputManager.IsButtonPressed(Buttons.B, _playerIndex))
+                        {
+                            _join();
+                        }
+                        break;
+                }
+
+                CheckForDisconnect();
+
+                _previousState = GamePad.GetState(_playerIndex);
+                base.Update(gameTime);
             }
-
-            CheckForDisconnect();
-
-            _previousState = GamePad.GetState(_playerIndex);
-            base.Update(gameTime);
+          
         }
         public bool IsReady()
         {

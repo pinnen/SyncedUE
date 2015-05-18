@@ -36,6 +36,9 @@ namespace Synced.Interface
         public SplashScreen(Texture2D texture, Game game) : base (game)
         {
             _background = new Sprite(texture, Vector2.Zero, DrawingHelper.DrawingLevel.Back, game);
+            _background.Enabled = false;
+            _background.Visible = false;
+
             // Temporary screen variables (Half of screen)
             int w = ResolutionManager.GetCenterPointWidth;
             int h = ResolutionManager.GetCenterPointHeight;
@@ -46,6 +49,8 @@ namespace Synced.Interface
             FadeInTime = TimeSpan.FromSeconds(0.5); 
             FadeOutTime = TimeSpan.FromSeconds(0.5);
             SplashTime = TimeSpan.FromSeconds(2.0);
+            Game.Components.Add(_background);
+            Game.Components.Add(this);
         }
 
         public override void Update(GameTime gameTime)
@@ -66,14 +71,14 @@ namespace Synced.Interface
         public override void Activated()
         {
             //Adds members to game components
-            GameComponents.Add(_background);
-            Game.Components.Add(this);
+            _background.Enabled = true;
+            _background.Visible = true;
             base.Activated();
         }
         public override void Deactivated()
         {
-            Dispose(true);
-            Game.Components.Remove(this);
+            _background.Enabled = false;
+            _background.Visible = false;
             base.Deactivated();
         }
     }
