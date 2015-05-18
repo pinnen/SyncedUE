@@ -52,7 +52,6 @@ namespace Synced.InGame
             _rectangle = rectangle;
             _alignment = DrawingHelper.Alignment.Center;
             DrawOrder = (int)DrawingHelper.DrawingLevel.High;
-            Game.Components.Add(this);
         }
 
         public override void Draw(GameTime gameTime)
