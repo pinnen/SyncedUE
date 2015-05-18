@@ -18,11 +18,15 @@ using FarseerPhysics.Factories;
 using FarseerPhysics.Collision.Shapes;
 using FarseerPhysics.Dynamics.Contacts;
 using FarseerPhysics;
+using Synced.InGame.Actors;
 namespace Synced.Actors
 {
     class Unit : Movable
     {
         #region Variables
+
+        ParticleEngine trail;
+
         #endregion
 
 
@@ -38,6 +42,8 @@ namespace Synced.Actors
             Origin = new Vector2(ConvertUnits.ToSimUnits(Texture.Width / 2), ConvertUnits.ToSimUnits(texture.Height / 2));
 
             Color = color;
+
+            trail = new ParticleEngine(1, Library.TrailParticle.Texture, position, color, Origin, 1.0f, 0.0f, 0.2f, DrawingHelper.DrawingLevel.Medium, game);
 
             game.Components.Add(this);
         }
@@ -56,6 +62,13 @@ namespace Synced.Actors
                 //Item = (f2 as Crystal).PickUp(this);
             }
             return true;
+        }
+
+        public override void Update(GameTime gameTime)
+        {
+            trail.UpdatePosition(Position);
+            trail.GenerateTrailParticles(1.0f, 0.2f);
+            base.Update(gameTime);
         }
     }
 }

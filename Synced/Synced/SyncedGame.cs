@@ -16,6 +16,7 @@ using Synced.InGame;
 using Synced.MapNamespace;
 using FarseerPhysics.Dynamics;
 using System;
+using Synced.InGame.Actors;
 
 namespace Synced
 {
@@ -123,7 +124,6 @@ namespace Synced
             DebuggingHelper.Update();
             _lastState = Keyboard.GetState();
             #endregion
-
             base.Update(gameTime);
             InputManager.Update(); // Must be called after base. (This updates InputManager._LastStates)
             ScreenManager.Update(gameTime);// Update Screen Manager (Must be called after inputmanager)

@@ -1,6 +1,6 @@
 ﻿// Particle.cs
 // Introduced: 2015-04-28
-// Last edited: 2015-04-28
+// Last edited: 2015-05-18
 // Edited by:
 // Lina Juuso
 //
@@ -11,10 +11,12 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Synced.Static_Classes;
+using FarseerPhysics;
 
 namespace Synced.InGame.Actors
 {
-    class Particle
+    class Particle : Synced.Actors.Sprite
     {
         #region Variables
         private float _timeSinceStart; // How long time the particle has existed.
@@ -49,19 +51,35 @@ namespace Synced.InGame.Actors
         //    get { return _isMoving; }
         //    set { _isMoving = value; }
         //}
-        //public bool IsDead
-        //{
-        //    get { return _lifetime <= _timeSinceStart; }
-        //}
-        //public float FadeAlpha
-        //{
-        //    get { return _fadeAlpha; }
-        //    set { _fadeAlpha = value; }
-        //}
+        public bool IsDead
+        {
+            get { return _lifetime <= _timeSinceStart; }
+        }
+        public Vector2 pPosition
+        {
+            get { return _position; }
+            set { _position = value; }
+        }
+        public float Scale
+        {
+            get { return _scale; }
+            set { _scale = value; }
+        }
+        public float pRotation
+        {
+            get { return _rotation; }
+            set { _rotation = value; }
+        }
+        public float FadeAlpha
+        {
+            get { return _fadeAlpha; }
+            set { _fadeAlpha = value; }
+        }
         #endregion
 
         #region Constructors
-        public Particle(Texture2D texture, Vector2 position, Color color, Vector2 origin, float scale, float rotation, float lifetime) 
+        public Particle(Texture2D texture, Vector2 position, Color color, Vector2 origin, float scale, float rotation, float lifetime, DrawingHelper.DrawingLevel drawingLevel, Game game)
+            : base(texture, position, drawingLevel, game)
         {
             _lifetime = lifetime;
             _timeSinceStart = 0.0f;
@@ -101,6 +119,14 @@ namespace Synced.InGame.Actors
             _lifetime = lifetime;
         }
 
+        public void WakeLineParticle(Vector2 position, Color color, float scale, float lifetime)
+        {
+            _position = position;
+            _color = color;
+            _scale = scale;
+            _lifetime = lifetime;
+        }
+
         public void Update(float elapsedTime) 
         {
             _timeSinceStart += elapsedTime;
@@ -114,11 +140,15 @@ namespace Synced.InGame.Actors
             }
         }
 
-        public void Draw(SpriteBatch spriteBatch) 
+        public override void Draw(GameTime gameTime)
         {
-            spriteBatch.Begin(SpriteSortMode.FrontToBack, BlendState.AlphaBlend);
-            spriteBatch.Draw(_texture, _position, null, (_color * _colorStrength * _fadeAlpha), _rotation, _origin, _scale, SpriteEffects.None, 1.0f);
-            spriteBatch.End();
+            _spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.LinearWrap, DepthStencilState.None, RasterizerState.CullNone, null, ResolutionManager.GetTransformationMatrix());
+            _spriteBatch.Draw(_texture, _position, null, (_color * _colorStrength * _fadeAlpha), _rotation, _origin, _scale, SpriteEffects.None, 1.0f); // TODO: use body pos/rot or Sprite pos/rot? 
+            _spriteBatch.End();
+
+            //_spriteBatch.Begin(SpriteSortMode.FrontToBack, BlendState.AlphaBlend);
+            //_spriteBatch.Draw(_texture, _position, null, (_color * _colorStrength * _fadeAlpha), _rotation, _origin, _scale, SpriteEffects.None, 1.0f);
+            //_spriteBatch.End();
         }
 
         public void SetMovement(Vector2 direction, float speed) 
