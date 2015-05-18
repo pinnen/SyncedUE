@@ -126,7 +126,6 @@ namespace Synced.Interface
             {
                 gc.Enabled = true;
                 gc.Visible = true;
-                
             }
         }
 

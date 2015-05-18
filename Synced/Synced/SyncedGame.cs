@@ -62,9 +62,9 @@ namespace Synced
             // ------------------------------------------------------------
             // Adds menu screen to ScreenManager
             // ------------------------------------------------------------
-            ScreenManager.InitializeScreenManager(new SplashScreen(Library.Interface.Arrows, this));
-            ScreenManager.AddScreen(new MenuScreen(Library.Interface.MenuBackground,this));
-
+            ScreenManager.InitializeScreenManager(this);
+            Components.Add(ScreenManager.Instance);
+            
             // Tests
 
             base.Initialize(); // Initializes all components

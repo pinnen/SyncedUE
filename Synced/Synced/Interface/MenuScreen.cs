@@ -33,7 +33,9 @@ namespace Synced.Interface
             : base(game)
         {
             _background = new Sprite(texture, Vector2.Zero, DrawingHelper.DrawingLevel.Back, game);
-            
+            _background.Enabled = false;
+            _background.Visible = false;
+
             // Temporary screen variables (Half of screen)
             int w = ResolutionManager.GetCenterPointWidth;
             int h = ResolutionManager.GetCenterPointHeight;
@@ -44,6 +46,13 @@ namespace Synced.Interface
             _characterSelectors.Add(new CharacterSelector(PlayerIndex.Two, new Rectangle(w, 0, w, h), Color.Green, Game));
             _characterSelectors.Add(new CharacterSelector(PlayerIndex.Three, new Rectangle(0, h, w, h), Color.Red, Game));
             _characterSelectors.Add(new CharacterSelector(PlayerIndex.Four, new Rectangle(w, h, w, h), Color.Yellow, Game));
+            foreach (CharacterSelector characterSelect in _characterSelectors)
+            {
+                characterSelect.Enabled = false;
+                characterSelect.Visible = false;
+            }
+
+                
             //GameComponents.Add(new CharacterSelector(PlayerIndex.One, new Rectangle(0, 0, w, h), Color.Blue, Game));
             //GameComponents.Add(new CharacterSelector(PlayerIndex.Two, new Rectangle(w, 0, w, h), Color.Green, Game));
             //GameComponents.Add(new CharacterSelector(PlayerIndex.Three, new Rectangle(0, h, w, h), Color.Red, Game));
@@ -72,8 +81,7 @@ namespace Synced.Interface
         }
         public override void Activated()
         {
-            Game.Components.Add(_background);
-            Game.Components.Add(this);
+            
             base.Activated();
    
         }
