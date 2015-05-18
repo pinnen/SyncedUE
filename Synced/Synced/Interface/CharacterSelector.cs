@@ -66,9 +66,6 @@ namespace Synced.Interface
             _currentState = State.Unconnected;
             _rectangle = rectangle;
             _playerIndex = playerIndex;
-
-            // Add this component
-            game.Components.Add(this);
         }
 
         public override void Initialize()
@@ -85,7 +82,6 @@ namespace Synced.Interface
             _characterHolder = new Sprite(Library.Character.InterfaceTexture[(Library.Character.Name)0], characterPosition, _color, DrawingHelper.DrawingLevel.Medium, true, Game);
             _abilityTextHolder = new Text("", abilityTextRectangle, Game);
             _arrowHolder = new Sprite(Library.Interface.Arrows, arrowPosition, _color, DrawingHelper.DrawingLevel.Medium, true, Game);
-
             _stateText = new Text("Unconnected!", new Rectangle(posX, posY, 0, 0), Game);
 
             base.Initialize();
@@ -98,40 +94,58 @@ namespace Synced.Interface
         }
         public override void Update(GameTime gameTime)
         {
-            if (Enabled)
+            switch (_currentState)
             {
-                switch (_currentState)
-                {
-                    case State.Unconnected:
-                        if (GamePad.GetState(_playerIndex).IsConnected) _connect();
-                        break;
-                    case State.Connected:
-                        if (InputManager.IsButtonPressed(Buttons.A, _playerIndex))
-                        {
-                            _join();
-                        }
-                        break;
-                    case State.Joined:
-                        if (InputManager.IsButtonPressed(Buttons.A, _playerIndex))
-                        {
-                            _ready();
-                        }
-                        _readInput();
-                        break;
-                    case State.Ready:
-                        if (InputManager.IsButtonPressed(Buttons.B, _playerIndex))
-                        {
-                            _join();
-                        }
-                        break;
-                }
-
-                CheckForDisconnect();
-
-                _previousState = GamePad.GetState(_playerIndex);
-                base.Update(gameTime);
+                case State.Unconnected:
+                    if (GamePad.GetState(_playerIndex).IsConnected) _connect();
+                    break;
+                case State.Connected:
+                    if (InputManager.IsButtonPressed(Buttons.A, _playerIndex))
+                    {
+                        _join();
+                    }
+                    break;
+                case State.Joined:
+                    if (InputManager.IsButtonPressed(Buttons.A, _playerIndex))
+                    {
+                        _ready();
+                    }
+                    _readInput();
+                    break;
+                case State.Ready:
+                    if (InputManager.IsButtonPressed(Buttons.B, _playerIndex))
+                    {
+                        _join();
+                    }
+                    break;
             }
-          
+
+            CheckForDisconnect();
+
+            _previousState = GamePad.GetState(_playerIndex);
+            base.Update(gameTime);
+        }
+        public override void Draw(GameTime gameTime)
+        {
+            switch (_currentState)
+            {
+                case State.Unconnected:
+                    _stateText.Draw(gameTime);
+                    break;
+                case State.Connected:
+                    _stateText.Draw(gameTime);
+                    break;
+                case State.Joined:
+                    _abilityTextHolder.Draw(gameTime);
+                    _characterHolder.Draw(gameTime);
+                    _arrowHolder.Draw(gameTime);
+                    break;
+                case State.Ready:
+                    _stateText.Draw(gameTime);
+                    break;
+            }
+
+            base.Draw(gameTime);
         }
         public bool IsReady()
         {
@@ -144,8 +158,6 @@ namespace Synced.Interface
                 _currentState = State.Unconnected;
                 _stateText.Content = "Unconnected";
                 _abilityTextHolder.Content = "";
-                if (Game.Components.Contains(_characterHolder)) Game.Components.Remove(_characterHolder);
-                if (Game.Components.Contains(_arrowHolder)) Game.Components.Remove(_arrowHolder);
             }
         }
         void _connect()
@@ -158,8 +170,6 @@ namespace Synced.Interface
             _currentState = State.Joined;
             _stateText.Content = "";
             _abilityTextHolder.Content = Library.Character.AbilityText[SelectedCharacter];
-            Game.Components.Add(_characterHolder);
-            Game.Components.Add(_arrowHolder);
 
             Library.Audio.PlaySoundEffect(Library.Audio.SoundEffects.MenuConfirm);
         }
@@ -168,9 +178,6 @@ namespace Synced.Interface
             _currentState = State.Ready;
             _stateText.Content = "Ready!";
             _abilityTextHolder.Content = "";
-
-            Game.Components.Remove(_characterHolder);
-            Game.Components.Remove(_arrowHolder);
         }
         void _nextCharacter(int direction)
         {
