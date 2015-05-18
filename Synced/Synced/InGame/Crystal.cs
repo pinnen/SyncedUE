@@ -83,7 +83,7 @@ namespace Synced.InGame
         {
             if (f2.Body.UserData.ToString() == "UNIT") // TODO: better way to do this?
             {
-                world.BodyList.ElementAt[1];
+                world.BodyList.ElementAt(1);
             }
             return true;
         }
