@@ -115,6 +115,9 @@ namespace Synced.Content
                     {Map.Name.Paper, "Content/Maps/Paper/map.xml"}
                 };
                 #endregion
+                #region TrailParticle
+                TrailParticle.Texture = content.Load<Texture2D>("GameObjects/TrailParticle");
+                #endregion
             }
         }
         public static class Crystal
@@ -198,6 +201,10 @@ namespace Synced.Content
             {
                 return null;
             }
+        }
+        public static class TrailParticle 
+        {
+            public static Texture2D Texture;
         }
         public static class Serialization<T> where T : class
         {

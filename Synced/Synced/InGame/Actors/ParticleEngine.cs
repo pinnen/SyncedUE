@@ -1,18 +1,257 @@
 ﻿// ParticleEngine.cs
 // Introduced: 2015-04-14
-// Last edited: 2015-04-14
+// Last edited: 2015-05-18
 // Edited by:
-// Pontus Magnusson
+// Lina Juuso
 //
 // 
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using Synced.Static_Classes;
 
-namespace Synced.Actors
+namespace Synced.InGame.Actors
 {
-    class ParticleEngine
+    class ParticleEngine : DrawableGameComponent
     {
+        #region Variables
+        List<Particle> _particles;
+        Queue<Particle> _sleepingParticles;
+        int _particleAmount; // Number of particles to generate each update
+        Random random;
+        Game game;
+        Texture2D _particleTexture;
+
+
+        //Data for particles:
+        Vector2 _particlePosition;
+        Color _particleColor;
+        Vector2 _particleOrigin;
+        float _particleScale;
+        float _particleRotation;
+        float _particleLifetime;
+
+        Particle currentParticle;
+        DrawingHelper.DrawingLevel dLevel;
+        #endregion
+
+        #region Constructors
+        public ParticleEngine(int particleAmount, Texture2D particleTexture, Vector2 position, Color color, Vector2 origin, float scale, float rotation, float lifetime, DrawingHelper.DrawingLevel drawingLevel, Game game)
+            : base(game)
+        {
+            _particles = new List<Particle>();
+            _sleepingParticles = new Queue<Particle>();
+            _particleAmount = particleAmount;
+            _particlePosition = position;
+            _particleColor = color;
+            _particleOrigin = origin;
+            _particleScale = scale;
+            _particleRotation = rotation;
+            _particleLifetime = lifetime;
+            _particleTexture = particleTexture;
+            _particleOrigin.X = _particleTexture.Width / 2;
+            _particleOrigin.Y = _particleTexture.Height / 2;
+            this.game = game;
+            dLevel = drawingLevel;
+            game.Components.Add(this);
+        }
+        #endregion
+
+        #region Public Methods
+        public override void Initialize()
+        {
+            base.Initialize();
+            random = new Random();
+
+        }
+
+        public void UpdatePosition(Vector2 newPosition) 
+        {
+            _particlePosition = newPosition;
+        }
+
+        public override void Update(GameTime gameTime)
+        {
+
+            float elapsedTime = (float)gameTime.ElapsedGameTime.TotalSeconds; //TODO: gångra med timescalevariabel? Se gamla koden.
+
+            for (int i = 0; i < _particles.Count; i++)
+            {
+                if (!_particles[i].IsDead) // Update particle if it's alive.
+                {
+                    _particles[i].Update(elapsedTime);
+                }
+                else
+                {
+                    _particles[i].Sleep();
+                    _sleepingParticles.Enqueue(_particles[i]); // Add particle to sleeping queue
+                    _particles.RemoveAt(i);
+                }
+            }
+            
+            base.Update(gameTime);
+        }
+        /// <summary>
+        /// Starts the particle engine for trails.
+        /// </summary>
+        public void GenerateTrailParticles(float scale, float lifetime) 
+        {
+
+            _particleRotation = MathHelper.ToRadians(random.Next(0, 360));
+
+            for (int i = 0; i < _particleAmount; i++)
+            {
+                if (_sleepingParticles.Count == 0)
+                {
+                    _particles.Add(new Particle(_particleTexture, _particlePosition, _particleColor, _particleOrigin, scale, _particleRotation, lifetime,dLevel,game));
+                }
+                else
+                {
+                    currentParticle = _sleepingParticles.Dequeue();
+                    currentParticle.WakeTrailParticle(_particlePosition, _particleColor, scale, lifetime);
+                    _particles.Add(currentParticle);
+                }
+            }
+        }
+        /// <summary>
+        /// Starts the particle engine for effects.
+        /// </summary>
+        public void GenerateEffectParticles(float scale, float lifetime) 
+        {
+            
+            int effectSize = 30; // TODO: ta in som parameter?
+
+            for (int i = 0; i < _particleAmount; i++)
+            {
+                if (_sleepingParticles.Count == 0)
+                {
+                    
+                    Vector2 randomPosition = new Vector2(_particlePosition.X + (float)random.Next(-effectSize,effectSize),_particlePosition.Y + (float)random.Next(-effectSize,effectSize));
+                    _particles.Add(new Particle(_particleTexture,randomPosition,_particleColor,_particleOrigin,scale,0.0f,lifetime,dLevel,game));
+                }
+                else
+                {
+                    currentParticle = _sleepingParticles.Dequeue();
+                    currentParticle.WakeRandomParticle(_particlePosition, _particleColor, scale, lifetime, (float)random.Next(-effectSize, effectSize), (float)random.Next(-effectSize, effectSize));
+                    _particles.Add(currentParticle);
+                }
+            }
+        }
+
+        public void GenerateLineParticles(float scale, float lifetime, Vector2 startPosition, Vector2 endPosition) 
+        {
+            // Get direction between positions.
+            Vector2 tmpDirection = Vector2.Zero;
+            tmpDirection.X = endPosition.X - startPosition.X;
+            tmpDirection.Y = endPosition.Y - startPosition.Y;
+            tmpDirection.Normalize();
+
+            // Get distance between the positions.
+            //float s_x = (float)Math.Pow(endPosition.X - startPosition.X, 2); // old code
+            //float s_y = (float)Math.Pow(endPosition.Y - startPosition.Y, 2); // old code
+            float s_x = (endPosition.X - startPosition.X) * (endPosition.X - startPosition.X);
+            float s_y = (endPosition.Y - startPosition.Y) * (endPosition.Y - startPosition.Y);
+            float distance = (float)Math.Sqrt(s_x + s_y);
+
+            // Get distance between particles.
+            float particleDistance = distance / _particleAmount;
+
+            //Split the distance between the particles that should be drawn.
+            for (int i = 0; i <= _particleAmount; i++)
+            {
+                Vector2 tmpPosition = startPosition + (tmpDirection * particleDistance * i);
+                
+
+                if (_sleepingParticles.Count == 0)
+                {
+                    _particles.Add(new Particle(_particleTexture, tmpPosition, _particleColor, _particleOrigin, scale, 0.0f, lifetime,dLevel, game));
+                }
+                else
+                {
+                    currentParticle = _sleepingParticles.Dequeue();
+                    currentParticle.WakeLineParticle(tmpPosition,_particleColor,scale,lifetime);
+                    _particles.Add(currentParticle);
+                }
+            }
+			}
+
+        public void GenerateClusterParticles(float lifetime) // TODO: Is this generate method needed?
+        {
+            int clusterParticleAmount = 300; // TODO: take in as parameter?
+
+            for (int i = 0; i < clusterParticleAmount; i++)
+            {
+                Vector2 randomPosition = _particlePosition;
+                float randomRotation = random.Next();
+                float randomScale = random.Next();
+                _particles.Add(new Particle(_particleTexture, randomPosition, _particleColor, _particleOrigin, randomScale, randomRotation, lifetime, dLevel, game));
+            }
+
+        }
+        /// <summary>
+        /// Shatters the particles
+        /// </summary>
+        public void ShatterParticles() 
+        {
+            int shatterDirection = 50;
+            int shatterSpeed = 200;
+
+            foreach (Particle p in _particles)
+            {
+                Vector2 direction = new Vector2(random.Next(-shatterDirection, shatterDirection), random.Next(-shatterDirection, shatterDirection));
+                direction.Normalize();
+                float speed = random.Next(-shatterSpeed, shatterSpeed);
+                p.SetMovement(direction, speed);
+            }
+        }
+
+        public void ExpandAndRotate()
+        {
+            foreach (Particle p in _particles)
+            {
+                p.pRotation += 0.05f;
+                p.Scale += 0.05f;
+            }
+        }
+
+        public void AddOffset(Vector2 positionOffset) 
+        {
+            foreach (Particle p in _particles)
+            {
+                p.pPosition += positionOffset;
+            }
+        }
+
+        public void SetParticleFadeAlpha(float alpha) 
+        {
+            foreach (Particle p in _particles)
+            {
+                p.FadeAlpha = alpha;
+            }
+        }
+
+        public void ResetParticleFadeAlpha() 
+        {
+            foreach (Particle p in _particles)
+            {
+                p.FadeAlpha = 1.0f;
+            }
+        }
+
+        public override void Draw(GameTime gameTime)
+        {
+
+            for (int i = 0; i < _particles.Count; i++)
+            {
+                _particles[i].Draw(gameTime);
+            }
+            
+        }
+
+        #endregion
     }
 }
+

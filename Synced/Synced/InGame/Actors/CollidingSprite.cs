@@ -43,6 +43,7 @@ namespace Synced.InGame.Actors
             bodyOrigin = new Vector2(texture.Width / 2, texture.Height / 2);
         }
 
+        // f1 = this gameObject, f2 = other gameObject
         virtual public bool OnCollision(Fixture f1, Fixture f2, Contact contact) { return true; }
 
         public override void Draw(GameTime gameTime)
