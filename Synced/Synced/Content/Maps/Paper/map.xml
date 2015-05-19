@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MapData>
+  <PlayerStart>
+    <Position>
+      <X>100</X>
+      <Y>100</Y>
+    </Position>
+    <TexturePath />
+    <PlayerIndex>One</PlayerIndex>
+  </PlayerStart>
+  <PlayerStart>
+    <Position>
+      <X>300</X>
+      <Y>100</Y>
+    </Position>
+    <TexturePath />
+    <PlayerIndex>Two</PlayerIndex>
+  </PlayerStart>
+  <PlayerStart>
+    <Position>
+      <X>300</X>
+      <Y>300</Y>
+    </Position>
+    <TexturePath />
+    <PlayerIndex>Three</PlayerIndex>
+  </PlayerStart>
+  <PlayerStart>
+    <Position>
+      <X>100</X>
+      <Y>300</Y>
+    </Position>
+    <TexturePath />
+    <PlayerIndex>Four</PlayerIndex>
+  </PlayerStart>
+  <Obstacle>
+    <Position>
+      <X>0</X>
+      <Y>0</Y>
+    </Position>
+    <TexturePath>Maps/Paper/frame</TexturePath>
+    <CollisionCategory>All</CollisionCategory>
+  </Obstacle>
+  <Obstacle>
+    <Position>
+      <X>0</X>
+      <Y>0</Y>
+    </Position>
+    <TexturePath>Maps/Paper/background</TexturePath>
+    <CollisionCategory>None</CollisionCategory>
+  </Obstacle>
+  <Goal>
+    <Position>
+      <X>500</X>
+      <Y>500</Y>
+    </Position>
+    <TexturePath>Maps/Paper/Goal</TexturePath>
+    <CollisionCategory>All</CollisionCategory>
+    <Radius>50</Radius>
+  </Goal>
+</MapData>
