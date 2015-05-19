@@ -1,6 +1,6 @@
 ﻿// Library.cs
 // Introduced: 2015-04-14
-// Last edited: 2015-05-09
+// Last edited: 2015-05-19
 // Edited by:
 // Pontus Magnusson
 // Göran Forsström
@@ -63,25 +63,25 @@ namespace Synced.Content
                 // Ref: http://rbwhitaker.wikidot.com/playing-background-music
                 Audio.SongDictionary = new Dictionary<Audio.Songs, Song>()
                 {
-                    {Audio.Songs.InGame, content.Load<Song>(@"Audio\game")},
-                    {Audio.Songs.Menu, content.Load<Song>(@"Audio\start")}
+                    {Audio.Songs.InGame, content.Load<Song>(@"Audio\song_InGame")},
+                    {Audio.Songs.InMenu, content.Load<Song>(@"Audio\song_InMenu")}
                 };
 
                 Audio.SoundEffectDictionary = new Dictionary<Audio.SoundEffects, SoundEffect>()
                 {
                     // ToDo: other sound?
-                    { Audio.SoundEffects.MenuSelect,    content.Load<SoundEffect>(@"Audio\menu_click")}, 
-                    { Audio.SoundEffects.MenuConfirm,   content.Load<SoundEffect>(@"Audio\menu_confirm")}, 
-                    { Audio.SoundEffects.GameStart,     content.Load<SoundEffect>(@"Audio\splash-to-drop")},
-                    { Audio.SoundEffects.GameFinished,  content.Load<SoundEffect>(@"Audio\goalApplause")},
-                    { Audio.SoundEffects.UnitMove,      content.Load<SoundEffect>(@"Audio\splash-to-drop")},
-                    { Audio.SoundEffects.CrystalShoot,  content.Load<SoundEffect>(@"Audio\crystalShoot-2")},
-                    { Audio.SoundEffects.CrystalPickUp, content.Load<SoundEffect>(@"Audio\crystalCapture")},
-                    { Audio.SoundEffects.ZoneShoot,     content.Load<SoundEffect>(@"Audio\crystalShoot-2")},
-                    { Audio.SoundEffects.ZonePickUp,    content.Load<SoundEffect>(@"Audio\crystalCapture")},
-                    { Audio.SoundEffects.ZoneCreate,    content.Load<SoundEffect>(@"Audio\expand_zone")},
-                    { Audio.SoundEffects.ZoneExplosion, content.Load<SoundEffect>(@"Audio\blow-up-zone")},
-                    { Audio.SoundEffects.Score,         content.Load<SoundEffect>(@"Audio\goal")},
+                    { Audio.SoundEffects.MenuSelect,    content.Load<SoundEffect>(@"Audio\MenuSelect")}, 
+                    { Audio.SoundEffects.MenuConfirm,   content.Load<SoundEffect>(@"Audio\MenuConfirm")}, 
+                    { Audio.SoundEffects.GameStart,     content.Load<SoundEffect>(@"Audio\GameStart")},
+                    { Audio.SoundEffects.GameFinished,  content.Load<SoundEffect>(@"Audio\GameFinished")},
+                    { Audio.SoundEffects.UnitMove,      content.Load<SoundEffect>(@"Audio\UnitMove")},
+                    { Audio.SoundEffects.CrystalShoot,  content.Load<SoundEffect>(@"Audio\CrystalShoot")},
+                    { Audio.SoundEffects.CrystalPickUp, content.Load<SoundEffect>(@"Audio\CrystalPickUp")},
+                    { Audio.SoundEffects.ZoneShoot,     content.Load<SoundEffect>(@"Audio\ZoneShoot")},
+                    { Audio.SoundEffects.ZonePickUp,    content.Load<SoundEffect>(@"Audio\ZonePickUp")},
+                    { Audio.SoundEffects.ZoneCreate,    content.Load<SoundEffect>(@"Audio\ZoneCreate")},
+                    { Audio.SoundEffects.ZoneExplosion, content.Load<SoundEffect>(@"Audio\ZoneExplosion")},
+                    { Audio.SoundEffects.Score,         content.Load<SoundEffect>(@"Audio\Score")},
                 };
 
                 #endregion
@@ -143,7 +143,7 @@ namespace Synced.Content
         }
         public static class Audio
         {
-            public enum Songs { Menu, InGame };
+            public enum Songs { InMenu, InGame };
             public static Dictionary<Songs, Song> SongDictionary;
 
             public enum SoundEffects { MenuSelect, MenuConfirm, GameStart, GameFinished, UnitMove, CrystalShoot, CrystalPickUp, ZoneShoot, ZonePickUp, ZoneCreate, ZoneExplosion, Score }
