@@ -14,7 +14,7 @@ namespace Synced.Static_Classes
     /// </summary>
     sealed class ScreenManager : DrawableGameComponent
     {
-        enum ScreenState { SplashScreen, MenuScreen, GameScreen }
+        public enum ScreenState { SplashScreen, MenuScreen, GameScreen }
         
 
         #region Singelton
