@@ -66,8 +66,8 @@ namespace Synced
             // ------------------------------------------------------------
             // Adds menu screen to ScreenManager
             // ------------------------------------------------------------
-            ScreenManager.AddScreen(new MenuScreen(this));
-
+            ScreenManager.InitializeScreenManager(this);
+            Components.Add(ScreenManager.Instance);
             // Tests
             //Map m = new Map(Library.Map.Path[Library.Map.Name.Paper]);
             // Tests    // TODO: Remove later
@@ -110,7 +110,7 @@ namespace Synced
             {
                 //_graphics.ToggleFullScreen();
                 ScreenManager.Pop();
-                ScreenManager.AddScreen(new GameScreen(this, world));
+                ScreenManager.Instance.AddScreen(new GameScreen(this, world));
             }
 
             // Test     // TODO: Remove later
@@ -126,7 +126,7 @@ namespace Synced
 
             base.Update(gameTime);
             InputManager.Update(); // Must be called after base. (This updates InputManager._LastStates)
-            ScreenManager.Update(gameTime);// Update Screen Manager (Must be called after inputmanager)
+            //ScreenManager.Update(gameTime);// Update Screen Manager (Must be called after inputmanager)
         }
 
         /// <summary>
@@ -138,7 +138,7 @@ namespace Synced
             ResolutionManager.BeginDraw(); // Clear and viewport fix
             
             // Draw Screen Manager
-            ScreenManager.Draw(gameTime, _spriteBatch);
+           // ScreenManager.Draw(gameTime, _spriteBatch);
 
             base.Draw(gameTime);
         }

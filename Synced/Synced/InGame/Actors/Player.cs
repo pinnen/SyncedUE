@@ -42,15 +42,17 @@ namespace Synced.Actors
 
         public override void Update(GameTime gameTime)
         {
-            Left.Direction = InputManager.LeftStickDirection(_playerIndex);
-            Right.Direction = InputManager.RightStickDirection(_playerIndex);
+            if (Enabled)
+            {
+                Left.Direction = InputManager.LeftStickDirection(_playerIndex);
+                Right.Direction = InputManager.RightStickDirection(_playerIndex);
 
-            if (InputManager.LeftShoulderPressed(_playerIndex))
-                Left.Shoot();
+                if (InputManager.LeftShoulderPressed(_playerIndex))
+                    Left.Shoot();
 
-            if (InputManager.RightShoulderPressed(_playerIndex))
-                Right.Shoot();
-
+                if (InputManager.RightShoulderPressed(_playerIndex))
+                    Right.Shoot();
+            }
             base.Update(gameTime);
         }
 

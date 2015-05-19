@@ -6,6 +6,7 @@
 //
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Synced.InGame;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,8 +14,13 @@ using System.Text;
 
 namespace Synced.Interface
 {
-    abstract class Screen : DrawableGameComponent, IDrawableObject
+    abstract class Screen : DrawableGameComponent, IDrawableObject, IActive
     {
+        public delegate void OnScreenActivate(Screen screen, EventArgs e);
+        public delegate void OnScreenDeactivate(Screen screen, EventArgs e);
+        public delegate void OnScreenTransition(Screen screen, EventArgs e);
+        
+
         #region Properties
         /// <summary>
         /// Screen Position
@@ -37,7 +43,7 @@ namespace Synced.Interface
         /// <summary>
         /// List of Components that this screen contains
         /// </summary>
-        public List<DrawableGameComponent> GameComponents
+        public GameComponentCollection GameComponents
         {
             get;
             protected set;
@@ -71,15 +77,19 @@ namespace Synced.Interface
             set;
         }
         #endregion
-
-        public Screen(Game game) :base(game)
+        #region Constructor
+        public Screen(Game game)
+            : base(game)
         {
-            GameComponents = new List<DrawableGameComponent>();
-        }
+            GameComponents = new GameComponentCollection();
 
+        }
+        #endregion
+        
+        #region DrawableGameComponents Methods
         public override void Initialize()
         {
-            foreach (GameComponent gc in this.GameComponents)
+            foreach (DrawableGameComponent gc in this.GameComponents)
                 gc.Initialize();
             Initialized = true;
             base.Initialize();
@@ -101,12 +111,24 @@ namespace Synced.Interface
             base.Draw(gameTime);
         }
 
+        protected override void Dispose(bool disposing)
+        {
+            GameComponents.Clear();
+            base.Dispose(disposing);
+        }
+        #endregion
+
+        #region IActive
         /// <summary>
         /// Virtual method, this method is called when a screen is activated 
         /// </summary>
         public virtual void Activated()
         {
-            
+            foreach (DrawableGameComponent gc in GameComponents)
+            {
+                gc.Enabled = true;
+                gc.Visible = true;
+            }
         }
 
         /// <summary>
@@ -114,12 +136,14 @@ namespace Synced.Interface
         /// </summary>
         public virtual void Deactivated()
         {
+            foreach (DrawableGameComponent gc in GameComponents)
+            {
+                gc.Enabled = false;
+                gc.Visible = false;
+            }
         }
+        #endregion
 
 
-        protected override void Dispose(bool disposing)
-        {
-            base.Dispose(disposing);
-        }
     }
 }

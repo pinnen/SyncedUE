@@ -20,7 +20,7 @@ namespace Synced.Interface
             : base (game)
         {
             _map = new Map(Library.Map.Path[Library.Map.Name.Paper], game);
-            ScreenManager.AddScreen(_map);
+            ScreenManager.Instance.AddScreen(_map);
 
             _players = new List<Player>();
             foreach (var item in _map.Data.Objects)
