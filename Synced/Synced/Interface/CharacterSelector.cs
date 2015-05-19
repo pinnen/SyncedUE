@@ -66,6 +66,7 @@ namespace Synced.Interface
             _currentState = State.Unconnected;
             _rectangle = rectangle;
             _playerIndex = playerIndex;
+            DrawOrder = (int)DrawingHelper.DrawingLevel.Top;
         }
 
         public override void Initialize()

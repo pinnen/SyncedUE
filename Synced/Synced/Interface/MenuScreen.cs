@@ -37,7 +37,7 @@ namespace Synced.Interface
             int w = ResolutionManager.GetCenterPointWidth;
             int h = ResolutionManager.GetCenterPointHeight;
 
-            GameComponents.Add(new Sprite(Library.Interface.MenuBackground, Vector2.Zero, DrawingHelper.DrawingLevel.Top, game));
+           
 
             // Add character selectors
             GameComponents.Add(new CharacterSelector(PlayerIndex.One, new Rectangle(0, 0, w, h), Color.Blue, Game));
@@ -45,7 +45,7 @@ namespace Synced.Interface
             GameComponents.Add(new CharacterSelector(PlayerIndex.Three, new Rectangle(0, h, w, h), Color.Red, Game));
             GameComponents.Add(new CharacterSelector(PlayerIndex.Four, new Rectangle(w, h, w, h), Color.Yellow, Game));
 
-
+            GameComponents.Add(new Sprite(Library.Interface.MenuBackground, Vector2.Zero, DrawingHelper.DrawingLevel.Back, game));
             // Background
         }
         public bool IsEveryoneReady()
@@ -68,7 +68,7 @@ namespace Synced.Interface
                 gc.Enabled = true;
                 gc.Visible = true;
             }
-            Game.Components.Add(this);
+           // Game.Components.Add(this);
             
         }
     }
