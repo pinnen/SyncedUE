@@ -14,12 +14,45 @@ using System.Text;
 
 namespace Synced.Interface
 {
+    //TODO: 
+    class ScreenEventArgs : EventArgs
+    {
+       
+    }
     abstract class Screen : DrawableGameComponent, IDrawableObject, IActive
     {
-        public delegate void OnScreenActivate(Screen screen, EventArgs e);
-        public delegate void OnScreenDeactivate(Screen screen, EventArgs e);
-        public delegate void OnScreenTransition(Screen screen, EventArgs e);
-        
+        #region Delegates & Events & Raisers 
+        public delegate void OnScreenActivateEventHandler(Screen screen, EventArgs e);
+        public delegate void OnScreenDeactivateEventHandler(Screen screen, EventArgs e);
+        public delegate void OnScreenTransitionEventHandler(Screen screen, EventArgs e);
+        public delegate void OnScreenExitEventHandler(Screen screen, EventArgs e);
+
+        public event OnScreenActivateEventHandler OnActivated;
+        public event OnScreenDeactivateEventHandler OnDeactivated;
+        public event OnScreenTransitionEventHandler OnTransition;
+        public event OnScreenExitEventHandler ScreenExit;
+
+        protected void OnScreenExit(Screen screen, EventArgs e)
+        {
+            if (ScreenExit!= null)
+                ScreenExit(screen, e);
+        }
+        protected void OnActivadedScreen(Screen screen, EventArgs e)
+        {
+            if (OnActivated != null)
+                OnActivated(screen, e);
+        }
+        protected void OnDeactivadedScreen(Screen screen, EventArgs e)
+        {
+            if (OnDeactivated != null)
+                OnDeactivated(screen, e);
+        }
+        protected void OnTransitionScreen(Screen screen, EventArgs e)
+        {
+            if (OnTransition!=null)
+                OnTransition(screen, e);
+        }
+        #endregion
 
         #region Properties
         /// <summary>
@@ -77,6 +110,7 @@ namespace Synced.Interface
             set;
         }
         #endregion
+
         #region Constructor
         public Screen(Game game)
             : base(game)
@@ -143,7 +177,6 @@ namespace Synced.Interface
             }
         }
         #endregion
-
 
     }
 }
