@@ -59,7 +59,7 @@ namespace Synced.Interface
                 if (SplashTime < TimeSpan.Zero)
                 {
                     OnScreenExit(this, new EventArgs());
-                    ScreenManager.Pop();
+                    //ScreenManager.Pop();
                     //Dispose();
                 }
                 foreach (IUpdateable gc in this.GameComponents.OfType<IUpdateable>().Where<IUpdateable>(x => x.Enabled).OrderBy<IUpdateable, int>(x => x.UpdateOrder))

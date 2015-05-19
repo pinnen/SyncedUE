@@ -78,6 +78,7 @@ namespace Synced.Static_Classes
         }
         public void AddScreen(Screen screen)
         {
+            screen.Activated();
             Screens.Push(screen);
         }
         public void AddScreen(List<Screen> screens)
@@ -117,7 +118,7 @@ namespace Synced.Static_Classes
         #region ScreenManager Events
         public void OnScreenExit(Screen screen, EventArgs e)
         {
-            
+            Pop();
         }
         #endregion
 
