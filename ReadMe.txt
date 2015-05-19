@@ -50,6 +50,23 @@ Notes on GITHUB
 
 How to get old versions
 
+Alt.1
+-----
+
+In GitHub: 
+a) Select version in history make a note of the hex value at the top right: e.g. "c320ad3"
+b) Right-click on projevt on left side and select "Open in Git Shell"!
+
+In Git Shell:
+git reset --hard <akt-nr>, ex: git reset --hard c320ad3
+
+Restore to current version:
+in Git Hub: Sync!
+
+
+Alt.2
+-----
+
 See:
 http://githowto.com/getting_old_versions
 
