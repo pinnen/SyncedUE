@@ -29,23 +29,27 @@ namespace Synced.Static_Classes
         public static void InitializeScreenManager(Game game)
         {
             if (_screenManager == null)
-            _screenManager = new ScreenManager(game);
+                _screenManager = new ScreenManager(game);
+
+            //Loads menu screen
             Screen screena = new MenuScreen(Library.Interface.MenuBackground, game);
             screena.Deactivated();
             _screenManager.Screens.Push(screena);
-            //Loads menu screen
-            //Loads splash screens
-            Screen screen2 = new SplashScreen(Library.Interface.Arrows, game);
+
+            //------------------------------------------------------------------------
+            // Splash screens
+            //------------------------------------------------------------------------
+            //Second splash screen
+            Screen screen2 = new SplashScreen(Library.Crystal.Texture, game);
             screen2.Deactivated();
             _screenManager.Screens.Push(screen2);
             screen2.ScreenExit += ScreenManager.Instance.OnScreenExit;
+
+            //First splash screen
             Screen screen = new SplashScreen(Library.Interface.Arrows, game);
             screen.Activated();
             _screenManager.Screens.Push(screen);
             screen.ScreenExit += ScreenManager.Instance.OnScreenExit;
-           
-
-
         }
 
        
