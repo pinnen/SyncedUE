@@ -120,6 +120,10 @@ namespace Synced.Content
                 #endregion
             }
         }
+        public static class SplashScreens
+        {
+            //TODO SplashScreen loading
+        }
         public static class Crystal
         {
             public static Texture2D Texture;
