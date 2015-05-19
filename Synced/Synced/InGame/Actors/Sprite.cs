@@ -32,7 +32,7 @@ namespace Synced.Actors
             Color = color;
             Position = position;
             Texture = texture;
-            
+
             if (centered) Origin = new Vector2(texture.Width / 2, texture.Height / 2);
 
             DrawOrder = (int)drawingLevel;
@@ -42,12 +42,9 @@ namespace Synced.Actors
 
         public override void Draw(GameTime gameTime)
         {
-            if (Visible)
-            {
-                _spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.LinearWrap, DepthStencilState.None, RasterizerState.CullNone, null, ResolutionManager.GetTransformationMatrix());
-                _spriteBatch.Draw(Texture, Position, null, Color, Rotation, Origin, 1.0f, SpriteEffects.None, 1.0f);
-                _spriteBatch.End();
-            }
+            _spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.LinearWrap, DepthStencilState.None, RasterizerState.CullNone, null, ResolutionManager.GetTransformationMatrix());
+            _spriteBatch.Draw(Texture, Position, null, Color, Rotation, Origin, 1.0f, SpriteEffects.None, 1.0f);
+            _spriteBatch.End();
             base.Draw(gameTime);
         }
 

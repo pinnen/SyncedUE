@@ -28,12 +28,13 @@ namespace Synced.Interface
             get;
             set;
         }
-        
+
 
         #endregion
 
 
-        public SplashScreen(Texture2D texture, Game game) : base (game)
+        public SplashScreen(Texture2D texture, Game game)
+            : base(game)
         {
             //How long to fade in & out
             FadeInTime = TimeSpan.FromSeconds(0.5);
@@ -42,29 +43,24 @@ namespace Synced.Interface
             // Temporary screen variables (Half of screen)
             int w = ResolutionManager.GetCenterPointWidth;
             int h = ResolutionManager.GetCenterPointHeight;
-            GameComponents.Add(_background = new Sprite(texture, new Vector2(w,h), Color.White,DrawingHelper.DrawingLevel.Back,true,game));
+            GameComponents.Add(_background = new Sprite(texture, new Vector2(w, h), Color.White, DrawingHelper.DrawingLevel.Back, true, game));
             Game.Components.Add(this);
-            this.Enabled = false;
-            this.Visible = false;
             //this.ScreenExit+=new OnScreenExit(ScreenManager.Instance.OnScreenExit);
         }
 
         public override void Update(GameTime gameTime)
         {
-            if (Enabled)
-            {
-                //TODO: Fix fade in fade out 
-                SplashTime -= gameTime.ElapsedGameTime;
+            //TODO: Fix fade in fade out 
+            SplashTime -= gameTime.ElapsedGameTime;
 
-                if (SplashTime < TimeSpan.Zero)
-                {
-                    OnScreenExit(this, new EventArgs());
-                    //ScreenManager.Pop();
-                    //Dispose();
-                }
-                foreach (IUpdateable gc in this.GameComponents.OfType<IUpdateable>().Where<IUpdateable>(x => x.Enabled).OrderBy<IUpdateable, int>(x => x.UpdateOrder))
-                    gc.Update(gameTime);
+            if (SplashTime < TimeSpan.Zero)
+            {
+                OnScreenExit(this, new EventArgs());
+                //ScreenManager.Pop();
+                //Dispose();
             }
+            foreach (IUpdateable gc in this.GameComponents.OfType<IUpdateable>().Where<IUpdateable>(x => x.Enabled).OrderBy<IUpdateable, int>(x => x.UpdateOrder))
+                gc.Update(gameTime);
         }
 
 
@@ -81,6 +77,6 @@ namespace Synced.Interface
             this.Visible = false;
             base.Deactivated();
         }
-        
+
     }
 }

@@ -29,28 +29,24 @@ namespace Synced.Interface
             get { return (SpriteBatch)Game.Services.GetService(typeof(SpriteBatch)); }
         }
 
-        public MenuScreen(Texture2D texture,Game game)
+        public MenuScreen(Game game)
             : base(game)
         {
-
-            //_background = new Sprite(texture, Vector2.Zero, DrawingHelper.DrawingLevel.Back, game);
-            //_background.Enabled = false;
-            //_background.Visible = false;
-            GameComponents.Add(new Sprite(texture, Vector2.Zero, DrawingHelper.DrawingLevel.Back, game));
 
             // Temporary screen variables (Half of screen)
             int w = ResolutionManager.GetCenterPointWidth;
             int h = ResolutionManager.GetCenterPointHeight;
 
+            GameComponents.Add(new Sprite(Library.Interface.MenuBackground, Vector2.Zero, DrawingHelper.DrawingLevel.Top, game));
+
             // Add character selectors
-            //_characterSelectors = new List<CharacterSelector>();
             GameComponents.Add(new CharacterSelector(PlayerIndex.One, new Rectangle(0, 0, w, h), Color.Blue, Game));
             GameComponents.Add(new CharacterSelector(PlayerIndex.Two, new Rectangle(w, 0, w, h), Color.Green, Game));
             GameComponents.Add(new CharacterSelector(PlayerIndex.Three, new Rectangle(0, h, w, h), Color.Red, Game));
             GameComponents.Add(new CharacterSelector(PlayerIndex.Four, new Rectangle(w, h, w, h), Color.Yellow, Game));
 
+
             // Background
-            GameComponents.Add(new Sprite(Library.Interface.MenuBackground, Vector2.Zero, DrawingHelper.DrawingLevel.Back, game));
         }
         public bool IsEveryoneReady()
         {
@@ -72,24 +68,8 @@ namespace Synced.Interface
                 gc.Enabled = true;
                 gc.Visible = true;
             }
-            //foreach (CharacterSelector characterSelect in _characterSelectors)
-            //{
-            //    characterSelect.Enabled = false;
-            //    characterSelect.Visible = false;
-            //}
-            //GameComponents.Add(_background);
             Game.Components.Add(this);
             
-        }
-        
-        public override void Initialize()
-        {
-            base.Initialize();
-        }
-
-        protected override void Dispose(bool disposing)
-        { 
-            base.Dispose(disposing);
         }
     }
 }

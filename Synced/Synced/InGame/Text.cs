@@ -51,13 +51,13 @@ namespace Synced.InGame
             _content = content;
             _rectangle = rectangle;
             _alignment = DrawingHelper.Alignment.Center;
-            DrawOrder = (int)DrawingHelper.DrawingLevel.High;
+            DrawOrder = (int)DrawingHelper.DrawingLevel.Top;
         }
 
         public override void Draw(GameTime gameTime)
         {
             _spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.LinearWrap, DepthStencilState.None, RasterizerState.CullNone, null, ResolutionManager.GetTransformationMatrix());
-            DrawingHelper.DrawString(_spriteBatch, _font, _content, _rectangle, DrawingHelper.Alignment.Center, 3, Color.Black);
+            DrawingHelper.DrawString(_spriteBatch, _font, _content, _rectangle, DrawingHelper.Alignment.Center, 3, Color.Red);
             _spriteBatch.End();
 
             base.Draw(gameTime);

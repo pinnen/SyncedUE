@@ -32,24 +32,23 @@ namespace Synced.Static_Classes
                 _screenManager = new ScreenManager(game);
 
             //Loads menu screen
-            Screen screena = new MenuScreen(Library.Interface.MenuBackground, game);
-            screena.Deactivated();
-            _screenManager.Screens.Push(screena);
+            Screen screena = new MenuScreen(game);
+            _screenManager.AddScreen(screena);
 
             //------------------------------------------------------------------------
             // Splash screens
             //------------------------------------------------------------------------
             //Second splash screen
-            Screen screen2 = new SplashScreen(Library.Crystal.Texture, game);
-            screen2.Deactivated();
-            _screenManager.Screens.Push(screen2);
-            screen2.ScreenExit += ScreenManager.Instance.OnScreenExit;
+            //Screen screen2 = new SplashScreen(Library.Crystal.Texture, game);
+            //screen2.Deactivated();
+            //_screenManager.Screens.Push(screen2);
+            //screen2.ScreenExit += ScreenManager.Instance.OnScreenExit;
 
             //First splash screen
-            Screen screen = new SplashScreen(Library.Interface.Arrows, game);
-            screen.Activated();
-            _screenManager.Screens.Push(screen);
-            screen.ScreenExit += ScreenManager.Instance.OnScreenExit;
+            //Screen screen = new SplashScreen(Library.Interface.Arrows, game);
+            //screen.Activated();
+            //_screenManager.Screens.Push(screen);
+            //screen.ScreenExit += ScreenManager.Instance.OnScreenExit;
         }
 
        
@@ -78,7 +77,7 @@ namespace Synced.Static_Classes
         }
         public void AddScreen(Screen screen)
         {
-            screen.Activated();
+            screen.Initialize();
             Screens.Push(screen);
         }
         public void AddScreen(List<Screen> screens)
@@ -137,17 +136,13 @@ namespace Synced.Static_Classes
             ActiveScreen.Update(gameTime);
         }
 
-        public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
+        public override void Draw(GameTime gameTime)
         {
             foreach (var item in Screens)
             {
                 if (item.Enabled)
                     item.Draw(gameTime);
             }
-        }
-        protected override void Dispose(bool disposing)
-        {
-
         }
     }
 }

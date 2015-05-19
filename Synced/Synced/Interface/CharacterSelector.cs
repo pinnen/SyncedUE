@@ -79,9 +79,9 @@ namespace Synced.Interface
             Rectangle abilityTextRectangle = new Rectangle(posX, posY + 50, 0, 0);
             Vector2 arrowPosition = characterPosition;
 
-            _characterHolder = new Sprite(Library.Character.InterfaceTexture[(Library.Character.Name)0], characterPosition, _color, DrawingHelper.DrawingLevel.Medium, true, Game);
+            _characterHolder = new Sprite(Library.Character.InterfaceTexture[(Library.Character.Name)0], characterPosition, _color, DrawingHelper.DrawingLevel.Top, true, Game);
             _abilityTextHolder = new Text("", abilityTextRectangle, Game);
-            _arrowHolder = new Sprite(Library.Interface.Arrows, arrowPosition, _color, DrawingHelper.DrawingLevel.Medium, true, Game);
+            _arrowHolder = new Sprite(Library.Interface.Arrows, arrowPosition, _color, DrawingHelper.DrawingLevel.Top, true, Game);
             _stateText = new Text("Unconnected!", new Rectangle(posX, posY, 0, 0), Game);
 
             base.Initialize();
@@ -94,64 +94,58 @@ namespace Synced.Interface
         }
         public override void Update(GameTime gameTime)
         {
-            if (Enabled)
+            switch (_currentState)
             {
-                switch (_currentState)
-                {
-                    case State.Unconnected:
-                        if (GamePad.GetState(_playerIndex).IsConnected) _connect();
-                        break;
-                    case State.Connected:
-                        if (InputManager.IsButtonPressed(Buttons.A, _playerIndex))
-                        {
-                            _join();
-                        }
-                        break;
-                    case State.Joined:
-                        if (InputManager.IsButtonPressed(Buttons.A, _playerIndex))
-                        {
-                            _ready();
-                        }
-                        _readInput();
-                        break;
-                    case State.Ready:
-                        if (InputManager.IsButtonPressed(Buttons.B, _playerIndex))
-                        {
-                            _join();
-                        }
-                        break;
-                }
-
-                CheckForDisconnect();
-
-                _previousState = GamePad.GetState(_playerIndex);
-                base.Update(gameTime);
+                case State.Unconnected:
+                    if (GamePad.GetState(_playerIndex).IsConnected) _connect();
+                    break;
+                case State.Connected:
+                    if (InputManager.IsButtonPressed(Buttons.A, _playerIndex))
+                    {
+                        _join();
+                    }
+                    break;
+                case State.Joined:
+                    if (InputManager.IsButtonPressed(Buttons.A, _playerIndex))
+                    {
+                        _ready();
+                    }
+                    _readInput();
+                    break;
+                case State.Ready:
+                    if (InputManager.IsButtonPressed(Buttons.B, _playerIndex))
+                    {
+                        _join();
+                    }
+                    break;
             }
+
+            CheckForDisconnect();
+
+            _previousState = GamePad.GetState(_playerIndex);
+            base.Update(gameTime);
         }
         public override void Draw(GameTime gameTime)
         {
-            if (Visible)
+            switch (_currentState)
             {
-                switch (_currentState)
-                {
-                    case State.Unconnected:
-                        _stateText.Draw(gameTime);
-                        break;
-                    case State.Connected:
-                        _stateText.Draw(gameTime);
-                        break;
-                    case State.Joined:
-                        _abilityTextHolder.Draw(gameTime);
-                        _characterHolder.Draw(gameTime);
-                        _arrowHolder.Draw(gameTime);
-                        break;
-                    case State.Ready:
-                        _stateText.Draw(gameTime);
-                        break;
-                }
-
-                base.Draw(gameTime);
+                case State.Unconnected:
+                    _stateText.Draw(gameTime);
+                    break;
+                case State.Connected:
+                    _stateText.Draw(gameTime);
+                    break;
+                case State.Joined:
+                    _abilityTextHolder.Draw(gameTime);
+                    _characterHolder.Draw(gameTime);
+                    _arrowHolder.Draw(gameTime);
+                    break;
+                case State.Ready:
+                    _stateText.Draw(gameTime);
+                    break;
             }
+
+            base.Draw(gameTime);
         }
         public bool IsReady()
         {
