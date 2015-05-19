@@ -44,8 +44,6 @@ namespace Synced.Interface
             int w = ResolutionManager.GetCenterPointWidth;
             int h = ResolutionManager.GetCenterPointHeight;
             GameComponents.Add(_background = new Sprite(texture, new Vector2(w, h), Color.White, DrawingHelper.DrawingLevel.Back, true, game));
-            //Game.Components.Add(this);
-            //this.ScreenExit+=new OnScreenExit(ScreenManager.Instance.OnScreenExit);
         }
 
         public override void Update(GameTime gameTime)

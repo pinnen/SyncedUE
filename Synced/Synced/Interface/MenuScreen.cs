@@ -32,21 +32,17 @@ namespace Synced.Interface
         public MenuScreen(Game game)
             : base(game)
         {
-
             // Temporary screen variables (Half of screen)
             int w = ResolutionManager.GetCenterPointWidth;
             int h = ResolutionManager.GetCenterPointHeight;
-
-           
 
             // Add character selectors
             GameComponents.Add(new CharacterSelector(PlayerIndex.One, new Rectangle(0, 0, w, h), Color.Blue, Game));
             GameComponents.Add(new CharacterSelector(PlayerIndex.Two, new Rectangle(w, 0, w, h), Color.Green, Game));
             GameComponents.Add(new CharacterSelector(PlayerIndex.Three, new Rectangle(0, h, w, h), Color.Red, Game));
             GameComponents.Add(new CharacterSelector(PlayerIndex.Four, new Rectangle(w, h, w, h), Color.Yellow, Game));
-
-            GameComponents.Add(new Sprite(Library.Interface.MenuBackground, Vector2.Zero, DrawingHelper.DrawingLevel.Back, game));
             // Background
+            GameComponents.Add(new Sprite(Library.Interface.MenuBackground, Vector2.Zero, DrawingHelper.DrawingLevel.Back, game));
         }
         public bool IsEveryoneReady()
         {

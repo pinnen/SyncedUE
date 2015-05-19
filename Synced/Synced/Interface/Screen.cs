@@ -142,10 +142,6 @@ namespace Synced.Interface
             //Draws every component in GameComponents
             foreach (IDrawable gc in this.GameComponents.OfType<IDrawable>().Where<IDrawable>(x => x.Visible).OrderBy<IDrawable, int>(x => x.DrawOrder))
                 gc.Draw(gameTime);
-            //foreach (DrawableGameComponent item in GameComponents)
-            //{
-            //    item.Draw(gameTime);
-            //}
             base.Draw(gameTime);
         }
 
