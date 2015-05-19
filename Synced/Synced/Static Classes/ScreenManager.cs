@@ -117,7 +117,7 @@ namespace Synced.Static_Classes
         #region ScreenManager Events
         public void OnScreenExit(Screen screen, EventArgs e)
         {
-            
+
         }
         #endregion
 
@@ -131,23 +131,19 @@ namespace Synced.Static_Classes
             ScreenManager.Initialized = true;
         }
 
-        //public override void Update(GameTime gameTime)
-        //{
-        //    foreach (var item in Screens)
-        //    {
-        //        if (item.Enabled)
-        //            item.Update(gameTime);
-        //    }
-        //}
-        
-        //public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
-        //{
-        //    foreach (var item in Screens)
-        //    {
-        //        if (item.Enabled)
-        //            item.Draw(gameTime);
-        //    }
-        //}
+        public override void Update(GameTime gameTime)
+        {
+            ActiveScreen.Update(gameTime);
+        }
+
+        public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
+        {
+            foreach (var item in Screens)
+            {
+                if (item.Enabled)
+                    item.Draw(gameTime);
+            }
+        }
         protected override void Dispose(bool disposing)
         {
 

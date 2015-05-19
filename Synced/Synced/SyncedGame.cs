@@ -31,10 +31,7 @@ namespace Synced
 
         KeyboardState _lastState;
 
-        // Test objects // TODO: Remove later
-        World world;
-        Player player;
-        Crystal crystal;
+        // TODO: Test objects. Remove later
 
         public SyncedGame()
             : base()
@@ -69,12 +66,8 @@ namespace Synced
             // ------------------------------------------------------------
             ScreenManager.InitializeScreenManager(this);
             Components.Add(ScreenManager.Instance);
-            // Tests
-            //Map m = new Map(Library.Map.Path[Library.Map.Name.Paper]);
-            // Tests    // TODO: Remove later
-            world = new World(new Vector2(0, 0));
-            player = new Player(PlayerIndex.One, Library.Character.Name.Circle, this, world);
-            crystal = new Crystal(Library.Crystal.Texture, new Vector2(100, 100), DrawingHelper.DrawingLevel.Medium, this, world);
+
+            // TODO: Test objects. Remove later
 
             base.Initialize(); // Initializes all components
         }
@@ -109,16 +102,10 @@ namespace Synced
             #region Debug
             if (Keyboard.GetState().IsKeyDown(Keys.F11) && _lastState.IsKeyUp(Keys.F11))
             {
-                //_graphics.ToggleFullScreen();
-                ScreenManager.Pop();
-                ScreenManager.Instance.AddScreen(new GameScreen(this, world));
+                _graphics.ToggleFullScreen();
             }
 
-            // Test     // TODO: Remove later
-            world.Step(Math.Min((float)gameTime.ElapsedGameTime.TotalSeconds, (1f / 30f)));
-            
             // Update the statemachine
-            //_gameStateMachine.Update();
 
             // Update the debugger
             DebuggingHelper.Update();
@@ -126,7 +113,6 @@ namespace Synced
             #endregion
             base.Update(gameTime);
             InputManager.Update(); // Must be called after base. (This updates InputManager._LastStates)
-            //ScreenManager.Update(gameTime);// Update Screen Manager (Must be called after inputmanager)
         }
 
         /// <summary>
@@ -137,8 +123,6 @@ namespace Synced
         {
             ResolutionManager.BeginDraw(); // Clear and viewport fix
             
-            // Draw Screen Manager
-           // ScreenManager.Draw(gameTime, _spriteBatch);
 
             base.Draw(gameTime);
         }
