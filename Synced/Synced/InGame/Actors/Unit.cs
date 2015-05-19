@@ -66,7 +66,7 @@ namespace Synced.Actors
 
         public override void Update(GameTime gameTime)
         {
-            trail.UpdatePosition(Position);
+            trail.UpdatePosition(this.body.Position);
             trail.GenerateTrailParticles(1.0f, 0.2f);
             base.Update(gameTime);
         }
