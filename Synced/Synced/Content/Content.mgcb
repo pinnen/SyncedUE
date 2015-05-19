@@ -13,173 +13,6 @@
 
 #---------------------------------- Content ---------------------------------#
 
-#begin Audio/ball_relocate.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:Audio/ball_relocate.wav
-
-#begin Audio/barrier_break.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:Audio/barrier_break.wav
-
-#begin Audio/barrier_crystal_capture.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:Audio/barrier_crystal_capture.wav
-
-#begin Audio/bermuda_triangle.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:Audio/bermuda_triangle.wav
-
-#begin Audio/blow-up-zone.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:Audio/blow-up-zone.wav
-
-#begin Audio/busy.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:Audio/busy.wav
-
-#begin Audio/crystalCapture.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:Audio/crystalCapture.wav
-
-#begin Audio/crystalShoot.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:Audio/crystalShoot.wav
-
-#begin Audio/crystalShoot-2.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:Audio/crystalShoot-2.wav
-
-#begin Audio/DRUMROLL.WAV
-/importer:
-/processor:
-/build:Audio/DRUMROLL.WAV
-
-#begin Audio/expand_zone.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:Audio/expand_zone.wav
-
-#begin Audio/game.wav
-/importer:WavImporter
-/processor:SongProcessor
-/processorParam:Quality=Best
-/build:Audio/game.wav
-
-#begin Audio/goal.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:Audio/goal.wav
-
-#begin Audio/goalApplause.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:Audio/goalApplause.wav
-
-#begin Audio/hexagon_mirror.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:Audio/hexagon_mirror.wav
-
-#begin Audio/menu_confirm.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:Audio/menu_confirm.wav
-
-#begin Audio/pentagon_secret.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:Audio/pentagon_secret.wav
-
-#begin Audio/pick_up.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:Audio/pick_up.wav
-
-#begin Audio/prison_square_collision.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:Audio/prison_square_collision.wav
-
-#begin Audio/score.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:Audio/score.wav
-
-#begin Audio/select_character.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:Audio/select_character.wav
-
-#begin Audio/shoot.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:Audio/shoot.wav
-
-#begin Audio/spalsh-to-drop-4.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:Audio/spalsh-to-drop-4.wav
-
-#begin Audio/splash-to-drop.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:Audio/splash-to-drop.wav
-
-#begin Audio/splash-to-drop-1.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:Audio/splash-to-drop-1.wav
-
-#begin Audio/splash-to-drop-2.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:Audio/splash-to-drop-2.wav
-
-#begin Audio/start.wav
-/importer:WavImporter
-/processor:SongProcessor
-/processorParam:Quality=Best
-/build:Audio/start.wav
-
-#begin Audio/track.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:Audio/track.wav
-
 #begin Fonts/menufont.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
@@ -704,12 +537,6 @@
 /processorParam:TextureFormat=Color
 /build:GameObjects/Crystal.png
 
-#begin Audio/menu_click.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:Audio/menu_click.wav
-
 #begin Maps/Paper/background.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -767,4 +594,88 @@
 
 #begin Maps/Paper/map.xml
 /copy:Maps/Paper/map.xml
+
+#begin Audio/CrystalPickUp.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/CrystalPickUp.wav
+
+#begin Audio/CrystalShoot.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/CrystalShoot.wav
+
+#begin Audio/GameFinished.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/GameFinished.wav
+
+#begin Audio/GameStart.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/GameStart.wav
+
+#begin Audio/MenuConfirm.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/MenuConfirm.wav
+
+#begin Audio/MenuSelect.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/MenuSelect.wav
+
+#begin Audio/Score.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/Score.wav
+
+#begin Audio/UnitMove.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/UnitMove.wav
+
+#begin Audio/ZoneCreate.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/ZoneCreate.wav
+
+#begin Audio/ZoneExplosion.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/ZoneExplosion.wav
+
+#begin Audio/ZonePickUp.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/ZonePickUp.wav
+
+#begin Audio/ZoneShoot.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/ZoneShoot.wav
+
+#begin Audio/song_InGame.wav
+/importer:WavImporter
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Audio/song_InGame.wav
+
+#begin Audio/song_InMenu.wav
+/importer:WavImporter
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Audio/song_InMenu.wav
 
