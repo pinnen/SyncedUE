@@ -16,6 +16,7 @@ namespace Synced.Static_Classes
     {
         enum ScreenState { SplashScreen, MenuScreen, GameScreen }
         
+
         #region Singelton
         private static ScreenManager _screenManager;
         public static ScreenManager Instance
@@ -34,12 +35,20 @@ namespace Synced.Static_Classes
             _screenManager.Screens.Push(screena);
             //Loads menu screen
             //Loads splash screens
+            Screen screen2 = new SplashScreen(Library.Interface.Arrows, game);
+            screen2.Deactivated();
+            _screenManager.Screens.Push(screen2);
+            screen2.ScreenExit += ScreenManager.Instance.OnScreenExit;
             Screen screen = new SplashScreen(Library.Interface.Arrows, game);
             screen.Activated();
             _screenManager.Screens.Push(screen);
+            screen.ScreenExit += ScreenManager.Instance.OnScreenExit;
+           
 
 
         }
+
+       
         #endregion
 
         #region Constructor
@@ -75,7 +84,6 @@ namespace Synced.Static_Classes
         {
             Array.ForEach(screens, Screens.Push);
         }
-        #endregion
         public static Screen Pop()
         {
             if (ScreenManager.Instance.Screens.Count < 1)
@@ -89,6 +97,7 @@ namespace Synced.Static_Classes
 
             return prev;
         }
+
         public static Screen ActiveScreen
         {
             get
@@ -99,6 +108,14 @@ namespace Synced.Static_Classes
             }
         }
 
+        #endregion
+
+        #region ScreenManager Events
+        public void OnScreenExit(Screen screen, EventArgs e)
+        {
+            
+        }
+        #endregion
 
         public static bool Initialized
         {

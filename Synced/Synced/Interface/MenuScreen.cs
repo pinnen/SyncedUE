@@ -91,11 +91,5 @@ namespace Synced.Interface
         { 
             base.Dispose(disposing);
         }
-
-        //public bool IsEveryoneReady()
-        //{
-        //    return true;
-        //}
-
     }
 }

@@ -46,6 +46,7 @@ namespace Synced.Interface
             Game.Components.Add(this);
             this.Enabled = false;
             this.Visible = false;
+            //this.ScreenExit+=new OnScreenExit(ScreenManager.Instance.OnScreenExit);
         }
 
         public override void Update(GameTime gameTime)
@@ -57,6 +58,7 @@ namespace Synced.Interface
 
                 if (SplashTime < TimeSpan.Zero)
                 {
+                    OnScreenExit(this, new EventArgs());
                     ScreenManager.Pop();
                     //Dispose();
                 }
