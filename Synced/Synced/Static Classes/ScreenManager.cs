@@ -13,7 +13,7 @@ namespace Synced.Static_Classes
     /// </summary>
     sealed class ScreenManager : DrawableGameComponent
     {
-        enum ScreenState { }
+        enum ScreenState { SplashScreen, MenuScreen, GameScreen }
         
         #region Singelton
         private static ScreenManager _screenManager;
@@ -27,15 +27,16 @@ namespace Synced.Static_Classes
         public static void InitializeScreenManager(Game game)
         {
             if (_screenManager == null)
-                _screenManager = new ScreenManager(game);
-
+            _screenManager = new ScreenManager(game);
+            Screen screena = new MenuScreen(Library.Interface.MenuBackground, game);
+            screena.Deactivated();
+            _screenManager.Screens.Push(screena);
+            //Loads menu screen
             //Loads splash screens
             Screen screen = new SplashScreen(Library.Interface.Arrows, game);
             screen.Activated();
             _screenManager.Screens.Push(screen);
-            screen = new MenuScreen(Library.Interface.MenuBackground, game);
-            _screenManager.Screens.Push(screen);
-            //Loads menu screen
+
 
         }
         #endregion

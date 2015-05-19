@@ -16,6 +16,11 @@ namespace Synced.Interface
 {
     abstract class Screen : DrawableGameComponent, IDrawableObject, IActive
     {
+        public delegate void OnScreenActivate(Screen screen, EventArgs e);
+        public delegate void OnScreenDeactivate(Screen screen, EventArgs e);
+        public delegate void OnScreenTransition(Screen screen, EventArgs e);
+        
+
         #region Properties
         /// <summary>
         /// Screen Position
@@ -73,17 +78,19 @@ namespace Synced.Interface
         }
         #endregion
 
-
-        public Screen(Game game) :base(game)
+        #region Constructor
+        public Screen(Game game)
+            : base(game)
         {
             GameComponents = new GameComponentCollection();
-            
+
         }
-
-
+        #endregion
+        
+        #region DrawableGameComponents Methods
         public override void Initialize()
         {
-            foreach (GameComponent gc in this.GameComponents)
+            foreach (DrawableGameComponent gc in this.GameComponents)
                 gc.Initialize();
             Initialized = true;
             base.Initialize();
@@ -117,6 +124,14 @@ namespace Synced.Interface
             base.Draw(gameTime);
         }
 
+        protected override void Dispose(bool disposing)
+        {
+            GameComponents.Clear();
+            base.Dispose(disposing);
+        }
+        #endregion
+
+        #region IActive
         /// <summary>
         /// Virtual method, this method is called when a screen is activated 
         /// </summary>
@@ -140,12 +155,8 @@ namespace Synced.Interface
                 gc.Visible = false;
             }
         }
+        #endregion
 
 
-        protected override void Dispose(bool disposing)
-        {
-            GameComponents.Clear();
-            base.Dispose(disposing);
-        }
     }
 }

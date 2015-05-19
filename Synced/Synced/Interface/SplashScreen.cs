@@ -35,51 +35,50 @@ namespace Synced.Interface
 
         public SplashScreen(Texture2D texture, Game game) : base (game)
         {
-            _background = new Sprite(texture, Vector2.Zero, DrawingHelper.DrawingLevel.Back, game);
-            _background.Enabled = false;
-            _background.Visible = false;
-
+            //How long to fade in & out
+            FadeInTime = TimeSpan.FromSeconds(0.5);
+            FadeOutTime = TimeSpan.FromSeconds(0.5);
+            SplashTime = TimeSpan.FromSeconds(2.0);
             // Temporary screen variables (Half of screen)
             int w = ResolutionManager.GetCenterPointWidth;
             int h = ResolutionManager.GetCenterPointHeight;
-            //Splash screen members
-
-            //TEST SPLASH SCREEN
-            //How long to fade in & out
-            FadeInTime = TimeSpan.FromSeconds(0.5); 
-            FadeOutTime = TimeSpan.FromSeconds(0.5);
-            SplashTime = TimeSpan.FromSeconds(2.0);
-            Game.Components.Add(_background);
+            GameComponents.Add(_background = new Sprite(texture, new Vector2(w,h), Color.White,DrawingHelper.DrawingLevel.Back,true,game));
             Game.Components.Add(this);
+            this.Enabled = false;
+            this.Visible = false;
         }
 
         public override void Update(GameTime gameTime)
         {
-            //TODO: Fix fade in fade out 
-            SplashTime -= gameTime.ElapsedGameTime;
-
-            if (SplashTime < TimeSpan.Zero)
+            if (Enabled)
             {
-                ScreenManager.Pop();
+                //TODO: Fix fade in fade out 
+                SplashTime -= gameTime.ElapsedGameTime;
+
+                if (SplashTime < TimeSpan.Zero)
+                {
+                    ScreenManager.Pop();
+                    //Dispose();
+                }
+                foreach (IUpdateable gc in this.GameComponents.OfType<IUpdateable>().Where<IUpdateable>(x => x.Enabled).OrderBy<IUpdateable, int>(x => x.UpdateOrder))
+                    gc.Update(gameTime);
             }
-            foreach (IUpdateable gc in this.GameComponents.OfType<IUpdateable>().Where<IUpdateable>(x => x.Enabled).OrderBy<IUpdateable, int>(x => x.UpdateOrder))
-                gc.Update(gameTime);
-            base.Update(gameTime);
         }
 
 
         public override void Activated()
         {
             //Adds members to game components
-            _background.Enabled = true;
-            _background.Visible = true;
+            this.Enabled = true;
+            this.Visible = true;
             base.Activated();
         }
         public override void Deactivated()
         {
-            _background.Enabled = false;
-            _background.Visible = false;
+            this.Enabled = false;
+            this.Visible = false;
             base.Deactivated();
         }
+        
     }
 }

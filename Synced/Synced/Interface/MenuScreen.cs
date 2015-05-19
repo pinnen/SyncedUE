@@ -36,14 +36,12 @@ namespace Synced.Interface
             //_background.Visible = false;
             GameComponents.Add(new Sprite(texture, Vector2.Zero, DrawingHelper.DrawingLevel.Back, game));
 
-
             // Temporary screen variables (Half of screen)
             int w = ResolutionManager.GetCenterPointWidth;
             int h = ResolutionManager.GetCenterPointHeight;
 
             // Add character selectors
             //_characterSelectors = new List<CharacterSelector>();
-
             GameComponents.Add(new CharacterSelector(PlayerIndex.One, new Rectangle(0, 0, w, h), Color.Blue, Game));
             GameComponents.Add(new CharacterSelector(PlayerIndex.Two, new Rectangle(w, 0, w, h), Color.Green, Game));
             GameComponents.Add(new CharacterSelector(PlayerIndex.Three, new Rectangle(0, h, w, h), Color.Red, Game));
@@ -53,8 +51,9 @@ namespace Synced.Interface
             //    characterSelect.Enabled = false;
             //    characterSelect.Visible = false;
             //}
-            GameComponents.Add(_background);
+            //GameComponents.Add(_background);
             Game.Components.Add(this);
+            
         }
         
         public override void Initialize()
@@ -71,18 +70,6 @@ namespace Synced.Interface
         {
             return true;
         }
-        public override void Activated()
-        {
-            _background.Enabled = true;
-            _background.Visible = true;
-            base.Activated();
-   
-        }
 
-        public override void Deactivated()
-        {
-
-            base.Deactivated();
-        }
     }
 }
