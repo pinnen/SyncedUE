@@ -82,11 +82,18 @@ namespace Synced.Static_Classes
         }
         public void AddScreen(Screen screen)
         {
+            if (!Initialized || screen == null)
+            {
+                return;
+            }
+            //Binds events to screen
             screen.OnScreenExit += ScreenManager.Instance.Screen_OnScreenExit;
             screen.OnActivated += ScreenManager.Instance.Screen_OnActivated;
             screen.OnDeactivated += ScreenManager.Instance.Screen_OnDeactivated;
             screen.OnTransition += ScreenManager.Instance.Screen_OnScreenTransition;
+            //screen initialize components
             screen.Initialize();
+            //adds screen to screen stack
             Screens.Push(screen);
         }
 
