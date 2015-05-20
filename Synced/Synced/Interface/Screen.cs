@@ -17,7 +17,7 @@ namespace Synced.Interface
     //TODO: 
     class ScreenEventArgs : EventArgs
     {
-       
+        Synced.Static_Classes.ScreenManager.ScreenState State { get; set; }
     }
     abstract class Screen : DrawableGameComponent, IDrawableObject, IActive
     {
@@ -30,12 +30,12 @@ namespace Synced.Interface
         public event OnScreenActivateEventHandler OnActivated;
         public event OnScreenDeactivateEventHandler OnDeactivated;
         public event OnScreenTransitionEventHandler OnTransition;
-        public event OnScreenExitEventHandler ScreenExit;
+        public event OnScreenExitEventHandler OnScreenExit;
 
-        protected void OnScreenExit(Screen screen, EventArgs e)
+        protected void OnExitScreen(Screen screen, EventArgs e)
         {
-            if (ScreenExit!= null)
-                ScreenExit(screen, e);
+            if (OnScreenExit!= null)
+                OnScreenExit(screen, e);
         }
         protected void OnActivadedScreen(Screen screen, EventArgs e)
         {
@@ -158,6 +158,8 @@ namespace Synced.Interface
         /// </summary>
         public virtual void Activated()
         {
+            this.Enabled = true;
+            this.Visible = true;
             foreach (DrawableGameComponent gc in GameComponents)
             {
                 gc.Enabled = true;
@@ -170,6 +172,8 @@ namespace Synced.Interface
         /// </summary>
         public virtual void Deactivated()
         {
+            this.Enabled = false;
+            this.Visible = false;
             foreach (DrawableGameComponent gc in GameComponents)
             {
                 gc.Enabled = false;
@@ -178,5 +182,8 @@ namespace Synced.Interface
         }
         #endregion
 
+
+
+       
     }
 }

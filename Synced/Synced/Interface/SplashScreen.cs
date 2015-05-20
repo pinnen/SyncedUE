@@ -43,7 +43,8 @@ namespace Synced.Interface
             // Temporary screen variables (Half of screen)
             int w = ResolutionManager.GetCenterPointWidth;
             int h = ResolutionManager.GetCenterPointHeight;
-            GameComponents.Add(_background = new Sprite(texture, new Vector2(w, h), Color.White, DrawingHelper.DrawingLevel.Back, true, game));
+            GameComponents.Add(new Sprite(texture, new Vector2(w, h), Color.White, DrawingHelper.DrawingLevel.Top, true, game));
+            DrawOrder = (int)DrawingHelper.DrawingLevel.Top;
         }
 
         public override void Update(GameTime gameTime)
@@ -53,9 +54,7 @@ namespace Synced.Interface
 
             if (SplashTime < TimeSpan.Zero)
             {
-                OnScreenExit(this, new EventArgs());
-                //ScreenManager.Pop();
-                //Dispose();
+                OnExitScreen(this, new EventArgs());
             }
             foreach (IUpdateable gc in this.GameComponents.OfType<IUpdateable>().Where<IUpdateable>(x => x.Enabled).OrderBy<IUpdateable, int>(x => x.UpdateOrder))
                 gc.Update(gameTime);

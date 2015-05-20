@@ -32,6 +32,7 @@ namespace Synced.Interface
         public MenuScreen(Game game)
             : base(game)
         {
+            DrawOrder = (int)DrawingHelper.DrawingLevel.Back;
             // Temporary screen variables (Half of screen)
             int w = ResolutionManager.GetCenterPointWidth;
             int h = ResolutionManager.GetCenterPointHeight;

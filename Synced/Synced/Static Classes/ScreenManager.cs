@@ -29,26 +29,31 @@ namespace Synced.Static_Classes
         public static void InitializeScreenManager(Game game)
         {
             if (_screenManager == null)
+            {
                 _screenManager = new ScreenManager(game);
-
-            //Loads menu screen
-            Screen screena = new MenuScreen(game);
-            _screenManager.AddScreen(screena);
+                _screenManager.Initialize();
+            }
+            if (_screenManager.Screens.Count >= 1)
+                _screenManager.Screens.Clear();
+            //------------------------------------------------------------------------
+            // *********************Loads menu screen*********************************
+            //Loads the menu screen and put in the stack
+            //------------------------------------------------------------------------
+            _screenManager.MenuScreen = new MenuScreen(game);
+            _screenManager.AddScreen(_screenManager.MenuScreen);
 
             //------------------------------------------------------------------------
             // Splash screens
             //------------------------------------------------------------------------
             //Second splash screen
-            //Screen screen2 = new SplashScreen(Library.Crystal.Texture, game);
-            //screen2.Deactivated();
-            //_screenManager.Screens.Push(screen2);
-            //screen2.ScreenExit += ScreenManager.Instance.OnScreenExit;
+            Screen screen2 = new SplashScreen(Library.Crystal.Texture, game);
+            screen2.Deactivated();
+            _screenManager.AddScreen(screen2);
 
             //First splash screen
-            //Screen screen = new SplashScreen(Library.Interface.Arrows, game);
-            //screen.Activated();
-            //_screenManager.Screens.Push(screen);
-            //screen.ScreenExit += ScreenManager.Instance.OnScreenExit;
+            Screen screen = new SplashScreen(Library.Interface.Arrows, game);
+            screen.Activated();
+            _screenManager.AddScreen(screen);
         }
 
        
@@ -77,9 +82,15 @@ namespace Synced.Static_Classes
         }
         public void AddScreen(Screen screen)
         {
+            screen.OnScreenExit += ScreenManager.Instance.Screen_OnScreenExit;
+            screen.OnActivated += ScreenManager.Instance.Screen_OnActivated;
+            screen.OnDeactivated += ScreenManager.Instance.Screen_OnDeactivated;
+            screen.OnTransition += ScreenManager.Instance.Screen_OnScreenTransition;
             screen.Initialize();
             Screens.Push(screen);
         }
+
+
         public void AddScreen(List<Screen> screens)
         {
             screens.ForEach(Screens.Push);
@@ -115,9 +126,36 @@ namespace Synced.Static_Classes
         #endregion
 
         #region ScreenManager Events
-        public void OnScreenExit(Screen screen, EventArgs e)
+        private void Screen_OnScreenTransition(Screen screen, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void Screen_OnDeactivated(Screen screen, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void Screen_OnActivated(Screen screen, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void Screen_OnScreenExit(Screen screen, EventArgs e)
         {
             Pop();
+        }
+
+        private void OnActivated(Screen screen, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+        #endregion
+        #region ScreenManager Properties
+        public Screen MenuScreen
+        {
+            get;
+            private set;
         }
         #endregion
 
