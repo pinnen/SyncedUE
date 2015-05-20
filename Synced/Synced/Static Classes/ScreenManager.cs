@@ -41,7 +41,7 @@ namespace Synced.Static_Classes
             //------------------------------------------------------------------------
             _screenManager.MenuScreen = new MenuScreen(game);
             _screenManager.AddScreen(_screenManager.MenuScreen);
-
+            _screenManager.Screens.Peek().Deactivated();
             //------------------------------------------------------------------------
             // Splash screens
             //------------------------------------------------------------------------
@@ -93,11 +93,11 @@ namespace Synced.Static_Classes
 
         public void AddScreen(List<Screen> screens)
         {
-            screens.ForEach(Screens.Push);
+            screens.ForEach(AddScreen);
         }
         public void AddScreen(Screen[] screens)
         {
-            Array.ForEach(screens, Screens.Push);
+            Array.ForEach(screens, AddScreen);
         }
         public static Screen Pop()
         {

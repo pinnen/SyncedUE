@@ -37,6 +37,7 @@ namespace Synced.Interface
             : base(game)
         {
             //How long to fade in & out
+            DrawOrder = (int)DrawingHelper.DrawingLevel.Top;
             FadeInTime = TimeSpan.FromSeconds(0.5);
             FadeOutTime = TimeSpan.FromSeconds(0.5);
             SplashTime = TimeSpan.FromSeconds(2.0);
@@ -44,7 +45,7 @@ namespace Synced.Interface
             int w = ResolutionManager.GetCenterPointWidth;
             int h = ResolutionManager.GetCenterPointHeight;
             GameComponents.Add(new Sprite(texture, new Vector2(w, h), Color.White, DrawingHelper.DrawingLevel.Top, true, game));
-            DrawOrder = (int)DrawingHelper.DrawingLevel.Top;
+            
         }
 
         public override void Update(GameTime gameTime)
@@ -59,21 +60,5 @@ namespace Synced.Interface
             foreach (IUpdateable gc in this.GameComponents.OfType<IUpdateable>().Where<IUpdateable>(x => x.Enabled).OrderBy<IUpdateable, int>(x => x.UpdateOrder))
                 gc.Update(gameTime);
         }
-
-
-        public override void Activated()
-        {
-            //Adds members to game components
-            this.Enabled = true;
-            this.Visible = true;
-            base.Activated();
-        }
-        public override void Deactivated()
-        {
-            this.Enabled = false;
-            this.Visible = false;
-            base.Deactivated();
-        }
-
     }
 }

@@ -32,6 +32,7 @@ namespace Synced.Interface
         public MenuScreen(Game game)
             : base(game)
         {
+            //Menu background 
             DrawOrder = (int)DrawingHelper.DrawingLevel.Back;
             // Temporary screen variables (Half of screen)
             int w = ResolutionManager.GetCenterPointWidth;
@@ -57,16 +58,6 @@ namespace Synced.Interface
                 }
             }
             return (count >= _minimumPlayersConstant);
-        }
-        public override void Activated()
-        {
-            foreach (DrawableGameComponent gc in GameComponents)
-            {
-                gc.Enabled = true;
-                gc.Visible = true;
-            }
-           // Game.Components.Add(this);
-            
         }
     }
 }
