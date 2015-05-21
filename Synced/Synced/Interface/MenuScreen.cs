@@ -22,8 +22,6 @@ namespace Synced.Interface
     {
         const int _minimumPlayersConstant = 1;
 
-        Sprite _background;
-
         SpriteBatch _spriteBatch
         {
             get { return (SpriteBatch)Game.Services.GetService(typeof(SpriteBatch)); }

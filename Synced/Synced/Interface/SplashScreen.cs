@@ -19,7 +19,7 @@ namespace Synced.Interface
     class SplashScreen : Screen
     {
         #region Member variables
-        Sprite _background;
+
         #endregion
 
         #region Properties
@@ -57,8 +57,7 @@ namespace Synced.Interface
             {
                 OnExitScreen(this, new EventArgs());
             }
-            foreach (IUpdateable gc in this.GameComponents.OfType<IUpdateable>().Where<IUpdateable>(x => x.Enabled).OrderBy<IUpdateable, int>(x => x.UpdateOrder))
-                gc.Update(gameTime);
+            base.Update(gameTime);
         }
     }
 }

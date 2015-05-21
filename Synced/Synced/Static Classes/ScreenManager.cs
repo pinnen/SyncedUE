@@ -67,7 +67,7 @@ namespace Synced.Static_Classes
         private ScreenManager(Game game) : base(game) { }
         #endregion
 
-        #region Screens
+        #region Screens Properties and Methods
         /// <summary>
         /// Backgrounds screen for the applications
         /// </summary>
@@ -183,11 +183,8 @@ namespace Synced.Static_Classes
 
         public override void Draw(GameTime gameTime)
         {
-            foreach (var item in Screens)
-            {
-                if (item.Enabled)
+            foreach (var item in Screens.OfType<IDrawable>().Where<IDrawable>(x=> x.Visible))
                     item.Draw(gameTime);
-            }
         }
     }
 }

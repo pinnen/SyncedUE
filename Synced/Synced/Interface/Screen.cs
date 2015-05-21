@@ -181,9 +181,5 @@ namespace Synced.Interface
             }
         }
         #endregion
-
-
-
-       
     }
 }
