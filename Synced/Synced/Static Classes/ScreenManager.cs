@@ -15,7 +15,6 @@ namespace Synced.Static_Classes
     sealed class ScreenManager : DrawableGameComponent
     {
         public enum ScreenState { SplashScreen, MenuScreen, GameScreen }
-        
 
         #region Singelton
         private static ScreenManager _screenManager;
@@ -56,7 +55,11 @@ namespace Synced.Static_Classes
             _screenManager.AddScreen(screen);
         }
 
-       
+        public static bool Initialized
+        {
+            get;
+            private set;
+        }
         #endregion
 
         #region Constructor
@@ -83,9 +86,7 @@ namespace Synced.Static_Classes
         public void AddScreen(Screen screen)
         {
             if (!Initialized || screen == null)
-            {
                 return;
-            }
             //Binds events to screen
             screen.OnScreenExit += ScreenManager.Instance.Screen_OnScreenExit;
             screen.OnActivated += ScreenManager.Instance.Screen_OnActivated;
@@ -106,21 +107,29 @@ namespace Synced.Static_Classes
         {
             Array.ForEach(screens, AddScreen);
         }
+
         public static Screen Pop()
         {
-            if (ScreenManager.Instance.Screens.Count < 1)
+            if (Initialized)
             {
-                return null;
-            }
-            ScreenManager.Instance.Screens.Peek().Deactivated(); //NOT SURE WHAT TO DO HERE.
-            Screen prev = ScreenManager.Instance.Screens.Pop(); // RETURN OR NOT RETURN IS THE QUESTION
-            if (ActiveScreen != null)
-                ScreenManager.Instance.Screens.Peek().Activated();
+                if (ScreenManager.Instance.Screens.Count < 1)
+                {
+                    //If we have no more screens we add a menu screen to back it up.
+                    ScreenManager.Instance.AddScreen(Instance.MenuScreen);
+                    ScreenManager.Instance.Screens.Peek().Activated();
+                    return null;
+                }
+                ScreenManager.Instance.Screens.Peek().Deactivated(); //NOT SURE WHAT TO DO HERE.
+                Screen prev = ScreenManager.Instance.Screens.Pop(); // RETURN OR NOT RETURN IS THE QUESTION
+                if (CurrentScreen != null)
+                    ScreenManager.Instance.Screens.Peek().Activated();
 
-            return prev;
+                return prev;
+            }
+            return null;
         }
 
-        public static Screen ActiveScreen
+        public static Screen CurrentScreen
         {
             get
             {
@@ -166,11 +175,7 @@ namespace Synced.Static_Classes
         }
         #endregion
 
-        public static bool Initialized
-        {
-            get;
-            private set;
-        }
+        #region DrawableGameComponent
         public override void Initialize()
         {
             ScreenManager.Initialized = true;
@@ -178,13 +183,20 @@ namespace Synced.Static_Classes
 
         public override void Update(GameTime gameTime)
         {
-            ActiveScreen.Update(gameTime);
+            CurrentScreen.Update(gameTime);
         }
 
         public override void Draw(GameTime gameTime)
         {
-            foreach (var item in Screens.OfType<IDrawable>().Where<IDrawable>(x=> x.Visible))
-                    item.Draw(gameTime);
+            foreach (var item in Screens.OfType<IDrawable>().Where<IDrawable>(x => x.Visible))
+                item.Draw(gameTime);
         }
+
+        protected override void Dispose(bool disposing)
+        {
+            Screens.Clear();
+            base.Dispose(disposing);
+        }
+        #endregion
     }
 }
