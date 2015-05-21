@@ -21,7 +21,7 @@ using FarseerPhysics;
 using Synced.InGame.Actors;
 namespace Synced.Actors
 {
-    class Unit : Movable
+    class Unit : MovableCollidable
     {
         #region Variables
 

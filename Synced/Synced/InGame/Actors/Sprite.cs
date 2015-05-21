@@ -25,6 +25,8 @@ namespace Synced.Actors
         public Vector2 Origin { get; set; }
         public Color Color { get; protected set; }
         public float Rotation { get; protected set; }
+        public Vector2 Position { get; set; }
+        public Texture2D Texture { get; set;}
 
         public Sprite(Texture2D texture, Vector2 position, Color color, DrawingHelper.DrawingLevel drawingLevel, bool centered, Game game)
             : base(game)
@@ -47,18 +49,5 @@ namespace Synced.Actors
             _spriteBatch.End();
             base.Draw(gameTime);
         }
-
-        public Vector2 Position
-        {
-            get;
-            protected set;
-        }
-
-        public Texture2D Texture
-        {
-            get;
-            set;
-        }
-
     }
 }

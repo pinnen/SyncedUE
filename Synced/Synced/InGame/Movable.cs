@@ -13,22 +13,35 @@ using System.Text;
 
 namespace Synced.InGame
 {
-    class Movable : CollidingSprite
+    class Movable : Sprite
     {
-        public Vector2 Direction { get; set; }
-        float Force; 
+        #region Variables
+        protected Vector2 direction;
+        protected float constantForce;
+        #endregion
 
-        public Movable(Texture2D texture, Vector2 position, DrawingHelper.DrawingLevel drawingLevel, Game game, World world)
-            : base(texture, position, drawingLevel, game, world)
+        #region Properties
+        public Vector2 Direction
         {
-            Force = 40f; // TODO: research a good ratio for farseer units etc to make this "normal"
+            get { return Direction; }
+            set
+            {
+                Direction = value;
+                Direction.Normalize();
+            }
+        }
+        #endregion
+
+        public Movable(Texture2D texture, Vector2 position, DrawingHelper.DrawingLevel drawingLevel, Game game, World world, Vector2 direction, float constantForce)
+            : base(texture, position, drawingLevel, game)
+        {
+            this.direction = direction;
+            this.constantForce = constantForce;
         }
 
         public override void Update(GameTime gameTime)
         {
-            if (Direction != Vector2.Zero)
-                body.ApplyForce(Force * new Vector2(Direction.X, -Direction.Y));
-                body.Rotation = (float)Math.Atan2(body.LinearVelocity.Y, body.LinearVelocity.X);
+            Position += Direction * constantForce * gameTime.ElapsedGameTime.Seconds; // TODO: Do this correctly // TODO: Adjust to screen ratio
 
             base.Update(gameTime);
         }

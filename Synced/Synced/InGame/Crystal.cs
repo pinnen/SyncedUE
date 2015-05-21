@@ -23,11 +23,11 @@ using FarseerPhysics;
 
 namespace Synced.InGame
 {
-    class Crystal : Movable, IGrabbable
+    class Crystal : MovableCollidable, IGrabbable
     {
         #region Variables
         // General Variables
-        Movable _owner = null;
+        MovableCollidable _owner = null;
         float _distanceToOwner;
         #endregion
 
@@ -44,7 +44,7 @@ namespace Synced.InGame
             Game.Components.Add(this);
         }
 
-        public IGrabbable PickUp(Movable owner)
+        public IGrabbable PickUp(MovableCollidable owner)
         {
             _owner = owner;
             Library.Audio.PlaySoundEffect(Library.Audio.SoundEffects.CrystalPickUp);
@@ -81,10 +81,7 @@ namespace Synced.InGame
 
         public override bool OnCollision(Fixture f1, Fixture f2, Contact contact)
         {
-            if (f2.Body.UserData.ToString() == "UNIT") // TODO: better way to do this?
-            {
-                world.BodyList.ElementAt(1);
-            }
+
             return true;
         }
     }

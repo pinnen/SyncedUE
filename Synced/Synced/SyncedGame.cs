@@ -17,6 +17,7 @@ using Synced.MapNamespace;
 using FarseerPhysics.Dynamics;
 using System;
 using Synced.InGame.Actors;
+using FarseerPhysics;
 
 namespace Synced
 {
@@ -52,6 +53,8 @@ namespace Synced
             ResolutionManager.Init(ref _graphics);
             ResolutionManager.SetVirtualResolution(1920, 1080); // TODO magic resolution values.
             ResolutionManager.SetResolution(GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width, GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height, fullscreen);
+            // Initialize Simulator Unit to Pixel ratio
+            ConvertUnits.SetDisplayUnitToSimUnitRatio(35f);     // 35 pixels = 1 meter // TODO: Use 'magic resolution values' to adapt. 
 
             // Create a new spritebatch and add it as service for access by other classes
             _spriteBatch = new SpriteBatch(GraphicsDevice);
