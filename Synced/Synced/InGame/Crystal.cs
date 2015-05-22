@@ -34,12 +34,18 @@ namespace Synced.InGame
         public Crystal(Texture2D texture, Vector2 position, DrawingHelper.DrawingLevel drawingLevel, SyncedGame game, World world)
             : base(texture, position, drawingLevel, game, world)
         {
-            this.world = world;
-
-            body.UserData = "CRYSTAL";
-
+            /* Setting up Farseer Physics */
+            RigidBody = BodyFactory.CreateCircle(this.world, ConvertUnits.ToSimUnits(texture.Width / 2), 0, ConvertUnits.ToSimUnits(position));
+            RigidBody.BodyType = BodyType.Dynamic;
+            RigidBody.CollisionCategories = Category.Cat1; /* Crystal Category */ // TODO: fix collisionCategory system. 
+            RigidBody.CollidesWith = Category.All;
+            RigidBody.Mass = 1f; // TODO: fix hardcoded value
+            RigidBody.LinearDamping = 0.5f; // TODO: fix hardcoded value
+            RigidBody.Restitution = 1f; // TODO: fix hardcoded value
             Origin = new Vector2(Texture.Width / 2, Texture.Height / 2);
-            _distanceToOwner = 50; // TODO hardcoded distance
+
+            /* Setting up Crystal */
+            _distanceToOwner = 50; // TODO: fix hardcoded distance
 
             Game.Components.Add(this);
         }
@@ -73,15 +79,13 @@ namespace Synced.InGame
                     Position = new Vector2(_owner.Position.X - (_distanceToOwner * _owner.Direction.X),
                                            _owner.Position.Y - (_distanceToOwner * -_owner.Direction.Y));
                 }
-                //Position = new Vector2(_owner.Position.X - (_distanceToOwner),
-                //                     _owner.Position.Y - (_distanceToOwner));
             }
             base.Update(gameTime);
         }
 
         public override bool OnCollision(Fixture f1, Fixture f2, Contact contact)
         {
-
+            // GameComponents.GetComponent(f1.body.userData)
             return true;
         }
     }

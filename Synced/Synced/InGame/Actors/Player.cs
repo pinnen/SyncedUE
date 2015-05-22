@@ -54,7 +54,6 @@ namespace Synced.Actors
                 if (InputManager.RightShoulderPressed(_playerIndex))
                     Right.Shoot();
             }
-            base.Update(gameTime);
         }
 
     }

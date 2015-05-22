@@ -10,61 +10,40 @@ using System.Text;
 
 namespace Synced.InGame
 {
-    class MovableCollidable : CollidingSprite
+    abstract class MovableCollidable : CollidingSprite
     {
         #region Variables
         protected Vector2 direction;
-        protected float acceleration;                   // Current Acceleration
-        protected float accelerationRate;               // acceleration growth or acceleration "acceleration"
-        protected float deaccelerationRate;
-        protected float maxAcceleration;                // acceleration limit
-        float force;                                    // product of mass and acceleration 
+        protected float acceleration;                
+        float force;                                 
         #endregion
 
         #region Properties
         public Vector2 Direction
         {
             get { return Direction; } 
-            set 
-            {
-                Direction = value;
-                Direction.Normalize();
-            } 
+            set { direction = value;} 
         }
         #endregion
 
+        /// <summary>
+        /// Creates a default MovableCollidable
+        /// </summary>
         public MovableCollidable(Texture2D texture, Vector2 position, DrawingHelper.DrawingLevel drawingLevel, Game game, World world)
             : base(texture, position, drawingLevel, game, world)
         {
-            direction = new Vector2(0, 0);
-            acceleration = 0;           // TODO: Replace hardcoded values with some kind of standard values. 
-            accelerationRate = 0.1f;
-            deaccelerationRate = 0.1f;
-            maxAcceleration = 10;
-        }
-
-        // TODO: WOAH long list, designflaw? 
-        public MovableCollidable(Texture2D texture, Vector2 position, DrawingHelper.DrawingLevel drawingLevel, 
-                                 Game game, World world, Body body, BodyType bodyType, Category collidesWith,
-                                 Category collisionCategory, float mass, float linearDamping, float restitution,
-                                 float accelerationRate, float deaccelerationRate, float maxAcceleration)
-            : base(texture, position, drawingLevel, game, world, body, bodyType, collidesWith, collisionCategory, mass,
-                   linearDamping, restitution)
-        {
-            direction = new Vector2(0, 0);
+            direction = Vector2.Zero;
             acceleration = 0;
-            this.accelerationRate = accelerationRate;
-            this.deaccelerationRate = deaccelerationRate;
-            this.maxAcceleration = maxAcceleration;
         }
 
         public override void Update(GameTime gameTime)
         {                     
             // Movement
-            force = body.Mass * acceleration;
-            body.ApplyForce(force * new Vector2(direction.X, -direction.Y));
-            // Rotate to direction
-            // body.Rotation = (float)Math.Atan2(body.LinearVelocity.Y, body.LinearVelocity.X);
+            if (direction != Vector2.Zero)
+            {
+                force = RigidBody.Mass * acceleration;
+                RigidBody.ApplyForce(force * new Vector2(direction.X, -direction.Y));
+            }
 
             base.Update(gameTime);
         }

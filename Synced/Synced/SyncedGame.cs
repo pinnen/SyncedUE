@@ -29,10 +29,12 @@ namespace Synced
         GraphicsDeviceManager _graphics;
         SpriteBatch _spriteBatch;
         bool fullscreen = false;
-
         KeyboardState _lastState;
 
         // TODO: Test objects. Remove later
+        World world;
+        Player player;
+        Crystal crystal;
 
         public SyncedGame()
             : base()
@@ -71,6 +73,9 @@ namespace Synced
             Components.Add(ScreenManager.Instance);
 
             // TODO: Test objects. Remove later
+            world = new World(Vector2.Zero);
+            player = new Player(PlayerIndex.One, Library.Character.Name.Circle, this, world);
+            crystal = new Crystal(Library.Crystal.Texture, new Vector2(100, 100), DrawingHelper.DrawingLevel.Medium, this, world);
 
             base.Initialize(); // Initializes all components
         }
@@ -107,6 +112,9 @@ namespace Synced
             {
                 _graphics.ToggleFullScreen();
             }
+
+            // TODO: Test objects. Remove later
+            world.Step(Math.Min((float)gameTime.ElapsedGameTime.TotalSeconds, (1f / 30f)));
 
             // Update the statemachine
 
