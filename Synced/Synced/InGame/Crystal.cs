@@ -35,7 +35,7 @@ namespace Synced.InGame
             : base(texture, position, drawingLevel, game, world)
         {
             /* Setting up Farseer Physics */
-            RigidBody = BodyFactory.CreateCircle(this.world, ConvertUnits.ToSimUnits(texture.Width / 2), 0, ConvertUnits.ToSimUnits(position));
+            RigidBody = BodyFactory.CreateCircle(this.world, ConvertUnits.ToSimUnits(texture.Width / 2), 0, ConvertUnits.ToSimUnits(position)); // TODO: size to some scale? 
             RigidBody.BodyType = BodyType.Dynamic;
             RigidBody.CollisionCategories = Category.Cat1; /* Crystal Category */ // TODO: fix collisionCategory system. 
             RigidBody.CollidesWith = Category.All;
@@ -71,6 +71,9 @@ namespace Synced.InGame
 
         public override void Update(GameTime gameTime)
         {
+            float rotval = (float)0.002 * gameTime.ElapsedGameTime.Milliseconds; // TODO: Fix hardcode value
+            RigidBody.Rotation += rotval;
+
             if (_owner != null) // TODO a better formula for a more consistent Crystal Position
             {
                 if (_owner.Direction  != Vector2.Zero)

@@ -35,10 +35,11 @@ namespace Synced.Actors
             : base(texture, position, DrawingHelper.DrawingLevel.Medium, game, world)
         {
             /* Setting up Farseer Physics */
-            RigidBody = BodyFactory.CreateCircle(this.world, ConvertUnits.ToSimUnits(texture.Width / 2), 0, ConvertUnits.ToSimUnits(position));
+            RigidBody = BodyFactory.CreateCircle(this.world, ConvertUnits.ToSimUnits(texture.Width / 2), 0, ConvertUnits.ToSimUnits(position)); // TODO: size to some scale?
             RigidBody.BodyType = BodyType.Dynamic;
             RigidBody.CollisionCategories = Category.Cat2; /* Unit Category */ // TODO: fix collisionCategory system. 
-            RigidBody.CollidesWith = Category.All;
+            RigidBody.CollidesWith = Category.All | Category.Cat2;
+            
             RigidBody.Mass = 10f;                          // TODO: fix hardcoded value
             RigidBody.LinearDamping = 5f;                  // TODO: fix hardcoded value
             RigidBody.Restitution = 0.1f;                  // TODO: fix hardcoded value
@@ -72,7 +73,7 @@ namespace Synced.Actors
             }
             // Update Trail
             trail.UpdatePosition(Position); // TODO: might have to use ConvertUnits function. 
-            trail.GenerateTrailParticles(1.0f, 0.8f);
+            trail.GenerateTrailParticles(1.0f, 0.2f);
 
             base.Update(gameTime);
         }

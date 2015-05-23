@@ -18,6 +18,8 @@ using FarseerPhysics.Dynamics;
 using System;
 using Synced.InGame.Actors;
 using FarseerPhysics;
+using Synced.MapNameSpace;
+using Synced.CollisionShapes;
 
 namespace Synced
 {
@@ -35,6 +37,9 @@ namespace Synced
         World world;
         Player player;
         Crystal crystal;
+        TestGoal goalLeft;
+        TestGoal goalRight;
+        TexturePolygon frame;
 
         public SyncedGame()
             : base()
@@ -75,7 +80,11 @@ namespace Synced
             // TODO: Test objects. Remove later
             world = new World(Vector2.Zero);
             player = new Player(PlayerIndex.One, Library.Character.Name.Circle, this, world);
-            crystal = new Crystal(Library.Crystal.Texture, new Vector2(100, 100), DrawingHelper.DrawingLevel.Medium, this, world);
+            crystal = new Crystal(Library.Crystal.Texture, new Vector2(500, 500), DrawingHelper.DrawingLevel.Medium, this, world);
+            goalLeft = new TestGoal(Library.Goal.GoalTexture, Library.Goal.BorderTexture, new Vector2(300, 1080 / 2), GoalDirections.West, DrawingHelper.DrawingLevel.Low, this, world);
+            goalRight = new TestGoal(Library.Goal.GoalTexture, Library.Goal.BorderTexture, new Vector2(1920 -300, 1080 /2), GoalDirections.East, DrawingHelper.DrawingLevel.Low, this, world);
+            frame = new TexturePolygon(Library.Map.Texture2, new Vector2(1920 / 2, 1080 / 2), 0, DrawingHelper.DrawingLevel.Back, this, world);
+            // End TODO: Test objects. Remove Later
 
             base.Initialize(); // Initializes all components
         }

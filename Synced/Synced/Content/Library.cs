@@ -114,9 +114,15 @@ namespace Synced.Content
                 {
                     {Map.Name.Paper, "Content/Maps/Paper/map.xml"}
                 };
+                Map.Texture2 = content.Load<Texture2D>("Maps/Paper/Frame2");
                 #endregion
                 #region TrailParticle
                 TrailParticle.Texture = content.Load<Texture2D>("GameObjects/TrailParticle");
+                #endregion
+                Goal.GoalTexture = content.Load<Texture2D>("GameObjects/Goal");
+                Goal.BorderTexture = content.Load<Texture2D>("GameObjects/GoalBorder");
+                #region Goal
+                
                 #endregion
             }
         }
@@ -205,10 +211,17 @@ namespace Synced.Content
             {
                 return null;
             }
+
+            public static Texture2D Texture2;
         }
         public static class TrailParticle 
         {
             public static Texture2D Texture;
+        }
+        public static class Goal
+        {
+            public static Texture2D GoalTexture;
+            public static Texture2D BorderTexture;
         }
         public static class Serialization<T> where T : class
         {

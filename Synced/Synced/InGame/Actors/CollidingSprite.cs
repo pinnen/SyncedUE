@@ -16,7 +16,7 @@ using Synced.Actors;
 
 namespace Synced.InGame.Actors
 {
-    abstract class CollidingSprite : Sprite
+    abstract class CollidingSprite : Sprite // TODO: Add a Collidable interface
     {
         #region Variables
         protected World world;
@@ -40,7 +40,7 @@ namespace Synced.InGame.Actors
         public new Vector2 Position
         {
             get { return rigidBody.Position; }
-            set { rigidBody.Position = ConvertUnits.ToSimUnits(value); }
+            set { rigidBody.Position = value; }
         }
         public new float Rotation 
         {

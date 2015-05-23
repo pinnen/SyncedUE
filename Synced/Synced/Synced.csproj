@@ -41,6 +41,9 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="CollisionShapes\Circle.cs" />
+    <Compile Include="CollisionShapes\DummyCircle.cs" />
+    <Compile Include="CollisionShapes\TexturePolygon.cs" />
     <Compile Include="InGame\Actors\CollidingSprite.cs" />
     <Compile Include="InGame\Actors\Particle.cs" />
     <Compile Include="InGame\Crystal.cs" />
@@ -58,12 +61,12 @@
     <Compile Include="InGame\Actors\Zone.cs" />
     <Compile Include="InGame\Actors\Sprite.cs" />
     <Compile Include="Interface\SplashScreen.cs" />
-    <Compile Include="Map\Goal.cs" />
-    <Compile Include="Map\Map.cs" />
-    <Compile Include="Map\MapData.cs" />
-    <Compile Include="Map\MapObject.cs" />
-    <Compile Include="Map\PlayerStart.cs" />
-    <Compile Include="Map\Obstacle.cs" />
+    <Compile Include="MapNameSpace\Goal.cs" />
+    <Compile Include="MapNameSpace\Map.cs" />
+    <Compile Include="MapNameSpace\MapData.cs" />
+    <Compile Include="MapNameSpace\MapObject.cs" />
+    <Compile Include="MapNameSpace\PlayerStart.cs" />
+    <Compile Include="MapNameSpace\Obstacle.cs" />
     <Compile Include="Interface\CharacterSelector.cs" />
     <Compile Include="Interface\Controls.cs" />
     <Compile Include="Interface\GameScreen.cs" />
@@ -71,6 +74,7 @@
     <Compile Include="Interface\MenuScreen.cs" />
     <Compile Include="Interface\Screen.cs" />
     <Compile Include="Interface\Button.cs" />
+    <Compile Include="MapNameSpace\TestGoal.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Static Classes\DebuggingHelper.cs" />
     <Compile Include="Static Classes\DrawingHelper.cs" />
