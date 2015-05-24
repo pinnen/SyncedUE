@@ -38,8 +38,7 @@ namespace Synced.Actors
             RigidBody = BodyFactory.CreateCircle(this.world, ConvertUnits.ToSimUnits(texture.Width / 2), 0, ConvertUnits.ToSimUnits(position)); // TODO: size to some scale?
             RigidBody.BodyType = BodyType.Dynamic;
             RigidBody.CollisionCategories = Category.Cat2; /* Unit Category */ // TODO: fix collisionCategory system. 
-            RigidBody.CollidesWith = Category.All | Category.Cat2;
-            
+            RigidBody.CollidesWith = Category.All | Category.Cat2;         
             RigidBody.Mass = 10f;                          // TODO: fix hardcoded value
             RigidBody.LinearDamping = 5f;                  // TODO: fix hardcoded value
             RigidBody.Restitution = 0.1f;                  // TODO: fix hardcoded value

@@ -17,7 +17,7 @@ namespace Synced.CollisionShapes
 {
     class TexturePolygon : CollidingSprite
     {
-        public TexturePolygon(Texture2D texture, Vector2 position, float rotation, DrawingHelper.DrawingLevel drawingLevel, Game game, World world)
+        public TexturePolygon(Texture2D texture, Vector2 position, float rotation, DrawingHelper.DrawingLevel drawingLevel, Game game, World world, bool textureCenter)
             : base(texture, position, drawingLevel, game, world)
         {
             // Fetch Texure data
@@ -25,10 +25,17 @@ namespace Synced.CollisionShapes
             texture.GetData(data);
             Vertices textureVertices = PolygonTools.CreatePolygon(data, texture.Width, true);
 
-            // Get Polygon Centroid
-            Vector2 centroid = -textureVertices.GetCentroid();
-            textureVertices.Translate(ref centroid);
-            Origin = new Vector2(Texture.Width / 2, Texture.Height / 2);
+            // Set Polygon Centroid    
+            if (textureCenter) // Texture based center
+            {
+                Origin = new Vector2(Texture.Width / 2, Texture.Height / 2);
+            }
+            else // Vertice based center
+            {
+                Vector2 centroid = -textureVertices.GetCentroid();
+                textureVertices.Translate(ref centroid);
+                Origin = -centroid;
+            }
 
             // Simplify Polygon for performance
             textureVertices = SimplifyTools.ReduceByDistance(textureVertices, 4f);
@@ -47,7 +54,24 @@ namespace Synced.CollisionShapes
             RigidBody.Position = ConvertUnits.ToSimUnits(position);
             RigidBody.Rotation = rotation;
 
-            game.Components.Add(this);
+            game.Components.Add(this); // TODO: Remove this later
+        }
+
+        public void setOnCollisionFunction(OnCollisionEventHandler onCollisionFunc)
+        {
+            RigidBody.OnCollision += onCollisionFunc;
+        }
+
+        public void SetCollisionCategory(Category collisionCategory)
+        {
+            RigidBody.CollisionCategories = collisionCategory;
+        }
+
+        public void SetCollideWithCategory(Category collideWithCategory)
+        {
+            RigidBody.CollidesWith = collideWithCategory;
         }
     }
+
+
 }

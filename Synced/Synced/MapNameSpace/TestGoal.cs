@@ -78,12 +78,12 @@ namespace Synced.MapNameSpace
                     break;
             }
 
-            Border = new TexturePolygon(borderTexture, borderPosition, borderRotation, DrawingHelper.DrawingLevel.Medium, game, world);
+            Border = new TexturePolygon(borderTexture, borderPosition, borderRotation, DrawingHelper.DrawingLevel.Medium, game, world, true);
         }
 
         public bool OnCollision(Fixture f1, Fixture f2, Contact contact)
         {
-            return true;
+            return false;
         }
     }
 }

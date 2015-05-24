@@ -88,7 +88,7 @@ namespace Synced.InGame
 
         public override bool OnCollision(Fixture f1, Fixture f2, Contact contact)
         {
-            // GameComponents.GetComponent(f1.body.userData)
+            // GameComponents.GetComponent(f1.body.userData) // preferred way to fetch objects. 
             return true;
         }
     }

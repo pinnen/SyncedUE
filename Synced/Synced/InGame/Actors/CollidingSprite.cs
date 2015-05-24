@@ -22,6 +22,7 @@ namespace Synced.InGame.Actors
         protected World world;
         Body rigidBody;
         Guid id;
+        string tag;
         #endregion
 
         #region Properties       
@@ -41,7 +42,7 @@ namespace Synced.InGame.Actors
         {
             get { return rigidBody.Position; }
             set { rigidBody.Position = value; }
-        }
+        } // TODO: CollidingSprite allways centered. need to change? 
         public new float Rotation 
         {
             get { return rigidBody.Rotation; }
@@ -50,6 +51,10 @@ namespace Synced.InGame.Actors
         public Guid ID
         {
             get { return id; }
+        }
+        public string Tag
+        {
+            get { return tag; }
         }
         #endregion
 
@@ -63,6 +68,7 @@ namespace Synced.InGame.Actors
 
             // Generate unique ID
             id = Guid.NewGuid();
+            tag = "";
         }
         
         /// <summary>

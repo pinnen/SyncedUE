@@ -20,16 +20,26 @@ namespace Synced.CollisionShapes
             /* Setting up Farseer Physics */
             RigidBody = BodyFactory.CreateCircle(this.world, ConvertUnits.ToSimUnits(r), 0, ConvertUnits.ToSimUnits(position)); // TODO: size to some scale? 
             RigidBody.BodyType = BodyType.Static;
-            RigidBody.CollisionCategories = Category.All; /* Dummy Category */ // TODO: fix collisionCategory system. 
+            RigidBody.CollisionCategories = Category.All; /* Collision Category */ // TODO: fix collisionCategory system. 
             RigidBody.CollidesWith = Category.All;
             Origin = new Vector2(r, r);
 
-            game.Components.Add(this);
+            game.Components.Add(this); // TODO: Remove this later
         }
 
         public void setOnCollisionFunction(OnCollisionEventHandler onCollisionFunc)
         {
             RigidBody.OnCollision += onCollisionFunc;
+        }
+
+        public void SetCollisionCategory(Category collisionCategory)
+        {
+            RigidBody.CollisionCategories = collisionCategory;
+        }
+
+        public void SetCollideWithCategory(Category collideWithCategory)
+        {
+            RigidBody.CollidesWith = collideWithCategory;
         }
     }
 }
