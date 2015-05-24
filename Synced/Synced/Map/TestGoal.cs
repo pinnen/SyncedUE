@@ -54,7 +54,7 @@ namespace Synced.MapNameSpace
                     break;
                 case GoalDirections.East:
                     borderRotation = 0;
-                    borderPosition = new Vector2(position.X + borderTexture.Width / 2, position.Y);
+                    borderPosition = new Vector2((position.X + borderTexture.Width / 2) + 5.30973f, (position.Y) - 0.63129f);
                     break;
                 case GoalDirections.SouthEast:
                     borderRotation = 0;
@@ -70,7 +70,7 @@ namespace Synced.MapNameSpace
                     break;
                 case GoalDirections.West:
                     borderRotation = (float)Math.PI;
-                    borderPosition = new Vector2(position.X - borderTexture.Width / 2, position.Y);
+                    borderPosition = new Vector2((position.X - borderTexture.Width / 2) -5.30973f, (position.Y) +0.63129f); // TODO: other solution for very specific offset for texture/vertice position
                     break;
                 case GoalDirections.NorthWest:
                     borderRotation = 0;

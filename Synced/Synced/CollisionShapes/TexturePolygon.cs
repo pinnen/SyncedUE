@@ -36,7 +36,7 @@ namespace Synced.CollisionShapes
             {
                 Vector2 centroid = -textureVertices.GetCentroid();
                 textureVertices.Translate(ref centroid);
-                Origin = new Vector2((int)-centroid.X, (int)-centroid.Y);
+                Origin = new Vector2(-centroid.X, -centroid.Y);
             }
 
             // Simplify Polygon for performance
