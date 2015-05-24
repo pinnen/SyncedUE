@@ -24,10 +24,16 @@ namespace Synced.Actors
     class Unit : MovableCollidable
     {
         #region Variables
-        ParticleEngine trail;
+        ParticleEngine _trail;
+        float _trailParticleLifetime;
         #endregion
 
         #region Properties
+        public float TrailParticleLifetime
+        {
+            get { return _trailParticleLifetime; }
+            set { _trailParticleLifetime = value; }
+        }
         #endregion
 
         public IGrabbable Item { get; set; }
@@ -47,7 +53,8 @@ namespace Synced.Actors
             /* Setting up Unit */
             acceleration = 40;
             Color = color;
-            trail = new ParticleEngine(1, Library.TrailParticle.Texture, position, color, Origin, 1.0f, 0.0f, 0.2f, DrawingHelper.DrawingLevel.Medium, game);
+            _trailParticleLifetime = 0.2f;
+            _trail = new ParticleEngine(1, Library.TrailParticle.Texture, position, color, Origin, 1.0f, 0.0f, _trailParticleLifetime, DrawingHelper.DrawingLevel.Medium, game);
 
             game.Components.Add(this);
         }
@@ -70,9 +77,11 @@ namespace Synced.Actors
                 RigidBody.Rotation = (float)Math.Atan2(RigidBody.LinearVelocity.Y, RigidBody.LinearVelocity.X);
                 
             }
+
             // Update Trail
-            trail.UpdatePosition(Position); // TODO: might have to use ConvertUnits function. 
-            trail.GenerateTrailParticles(1.0f, 0.2f);
+            _trail.UpdatePosition(Position); // TODO: might have to use ConvertUnits function. 
+            _trail.GenerateTrailParticles(1.0f, _trailParticleLifetime);
+            _trailParticleLifetime = 0.2f;
 
             base.Update(gameTime);
         }

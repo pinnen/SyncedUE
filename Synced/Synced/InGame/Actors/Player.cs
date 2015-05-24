@@ -51,6 +51,15 @@ namespace Synced.Actors
 
                 if (InputManager.RightShoulderPressed(_playerIndex))
                     Right.Shoot();
+
+                if (InputManager.RightTriggerPressed(_playerIndex) != 0.0f)
+                {
+                    Right.TrailParticleLifetime += InputManager.RightTriggerPressed(_playerIndex);
+                }
+                if (InputManager.LeftTriggerPressed(_playerIndex) != 0.0f)
+                {
+                    Left.TrailParticleLifetime += InputManager.LeftTriggerPressed(_playerIndex);
+                }
             }
         }
 

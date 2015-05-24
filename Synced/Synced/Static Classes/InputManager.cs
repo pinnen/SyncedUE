@@ -53,13 +53,13 @@ namespace Synced.Static_Classes
         {
             return GamePad.GetState(playerIndex, GamePadDeadZone.Circular).ThumbSticks.Right;
         }
-        public static bool LeftTriggerPressed(PlayerIndex playerIndex)
+        public static float LeftTriggerPressed(PlayerIndex playerIndex)
         {
-            return GamePad.GetState(playerIndex).IsButtonDown(Buttons.LeftTrigger);
+            return GamePad.GetState(playerIndex).Triggers.Left;
         }
-        public static bool RightTriggerPressed(PlayerIndex playerIndex)
+        public static float RightTriggerPressed(PlayerIndex playerIndex)
         {
-            return GamePad.GetState(playerIndex).IsButtonDown(Buttons.RightTrigger);
+            return GamePad.GetState(playerIndex).Triggers.Right;
         }
         public static bool LeftShoulderPressed(PlayerIndex playerIndex)
         {

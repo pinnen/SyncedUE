@@ -20,6 +20,7 @@ using FarseerPhysics.Dynamics.Contacts;
 
 using Synced.Content;
 using FarseerPhysics;
+using Synced.InGame.Actors;
 
 namespace Synced.InGame
 {
@@ -29,6 +30,7 @@ namespace Synced.InGame
         // General Variables
         MovableCollidable _owner = null;
         float _distanceToOwner;
+        ParticleEngine _tail;
         #endregion
 
         public Crystal(Texture2D texture, Vector2 position, DrawingHelper.DrawingLevel drawingLevel, SyncedGame game, World world)
@@ -46,6 +48,8 @@ namespace Synced.InGame
 
             /* Setting up Crystal */
             _distanceToOwner = 50; // TODO: fix hardcoded distance
+
+            _tail = new ParticleEngine(1, Library.TrailParticle.Texture, position, Color.Magenta, Origin, 1.0f, 0.0f, 0.2f, DrawingHelper.DrawingLevel.Medium, game);
 
             Game.Components.Add(this);
         }
@@ -83,6 +87,8 @@ namespace Synced.InGame
                                            _owner.Position.Y - (_distanceToOwner * -_owner.Direction.Y));
                 }
             }
+            _tail.UpdatePosition(Position);
+            _tail.GenerateTrailParticles(1.0f, 0.2f);
             base.Update(gameTime);
         }
 
