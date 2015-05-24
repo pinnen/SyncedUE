@@ -26,6 +26,10 @@ namespace Synced.Actors
         #region Variables
         ParticleEngine _trail;
         float _trailParticleLifetime;
+        ParticleEngine _effectParticles;
+        bool _useEffectParticles;
+
+        
         #endregion
 
         #region Properties
@@ -33,6 +37,16 @@ namespace Synced.Actors
         {
             get { return _trailParticleLifetime; }
             set { _trailParticleLifetime = value; }
+        }
+        public bool UseEffectParticles
+        {
+            get { return _useEffectParticles; }
+            set { _useEffectParticles = value; }
+        }
+        public float Acceleration 
+        {
+            get { return acceleration; }
+            set { acceleration = value; }
         }
         #endregion
 
@@ -54,8 +68,9 @@ namespace Synced.Actors
             acceleration = 40;
             Color = color;
             _trailParticleLifetime = 0.2f;
-            _trail = new ParticleEngine(1, Library.TrailParticle.Texture, position, color, Origin, 1.0f, 0.0f, _trailParticleLifetime, DrawingHelper.DrawingLevel.Medium, game);
-
+            _trail = new ParticleEngine(1, Library.Particle.trailTexture, position, color, Origin, 1.0f, 0.0f, _trailParticleLifetime, DrawingHelper.DrawingLevel.Medium, game);
+            _effectParticles = new ParticleEngine(1, Library.Particle.plusSignTexture, position, color, Origin, 0.7f, 0.0f, 0.5f, DrawingHelper.DrawingLevel.Medium, game);
+            _useEffectParticles = false;
             game.Components.Add(this);
         }
 
@@ -80,8 +95,13 @@ namespace Synced.Actors
 
             // Update Trail
             _trail.UpdatePosition(Position); // TODO: might have to use ConvertUnits function. 
-            _trail.GenerateTrailParticles(1.0f, _trailParticleLifetime);
+            _trail.GenerateTrailParticles(_trailParticleLifetime);
             _trailParticleLifetime = 0.2f;
+            if (_useEffectParticles)
+            {
+                _effectParticles.UpdatePosition(Position);
+                _effectParticles.GenerateEffectParticles();
+            }
 
             base.Update(gameTime);
         }

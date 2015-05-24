@@ -116,13 +116,16 @@ namespace Synced.Content
                 };
                 Map.Texture2 = content.Load<Texture2D>("Maps/Paper/Frame2");
                 #endregion
-                #region TrailParticle
-                TrailParticle.Texture = content.Load<Texture2D>("GameObjects/TrailParticle");
+                #region Particles
+                Particle.trailTexture = content.Load<Texture2D>("GameObjects/TrailParticle");
+                Particle.plusSignTexture = content.Load<Texture2D>("GameObjects/plussign");
+                Particle.minusSignTexture = content.Load<Texture2D>("GameObjects/minussign");
+                Particle.questionSignTexture = content.Load<Texture2D>("GameObjects/questionsign");
+                Particle.exclamationSignTexture = content.Load<Texture2D>("GameObjects/exclamationsign");
                 #endregion
+                #region Goal
                 Goal.GoalTexture = content.Load<Texture2D>("GameObjects/Goal");
                 Goal.BorderTexture = content.Load<Texture2D>("GameObjects/GoalBorder");
-                #region Goal
-                
                 #endregion
             }
         }
@@ -214,9 +217,13 @@ namespace Synced.Content
 
             public static Texture2D Texture2;
         }
-        public static class TrailParticle 
+        public static class Particle 
         {
-            public static Texture2D Texture;
+            public static Texture2D trailTexture;
+            public static Texture2D plusSignTexture;
+            public static Texture2D minusSignTexture;
+            public static Texture2D exclamationSignTexture;
+            public static Texture2D questionSignTexture;
         }
         public static class Goal
         {

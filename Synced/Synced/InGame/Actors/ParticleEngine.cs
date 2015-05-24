@@ -97,10 +97,20 @@ namespace Synced.InGame.Actors
         /// <summary>
         /// Starts the particle engine for trails.
         /// </summary>
+        /// 
+        public void GenerateTrailParticles() 
+        {
+            GenerateTrailParticles(_particleScale, _particleLifetime);
+        }
+        public void GenerateTrailParticles(float lifetime)
+        {
+            GenerateTrailParticles(_particleScale, lifetime);
+        }
         public void GenerateTrailParticles(float scale, float lifetime) 
         {
 
             _particleRotation = MathHelper.ToRadians(random.Next(0, 360));
+
 
             for (int i = 0; i < _particleAmount; i++)
             {
@@ -119,10 +129,15 @@ namespace Synced.InGame.Actors
         /// <summary>
         /// Starts the particle engine for effects.
         /// </summary>
+        /// 
+        public void GenerateEffectParticles() 
+        {
+            GenerateEffectParticles(_particleScale, _particleLifetime);
+        }
         public void GenerateEffectParticles(float scale, float lifetime) 
         {
             
-            int effectSize = 30; // TODO: ta in som parameter?
+            int effectSize = 2; // TODO: ta in som parameter?
 
             for (int i = 0; i < _particleAmount; i++)
             {

@@ -49,7 +49,7 @@ namespace Synced.InGame
             /* Setting up Crystal */
             _distanceToOwner = 50; // TODO: fix hardcoded distance
 
-            _tail = new ParticleEngine(1, Library.TrailParticle.Texture, position, Color.Magenta, Origin, 1.0f, 0.0f, 0.2f, DrawingHelper.DrawingLevel.Medium, game);
+            _tail = new ParticleEngine(1, Library.Particle.trailTexture, position, Color.LightGray, Origin, 1.0f, 0.0f, 0.2f, DrawingHelper.DrawingLevel.Medium, game);
 
             Game.Components.Add(this);
         }
