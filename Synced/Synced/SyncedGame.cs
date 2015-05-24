@@ -83,7 +83,7 @@ namespace Synced
             crystal = new Crystal(Library.Crystal.Texture, new Vector2(500, 500), DrawingHelper.DrawingLevel.Medium, this, world);
             goalLeft = new TestGoal(Library.Goal.GoalTexture, Library.Goal.BorderTexture, new Vector2(300, 1080 / 2), GoalDirections.West, DrawingHelper.DrawingLevel.Low, this, world);
             goalRight = new TestGoal(Library.Goal.GoalTexture, Library.Goal.BorderTexture, new Vector2(1920 -300, 1080 /2), GoalDirections.East, DrawingHelper.DrawingLevel.Low, this, world);
-            frame = new TexturePolygon(Library.Map.Texture2, new Vector2(1920 / 2, 1080 / 2), 0, DrawingHelper.DrawingLevel.Back, this, world, true);
+            frame = new TexturePolygon(Library.Map.Texture2, new Vector2(1920 / 2, 1080 / 2), 0, DrawingHelper.DrawingLevel.Back, this, world, false);
             // End TODO: Test objects. Remove Later
 
             base.Initialize(); // Initializes all components

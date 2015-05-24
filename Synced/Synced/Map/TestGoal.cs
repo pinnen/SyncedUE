@@ -33,7 +33,7 @@ namespace Synced.MapNameSpace
 
         public TestGoal(Texture2D goalTexture, Texture2D borderTexture, Vector2 position, GoalDirections direction, DrawingHelper.DrawingLevel drawingLevel, Game game, World world)
         {
-            InnerCircle = new DummyCircle(position, (goalTexture.Width / 2), game, world);
+            InnerCircle = new DummyCircle(position, (goalTexture.Width / 2), game, world); // TODO: fix position
             InnerCircle.setOnCollisionFunction(OnCollision);
             OuterCircle = new Circle(goalTexture, position, goalTexture.Width / 2, game, world);
             OuterCircle.setOnCollisionFunction(OnCollision);
@@ -78,12 +78,12 @@ namespace Synced.MapNameSpace
                     break;
             }
 
-            Border = new TexturePolygon(borderTexture, borderPosition, borderRotation, DrawingHelper.DrawingLevel.Medium, game, world, true);
+            Border = new TexturePolygon(borderTexture, borderPosition, borderRotation, DrawingHelper.DrawingLevel.Medium, game, world, false);
         }
 
         public bool OnCollision(Fixture f1, Fixture f2, Contact contact)
         {
-            return false;
+            return true;
         }
     }
 }
