@@ -132,7 +132,7 @@ namespace Synced.InGame.Actors
             _timeSinceStart += elapsedTime;
             _procentualLifetime = _timeSinceStart / _lifetime;
             _colorStrength = 1.0f - _procentualLifetime;
-            _scale = 1.0f - (-_procentualLifetime / 2.0f);
+            //_scale = 1.0f - (-_procentualLifetime / 2.0f);
 
             if (_isMoving)
             {
