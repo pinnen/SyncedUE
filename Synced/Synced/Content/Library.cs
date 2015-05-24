@@ -1,6 +1,6 @@
 ﻿// Library.cs
 // Introduced: 2015-04-14
-// Last edited: 2015-05-19
+// Last edited: 2015-05-24
 // Edited by:
 // Pontus Magnusson
 // Göran Forsström
@@ -157,10 +157,10 @@ namespace Synced.Content
 
             public static void PlaySong(Songs song)
             {
-                //if (MediaPlayer.State == MediaState.Playing)
-                //    MediaPlayer.Stop();
-                //MediaPlayer.Play(SongDictionary[song]);
-                //MediaPlayer.IsRepeating = true;
+                if (MediaPlayer.State == MediaState.Playing)
+                    MediaPlayer.Stop();
+                MediaPlayer.Play(SongDictionary[song]);
+                MediaPlayer.IsRepeating = true;
             }
 
             public static void PlaySoundEffect(SoundEffects soundEffect)

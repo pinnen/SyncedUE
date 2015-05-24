@@ -667,12 +667,6 @@
 /processorParam:Quality=Best
 /build:Audio/ZoneShoot.wav
 
-#begin Audio/song_InGame.wav
-/importer:WavImporter
-/processor:SongProcessor
-/processorParam:Quality=Best
-/build:Audio/song_InGame.wav
-
 #begin Audio/song_InMenu.wav
 /importer:WavImporter
 /processor:SongProcessor
@@ -711,4 +705,10 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:TextureFormat=Color
 /build:Maps/Paper/frame2.png
+
+#begin Audio/song_InGame.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Audio/song_InGame.mp3
 
