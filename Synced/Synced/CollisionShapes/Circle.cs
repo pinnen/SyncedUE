@@ -23,8 +23,6 @@ namespace Synced.CollisionShapes
             RigidBody.CollisionCategories = Category.All; /* Collision Category */ // TODO: fix collisionCategory system. 
             RigidBody.CollidesWith = Category.All;
             Origin = new Vector2(r, r);
-
-            game.Components.Add(this); // TODO: Remove this later
         }
 
         public void setOnCollisionFunction(OnCollisionEventHandler onCollisionFunc)

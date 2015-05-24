@@ -31,7 +31,7 @@ namespace Synced.InGame
         float _distanceToOwner;
         #endregion
 
-        public Crystal(Texture2D texture, Vector2 position, DrawingHelper.DrawingLevel drawingLevel, SyncedGame game, World world)
+        public Crystal(Texture2D texture, Vector2 position, DrawingHelper.DrawingLevel drawingLevel, Game game, World world)
             : base(texture, position, drawingLevel, game, world)
         {
             /* Setting up Farseer Physics */
@@ -46,8 +46,7 @@ namespace Synced.InGame
 
             /* Setting up Crystal */
             _distanceToOwner = 50; // TODO: fix hardcoded distance
-
-            Game.Components.Add(this);
+            Tag = "CRYSTAL";
         }
 
         public IGrabbable PickUp(MovableCollidable owner)
@@ -76,18 +75,23 @@ namespace Synced.InGame
 
             if (_owner != null) // TODO a better formula for a more consistent Crystal Position
             {
-                if (_owner.Direction  != Vector2.Zero)
-                {
-
-                    Position = new Vector2(_owner.Position.X - (_distanceToOwner * _owner.Direction.X),
-                                           _owner.Position.Y - (_distanceToOwner * -_owner.Direction.Y));
-                }
+                //if (_owner.Direction  != Vector2.Zero)
+                //{
+                acceleration = 40;
+                direction = new Vector2(_owner.Position.X - this.Position.X, -(_owner.Position.Y - this.Position.Y));
+                    direction.Normalize();
+                    //Position = new Vector2(_owner.Position.X - (_distanceToOwner * _owner.Direction.X),
+                                           //_owner.Position.Y - (_distanceToOwner * -_owner.Direction.Y));
+                //}
             }
             base.Update(gameTime);
         }
 
         public override bool OnCollision(Fixture f1, Fixture f2, Contact contact)
         {
+            
+            
+            
             // GameComponents.GetComponent(f1.body.userData) // preferred way to fetch objects. 
             return true;
         }

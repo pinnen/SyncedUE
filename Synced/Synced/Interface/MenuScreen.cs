@@ -57,5 +57,15 @@ namespace Synced.Interface
             }
             return (count >= _minimumPlayersConstant);
         }
+
+        public override void Update(GameTime gameTime)
+        {
+            if (IsEveryoneReady())
+            {
+                
+            }
+
+            base.Update(gameTime);
+        }
     }
 }

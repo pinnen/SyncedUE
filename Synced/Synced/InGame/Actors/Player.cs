@@ -13,6 +13,7 @@ using Synced.Content;
 using Synced.Static_Classes;
 using Microsoft.Xna.Framework.Input;
 using FarseerPhysics.Dynamics;
+using Synced.MapNamespace;
 
 namespace Synced.Actors
 {
@@ -33,9 +34,11 @@ namespace Synced.Actors
             : base(game)
         {
             _playerIndex = playerIndex;
-            Left = new Unit(Library.Character.GameTexture[character], new Vector2(200, 200), Color.Red, game, world);       // TODO: fix hardcoded values for positions. 
-            Right = new Unit(Library.Character.GameTexture[character], new Vector2(200, 120), Color.DarkRed, game, world);
+            Left = new Unit(Library.Character.GameTexture[character], new Vector2(300, 300), Color.Red, game, world);       // TODO: fix hardcoded values for positions. 
+            Right = new Unit(Library.Character.GameTexture[character], new Vector2(300, 200), Color.DarkRed, game, world);
 
+            Map.MapComponentCollection.Add(Left);
+            Map.MapComponentCollection.Add(Right);
             game.Components.Add(this);
         }
 

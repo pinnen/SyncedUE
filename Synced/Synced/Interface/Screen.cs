@@ -54,6 +54,10 @@ namespace Synced.Interface
         }
         #endregion
 
+        #region Variables
+        static GameComponentCollection staticGameComponents;
+        #endregion
+
         #region Properties
         /// <summary>
         /// Screen Position
@@ -90,7 +94,6 @@ namespace Synced.Interface
             get; 
             private set;
         }
-
 
         public bool IsPopUp
         {

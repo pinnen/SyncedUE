@@ -19,6 +19,9 @@ using FarseerPhysics.Collision.Shapes;
 using FarseerPhysics.Dynamics.Contacts;
 using FarseerPhysics;
 using Synced.InGame.Actors;
+using Synced.MapNamespace;
+using System.Linq;
+
 namespace Synced.Actors
 {
     class Unit : MovableCollidable
@@ -48,8 +51,6 @@ namespace Synced.Actors
             acceleration = 40;
             Color = color;
             trail = new ParticleEngine(1, Library.TrailParticle.Texture, position, color, Origin, 1.0f, 0.0f, 0.2f, DrawingHelper.DrawingLevel.Medium, game);
-
-            game.Components.Add(this);
         }
 
         public void Shoot()
@@ -60,6 +61,20 @@ namespace Synced.Actors
 
         public override bool OnCollision(Fixture f1, Fixture f2, Contact contact)
         {
+            foreach (CollidingSprite gc in Map.MapComponentCollection)
+            {
+                if (gc is CollidingSprite)
+                {
+                    if (gc.ID.ToString() == f1.Body.UserData.ToString())
+                    {
+                        if (gc.Tag == "CRYSTAL")
+                        {
+                            Crystal crystal = gc as Crystal;
+                            crystal.PickUp(this);
+                        }
+                    }
+                }
+            }
             return true;
         }
 
@@ -73,6 +88,8 @@ namespace Synced.Actors
             // Update Trail
             trail.UpdatePosition(Position); // TODO: might have to use ConvertUnits function. 
             trail.GenerateTrailParticles(1.0f, 0.2f);
+
+            
 
             base.Update(gameTime);
         }
