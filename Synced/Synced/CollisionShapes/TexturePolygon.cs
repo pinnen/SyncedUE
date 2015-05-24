@@ -28,13 +28,15 @@ namespace Synced.CollisionShapes
             // Set Polygon Centroid    
             if (textureCenter) // Texture based center
             {
-                Origin = new Vector2(Texture.Width / 2, Texture.Height / 2);
+                Vector2 centroid = -textureVertices.GetCentroid();
+                textureVertices.Translate(ref centroid);
+                Origin = new Vector2(texture.Width / 2, texture.Height / 2);
             }
             else // Vertice based center
             {
                 Vector2 centroid = -textureVertices.GetCentroid();
                 textureVertices.Translate(ref centroid);
-                Origin = -centroid;
+                Origin = new Vector2((int)-centroid.X, (int)-centroid.Y);
             }
 
             // Simplify Polygon for performance
