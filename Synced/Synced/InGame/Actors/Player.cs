@@ -29,8 +29,6 @@ namespace Synced.Actors
 
         PlayerIndex _playerIndex;
 
-
-
         public Player(PlayerIndex playerIndex, Library.Character.Name character, Game game, World world)
             : base(game)
         {

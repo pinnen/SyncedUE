@@ -4,7 +4,7 @@
 // Edited by:
 // Pontus Magnusson
 //
-// 
+//
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Synced.Static_Classes;
@@ -13,7 +13,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Synced.InGame
+namespace Synced.Interface
 {
     class Text : DrawableGameComponent
     {
@@ -57,7 +57,7 @@ namespace Synced.InGame
         public override void Draw(GameTime gameTime)
         {
             _spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.LinearWrap, DepthStencilState.None, RasterizerState.CullNone, null, ResolutionManager.GetTransformationMatrix());
-            DrawingHelper.DrawString(_spriteBatch, _font, _content, _rectangle, DrawingHelper.Alignment.Center, 3, Color.Red);
+            DrawingHelper.DrawString(_spriteBatch, _font, _content, _rectangle, DrawingHelper.Alignment.Center, 3, Color.Black);
             _spriteBatch.End();
 
             base.Draw(gameTime);

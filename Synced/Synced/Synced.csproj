@@ -48,7 +48,7 @@
     <Compile Include="InGame\ICollidable.cs" />
     <Compile Include="InGame\IGrabbable.cs" />
     <Compile Include="InGame\Movable.cs" />
-    <Compile Include="InGame\Text.cs" />
+    <Compile Include="Interface\Text.cs" />
     <Compile Include="Content\Library.cs" />
     <Compile Include="InGame\Actors\Ability.cs" />
     <Compile Include="InGame\Actors\ParticleEngine.cs" />
