@@ -12,44 +12,78 @@ using FarseerPhysics.Factories;
 using FarseerPhysics.Collision.Shapes;
 using FarseerPhysics;
 using FarseerPhysics.Dynamics.Contacts;
+using Synced.Actors;
 
 namespace Synced.InGame.Actors
 {
-    abstract class CollidingSprite : Synced.Actors.Sprite
+    abstract class CollidingSprite : Sprite // TODO: Add a Collidable interface
     {
         #region Variables
         protected World world;
-        protected Body body;
-        Vector2 bodyOrigin;
+        Body rigidBody;
+        Guid id;
+        string tag;
         #endregion
 
-        #region Properties
+        #region Properties       
+        public Body RigidBody
+        {
+            get { return rigidBody; }
+            set 
+            {
+                rigidBody = value;
+                rigidBody.UserData = id.ToByteArray();
+                rigidBody.OnCollision += OnCollision;
+                rigidBody.OnSeparation += OnSeparation;
+            }
+        }
+        /* "overrides" Sprite position/rotation to translate pixels to FarseerPhysics units. */
+        public new Vector2 Position
+        {
+            get { return rigidBody.Position; }
+            set { rigidBody.Position = value; }
+        } // TODO: CollidingSprite allways centered. need to change? 
+        public new float Rotation 
+        {
+            get { return rigidBody.Rotation; }
+            protected set { rigidBody.Rotation = value; } 
+        }
+        public Guid ID
+        {
+            get { return id; }
+        }
+        public string Tag
+        {
+            get { return tag; }
+        }
         #endregion
 
+        /// <summary>
+        /// Creates a default Colliding Sprite. 
+        /// </summary>
         public CollidingSprite(Texture2D texture, Vector2 position, DrawingHelper.DrawingLevel drawingLevel, Game game, World world)
             : base(texture, position, drawingLevel, game)
         {
             this.world = world;
-            ConvertUnits.SetDisplayUnitToSimUnitRatio(35f);    // 35 pixels = 1 meter
-            body = BodyFactory.CreateCircle(world, ConvertUnits.ToSimUnits(texture.Width / 2), 0, ConvertUnits.ToSimUnits(position));
-            body.BodyType = BodyType.Dynamic;
-            body.CollidesWith = Category.All;
-            body.CollisionCategories = Category.All;
-            body.LinearDamping = 5f;
-            body.Mass = 1f;
-            body.OnCollision += OnCollision;
-            
-  
-            bodyOrigin = new Vector2(texture.Width / 2, texture.Height / 2);
-        }
 
-        // f1 = this gameObject, f2 = other gameObject
+            // Generate unique ID
+            id = Guid.NewGuid();
+            tag = "";
+        }
+        
+        /// <summary>
+        /// FarseerPhysics OnCollisionEvent. 
+        /// </summary>
+        /// <param name="f1">This GameObject</param>
+        /// <param name="f2">Other GameObject</param>
+        /// <returns>return false if collision should be ignored</returns>
         virtual public bool OnCollision(Fixture f1, Fixture f2, Contact contact) { return true; }
+        virtual public void OnSeparation(Fixture f1, Fixture f2) {}
 
         public override void Draw(GameTime gameTime)
         {       
             _spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.LinearWrap, DepthStencilState.None, RasterizerState.CullNone, null, ResolutionManager.GetTransformationMatrix());
-            _spriteBatch.Draw(Texture, ConvertUnits.ToDisplayUnits(body.Position), null, Color, body.Rotation, bodyOrigin, 1.0f, SpriteEffects.None, 1f); // TODO: use body pos/rot or Sprite pos/rot? 
+            _spriteBatch.Draw(Texture, ConvertUnits.ToDisplayUnits(rigidBody.Position), null, Color, rigidBody.Rotation, Origin, 1.0f, SpriteEffects.None, 1f);
             _spriteBatch.End();
         }
     }

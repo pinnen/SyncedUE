@@ -21,28 +21,32 @@ using FarseerPhysics;
 using Synced.InGame.Actors;
 namespace Synced.Actors
 {
-    class Unit : Movable
+    class Unit : MovableCollidable
     {
         #region Variables
-
         ParticleEngine trail;
-
         #endregion
 
+        #region Properties
+        #endregion
 
         public IGrabbable Item { get; set; }
         public Unit(Texture2D texture, Vector2 position, Color color, Game game, World world)
             : base(texture, position, DrawingHelper.DrawingLevel.Medium, game, world)
         {
-            this.world = world;
+            /* Setting up Farseer Physics */
+            RigidBody = BodyFactory.CreateCircle(this.world, ConvertUnits.ToSimUnits(texture.Width / 2), 0, ConvertUnits.ToSimUnits(position)); // TODO: size to some scale?
+            RigidBody.BodyType = BodyType.Dynamic;
+            RigidBody.CollisionCategories = Category.Cat2; /* Unit Category */ // TODO: fix collisionCategory system. 
+            RigidBody.CollidesWith = Category.All | Category.Cat2;         
+            RigidBody.Mass = 10f;                          // TODO: fix hardcoded value
+            RigidBody.LinearDamping = 5f;                  // TODO: fix hardcoded value
+            RigidBody.Restitution = 0.1f;                  // TODO: fix hardcoded value
+            Origin = new Vector2(Texture.Width / 2, texture.Height / 2);
 
-            body.UserData = "UNIT";
-
-            // Centered origin
-            Origin = new Vector2(ConvertUnits.ToSimUnits(Texture.Width / 2), ConvertUnits.ToSimUnits(texture.Height / 2));
-
+            /* Setting up Unit */
+            acceleration = 40;
             Color = color;
-
             trail = new ParticleEngine(1, Library.TrailParticle.Texture, position, color, Origin, 1.0f, 0.0f, 0.2f, DrawingHelper.DrawingLevel.Medium, game);
 
             game.Components.Add(this);
@@ -56,18 +60,20 @@ namespace Synced.Actors
 
         public override bool OnCollision(Fixture f1, Fixture f2, Contact contact)
         {
-            if (f2.Body.UserData.ToString() == "UNIT") // TODO: maybe find better way to do this. 
-            {
-                // TODO: need to be able to cast object to collision class or fetch it in another way. 
-                //Item = (f2 as Crystal).PickUp(this);
-            }
             return true;
         }
 
         public override void Update(GameTime gameTime)
         {
-            trail.UpdatePosition(this.body.Position);
+            if (direction != Vector2.Zero)
+            {
+                RigidBody.Rotation = (float)Math.Atan2(RigidBody.LinearVelocity.Y, RigidBody.LinearVelocity.X);
+                
+            }
+            // Update Trail
+            trail.UpdatePosition(Position); // TODO: might have to use ConvertUnits function. 
             trail.GenerateTrailParticles(1.0f, 0.2f);
+
             base.Update(gameTime);
         }
     }
