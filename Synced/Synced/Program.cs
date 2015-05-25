@@ -1,9 +1,5 @@
 ﻿// Program.cs
 // Introduced: 2015-04-14
-// Last edited: 2015-04-14
-// Edited by:
-//
-// 
 #region Using Statements
 using System;
 using System.Collections.Generic;

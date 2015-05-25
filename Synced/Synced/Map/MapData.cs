@@ -1,12 +1,13 @@
-﻿using FarseerPhysics.Dynamics;
+﻿// MapData.cs
+// Introduced: 2015-04-14
+// Last edited: 2015-05-13
+// Edited by:
+// Pontus Magnusson
+using FarseerPhysics.Dynamics;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Serialization;
-using System.Text;
 using System.Xml;
-using System.Xml.Schema;
 using System.Xml.Serialization;
 
 namespace Synced.MapNamespace

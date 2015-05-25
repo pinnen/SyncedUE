@@ -3,21 +3,18 @@
 // Last edited: 2015-04-30
 // Edited by:
 // Robin Calmegård
-//
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Synced.InGame;
+using Synced.Static_Classes;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace Synced.Interface
 {
-    //TODO: 
     class ScreenEventArgs : EventArgs
     {
-        Synced.Static_Classes.ScreenManager.ScreenState State { get; set; }
+        ScreenManager.ScreenState State { get; set; }
     }
     abstract class Screen : DrawableGameComponent, IDrawableObject, IActive
     {

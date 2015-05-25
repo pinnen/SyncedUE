@@ -3,23 +3,18 @@
 // Last edited: 2015-04-29
 // Edited by:
 // Pontus Magnusson
-//
-// 
+using FarseerPhysics;
+using FarseerPhysics.Dynamics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using Synced.Content;
-using Synced.Interface;
 using Synced.Actors;
-using Synced.Static_Classes;
-using Synced.InGame;
-using Synced.MapNamespace;
-using FarseerPhysics.Dynamics;
-using System;
-using Synced.InGame.Actors;
-using FarseerPhysics;
-using Synced.MapNameSpace;
 using Synced.CollisionShapes;
+using Synced.Content;
+using Synced.InGame;
+using Synced.MapNameSpace;
+using Synced.Static_Classes;
+using System;
 
 namespace Synced
 {

@@ -1,15 +1,14 @@
-﻿using FarseerPhysics;
+﻿// DummyCircle.cs
+// Introduced: 2015-05-23
+// Last edited: 2015-05-23
+// Edited by:
+// Dennis Stockhaus
+using FarseerPhysics;
 using FarseerPhysics.Dynamics;
-using FarseerPhysics.Dynamics.Contacts;
 using FarseerPhysics.Factories;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using Synced.InGame.Actors;
 using Synced.Static_Classes;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Synced.CollisionShapes
 {

@@ -1,11 +1,14 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
+﻿// ScreenManager.cs
+// Introduced: 2015-04-14
+// Last edited: 2015-04-14
+// Edited by:
+// Pontus Magnusson 
+using Microsoft.Xna.Framework;
 using Synced.Content;
 using Synced.Interface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace Synced.Static_Classes
 {

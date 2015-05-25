@@ -1,8 +1,10 @@
-﻿using Microsoft.Xna.Framework;
+﻿// MapObject.cs
+// Introduced: 2015-04-14
+// Last edited: 2015-05-13
+// Edited by:
+// Pontus Magnusson
+using Microsoft.Xna.Framework;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Xml.Serialization;
 
 namespace Synced.MapNamespace

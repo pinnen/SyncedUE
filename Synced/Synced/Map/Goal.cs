@@ -3,12 +3,7 @@
 // Last edited: 2015-04-14
 // Edited by:
 // Pontus Magnusson
-//
-// 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Xml.Serialization;
 
 namespace Synced.MapNamespace

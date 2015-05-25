@@ -1,15 +1,10 @@
-﻿using FarseerPhysics.Dynamics;
-// Wall.cs
+﻿// Obstacle.cs
 // Introduced: 2015-04-14
 // Last edited: 2015-04-14
 // Edited by:
-// Pontus Magnusson
-//
-// 
+// Pontus Magnusson 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using FarseerPhysics.Dynamics;
 using System.Xml.Serialization;
 
 namespace Synced.MapNamespace

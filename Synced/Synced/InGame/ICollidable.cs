@@ -1,11 +1,9 @@
-﻿using Microsoft.Xna.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿// ICollidable.cs
+// Introduced: 2015-05-14
+// Last edited: 2015-05-15
+// Edited by:
+// Dennis Stockhaus
 using FarseerPhysics.Dynamics;
-using FarseerPhysics.Factories;
-using FarseerPhysics.Collision.Shapes;
 using FarseerPhysics.Dynamics.Contacts;
 
 namespace Synced.InGame
