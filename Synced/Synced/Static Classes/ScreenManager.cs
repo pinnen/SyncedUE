@@ -45,12 +45,12 @@ namespace Synced.Static_Classes
             // Splash screens
             //------------------------------------------------------------------------
             //Second splash screen
-            Screen screen2 = new SplashScreen(Library.Crystal.Texture, game);
+            Screen screen2 = new SplashScreen(Library.SplashScreen.SplashSeven, game);
             screen2.Deactivated();
             _screenManager.AddScreen(screen2);
 
             //First splash screen
-            Screen screen = new SplashScreen(Library.Interface.Arrows, game);
+            Screen screen = new SplashScreen(Library.SplashScreen.SplashAlpha, game);
             screen.Activated();
             _screenManager.AddScreen(screen);
         }

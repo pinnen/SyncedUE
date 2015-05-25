@@ -148,12 +148,17 @@ namespace Synced.Content
                     {Tuple.Create(Colors.ColorName.Yellow,Colors.ColorVariation.Other),new Color(180, 180, 0, 255)},
                 };
                 #endregion
+                #region SplashScreen
+                SplashScreen.SplashAlpha = content.Load<Texture2D>("Interface/SplashAlpha");
+                SplashScreen.SplashSeven = content.Load<Texture2D>("Interface/Splash2");
+                #endregion
 
             }
         }
-        public static class SplashScreens
+        public static class SplashScreen
         {
-            //TODO SplashScreen loading
+            public static Texture2D SplashAlpha;
+            public static Texture2D SplashSeven;
         }
         public static class Crystal
         {
