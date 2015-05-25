@@ -66,15 +66,17 @@ namespace Synced.InGame
         
         public virtual void Shoot()
         {
+            RigidBody.LinearDamping = 0f;
+            RigidBody.ApplyForce(3000 * new Vector2(-(_owner.Direction.X), (_owner.Direction.Y))); // TODO: fix hardcoded shooting force
+            Direction = Vector2.Zero;
             Release();
-            Direction = -Direction;
             Library.Audio.PlaySoundEffect(Library.Audio.SoundEffects.CrystalShoot);
         }
         
         public override void Update(GameTime gameTime)
         {
 
-            float rotval = (float)0.002 * gameTime.ElapsedGameTime.Milliseconds; // TODO: Fix hardcode value
+            float rotval = (float)0.005 * gameTime.ElapsedGameTime.Milliseconds; // TODO: Fix hardcode value
             RigidBody.Rotation += rotval;
 
             if (_owner != null) // TODO a is this creating framedrop? 

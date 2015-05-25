@@ -31,8 +31,7 @@ namespace Synced.Actors
         float _trailParticleLifetime;
         ParticleEngine _effectParticles;
         bool _useEffectParticles;
-
-        
+    
         #endregion
 
         #region Properties
@@ -82,7 +81,10 @@ namespace Synced.Actors
         public void Shoot()
         {
             if (Item != null)
+            {
                 Item.Shoot();
+                Item = null;
+            }
         }
 
         public override bool OnCollision(Fixture f1, Fixture f2, Contact contact)
@@ -95,6 +97,7 @@ namespace Synced.Actors
                 {
                     Crystal crystal = other as Crystal;
                     crystal.PickUp(this);
+                    Item = crystal;
                     return false;
                 }
                 else if (other.Tag == "UNIT")
