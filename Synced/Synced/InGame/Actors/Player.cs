@@ -24,7 +24,7 @@ namespace Synced.Actors
         bool _areTrailsActive;
         PlayerIndex _playerIndex;
         Library.Zone.Name shape;
-        Library.Colors.TeamColor teamColor;
+        Library.Colors.ColorName _teamColor;
         CompactZone _compactZone;
         Game _game;
         World _world;
@@ -48,16 +48,17 @@ namespace Synced.Actors
         #endregion
 
         
-        public Player(PlayerIndex playerIndex, Library.Character.Name character, Game game, World world)
+        public Player(PlayerIndex playerIndex, Library.Character.Name character,Library.Colors.ColorName teamcolor, Game game, World world)
             : base(game)
         {
             _playerIndex = playerIndex;
-            Left = new Unit(Library.Character.GameTexture[character], new Vector2(200, 200), Color.Red, game, world);       // TODO: fix hardcoded values for positions. 
-            Right = new Unit(Library.Character.GameTexture[character], new Vector2(200, 120), Color.DarkRed, game, world);
+            Left = new Unit(Library.Character.GameTexture[character], new Vector2(200, 200), Library.Colors.getColor[Tuple.Create(teamcolor,Library.Colors.ColorVariation.Left)], game, world);       // TODO: fix hardcoded values for positions. 
+            Right = new Unit(Library.Character.GameTexture[character], new Vector2(200, 120), Library.Colors.getColor[Tuple.Create(teamcolor, Library.Colors.ColorVariation.Right)], game, world);
             _areTrailsActive = false;
             _game = game;
             _world = world;
             shape = (Library.Zone.Name)character;
+            _teamColor = teamcolor;
             game.Components.Add(this);
         }
 
@@ -128,7 +129,7 @@ namespace Synced.Actors
                     if (_compactZone == null)
                     {
                         Vector2 spawnPosition = new Vector2((Left.RigidBody.Position.X + Right.RigidBody.Position.X)/2.0f,(Left.RigidBody.Position.Y + Right.RigidBody.Position.Y)/2.0f);
-                        _compactZone = new CompactZone(Library.Zone.CompactTexture[shape], ConvertUnits.ToDisplayUnits(spawnPosition), DrawingHelper.DrawingLevel.Medium, _game, _world, Library.Colors.RedCrystal);
+                        _compactZone = new CompactZone(Library.Zone.CompactTexture[shape], ConvertUnits.ToDisplayUnits(spawnPosition), DrawingHelper.DrawingLevel.Medium, _game, _world, Library.Colors.getColor[Tuple.Create(_teamColor, Library.Colors.ColorVariation.Other)]);
                     }
                     else
                     {

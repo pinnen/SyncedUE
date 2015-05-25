@@ -28,7 +28,7 @@ namespace Synced.Interface
                 if (item is PlayerStart)
                 {
                     PlayerStart temp = item as PlayerStart;
-                    _players.Add(new Player(temp.PlayerIndex, Library.Character.Name.Circle, game, world)); // TODO: All collision objects need world!
+                    _players.Add(new Player(temp.PlayerIndex, Library.Character.Name.Circle,Library.Colors.ColorName.Blue, game, world)); // TODO: All collision objects need world!
                 }
             }
         }

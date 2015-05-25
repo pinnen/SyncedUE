@@ -129,12 +129,23 @@ namespace Synced.Content
                 Goal.BorderTexture = content.Load<Texture2D>("GameObjects/GoalBorder");
                 #endregion
                 #region Colors
-                
-                Colors.Color = new Dictionary<Tuple <Colors.TeamColor,Colors.TeamColorVariation> , Color>()
+                Colors.getColor = new Dictionary<Tuple<Colors.ColorName, Colors.ColorVariation>, Color>() 
                 {
-                    {Tuple.Create(Colors.TeamColor,Colors.TeamColorVariation)<Colors.TeamColor.Red,Colors.TeamColorVariation.Left)>, Color.Red},
+                    {Tuple.Create(Colors.ColorName.Blue,Colors.ColorVariation.Left),Color.Blue},
+                    {Tuple.Create(Colors.ColorName.Blue,Colors.ColorVariation.Right),Color.DarkBlue},
+                    {Tuple.Create(Colors.ColorName.Blue,Colors.ColorVariation.Other),new Color(0, 0, 180, 255)},
 
+                    {Tuple.Create(Colors.ColorName.Green,Colors.ColorVariation.Left),new Color(0, 255, 0, 255)},
+                    {Tuple.Create(Colors.ColorName.Green,Colors.ColorVariation.Right),new Color(0, 139, 0, 255)},
+                    {Tuple.Create(Colors.ColorName.Green,Colors.ColorVariation.Other),new Color(0, 180, 0, 255)},
 
+                    {Tuple.Create(Colors.ColorName.Red,Colors.ColorVariation.Left),Color.Red},
+                    {Tuple.Create(Colors.ColorName.Red,Colors.ColorVariation.Right),Color.DarkRed},
+                    {Tuple.Create(Colors.ColorName.Red,Colors.ColorVariation.Other),new Color(180, 0, 0, 255)},
+
+                    {Tuple.Create(Colors.ColorName.Yellow,Colors.ColorVariation.Left),Color.Yellow},
+                    {Tuple.Create(Colors.ColorName.Yellow,Colors.ColorVariation.Right),new Color(139, 139, 0, 255)},
+                    {Tuple.Create(Colors.ColorName.Yellow,Colors.ColorVariation.Other),new Color(180, 180, 0, 255)},
                 };
                 #endregion
 
@@ -194,28 +205,13 @@ namespace Synced.Content
             public static Dictionary<Name, Texture2D> CompactTexture;
             public static Dictionary<Name, Texture2D> Texture;
         }
+
         public static class Colors
         {
-            public enum TeamColor {Red,Blue,Green,Yellow }
-            public enum TeamColorVariation { Left, Right, Other }
-            Tuple teamcolorvariation = Tuple<TeamColor, TeamColorVariation>();
-            public static Dictionary<Tuple<TeamColor,TeamColorVariation>, Color> Color;
+            public enum ColorName {Red,Blue,Green,Yellow }
+            public enum ColorVariation { Left, Right, Other }
+            public static Dictionary<Tuple<ColorName, ColorVariation>,Color> getColor;
 
-                public static Color RedLeft { get { return Color.Red; } }
-                public static Color RedRight { get { return Color.DarkRed; }}
-                public static Color RedCrystal { get { return new Color(180, 0, 0, 255); }}
-
-                public static Color BlueLeft { get { return Color.Blue; }}
-                public static Color BlueRight { get { return Color.DarkBlue; }}
-                public static Color BlueCrystal { get { return new Color(0, 0, 180, 255); }}
-
-                public static Color GreenLeft { get { return new Color(0, 255, 0, 255); }}
-                public static Color GreenRight { get { return new Color(0, 139, 0, 255); }}
-                public static Color GreenCrystal { get { return new Color(0, 180, 0, 255); }}
-
-                public static Color YellowLeft { get { return Color.Yellow; }}
-                public static Color YellowRight { get { return new Color(139, 139, 0, 255); }}
-                public static Color YellowCrystal { get { return new Color(180, 180, 0, 255); }}
         }
         public static class Map
         {
