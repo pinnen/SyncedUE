@@ -23,6 +23,8 @@ namespace Synced.Actors
         #region Variables
         bool _areTrailsActive;
         PlayerIndex _playerIndex;
+        Library.Zone.Name shape;
+        Library.Colors.TeamColor teamColor;
         CompactZone _compactZone;
         Game _game;
         World _world;
@@ -55,6 +57,7 @@ namespace Synced.Actors
             _areTrailsActive = false;
             _game = game;
             _world = world;
+            shape = (Library.Zone.Name)character;
             game.Components.Add(this);
         }
 
@@ -80,11 +83,11 @@ namespace Synced.Actors
 
                 if (InputManager.RightTriggerPressed(_playerIndex) != 0.0f)
                 {
-                    Right.TrailParticleLifetime += (1.5f * InputManager.RightTriggerPressed(_playerIndex));
+                    Right.TrailParticleLifetime += (1.5f * InputManager.RightTriggerPressed(_playerIndex)); // TODO: constant
                 }
                 if (InputManager.LeftTriggerPressed(_playerIndex) != 0.0f)
                 {
-                    Left.TrailParticleLifetime += (1.5f * InputManager.LeftTriggerPressed(_playerIndex));
+                    Left.TrailParticleLifetime += (1.5f * InputManager.LeftTriggerPressed(_playerIndex)); // TODO: constant
                 }
                 _areTrailsActive = false;
                 if ((InputManager.RightTriggerPressed(_playerIndex) > 0.0f) && (InputManager.LeftTriggerPressed(_playerIndex) > 0.0f))
@@ -119,13 +122,13 @@ namespace Synced.Actors
                     Right.UseEffectParticles = false;
                 }
 
-                //***** CREATE ZONE ******
-                if (InputManager.LeftShoulderPressed(_playerIndex) && InputManager.RightShoulderPressed(_playerIndex))
+                //***** CREATE COMPACT ZONE ******
+                if (InputManager.LeftShoulderPressed(_playerIndex) && InputManager.RightShoulderPressed(_playerIndex)) // FOR TESTING
                 {
                     if (_compactZone == null)
                     {
                         Vector2 spawnPosition = new Vector2((Left.RigidBody.Position.X + Right.RigidBody.Position.X)/2.0f,(Left.RigidBody.Position.Y + Right.RigidBody.Position.Y)/2.0f);
-                        _compactZone = new CompactZone(Library.Crystal.Texture, ConvertUnits.ToDisplayUnits(spawnPosition), DrawingHelper.DrawingLevel.Medium, _game, _world, Color.Magenta);
+                        _compactZone = new CompactZone(Library.Zone.CompactTexture[shape], ConvertUnits.ToDisplayUnits(spawnPosition), DrawingHelper.DrawingLevel.Medium, _game, _world, Library.Colors.RedCrystal);
                     }
                     else
                     {

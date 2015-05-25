@@ -91,19 +91,20 @@ namespace Synced.Content
                 #region Zone
                 Zone.CompactTexture = new Dictionary<Zone.Name, Texture2D>()
                 {
-                    {Zone.Name.Circle, content.Load<Texture2D>("GameObjects/Zones/CircleZone")},
-                    {Zone.Name.Hexagon, content.Load<Texture2D>("GameObjects/Zones/HexagonZone")},
-                    {Zone.Name.Pentagon, content.Load<Texture2D>("GameObjects/Zones/PentagonZone")},
-                    {Zone.Name.Square, content.Load<Texture2D>("GameObjects/Zones/SquareZone")},
-                    {Zone.Name.Triangle, content.Load<Texture2D>("GameObjects/Zones/TriangleZone")}
-                };
-                Zone.Texture = new Dictionary<Zone.Name, Texture2D>()
-                {
                     {Zone.Name.Circle, content.Load<Texture2D>("GameObjects/Zones/CompactCircleZone")},
                     {Zone.Name.Hexagon, content.Load<Texture2D>("GameObjects/Zones/CompactHexagonZone")},
                     {Zone.Name.Pentagon, content.Load<Texture2D>("GameObjects/Zones/CompactPentagonZone")},
                     {Zone.Name.Square, content.Load<Texture2D>("GameObjects/Zones/CompactSquareZone")},
                     {Zone.Name.Triangle, content.Load<Texture2D>("GameObjects/Zones/CompactTriangleZone")}
+                };
+                Zone.Texture = new Dictionary<Zone.Name, Texture2D>()
+                {
+
+                    {Zone.Name.Circle, content.Load<Texture2D>("GameObjects/Zones/CircleZone")},
+                    {Zone.Name.Hexagon, content.Load<Texture2D>("GameObjects/Zones/HexagonZone")},
+                    {Zone.Name.Pentagon, content.Load<Texture2D>("GameObjects/Zones/PentagonZone")},
+                    {Zone.Name.Square, content.Load<Texture2D>("GameObjects/Zones/SquareZone")},
+                    {Zone.Name.Triangle, content.Load<Texture2D>("GameObjects/Zones/TriangleZone")}
                 };
                 #endregion
                 #region Crystal
@@ -127,6 +128,16 @@ namespace Synced.Content
                 Goal.GoalTexture = content.Load<Texture2D>("GameObjects/Goal");
                 Goal.BorderTexture = content.Load<Texture2D>("GameObjects/GoalBorder");
                 #endregion
+                #region Colors
+                
+                Colors.Color = new Dictionary<Tuple <Colors.TeamColor,Colors.TeamColorVariation> , Color>()
+                {
+                    {Tuple.Create(Colors.TeamColor,Colors.TeamColorVariation)<Colors.TeamColor.Red,Colors.TeamColorVariation.Left)>, Color.Red},
+
+
+                };
+                #endregion
+
             }
         }
         public static class SplashScreens
@@ -185,6 +196,11 @@ namespace Synced.Content
         }
         public static class Colors
         {
+            public enum TeamColor {Red,Blue,Green,Yellow }
+            public enum TeamColorVariation { Left, Right, Other }
+            Tuple teamcolorvariation = Tuple<TeamColor, TeamColorVariation>();
+            public static Dictionary<Tuple<TeamColor,TeamColorVariation>, Color> Color;
+
                 public static Color RedLeft { get { return Color.Red; } }
                 public static Color RedRight { get { return Color.DarkRed; }}
                 public static Color RedCrystal { get { return new Color(180, 0, 0, 255); }}
