@@ -13,13 +13,22 @@ using Synced.Content;
 using Synced.Static_Classes;
 using Microsoft.Xna.Framework.Input;
 using FarseerPhysics.Dynamics;
+using Synced.InGame.Actors;
+using FarseerPhysics;
 
 namespace Synced.Actors
 {
     class Player : GameComponent
     {
+        #region Variables
         bool _areTrailsActive;
-
+        PlayerIndex _playerIndex;
+        CompactZone _compactZone;
+        Game _game;
+        World _world;
+        #endregion
+        
+        #region Properties
         public bool AreTrailsActive
         {
             get { return _areTrailsActive; }
@@ -34,9 +43,9 @@ namespace Synced.Actors
             get;
             set;
         }
+        #endregion
 
-        PlayerIndex _playerIndex;
-
+        
         public Player(PlayerIndex playerIndex, Library.Character.Name character, Game game, World world)
             : base(game)
         {
@@ -44,6 +53,8 @@ namespace Synced.Actors
             Left = new Unit(Library.Character.GameTexture[character], new Vector2(200, 200), Color.Red, game, world);       // TODO: fix hardcoded values for positions. 
             Right = new Unit(Library.Character.GameTexture[character], new Vector2(200, 120), Color.DarkRed, game, world);
             _areTrailsActive = false;
+            _game = game;
+            _world = world;
             game.Components.Add(this);
         }
 
@@ -106,6 +117,21 @@ namespace Synced.Actors
                     Right.Acceleration = 40.0f; //TODO: constant
                     Left.UseEffectParticles = false;
                     Right.UseEffectParticles = false;
+                }
+
+                //***** CREATE ZONE ******
+                if (InputManager.LeftShoulderPressed(_playerIndex) && InputManager.RightShoulderPressed(_playerIndex))
+                {
+                    if (_compactZone == null)
+                    {
+                        Vector2 spawnPosition = new Vector2((Left.RigidBody.Position.X + Right.RigidBody.Position.X)/2.0f,(Left.RigidBody.Position.Y + Right.RigidBody.Position.Y)/2.0f);
+                        _compactZone = new CompactZone(Library.Crystal.Texture, ConvertUnits.ToDisplayUnits(spawnPosition), DrawingHelper.DrawingLevel.Medium, _game, _world, Color.Magenta);
+                    }
+                    else
+                    {
+                        _compactZone.Detonate();
+                        _compactZone = null;
+                    }
                 }
                 
             }

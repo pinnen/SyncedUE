@@ -45,11 +45,12 @@
     <Compile Include="CollisionShapes\DummyCircle.cs" />
     <Compile Include="CollisionShapes\TexturePolygon.cs" />
     <Compile Include="InGame\Actors\CollidingSprite.cs" />
+    <Compile Include="InGame\Actors\CompactZone.cs" />
     <Compile Include="InGame\Actors\Particle.cs" />
     <Compile Include="InGame\Crystal.cs" />
     <Compile Include="InGame\IActive.cs" />
     <Compile Include="InGame\ICollidable.cs" />
-    <Compile Include="InGame\IGrabbable.cs" />
+    <Compile Include="InGame\Grabbable.cs" />
     <Compile Include="InGame\Movable.cs" />
     <Compile Include="InGame\MovableCollidable.cs" />
     <Compile Include="Interface\Text.cs" />
