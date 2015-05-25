@@ -50,7 +50,7 @@ namespace Synced.Actors
         }
         #endregion
 
-        public IGrabbable Item { get; set; }
+        public Grabbable Item { get; set; }
         public Unit(Texture2D texture, Vector2 position, Color color, Game game, World world)
             : base(texture, position, DrawingHelper.DrawingLevel.Medium, game, world)
         {
