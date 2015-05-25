@@ -13,6 +13,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Synced.Static_Classes;
 using FarseerPhysics;
+using Synced.Interface;
 
 namespace Synced.InGame.Actors
 {
@@ -90,6 +91,7 @@ namespace Synced.InGame.Actors
             _scale = scale;
             _rotation = rotation;
             _fadeAlpha = 1.0f;
+            GameScreen.ComponentCollection.Add(this); // TODO: all objects should be added here right? for drawing and collision purposes. 
         }
         #endregion
 

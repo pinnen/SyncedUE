@@ -80,7 +80,7 @@ namespace Synced.MapNameSpace
                     break;
             }
 
-            Border = new TexturePolygon(borderTexture, borderPosition, borderRotation, DrawingHelper.DrawingLevel.Medium, game, world, false);
+            Border = new TexturePolygon(borderTexture, borderPosition, borderRotation, DrawingHelper.DrawingLevel.High, game, world, false);
 
             GameScreen.ComponentCollection.Add(OuterCircle);
             GameScreen.ComponentCollection.Add(InnerCircle);

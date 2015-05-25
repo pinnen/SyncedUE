@@ -42,8 +42,8 @@
   </Obstacle>
   <Obstacle>
     <Position>
-      <X>0</X>
-      <Y>0</Y>
+      <X>129</X>
+      <Y>111</Y>
     </Position>
     <TexturePath>Maps/Paper/background</TexturePath>
     <CollisionCategory>None</CollisionCategory>

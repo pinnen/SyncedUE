@@ -55,8 +55,8 @@ namespace Synced.InGame.Actors
             _particleOrigin.X = _particleTexture.Width / 2;
             _particleOrigin.Y = _particleTexture.Height / 2;
             this.game = game;
-            dLevel = drawingLevel;
-            game.Components.Add(this);
+            dLevel = DrawingHelper.DrawingLevel.Top;//drawingLevel;
+            game.Components.Add(this); // TODO: Remove this and replace with GameScreen.CompomentCollection.Add(this);
         }
         #endregion
 

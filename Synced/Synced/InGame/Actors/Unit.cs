@@ -50,7 +50,7 @@ namespace Synced.Actors
             /* Setting up Unit */
             acceleration = 40;
             Color = color;
-            trail = new ParticleEngine(1, Library.TrailParticle.Texture, position, color, Origin, 1.0f, 0.0f, 0.2f, DrawingHelper.DrawingLevel.Medium, game);
+            trail = new ParticleEngine(1, Library.TrailParticle.Texture, position, color, Origin, 1.0f, 0.0f, 0.2f, DrawingHelper.DrawingLevel.Top, game);
         }
 
         public void Shoot()
@@ -61,15 +61,16 @@ namespace Synced.Actors
 
         public override bool OnCollision(Fixture f1, Fixture f2, Contact contact)
         {
-            foreach (CollidingSprite gc in GameScreen.ComponentCollection)
+            foreach (GameComponent gc in GameScreen.ComponentCollection)
             {
                 if (gc is CollidingSprite)
                 {
-                    if (gc.ID.ToString() == f2.Body.UserData.ToString())
+                    CollidingSprite cs = (CollidingSprite)gc;
+                    if (cs.ID.ToString() == f2.Body.UserData.ToString())
                     {
-                        if (gc.Tag == "CRYSTAL")
+                        if (cs.Tag == "CRYSTAL")
                         {
-                            Crystal crystal = gc as Crystal;
+                            Crystal crystal = cs as Crystal;
                             crystal.PickUp(this);
                         }
                         break;

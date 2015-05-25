@@ -57,34 +57,34 @@ namespace Synced.MapNamespace
             world = new World(Vector2.Zero);
             player = new Player(PlayerIndex.One, Library.Character.Name.Circle, game, world);
             crystal = new Crystal(Library.Crystal.Texture, new Vector2(500, 500), DrawingHelper.DrawingLevel.Medium, game, world);
-            goalLeft = new TestGoal(Library.Goal.GoalTexture, Library.Goal.BorderTexture, new Vector2(300, 1080 / 2), GoalDirections.West, DrawingHelper.DrawingLevel.Low, game, world);
-            goalRight = new TestGoal(Library.Goal.GoalTexture, Library.Goal.BorderTexture, new Vector2(1920 - 300, 1080 / 2), GoalDirections.East, DrawingHelper.DrawingLevel.Low, game, world);
+            goalLeft = new TestGoal(Library.Goal.GoalTexture, Library.Goal.BorderTexture, new Vector2(300, 1080 / 2), GoalDirections.West, DrawingHelper.DrawingLevel.Medium, game, world);
+            goalRight = new TestGoal(Library.Goal.GoalTexture, Library.Goal.BorderTexture, new Vector2(1920 - 300, 1080 / 2), GoalDirections.East, DrawingHelper.DrawingLevel.Medium, game, world);
             frame = new TexturePolygon(Library.Map.Texture2, new Vector2(1920 / 2, 1080 / 2), 0, DrawingHelper.DrawingLevel.Medium, game, world, false);
 
             GameScreen.ComponentCollection.Add(crystal);
             GameScreen.ComponentCollection.Add(frame);
             // End TODO: Test objects. Remove Later
-
-            // Process data
-            //foreach (var mapObject in Data.Objects)
-            //{
-            //    if (mapObject is Obstacle)
-            //    {
-            //        GameScreen.ComponentCollection.Add(new Sprite(game.Content.Load<Texture2D>(mapObject.TexturePath), mapObject.Position, Static_Classes.DrawingHelper.DrawingLevel.Back, game));
-            //    }
-            //    else if (mapObject is Goal)
-            //    {
-            //        GameScreen.ComponentCollection.Add(new Sprite(game.Content.Load<Texture2D>(mapObject.TexturePath), mapObject.Position, Static_Classes.DrawingHelper.DrawingLevel.Back, game));
-            //    }
-            //    else if (mapObject is PlayerStart)
-            //    {
-            //        // TODO: Add player
-            //    }
-            //    else if (mapObject is MapObject)
-            //    {
-            //        GameScreen.ComponentCollection.Add(new Sprite(game.Content.Load<Texture2D>(mapObject.TexturePath), mapObject.Position, Static_Classes.DrawingHelper.DrawingLevel.Back, game));
-            //    }
-            //}
+            
+            //Process data
+            foreach (var mapObject in Data.Objects)
+            {
+                if (mapObject is Obstacle)
+                {
+                    GameScreen.ComponentCollection.Add(new Sprite(game.Content.Load<Texture2D>(mapObject.TexturePath), mapObject.Position, Static_Classes.DrawingHelper.DrawingLevel.Low, game));
+                }
+                else if (mapObject is Goal)
+                {
+                    GameScreen.ComponentCollection.Add(new Sprite(game.Content.Load<Texture2D>(mapObject.TexturePath), mapObject.Position, Static_Classes.DrawingHelper.DrawingLevel.Back, game));
+                }
+                else if (mapObject is PlayerStart)
+                {
+                    // TODO: Add player
+                }
+                else if (mapObject is MapObject)
+                {
+                    GameScreen.ComponentCollection.Add(new Sprite(game.Content.Load<Texture2D>(mapObject.TexturePath), mapObject.Position, Static_Classes.DrawingHelper.DrawingLevel.Back, game));
+                }
+            }
         }
 
         public override void Update(GameTime gameTime)

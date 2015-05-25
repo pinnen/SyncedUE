@@ -40,7 +40,7 @@ namespace Synced.Actors
 
             GameScreen.ComponentCollection.Add(Left);
             GameScreen.ComponentCollection.Add(Right);
-            game.Components.Add(this);
+            game.Components.Add(this); // TODO: Remove this later
         }
 
         public override void Update(GameTime gameTime)
