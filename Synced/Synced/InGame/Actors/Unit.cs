@@ -65,7 +65,7 @@ namespace Synced.Actors
             {
                 if (gc is CollidingSprite)
                 {
-                    if (gc.ID.ToString() == f1.Body.UserData.ToString())
+                    if (gc.ID.ToString() == f2.Body.UserData.ToString())
                     {
                         if (gc.Tag == "CRYSTAL")
                         {

@@ -68,7 +68,6 @@ namespace Synced.MapNamespace
             goalRight = new TestGoal(Library.Goal.GoalTexture, Library.Goal.BorderTexture, new Vector2(1920 - 300, 1080 / 2), GoalDirections.East, DrawingHelper.DrawingLevel.Low, game, world);
             frame = new TexturePolygon(Library.Map.Texture2, new Vector2(1920 / 2, 1080 / 2), 0, DrawingHelper.DrawingLevel.Back, game, world, false);
 
-            mapComponentCollection.Add(player);
             mapComponentCollection.Add(crystal);
             mapComponentCollection.Add(frame);
             // End TODO: Test objects. Remove Later
