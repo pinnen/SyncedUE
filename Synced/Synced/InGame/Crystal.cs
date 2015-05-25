@@ -1,26 +1,16 @@
 ﻿// Crystal.cs
 // Introduced: 2015-04-14
-// Last edited: 2015-05-10
+// Last edited: 2015-05-23
 // Edited by:
 // Pontus Magnusson
 // Göran Forsström
-
+// Dennis Stockhaus
+using FarseerPhysics.Dynamics;
+using FarseerPhysics.Dynamics.Contacts;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Synced.Actors;
 using Synced.Static_Classes;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using FarseerPhysics.Dynamics;
-using FarseerPhysics.Factories;
-using FarseerPhysics.Collision.Shapes;
-using FarseerPhysics.Dynamics.Contacts;
 
-using Synced.Content;
-using FarseerPhysics;
-using Synced.InGame.Actors;
 
 namespace Synced.InGame
 {

@@ -1,17 +1,18 @@
-﻿using FarseerPhysics.Dynamics;
+﻿// TestGoal.cs
+// Introduced: 2015-04-14
+// Last edited: 2015-04-14
+// Edited by:
+// Dennis Stockhaus
+using FarseerPhysics.Dynamics;
 using FarseerPhysics.Dynamics.Contacts;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Synced.Actors;
 using Synced.CollisionShapes;
 using Synced.InGame.Actors;
 using Synced.Interface;
 using Synced.MapNamespace;
 using Synced.Static_Classes;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Synced.MapNameSpace
 {

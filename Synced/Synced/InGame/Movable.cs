@@ -1,15 +1,13 @@
-﻿using FarseerPhysics;
+﻿// Movable.cs
+// Introduced: 2015-04-14
+// Last edited: 2015-05-10
+// Edited by:
+// Pontus Magnusson
 using FarseerPhysics.Dynamics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 using Synced.Actors;
-using Synced.InGame.Actors;
 using Synced.Static_Classes;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Synced.InGame
 {

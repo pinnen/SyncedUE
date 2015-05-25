@@ -9,15 +9,8 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Synced.Actors;
 using Synced.Content;
-using Synced.InGame;
 using Synced.Static_Classes;
 using System;
-
-// TODO:
-// Create controls for all objects/texts/controllers
-// Update the list to hide/show objects with:
-// myList.ForEach(c => c.Enabled = false);
-// http://stackoverflow.com/questions/1883920/call-a-function-for-each-value-in-a-generic-c-sharp-collection
 
 namespace Synced.Interface
 {
@@ -33,9 +26,9 @@ namespace Synced.Interface
 
         // Objects/Texts/Controllers
         Sprite _characterHolder;    // Sprite that displays the character
-        Text _abilityTextHolder;     // Text that displays the ability text
+        Label _abilityTextHolder;     // Text that displays the ability text
         Sprite _arrowHolder;        // Sprite that displays the selection arrows
-        Text _stateText;
+        Label _stateText;
 
         PlayerIndex _playerIndex;
         GamePadState _previousState;
@@ -81,9 +74,9 @@ namespace Synced.Interface
             Vector2 arrowPosition = characterPosition;
 
             _characterHolder = new Sprite(Library.Character.InterfaceTexture[(Library.Character.Name)0], characterPosition, _color, DrawingHelper.DrawingLevel.Top, true, Game);
-            _abilityTextHolder = new Text("", abilityTextRectangle, Game);
+            _abilityTextHolder = new Label("", abilityTextRectangle, Game);
             _arrowHolder = new Sprite(Library.Interface.Arrows, arrowPosition, _color, DrawingHelper.DrawingLevel.Top, true, Game);
-            _stateText = new Text("Unconnected!", new Rectangle(posX, posY, 0, 0), Game);
+            _stateText = new Label("Unconnected!", new Rectangle(posX, posY, 0, 0), Game);
 
             base.Initialize();
         }

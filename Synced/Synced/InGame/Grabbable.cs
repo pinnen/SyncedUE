@@ -1,16 +1,17 @@
-﻿using FarseerPhysics;
+﻿// Grabbable.cs
+// Introduced: 2015-04-14
+// Last edited: 2015-05-10
+// Edited by:
+// Dennis Stockhaus
+// Lina Ju
+using FarseerPhysics;
 using FarseerPhysics.Dynamics;
 using FarseerPhysics.Factories;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Synced.Actors;
 using Synced.Content;
 using Synced.InGame.Actors;
 using Synced.Static_Classes;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Synced.InGame
 {
@@ -35,7 +36,6 @@ namespace Synced.InGame
             RigidBody.LinearDamping = 0.5f; // TODO: fix hardcoded value
             RigidBody.Restitution = 1f; // TODO: fix hardcoded value
             Origin = new Vector2(Texture.Width / 2, Texture.Height / 2);
-
 
             Color = color;
             _tail = new ParticleEngine(1, Library.Particle.trailTexture, position, color, Origin, 1.0f, 0.0f, 0.2f, DrawingHelper.DrawingLevel.Medium, game);

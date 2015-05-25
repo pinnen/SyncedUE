@@ -1,9 +1,5 @@
 ﻿// ResolutionManager.cs
 // Introduced: 2015-04-14
-// Last edited: 2015-04-14
-// Edited by:
-// 
-//
 
 //////////////////////////////////////////////////////////////////////////
 ////License:  The MIT License (MIT)
@@ -26,10 +22,6 @@
 //// 
 //////////////////////////////////////////////////////////////////////////
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 

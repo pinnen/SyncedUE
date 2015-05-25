@@ -3,8 +3,6 @@
 // Last edited: 2015-05-13
 // Edited by:
 // Pontus Magnusson
-
-using FarseerPhysics.Common;
 using FarseerPhysics.Dynamics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -19,7 +17,6 @@ using Synced.InGame;
 using Synced.MapNameSpace;
 using Synced.CollisionShapes;
 using Synced.Static_Classes;
-
 
 namespace Synced.MapNamespace
 {

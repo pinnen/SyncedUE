@@ -1,13 +1,17 @@
-﻿using Microsoft.Xna.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Synced.MapNamespace;
-using Synced.Content;
-using Synced.Static_Classes;
-using Synced.Actors;
+﻿// CharacterSelector.cs
+// Introduced: 2015-04-29
+// Last edited: 2015-05-18
+// Edited by:
+// Pontus Magnusson
+// Dennis Stockhaus
+// Robin Calmegård
 using FarseerPhysics.Dynamics;
+using Microsoft.Xna.Framework;
+using Synced.Actors;
+using Synced.Content;
+using Synced.MapNamespace;
+using Synced.Static_Classes;
+using System.Collections.Generic;
 
 namespace Synced.Interface
 {

@@ -3,16 +3,11 @@
 // Last edited: 2015-05-13
 // Edited by:
 // Robin Calmegård
-//
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Synced.Actors;
-using Synced.InGame;
 using Synced.Static_Classes;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Synced.Interface
 {

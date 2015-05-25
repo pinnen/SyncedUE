@@ -3,15 +3,12 @@
 // Last edited: 2015-04-28
 // Edited by:
 // Göran F
-
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-
-using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
-using MonoGame.Framework;
+using Microsoft.Xna.Framework;
 
 namespace Synced.Static_Classes
 {

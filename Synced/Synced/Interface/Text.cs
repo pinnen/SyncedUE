@@ -3,19 +3,13 @@
 // Last edited: 2015-04-29
 // Edited by:
 // Pontus Magnusson
-//
-//
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Synced.Static_Classes;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Synced.Interface
 {
-    class Text : DrawableGameComponent
+    class Label : DrawableGameComponent
     {
         #region Variables
         string _content;
@@ -45,7 +39,7 @@ namespace Synced.Interface
         }
         #endregion
 
-        public Text(string content, Rectangle rectangle, Game game)
+        public Label(string content, Rectangle rectangle, Game game)
             : base(game)
         {
             _content = content;
