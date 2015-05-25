@@ -42,14 +42,21 @@ namespace Synced.Interface
                     }
                 }
             }
-            return null;
+            return null; // TODO: return something else then null
         }
         #endregion
 
         public GameScreen(Game game) // TODO: tmp added world to parameters, might solve in a different way later. 
             : base (game)
         {
-            componentCollection = new GameComponentCollection();
+            if (componentCollection != null)
+            {
+                componentCollection.Clear();
+            }
+            else
+            {
+                componentCollection = new GameComponentCollection();
+            }
 
             _map = new Map(Library.Map.Path[Library.Map.Name.Paper], game);
             GameComponents.Add(_map);

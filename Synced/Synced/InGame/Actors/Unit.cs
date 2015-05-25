@@ -89,15 +89,18 @@ namespace Synced.Actors
         {
             CollidingSprite other = GameScreen.GetCollisionComponent(f2);
 
-            if (other.Tag == "CRYSTAL")
+            if (other != null)
             {
-                Crystal crystal = other as Crystal;
-                crystal.PickUp(this);
-                return false;
-            }
-            if (other.Tag == "UNIT")
-            {
-                return false;
+                if (other.Tag == "CRYSTAL")
+                {
+                    Crystal crystal = other as Crystal;
+                    crystal.PickUp(this);
+                    return false;
+                }
+                else if (other.Tag == "UNIT")
+                {
+                    return false;
+                }
             }
 
             return true;
