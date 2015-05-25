@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Synced.Actors;
 using Synced.CollisionShapes;
 using Synced.InGame.Actors;
+using Synced.Interface;
 using Synced.MapNamespace;
 using Synced.Static_Classes;
 using System;
@@ -81,9 +82,9 @@ namespace Synced.MapNameSpace
 
             Border = new TexturePolygon(borderTexture, borderPosition, borderRotation, DrawingHelper.DrawingLevel.Medium, game, world, false);
 
-            Map.MapComponentCollection.Add(OuterCircle);
-            Map.MapComponentCollection.Add(InnerCircle);
-            Map.MapComponentCollection.Add(Border);
+            GameScreen.ComponentCollection.Add(OuterCircle);
+            GameScreen.ComponentCollection.Add(InnerCircle);
+            GameScreen.ComponentCollection.Add(Border);
         }
 
         public bool OnCollision(Fixture f1, Fixture f2, Contact contact)

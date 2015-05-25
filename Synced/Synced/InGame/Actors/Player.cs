@@ -14,6 +14,7 @@ using Synced.Static_Classes;
 using Microsoft.Xna.Framework.Input;
 using FarseerPhysics.Dynamics;
 using Synced.MapNamespace;
+using Synced.Interface;
 
 namespace Synced.Actors
 {
@@ -37,8 +38,8 @@ namespace Synced.Actors
             Left = new Unit(Library.Character.GameTexture[character], new Vector2(300, 300), Color.Red, game, world);       // TODO: fix hardcoded values for positions. 
             Right = new Unit(Library.Character.GameTexture[character], new Vector2(300, 200), Color.DarkRed, game, world);
 
-            Map.MapComponentCollection.Add(Left);
-            Map.MapComponentCollection.Add(Right);
+            GameScreen.ComponentCollection.Add(Left);
+            GameScreen.ComponentCollection.Add(Right);
             game.Components.Add(this);
         }
 

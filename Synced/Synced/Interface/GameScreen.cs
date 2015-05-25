@@ -15,25 +15,32 @@ namespace Synced.Interface
     {
         Map _map;
         List<Player> _players;
-        World world; 
+
+        static GameComponentCollection componentCollection;
+
+        public static GameComponentCollection ComponentCollection
+        {
+            get { return componentCollection; }
+            set { componentCollection = value; }
+        }
 
         public GameScreen(Game game) // TODO: tmp added world to parameters, might solve in a different way later. 
             : base (game)
         {
-            world = new World(Vector2.Zero);
+            componentCollection = new GameComponentCollection();
 
             _map = new Map(Library.Map.Path[Library.Map.Name.Paper], game);
             GameComponents.Add(_map);
 
             _players = new List<Player>();
-            //foreach (var item in _map.Data.Objects)
-            //{
-            //    if (item is PlayerStart)
-            //    {
-            //        PlayerStart temp = item as PlayerStart;
-            //        _players.Add(new Player(temp.PlayerIndex, Library.Character.Name.Circle, game, world)); // TODO: All collision objects need world!
-            //    }
-            //}
+            foreach (var item in _map.Data.Objects)
+            {
+                if (item is PlayerStart)
+                {
+                    PlayerStart temp = item as PlayerStart;
+                    _players.Add(new Player(temp.PlayerIndex, Library.Character.Name.Circle, game, _map.World)); // TODO: All collision objects need world!
+                }
+            }
         }
     }
 }

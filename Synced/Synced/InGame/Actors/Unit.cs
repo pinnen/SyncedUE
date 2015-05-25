@@ -20,7 +20,7 @@ using FarseerPhysics.Dynamics.Contacts;
 using FarseerPhysics;
 using Synced.InGame.Actors;
 using Synced.MapNamespace;
-using System.Linq;
+using Synced.Interface;
 
 namespace Synced.Actors
 {
@@ -61,17 +61,18 @@ namespace Synced.Actors
 
         public override bool OnCollision(Fixture f1, Fixture f2, Contact contact)
         {
-            foreach (CollidingSprite gc in Map.MapComponentCollection)
+            foreach (CollidingSprite gc in GameScreen.ComponentCollection)
             {
                 if (gc is CollidingSprite)
                 {
-                    if (gc.ID.ToString() == f1.Body.UserData.ToString())
+                    if (gc.ID.ToString() == f2.Body.UserData.ToString())
                     {
                         if (gc.Tag == "CRYSTAL")
                         {
                             Crystal crystal = gc as Crystal;
                             crystal.PickUp(this);
                         }
+                        break;
                     }
                 }
             }
