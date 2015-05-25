@@ -34,6 +34,7 @@ namespace Synced.InGame
             //RigidBody.LinearDamping = 0.5f; // TODO: fix hardcoded value
             //RigidBody.Restitution = 1f; // TODO: fix hardcoded value
             //Origin = new Vector2(Texture.Width / 2, Texture.Height / 2);
+            RigidBody.CollidesWith = Category.All ^ Category.Cat9;
 
             /* Setting up Crystal */
             //_distanceToOwner = 50; // TODO: fix hardcoded distance

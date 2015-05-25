@@ -74,6 +74,8 @@ namespace Synced.Actors
             _trail = new ParticleEngine(1, Library.Particle.trailTexture, position, color, Origin, 1.0f, 0.0f, _trailParticleLifetime, DrawingHelper.DrawingLevel.Medium, game);
             _effectParticles = new ParticleEngine(1, Library.Particle.plusSignTexture, position, color, Origin, 0.7f, 0.0f, 0.5f, DrawingHelper.DrawingLevel.Medium, game);
             _useEffectParticles = false;
+            Tag = "UNIT";
+
             game.Components.Add(this);
         }
 
@@ -85,22 +87,19 @@ namespace Synced.Actors
 
         public override bool OnCollision(Fixture f1, Fixture f2, Contact contact)
         {
-            foreach (GameComponent gc in GameScreen.ComponentCollection)
+            CollidingSprite other = GameScreen.GetCollisionComponent(f2);
+
+            if (other.Tag == "CRYSTAL")
             {
-                if (gc is CollidingSprite)
-                {
-                    CollidingSprite cs = (CollidingSprite)gc;
-                    if (cs.ID.ToString() == f2.Body.UserData.ToString())
-                    {
-                        if (cs.Tag == "CRYSTAL")
-                        {
-                            Crystal crystal = cs as Crystal;
-                            crystal.PickUp(this);
-                        }
-                        break;
-                    }
-                }
+                Crystal crystal = other as Crystal;
+                crystal.PickUp(this);
+                return false;
             }
+            if (other.Tag == "UNIT")
+            {
+                return false;
+            }
+
             return true;
         }
 
@@ -121,8 +120,6 @@ namespace Synced.Actors
                 _effectParticles.UpdatePosition(Position);
                 _effectParticles.GenerateEffectParticles();
             }
-
-            
 
             base.Update(gameTime);
         }

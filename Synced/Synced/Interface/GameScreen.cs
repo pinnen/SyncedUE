@@ -9,6 +9,7 @@ using FarseerPhysics.Dynamics;
 using Microsoft.Xna.Framework;
 using Synced.Actors;
 using Synced.Content;
+using Synced.InGame.Actors;
 using Synced.MapNamespace;
 using Synced.Static_Classes;
 using System.Collections.Generic;
@@ -20,6 +21,7 @@ namespace Synced.Interface
         Map _map;
         List<Player> _players;
 
+        #region static Collection Functions
         static GameComponentCollection componentCollection;
 
         public static GameComponentCollection ComponentCollection
@@ -27,6 +29,22 @@ namespace Synced.Interface
             get { return componentCollection; }
             set { componentCollection = value; }
         }
+        public static CollidingSprite GetCollisionComponent(Fixture other)
+        { 
+            foreach (GameComponent gc in GameScreen.ComponentCollection)
+            {
+                if (gc is CollidingSprite)
+                {
+                    CollidingSprite cs = (CollidingSprite)gc;
+                    if (cs.ID.ToString() == other.Body.UserData.ToString())
+                    {
+                        return cs;
+                    }
+                }
+            }
+            return null;
+        }
+        #endregion
 
         public GameScreen(Game game) // TODO: tmp added world to parameters, might solve in a different way later. 
             : base (game)

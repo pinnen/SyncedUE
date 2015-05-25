@@ -36,11 +36,11 @@ namespace Synced.MapNameSpace
 
         public TestGoal(Texture2D goalTexture, Texture2D borderTexture, Vector2 position, GoalDirections direction, DrawingHelper.DrawingLevel drawingLevel, Game game, World world)
         {
-            InnerCircle = new DummyCircle(position, (goalTexture.Width / 2), game, world); // TODO: fix position
+            InnerCircle = new DummyCircle(position, ((goalTexture.Width / 2) / 2) / 2, game, world); // TODO: fix position
             InnerCircle.setOnCollisionFunction(OnCollision);
             OuterCircle = new Circle(goalTexture, position, goalTexture.Width / 2, game, world);
+            OuterCircle.RigidBody.CollisionCategories = Category.Cat9;
             OuterCircle.setOnCollisionFunction(OnCollision);
-            OuterCircle.RigidBody.CollidesWith = Category.Cat2;
 
             float borderRotation = 0;
             Vector2 borderPosition = Vector2.Zero;
