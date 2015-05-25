@@ -19,6 +19,9 @@ using FarseerPhysics.Collision.Shapes;
 using FarseerPhysics.Dynamics.Contacts;
 using FarseerPhysics;
 using Synced.InGame.Actors;
+using Synced.MapNamespace;
+using Synced.Interface;
+
 namespace Synced.Actors
 {
     class Unit : MovableCollidable
@@ -82,6 +85,22 @@ namespace Synced.Actors
 
         public override bool OnCollision(Fixture f1, Fixture f2, Contact contact)
         {
+            foreach (GameComponent gc in GameScreen.ComponentCollection)
+            {
+                if (gc is CollidingSprite)
+                {
+                    CollidingSprite cs = (CollidingSprite)gc;
+                    if (cs.ID.ToString() == f2.Body.UserData.ToString())
+                    {
+                        if (cs.Tag == "CRYSTAL")
+                        {
+                            Crystal crystal = cs as Crystal;
+                            crystal.PickUp(this);
+                        }
+                        break;
+                    }
+                }
+            }
             return true;
         }
 
@@ -102,6 +121,8 @@ namespace Synced.Actors
                 _effectParticles.UpdatePosition(Position);
                 _effectParticles.GenerateEffectParticles();
             }
+
+            
 
             base.Update(gameTime);
         }

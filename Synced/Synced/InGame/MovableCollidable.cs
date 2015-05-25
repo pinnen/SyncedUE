@@ -21,7 +21,7 @@ namespace Synced.InGame
         #region Properties
         public Vector2 Direction
         {
-            get { return Direction; } 
+            get { return direction; } 
             set { direction = value;} 
         }
         #endregion

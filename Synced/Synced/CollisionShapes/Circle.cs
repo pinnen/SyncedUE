@@ -15,7 +15,7 @@ namespace Synced.CollisionShapes
     class Circle : CollidingSprite
     {
         public Circle(Texture2D texture, Vector2 position, float r, Game game, World world)
-            : base(texture, position, DrawingHelper.DrawingLevel.Back, game, world)
+            : base(texture, position, DrawingHelper.DrawingLevel.Medium, game, world)
         {
             /* Setting up Farseer Physics */
             RigidBody = BodyFactory.CreateCircle(this.world, ConvertUnits.ToSimUnits(r), 0, ConvertUnits.ToSimUnits(position)); // TODO: size to some scale? 
@@ -23,8 +23,6 @@ namespace Synced.CollisionShapes
             RigidBody.CollisionCategories = Category.All; /* Collision Category */ // TODO: fix collisionCategory system. 
             RigidBody.CollidesWith = Category.All;
             Origin = new Vector2(r, r);
-
-            game.Components.Add(this); // TODO: Remove this later
         }
 
         public void setOnCollisionFunction(OnCollisionEventHandler onCollisionFunc)

@@ -32,7 +32,7 @@ namespace Synced.InGame.Actors
             set 
             {
                 rigidBody = value;
-                rigidBody.UserData = id.ToByteArray();
+                rigidBody.UserData = id.ToString();
                 rigidBody.OnCollision += OnCollision;
                 rigidBody.OnSeparation += OnSeparation;
             }
@@ -55,6 +55,7 @@ namespace Synced.InGame.Actors
         public string Tag
         {
             get { return tag; }
+            set { tag = value; }
         }
         #endregion
 

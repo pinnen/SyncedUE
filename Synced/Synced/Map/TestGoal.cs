@@ -5,6 +5,8 @@ using Microsoft.Xna.Framework.Graphics;
 using Synced.Actors;
 using Synced.CollisionShapes;
 using Synced.InGame.Actors;
+using Synced.Interface;
+using Synced.MapNamespace;
 using Synced.Static_Classes;
 using System;
 using System.Collections.Generic;
@@ -54,7 +56,7 @@ namespace Synced.MapNameSpace
                     break;
                 case GoalDirections.East:
                     borderRotation = 0;
-                    borderPosition = new Vector2((position.X + borderTexture.Width / 2) + 5.30973f, (position.Y) - 0.63129f);
+                    borderPosition = new Vector2((position.X + borderTexture.Width / 2) + 5.30973f, (position.Y) - 0.63129f); // TODO: hardcoded offset
                     break;
                 case GoalDirections.SouthEast:
                     borderRotation = 0;
@@ -78,7 +80,11 @@ namespace Synced.MapNameSpace
                     break;
             }
 
-            Border = new TexturePolygon(borderTexture, borderPosition, borderRotation, DrawingHelper.DrawingLevel.Medium, game, world, false);
+            Border = new TexturePolygon(borderTexture, borderPosition, borderRotation, DrawingHelper.DrawingLevel.High, game, world, false);
+
+            GameScreen.ComponentCollection.Add(OuterCircle);
+            GameScreen.ComponentCollection.Add(InnerCircle);
+            GameScreen.ComponentCollection.Add(Border);
         }
 
         public bool OnCollision(Fixture f1, Fixture f2, Contact contact)

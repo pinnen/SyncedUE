@@ -15,6 +15,8 @@ using Microsoft.Xna.Framework.Input;
 using FarseerPhysics.Dynamics;
 using Synced.InGame.Actors;
 using FarseerPhysics;
+using Synced.MapNamespace;
+using Synced.Interface;
 
 namespace Synced.Actors
 {
@@ -60,6 +62,10 @@ namespace Synced.Actors
             shape = (Library.Zone.Name)character;
             _teamColor = teamcolor;
             game.Components.Add(this);
+
+            GameScreen.ComponentCollection.Add(Left);
+            GameScreen.ComponentCollection.Add(Right);
+            //game.Components.Add(this); // TODO: Remove this later
         }
 
         public float GetDistanceBetweenUnits() 

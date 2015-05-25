@@ -14,12 +14,26 @@ using Synced.Interface;
 using System;
 using System.Collections.Generic;
 using System.Xml.Serialization;
+using System.Linq;
+using Synced.InGame;
+using Synced.MapNameSpace;
+using Synced.CollisionShapes;
+using Synced.Static_Classes;
+
 
 namespace Synced.MapNamespace
 {
-    class Map : Screen
+    class Map : DrawableGameComponent// : Screen
     {
         #region Variables
+        // TODO: Test objects. Remove later
+        World world;
+        Player player;
+        Crystal crystal;
+        TestGoal goalLeft;
+        TestGoal goalRight;
+        TexturePolygon frame;
+        // End TODO: Test objects. Remove Later
         #endregion
         #region Properties
         public MapData Data
@@ -39,25 +53,58 @@ namespace Synced.MapNamespace
             Data = Library.Serialization<MapData>.DeserializeFromXmlFile(path);
             World = new World(Vector2.Zero); // Topdown games have no gravity
 
-            // Process data
+            // TODO: Test objects. Remove later
+            world = new World(Vector2.Zero);
+            player = new Player(PlayerIndex.One, Library.Character.Name.Circle, Library.Colors.ColorName.Blue, game, world);
+            crystal = new Crystal(Library.Crystal.Texture, new Vector2(500, 500), DrawingHelper.DrawingLevel.Medium, game, world, Color.White);
+            goalLeft = new TestGoal(Library.Goal.GoalTexture, Library.Goal.BorderTexture, new Vector2(300, 1080 / 2), GoalDirections.West, DrawingHelper.DrawingLevel.Medium, game, world);
+            goalRight = new TestGoal(Library.Goal.GoalTexture, Library.Goal.BorderTexture, new Vector2(1920 - 300, 1080 / 2), GoalDirections.East, DrawingHelper.DrawingLevel.Medium, game, world);
+            frame = new TexturePolygon(Library.Map.Texture2, new Vector2(1920 / 2, 1080 / 2), 0, DrawingHelper.DrawingLevel.Medium, game, world, false);
+
+            GameScreen.ComponentCollection.Add(player);
+            GameScreen.ComponentCollection.Add(crystal);
+            GameScreen.ComponentCollection.Add(frame);
+            // End TODO: Test objects. Remove Later
+            
+            //Process data
             foreach (var mapObject in Data.Objects)
             {
                 if (mapObject is Obstacle)
                 {
-                    GameComponents.Add(new Sprite(game.Content.Load<Texture2D>(mapObject.TexturePath), mapObject.Position, Static_Classes.DrawingHelper.DrawingLevel.Back, game));
+                    GameScreen.ComponentCollection.Add(new Sprite(game.Content.Load<Texture2D>(mapObject.TexturePath), mapObject.Position, Static_Classes.DrawingHelper.DrawingLevel.Low, game));
                 }
                 else if (mapObject is Goal)
                 {
-                    GameComponents.Add(new Sprite(game.Content.Load<Texture2D>(mapObject.TexturePath), mapObject.Position, Static_Classes.DrawingHelper.DrawingLevel.Back, game));
+                    GameScreen.ComponentCollection.Add(new Sprite(game.Content.Load<Texture2D>(mapObject.TexturePath), mapObject.Position, Static_Classes.DrawingHelper.DrawingLevel.Back, game));
                 }
                 else if (mapObject is PlayerStart)
                 {
+                    // TODO: Add player
                 }
                 else if (mapObject is MapObject)
                 {
-                    GameComponents.Add(new Sprite(game.Content.Load<Texture2D>(mapObject.TexturePath), mapObject.Position, Static_Classes.DrawingHelper.DrawingLevel.Back, game));
+                    GameScreen.ComponentCollection.Add(new Sprite(game.Content.Load<Texture2D>(mapObject.TexturePath), mapObject.Position, Static_Classes.DrawingHelper.DrawingLevel.Back, game));
                 }
             }
+        }
+
+        public override void Update(GameTime gameTime)
+        {
+            // TODO: Test objects. Remove later
+            world.Step(Math.Min((float)gameTime.ElapsedGameTime.TotalSeconds, (1f / 30f)));
+
+            //Updates every component in GameComponents
+            foreach (IUpdateable gc in GameScreen.ComponentCollection.OfType<IUpdateable>().Where<IUpdateable>(x => x.Enabled).OrderBy<IUpdateable, int>(x => x.UpdateOrder))
+                gc.Update(gameTime);
+            base.Update(gameTime);
+        }
+
+        public override void Draw(GameTime gameTime)
+        {
+            //Draws every component in GameComponents
+            foreach (IDrawable gc in GameScreen.ComponentCollection.OfType<IDrawable>().Where<IDrawable>(x => x.Visible).OrderBy<IDrawable, int>(x => x.DrawOrder))
+                gc.Draw(gameTime);
+            base.Draw(gameTime);
         }
     }
 }
