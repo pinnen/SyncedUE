@@ -44,7 +44,8 @@ Game Beginning:       The game starts with a menu screen; here each player selec
                                 Circle            Circle of Tar                  Slows done captured player as in a tar pit.
                                 Hexagon           Hexacopy                       The captured player will be created in multiple incarnations, 
                                                                                  all moving the same way but after a few seconds all but one will disappear.
-                                Pentagon          Secret Penterrorist            ???
+                                Pentagon          Secret Penterrorist            Captured player is made invisible but continues anyhow to be controlled and moved,
+                                                                                 after a few seconds it reappears.
                                 Square            Square Prison                  Captured player is stuck inside the box.
                                 Triangle          Bermuda Triangle               Captured player disappears and the reappears somewhere else.
                         (3) Click on button A again to confirm the selected icon.
@@ -53,7 +54,7 @@ Game Beginning:       The game starts with a menu screen; here each player selec
 
 
 Game Playing:         Use the thumb sticks to control speed and direction of each of you icons.
-                      Try to pick-up the crystal by getting close to it, when picked-up speed to one of the goals, turn 180 degrees and shoot it towards the goal.
+                      Try to pick-up the crystal by getting close to it, when picked-upped speed to one of the goals, turn 180 degrees and shoot it towards the goal.
                       
 
 Game Mischiefs:       Control your two icons in selected patterns and there is a reward: a zone-bomb is created!
@@ -63,7 +64,7 @@ Game Mischiefs:       Control your two icons in selected patterns and there is a
 
 
 Game Patterns:        Speed-up            - make your two icons go in parallel while activating the Power-Up control (Xbox Left/Right Trigger).
-                      Create Zone Bomb    - make one icon tightly circle your other icon and a new bomb is created and may be picked-up.
+                      Create Zone Bomb    - make one icon tightly circle your other icon and a new bomb is created and picked-upped by circled icon.
                       Create Capture Net  - ???
                       fler ???
 
