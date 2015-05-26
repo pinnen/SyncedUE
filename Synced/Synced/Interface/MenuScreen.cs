@@ -8,17 +8,27 @@ using Microsoft.Xna.Framework.Graphics;
 using Synced.Actors;
 using Synced.Content;
 using Synced.Static_Classes;
+using System;
 
 namespace Synced.Interface
 {
     class MenuScreen : Screen
     {
+        #region Delegates & Event & Raisers
+        
+        public event StartNewGame NewGame;
+
+        #endregion
+
+        #region Variables & Properties
         const int _minimumPlayersConstant = 1;
 
         SpriteBatch _spriteBatch
         {
             get { return (SpriteBatch)Game.Services.GetService(typeof(SpriteBatch)); }
         }
+        #endregion
+        
 
         public MenuScreen(Game game)
             : base(game)
@@ -37,6 +47,7 @@ namespace Synced.Interface
             // Background
             GameComponents.Add(new Sprite(Library.Interface.MenuBackground, Vector2.Zero, DrawingHelper.DrawingLevel.Back, game));
         }
+
         public bool IsEveryoneReady()
         {
             int count = 0;
@@ -55,9 +66,10 @@ namespace Synced.Interface
         {
             if (IsEveryoneReady())
             {
+                if (NewGame != null)
+                    NewGame(this, new EventArgs());
                 
             }
-
             base.Update(gameTime);
         }
     }

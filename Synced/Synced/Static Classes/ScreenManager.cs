@@ -17,6 +17,11 @@ namespace Synced.Static_Classes
     /// </summary>
     sealed class ScreenManager : DrawableGameComponent
     {
+        public ScreenState CurrentState
+        { 
+            get; 
+            private set;
+        }
         public enum ScreenState { SplashScreen, MenuScreen, GameScreen }
 
         #region Singelton
@@ -41,10 +46,11 @@ namespace Synced.Static_Classes
             // *********************Loads menu screen*********************************
             //Loads the menu screen and put in the stack
             //------------------------------------------------------------------------
-
             //_screenManager.MenuScreen = new MenuScreen(game);
+            //_screenManager.MenuScreen.NewGame += Instance.NewGameEvent;
             //_screenManager.AddScreen(_screenManager.MenuScreen);
             //_screenManager.Screens.Peek().Deactivated();
+            
             ////------------------------------------------------------------------------
             //// Splash screens
             ////------------------------------------------------------------------------
@@ -57,7 +63,7 @@ namespace Synced.Static_Classes
             //Screen screen = new SplashScreen(Library.SplashScreen.SplashAlpha, game);
             //screen.Activated();
             //_screenManager.AddScreen(screen);
-            _screenManager.AddScreen(new GameScreen(game));
+            _screenManager.AddScreen(Instance.GameScreen);
             //TODO: Add this functionality properly. 
         }
 
@@ -147,7 +153,7 @@ namespace Synced.Static_Classes
 
         #endregion
 
-        #region ScreenManager Events
+        #region ScreenManager Events & Raisers
         private void Screen_OnScreenTransition(Screen screen, EventArgs e)
         {
             throw new NotImplementedException();
@@ -172,12 +178,22 @@ namespace Synced.Static_Classes
         {
             throw new NotImplementedException();
         }
+
+        private void NewGameEvent(Screen screen, EventArgs e)
+        {
+
+            throw new NotImplementedException();
+        }
         #endregion
         #region ScreenManager Properties
-        public Screen MenuScreen
+        public MenuScreen MenuScreen
         {
             get;
             private set;
+        }
+        public GameScreen GameScreen
+        {
+            get { return new GameScreen(Game); }
         }
         #endregion
 
