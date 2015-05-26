@@ -58,15 +58,15 @@ namespace Synced.Interface
 
             // TODO: had to comment this
             _players = new List<Player>();
-            //foreach (var item in _map.Data.Objects)
-            //{
-            //    if (item is PlayerStart)
-            //    {
-            //        PlayerStart temp = item as PlayerStart;
+            foreach (var item in _map.Data.Objects)
+            {
+                if (item is PlayerStart)
+                {
+                    PlayerStart temp = item as PlayerStart;
 
-            //        _players.Add(new Player(temp.PlayerIndex, Library.Character.Name.Circle, Library.Colors.ColorName.Blue, game, _map.World)); // TODO: All collision objects need world!
-            //    }
-            //}
+                    _players.Add(new Player(temp.PlayerIndex, Library.Character.Name.Circle, Library.Colors.ColorName.Blue, game, _map.World)); // TODO: All collision objects need world!
+                }
+            }
         }
 
         public override void Update(GameTime gameTime)
