@@ -30,6 +30,7 @@ namespace Synced.Actors
         CompactZone _compactZone;
         Game _game;
         World _world;
+        Barrier _barrier;
         #endregion
         
         #region Properties
@@ -59,11 +60,13 @@ namespace Synced.Actors
             _areTrailsActive = false;
             _game = game;
             _world = world;
+            _barrier = new Barrier(Library.Particle.plusSignTexture, Left, Right, world, game);
             shape = (Library.Zone.Name)character;
             _teamColor = teamcolor;
 
             SyncedGameCollection.ComponentCollection.Add(Left);
             SyncedGameCollection.ComponentCollection.Add(Right);
+            SyncedGameCollection.ComponentCollection.Add(_barrier);
         }
 
         public float GetDistanceBetweenUnits() 

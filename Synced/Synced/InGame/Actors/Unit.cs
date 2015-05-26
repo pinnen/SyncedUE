@@ -58,7 +58,7 @@ namespace Synced.Actors
         {
             /* Setting up Farseer Physics */
             RigidBody = BodyFactory.CreateCircle(this.world, ConvertUnits.ToSimUnits(texture.Width / 2), 0, ConvertUnits.ToSimUnits(position));
-            RigidBody.BodyType = BodyType.Dynamic;
+            RigidBody.BodyType = BodyType.Static;
             RigidBody.CollisionCategories = Category.Cat5; /* UNIT Category & TEAM Category*/ // TODO: fix collisionCategory system. 
             RigidBody.CollidesWith = Category.All | Category.Cat2;         
             RigidBody.Mass = 10f;                          
