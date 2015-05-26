@@ -42,6 +42,7 @@ namespace Synced.InGame.Actors
         public ParticleEngine(int particleAmount, Texture2D particleTexture, Vector2 position, Color color, Vector2 origin, float scale, float rotation, float lifetime, DrawingHelper.DrawingLevel drawingLevel, Game game)
             : base(game)
         {
+            Initialize();
             _particles = new List<Particle>();
             _sleepingParticles = new Queue<Particle>();
             _particleAmount = particleAmount;
@@ -55,8 +56,7 @@ namespace Synced.InGame.Actors
             _particleOrigin.X = _particleTexture.Width / 2;
             _particleOrigin.Y = _particleTexture.Height / 2;
             this.game = game;
-            dLevel = DrawingHelper.DrawingLevel.Top;//drawingLevel;
-            game.Components.Add(this); // TODO: Remove this and replace with GameScreen.CompomentCollection.Add(this);
+            dLevel = drawingLevel;
         }
         #endregion
 
@@ -65,7 +65,6 @@ namespace Synced.InGame.Actors
         {
             base.Initialize();
             random = new Random();
-
         }
 
         public void UpdatePosition(Vector2 newPosition) 

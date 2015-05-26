@@ -58,6 +58,7 @@ namespace Synced.Static_Classes
             //screen.Activated();
             //_screenManager.AddScreen(screen);
             _screenManager.AddScreen(new GameScreen(game));
+            //TODO: Add this functionality properly. 
         }
 
         public static bool Initialized

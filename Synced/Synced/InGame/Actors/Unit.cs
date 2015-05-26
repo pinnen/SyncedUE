@@ -57,13 +57,13 @@ namespace Synced.Actors
             : base(texture, position, DrawingHelper.DrawingLevel.Medium, game, world)
         {
             /* Setting up Farseer Physics */
-            RigidBody = BodyFactory.CreateCircle(this.world, ConvertUnits.ToSimUnits(texture.Width / 2), 0, ConvertUnits.ToSimUnits(position)); // TODO: size to some scale?
+            RigidBody = BodyFactory.CreateCircle(this.world, ConvertUnits.ToSimUnits(texture.Width / 2), 0, ConvertUnits.ToSimUnits(position));
             RigidBody.BodyType = BodyType.Dynamic;
-            RigidBody.CollisionCategories = Category.Cat2; /* Unit Category */ // TODO: fix collisionCategory system. 
+            RigidBody.CollisionCategories = Category.Cat5; /* UNIT Category & TEAM Category*/ // TODO: fix collisionCategory system. 
             RigidBody.CollidesWith = Category.All | Category.Cat2;         
-            RigidBody.Mass = 10f;                          // TODO: fix hardcoded value
-            RigidBody.LinearDamping = 5f;                  // TODO: fix hardcoded value
-            RigidBody.Restitution = 0.1f;                  // TODO: fix hardcoded value
+            RigidBody.Mass = 10f;                          
+            RigidBody.LinearDamping = 5f;                  
+            RigidBody.Restitution = 0.1f;                  
             Origin = new Vector2(Texture.Width / 2, texture.Height / 2);
 
             /* Setting up Unit */
@@ -73,9 +73,8 @@ namespace Synced.Actors
             _trail = new ParticleEngine(1, Library.Particle.trailTexture, position, color, Origin, 1.0f, 0.0f, _trailParticleLifetime, DrawingHelper.DrawingLevel.Medium, game);
             _effectParticles = new ParticleEngine(1, Library.Particle.plusSignTexture, position, color, Origin, 0.7f, 0.0f, 0.5f, DrawingHelper.DrawingLevel.Medium, game);
             _useEffectParticles = false;
-            Tag = "UNIT";
-
-            game.Components.Add(this);
+            SyncedGameCollection.ComponentCollection.Add(_trail);
+            Tag = TagCategories.UNIT;
         }
 
         public void Shoot()
@@ -89,18 +88,18 @@ namespace Synced.Actors
 
         public override bool OnCollision(Fixture f1, Fixture f2, Contact contact)
         {
-            CollidingSprite other = GameScreen.GetCollisionComponent(f2);
+            CollidingSprite other = SyncedGameCollection.GetCollisionComponent(f2);
 
             if (other != null)
             {
-                if (other.Tag == "CRYSTAL")
+                if (other.Tag == TagCategories.CRYSTAL)
                 {
                     Crystal crystal = other as Crystal;
                     crystal.PickUp(this);
                     Item = crystal;
                     return false;
                 }
-                else if (other.Tag == "UNIT")
+                else if (other.Tag == TagCategories.UNIT)
                 {
                     return false;
                 }
@@ -118,7 +117,7 @@ namespace Synced.Actors
             }
 
             // Update Trail
-            _trail.UpdatePosition(Position); // TODO: might have to use ConvertUnits function. 
+            _trail.UpdatePosition(Position);
             _trail.GenerateTrailParticles(_trailParticleLifetime);
             _trailParticleLifetime = 0.2f;
             if (_useEffectParticles)

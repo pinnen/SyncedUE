@@ -63,8 +63,8 @@ namespace Synced.Actors
             _teamColor = teamcolor;
             game.Components.Add(this);
 
-            GameScreen.ComponentCollection.Add(Left);
-            GameScreen.ComponentCollection.Add(Right);
+            SyncedGameCollection.ComponentCollection.Add(Left);
+            SyncedGameCollection.ComponentCollection.Add(Right);
             //game.Components.Add(this); // TODO: Remove this later
         }
 

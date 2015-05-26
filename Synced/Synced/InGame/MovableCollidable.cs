@@ -16,7 +16,9 @@ namespace Synced.InGame
     {
         #region Variables
         protected Vector2 direction;
-        protected float acceleration;                
+        protected float acceleration;
+        protected float maxAcceleration;
+        protected float minAcceleration;
         float force;                                 
         #endregion
 
@@ -34,13 +36,14 @@ namespace Synced.InGame
         public MovableCollidable(Texture2D texture, Vector2 position, DrawingHelper.DrawingLevel drawingLevel, Game game, World world)
             : base(texture, position, drawingLevel, game, world)
         {
+            /* Setting up MovableCollidable */
             direction = Vector2.Zero;
             acceleration = 0;
         }
 
         public override void Update(GameTime gameTime)
         {                     
-            // Movement
+            // Basic Movement
             if (direction != Vector2.Zero)
             {
                 force = RigidBody.Mass * acceleration;

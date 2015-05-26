@@ -14,6 +14,16 @@ using FarseerPhysics;
 using FarseerPhysics.Dynamics.Contacts;
 using Synced.Actors;
 
+public enum TagCategories
+{
+    UNDEFINED,
+    CRYSTAL,
+    UNIT,
+    GOAL,
+    COMPACTZONE,
+    ZONE,
+}
+
 namespace Synced.InGame.Actors
 {
     abstract class CollidingSprite : Sprite // TODO: Add a Collidable interface
@@ -22,7 +32,7 @@ namespace Synced.InGame.Actors
         protected World world;
         Body rigidBody;
         Guid id;
-        string tag;
+        TagCategories tag;
         #endregion
 
         #region Properties       
@@ -37,12 +47,11 @@ namespace Synced.InGame.Actors
                 rigidBody.OnSeparation += OnSeparation;
             }
         }
-        /* "overrides" Sprite position/rotation to translate pixels to FarseerPhysics units. */
         public new Vector2 Position
         {
-            get { return rigidBody.Position; }
+            get { return rigidBody.Position; } // TODO: check if it should be converted or not
             set { rigidBody.Position = value; }
-        } // TODO: CollidingSprite allways centered. need to change? 
+        }
         public new float Rotation 
         {
             get { return rigidBody.Rotation; }
@@ -52,7 +61,7 @@ namespace Synced.InGame.Actors
         {
             get { return id; }
         }
-        public string Tag
+        public TagCategories Tag
         {
             get { return tag; }
             set { tag = value; }
@@ -65,15 +74,17 @@ namespace Synced.InGame.Actors
         public CollidingSprite(Texture2D texture, Vector2 position, DrawingHelper.DrawingLevel drawingLevel, Game game, World world)
             : base(texture, position, drawingLevel, game)
         {
+            /* Setting up Farseer Physics*/
             this.world = world;
 
-            // Generate unique ID
+            /* Setting up CollidingSprite */
             id = Guid.NewGuid();
-            tag = "";
+            tag = TagCategories.UNDEFINED;
         }
         
         /// <summary>
-        /// FarseerPhysics OnCollisionEvent. 
+        /// FarseerPhysics OnCollisionEvent. Called when Collision Occures.
+        /// FarseerPhysics OnSeparationEvent. Called when Collision no longer Occures. 
         /// </summary>
         /// <param name="f1">This GameObject</param>
         /// <param name="f2">Other GameObject</param>

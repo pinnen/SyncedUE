@@ -91,7 +91,7 @@ namespace Synced.InGame.Actors
             _scale = scale;
             _rotation = rotation;
             _fadeAlpha = 1.0f;
-            GameScreen.ComponentCollection.Add(this); // TODO: all objects should be added here right? for drawing and collision purposes. 
+            SyncedGameCollection.ComponentCollection.Add(this); // TODO: all objects should be added here right? for drawing and collision purposes. 
         }
         #endregion
 

@@ -83,9 +83,9 @@ namespace Synced.MapNameSpace
 
             Border = new TexturePolygon(borderTexture, borderPosition, borderRotation, DrawingHelper.DrawingLevel.High, game, world, false);
 
-            GameScreen.ComponentCollection.Add(OuterCircle);
-            GameScreen.ComponentCollection.Add(InnerCircle);
-            GameScreen.ComponentCollection.Add(Border);
+            SyncedGameCollection.ComponentCollection.Add(OuterCircle);
+            SyncedGameCollection.ComponentCollection.Add(InnerCircle);
+            SyncedGameCollection.ComponentCollection.Add(Border);
         }
 
         public bool OnCollision(Fixture f1, Fixture f2, Contact contact)

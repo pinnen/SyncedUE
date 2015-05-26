@@ -8,10 +8,14 @@
 using FarseerPhysics.Dynamics;
 using Microsoft.Xna.Framework;
 using Synced.Actors;
+using Synced.CollisionShapes;
 using Synced.Content;
+using Synced.InGame;
 using Synced.InGame.Actors;
 using Synced.MapNamespace;
+using Synced.MapNameSpace;
 using Synced.Static_Classes;
+using System;
 using System.Collections.Generic;
 
 namespace Synced.Interface
@@ -21,45 +25,36 @@ namespace Synced.Interface
         Map _map;
         List<Player> _players;
 
-        #region static Collection Functions
-        static GameComponentCollection componentCollection;
-
-        public static GameComponentCollection ComponentCollection
-        {
-            get { return componentCollection; }
-            set { componentCollection = value; }
-        }
-        public static CollidingSprite GetCollisionComponent(Fixture other)
-        { 
-            foreach (GameComponent gc in GameScreen.ComponentCollection)
-            {
-                if (gc is CollidingSprite)
-                {
-                    CollidingSprite cs = (CollidingSprite)gc;
-                    if (cs.ID.ToString() == other.Body.UserData.ToString())
-                    {
-                        return cs;
-                    }
-                }
-            }
-            return null; // TODO: return something else then null
-        }
-        #endregion
+        // TODO: Test objects. Remove later
+        World world;
+        Player player;
+        Crystal crystal;
+        TestGoal goalLeft;
+        TestGoal goalRight;
+        TexturePolygon frame;
+        // End TODO: Test objects. Remove Later
 
         public GameScreen(Game game) // TODO: tmp added world to parameters, might solve in a different way later. 
             : base (game)
         {
-            if (componentCollection != null)
-            {
-                componentCollection.Clear();
-            }
-            else
-            {
-                componentCollection = new GameComponentCollection();
-            }
+            SyncedGameCollection.InitializeSyncedGameCollection(game);
+            GameComponents.Add(SyncedGameCollection.Instance);
 
             _map = new Map(Library.Map.Path[Library.Map.Name.Paper], game);
             GameComponents.Add(_map);
+
+            // TODO: Test objects. Remove later
+            world = new World(Vector2.Zero);
+            player = new Player(PlayerIndex.One, Library.Character.Name.Circle, Library.Colors.ColorName.Blue, game, world);
+            crystal = new Crystal(Library.Crystal.Texture, new Vector2(500, 500), DrawingHelper.DrawingLevel.Medium, game, world, Color.White);
+            goalLeft = new TestGoal(Library.Goal.GoalTexture, Library.Goal.BorderTexture, new Vector2(300, 1080 / 2), GoalDirections.West, DrawingHelper.DrawingLevel.Medium, game, world);
+            goalRight = new TestGoal(Library.Goal.GoalTexture, Library.Goal.BorderTexture, new Vector2(1920 - 300, 1080 / 2), GoalDirections.East, DrawingHelper.DrawingLevel.Medium, game, world);
+            frame = new TexturePolygon(Library.Map.Texture2, new Vector2(1920 / 2, 1080 / 2), 0, DrawingHelper.DrawingLevel.Medium, game, world, false);
+
+            SyncedGameCollection.ComponentCollection.Add(player);
+            SyncedGameCollection.ComponentCollection.Add(crystal);
+            SyncedGameCollection.ComponentCollection.Add(frame);
+            // End TODO: Test objects. Remove Later
 
             _players = new List<Player>();
             foreach (var item in _map.Data.Objects)
@@ -72,5 +67,13 @@ namespace Synced.Interface
                 }
             }
         }
+
+        public override void Update(GameTime gameTime)
+        {
+            world.Step(Math.Min((float)gameTime.ElapsedGameTime.TotalSeconds, (1f / 30f)));
+            base.Update(gameTime);
+        }
     }
 }
+
+            

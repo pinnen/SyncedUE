@@ -57,7 +57,6 @@ namespace Synced.CollisionShapes
             RigidBody.BodyType = BodyType.Static;
             RigidBody.Position = ConvertUnits.ToSimUnits(position);
             RigidBody.Rotation = rotation;
-            Tag = "";
         }
 
         public void setOnCollisionFunction(OnCollisionEventHandler onCollisionFunc)

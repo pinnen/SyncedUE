@@ -21,39 +21,35 @@ namespace Synced.InGame
 
         #region Variables
         MovableCollidable _owner = null;
-        float _distanceToOwner;
         ParticleEngine _tail;
-        float currentAcceleration;
+        float shootForce;
         #endregion
 
         public Grabbable(Texture2D texture, Vector2 position, DrawingHelper.DrawingLevel drawingLevel, Game game, World world, Color color)
             : base(texture, position, drawingLevel, game, world) 
         {
             /* Setting up Farseer Physics */
-            RigidBody = BodyFactory.CreateCircle(this.world, ConvertUnits.ToSimUnits(texture.Width / 2), 0, ConvertUnits.ToSimUnits(position)); // TODO: size to some scale? 
+            RigidBody = BodyFactory.CreateCircle(this.world, ConvertUnits.ToSimUnits(texture.Width / 2), 0, ConvertUnits.ToSimUnits(position));
             RigidBody.BodyType = BodyType.Dynamic;
-            RigidBody.CollisionCategories = Category.Cat1; /* Crystal Category */ // TODO: fix collisionCategory system. 
+            RigidBody.CollisionCategories = Category.Cat5; /* GRABBABLE Category */
             RigidBody.CollidesWith = Category.All;
-            RigidBody.Mass = 1f; // TODO: fix hardcoded value
-            RigidBody.LinearDamping = 0.5f; // TODO: fix hardcoded value
-            RigidBody.Restitution = 1f; // TODO: fix hardcoded value
+            RigidBody.Mass = 1f; 
+            RigidBody.LinearDamping = 0.5f;
+            RigidBody.Restitution = 1f;
             Origin = new Vector2(Texture.Width / 2, Texture.Height / 2);
 
             /* Setting up Grabbable*/
-            acceleration = 20;
+            acceleration = maxAcceleration = 20;
+            shootForce = 3000f;
             Color = color;
             _tail = new ParticleEngine(1, Library.Particle.trailTexture, position, color, Origin, 1.0f, 0.0f, 0.2f, DrawingHelper.DrawingLevel.Medium, game);
-            _distanceToOwner = 50; // TODO: fix hardcoded distance
-
-            game.Components.Add(this);
-
-
+            SyncedGameCollection.ComponentCollection.Add(_tail);
         }
         
         public virtual Grabbable PickUp(MovableCollidable owner) 
         {
             _owner = owner;
-            currentAcceleration = 100;
+            maxAcceleration = 100;
             RigidBody.LinearDamping = 10f;
             Library.Audio.PlaySoundEffect(Library.Audio.SoundEffects.CrystalPickUp);
             return this;
@@ -62,12 +58,13 @@ namespace Synced.InGame
         public virtual void Release() 
         {
             _owner = null;
+            maxAcceleration = 20;
         }
         
         public virtual void Shoot()
         {
-            RigidBody.LinearDamping = 0f;
-            RigidBody.ApplyForce(3000 * new Vector2(-(_owner.Direction.X), (_owner.Direction.Y))); // TODO: fix hardcoded shooting force
+            RigidBody.LinearDamping = 0.5f;
+            RigidBody.ApplyForce(shootForce * new Vector2(-(_owner.Direction.X), (_owner.Direction.Y)));
             Direction = Vector2.Zero;
             Release();
             Library.Audio.PlaySoundEffect(Library.Audio.SoundEffects.CrystalShoot);
@@ -76,14 +73,14 @@ namespace Synced.InGame
         public override void Update(GameTime gameTime)
         {
 
-            float rotval = (float)0.005 * gameTime.ElapsedGameTime.Milliseconds; // TODO: Fix hardcode value
+            float rotval = (float)0.002 * gameTime.ElapsedGameTime.Milliseconds; // TODO: Fix hardcode value
             RigidBody.Rotation += rotval;
 
-            if (_owner != null) // TODO a is this creating framedrop? 
+            if (_owner != null)
             {
                 Vector2 ownerOffsetPosition =  new Vector2(_owner.Position.X + -(_owner.Direction.X / 4), _owner.Position.Y + (_owner.Direction.Y / 4));
                 float distance = (Position.X - ownerOffsetPosition.X) * (Position.X - ownerOffsetPosition.X) + (Position.Y - ownerOffsetPosition.Y) * (Position.Y - ownerOffsetPosition.Y);
-                acceleration = currentAcceleration * distance;
+                acceleration = maxAcceleration * distance;
         
                 direction = new Vector2(ownerOffsetPosition.X - this.Position.X, -(ownerOffsetPosition.Y - this.Position.Y));
                 direction.Normalize();
