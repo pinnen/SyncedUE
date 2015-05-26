@@ -1,6 +1,7 @@
 Synced by Seven: ReadMe-file
 ============================
 
+Revision: 20:03 2015-05-26
 
 Recommended Platform: Windows 7
 
@@ -54,20 +55,22 @@ Game Beginning:       The game starts with a menu screen; here each player selec
 
 
 Game Playing:         Use the thumb sticks to control speed and direction of each of you icons.
-                      Try to pick-up the crystal by getting close to it, when picked-upped speed to one of the goals, turn 180 degrees and shoot it towards the goal.
+                      Try to pick-up the crystal by getting close to it, when picked-upped speed to one of the goals, 
+                      turn 180 degrees and use the corresponding Xbox Bumper button to shoot it towards the goal.
                       
 
 Game Mischiefs:       Control your two icons in selected patterns and there is a reward: a zone-bomb is created!
                       Pick up the bomb - the same way as a crystal - and transport it into a good position and then shoot it towards your adversaries,
-                      then, after some distance, the bomb will go off and create an zone that is effective for a few seconds.
+                      then, after some travelled distance, the bomb will go off and create an zone that is effective for a few seconds. 
+                      Alternatively you can explode the bomb prematurely by hitting the Bumper button again.
                       Depending on your type of selected icon the zone bomb has different effects as shown in the table above!
 
 
-Game Patterns:        Speed-up            - make your two icons go in parallel while activating the Power-Up control (Xbox Left/Right Trigger).
+Game Patterns:        The game pattern detection is active when the Power-Up control (Xbox Left/Right Trigger) is pressed - indication: the icons have "smoke"-exhaust.
+                      Speed-up            - make your two icons go closely in parallel.
                       Create Zone Bomb    - make one icon tightly circle your other icon and a new bomb is created and picked-upped by circled icon.
-                      Create Capture Net  - ???
-                      fler ???
-
+                      Create Capture Net  - make your two icons cross at an angle and you will get a net between your icons. 
+                                            The net will persist until your icons get too far apart. The net is useful for capturing the crystal.
 
 
 
