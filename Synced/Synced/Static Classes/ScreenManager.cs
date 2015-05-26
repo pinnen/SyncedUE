@@ -49,7 +49,7 @@ namespace Synced.Static_Classes
             _screenManager.MenuScreen = new MenuScreen(game);
             _screenManager.MenuScreen.NewGame += Instance.NewGameEvent;
             _screenManager.AddScreen(_screenManager.MenuScreen);
-            _screenManager.Screens.Peek().Deactivated();
+            //_screenManager.Screens.Peek().Deactivated();
             
             ////------------------------------------------------------------------------
             //// Splash screens
@@ -63,7 +63,7 @@ namespace Synced.Static_Classes
             //Screen screen = new SplashScreen(Library.SplashScreen.SplashAlpha, game);
             //screen.Activated();
             //_screenManager.AddScreen(screen);
-            _screenManager.AddScreen(Instance.GameScreen);
+           // _screenManager.AddScreen(Instance.GameScreen);
             //TODO: Add this functionality properly. 
         }
 
