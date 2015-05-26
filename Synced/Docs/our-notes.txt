@@ -1,0 +1,24 @@
+17:08 2015-05-26/GF
+From: http://gameawards.se/news/swedish-game-awards-15-deadline-submission/
+
+
+The deadline is here! To enter you must send the following:
+
+- An exe-file of the game
+
+- A short description of the game
+
+- A gameplay trailer
+
+- Three screenshots
+
+- A readme of how the game is played (as well as information like platform, accessories)
+
+- A textfile including: groupname, name of the game and phonenumber so we can reach you! 
+
+Zip everything and send it with www.sprend.com to sgasubmit@gmail.com
+
+If the Zip file is over 2GB you can send a mail to Kasper@Gameawards.se and we will resolve the issue!
+
+
+Last last day to submit the game is the 28th of May at 23:59 CET.
