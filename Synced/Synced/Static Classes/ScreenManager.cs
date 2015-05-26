@@ -49,21 +49,25 @@ namespace Synced.Static_Classes
             _screenManager.MenuScreen = new MenuScreen(game);
             _screenManager.MenuScreen.NewGame += Instance.NewGameEvent;
             _screenManager.AddScreen(_screenManager.MenuScreen);
-            //_screenManager.Screens.Peek().Deactivated();
-            
-            ////------------------------------------------------------------------------
-            //// Splash screens
-            ////------------------------------------------------------------------------
-            ////Second splash screen
-            //Screen screen2 = new SplashScreen(Library.SplashScreen.SplashSeven, game);
-            //screen2.Deactivated();
-            //_screenManager.AddScreen(screen2);
+            _screenManager.Screens.Peek().Deactivated();
 
-            ////First splash screen
-            //Screen screen = new SplashScreen(Library.SplashScreen.SplashAlpha, game);
-            //screen.Activated();
-            //_screenManager.AddScreen(screen);
-           // _screenManager.AddScreen(Instance.GameScreen);
+            //------------------------------------------------------------------------
+            // **********************Splash screens***********************************
+            //------------------------------------------------------------------------
+            //Second splash screen
+            Screen screen2 = new SplashScreen(Library.SplashScreen.SplashSeven, game);
+            screen2.Deactivated();
+            _screenManager.AddScreen(screen2);
+
+            //First splash screen
+            Screen screen = new SplashScreen(Library.SplashScreen.SplashAlpha, game);
+            screen.Activated();
+            _screenManager.AddScreen(screen);
+            //------------------------------------------------------------------------
+            // **********************Game Screen**************************************
+            //FOR DEBUG
+            //------------------------------------------------------------------------
+            //_screenManager.AddScreen(Instance.GameScreen);
             //TODO: Add this functionality properly. 
         }
 
