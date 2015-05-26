@@ -20,9 +20,9 @@ namespace Synced.MapNamespace
         [XmlElement("TexturePath")]
         public string TexturePath;
 
-        public virtual GameComponent GetComponent(Game game)
-        {
-            return new Sprite(game.Content.Load<Texture2D>(TexturePath), Position, Static_Classes.DrawingHelper.DrawingLevel.Medium, game);
-        }
+        //public virtual GameComponent GetComponent(Game game)
+        //{
+        //    return new Sprite(game.Content.Load<Texture2D>(TexturePath), Position, Static_Classes.DrawingHelper.DrawingLevel.Medium, game);
+        //}
     }
 }

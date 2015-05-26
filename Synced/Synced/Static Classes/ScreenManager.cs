@@ -63,7 +63,7 @@ namespace Synced.Static_Classes
             //Screen screen = new SplashScreen(Library.SplashScreen.SplashAlpha, game);
             //screen.Activated();
             //_screenManager.AddScreen(screen);
-            //_screenManager.AddScreen(Instance.GameScreen);
+            _screenManager.AddScreen(Instance.GameScreen);
             //TODO: Add this functionality properly. 
         }
 
