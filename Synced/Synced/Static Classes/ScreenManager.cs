@@ -46,10 +46,10 @@ namespace Synced.Static_Classes
             // *********************Loads menu screen*********************************
             //Loads the menu screen and put in the stack
             //------------------------------------------------------------------------
-            //_screenManager.MenuScreen = new MenuScreen(game);
-            //_screenManager.MenuScreen.NewGame += Instance.NewGameEvent;
-            //_screenManager.AddScreen(_screenManager.MenuScreen);
-            //_screenManager.Screens.Peek().Deactivated();
+            _screenManager.MenuScreen = new MenuScreen(game);
+            _screenManager.MenuScreen.NewGame += Instance.NewGameEvent;
+            _screenManager.AddScreen(_screenManager.MenuScreen);
+            _screenManager.Screens.Peek().Deactivated();
             
             ////------------------------------------------------------------------------
             //// Splash screens
@@ -63,7 +63,7 @@ namespace Synced.Static_Classes
             //Screen screen = new SplashScreen(Library.SplashScreen.SplashAlpha, game);
             //screen.Activated();
             //_screenManager.AddScreen(screen);
-            _screenManager.AddScreen(Instance.GameScreen);
+            //_screenManager.AddScreen(Instance.GameScreen);
             //TODO: Add this functionality properly. 
         }
 
@@ -181,8 +181,8 @@ namespace Synced.Static_Classes
 
         private void NewGameEvent(Screen screen, EventArgs e)
         {
-
-            throw new NotImplementedException();
+            _screenManager.Screens.Peek().Deactivated();
+            _screenManager.AddScreen(GameScreen);
         }
         #endregion
         #region ScreenManager Properties
