@@ -26,9 +26,9 @@ namespace Synced.Interface
 
         // Objects/Texts/Controllers
         Sprite _characterHolder;    // Sprite that displays the character
-        //Label _abilityTextHolder;     // Text that displays the ability text
+        Label _abilityTextHolder;     // Text that displays the ability text
         Sprite _arrowHolder;        // Sprite that displays the selection arrows
-        //Label _stateText;
+        Label _stateText;
 
         PlayerIndex _playerIndex;
         GamePadState _previousState;
