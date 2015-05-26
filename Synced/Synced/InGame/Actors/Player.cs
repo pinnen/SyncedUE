@@ -61,11 +61,9 @@ namespace Synced.Actors
             _world = world;
             shape = (Library.Zone.Name)character;
             _teamColor = teamcolor;
-            game.Components.Add(this);
 
             SyncedGameCollection.ComponentCollection.Add(Left);
             SyncedGameCollection.ComponentCollection.Add(Right);
-            //game.Components.Add(this); // TODO: Remove this later
         }
 
         public float GetDistanceBetweenUnits() 
