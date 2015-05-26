@@ -29,8 +29,8 @@ namespace Synced.Interface
         World world;
         Player player;
         Crystal crystal;
-        TestGoal goalLeft;
-        TestGoal goalRight;
+        Goal goalLeft;
+        Goal goalRight;
         TexturePolygon frame;
         // End TODO: Test objects. Remove Later
 
@@ -47,8 +47,8 @@ namespace Synced.Interface
             world = new World(Vector2.Zero);
             player = new Player(PlayerIndex.One, Library.Character.Name.Circle, Library.Colors.ColorName.Blue, game, world);
             crystal = new Crystal(Library.Crystal.Texture, new Vector2(500, 500), DrawingHelper.DrawingLevel.Medium, game, world, Color.White);
-            goalLeft = new TestGoal(Library.Goal.GoalTexture, Library.Goal.BorderTexture, new Vector2(300, 1080 / 2), GoalDirections.West, DrawingHelper.DrawingLevel.Medium, game, world);
-            goalRight = new TestGoal(Library.Goal.GoalTexture, Library.Goal.BorderTexture, new Vector2(1920 - 300, 1080 / 2), GoalDirections.East, DrawingHelper.DrawingLevel.Medium, game, world);
+            goalLeft = new Goal(Library.Goal.GoalTexture, Library.Goal.BorderTexture, new Vector2(300, 1080 / 2), GoalDirections.West, DrawingHelper.DrawingLevel.Medium, game, world);
+            goalRight = new Goal(Library.Goal.GoalTexture, Library.Goal.BorderTexture, new Vector2(1920 - 300, 1080 / 2), GoalDirections.East, DrawingHelper.DrawingLevel.Medium, game, world);
             frame = new TexturePolygon(Library.Map.Texture2, new Vector2(1920 / 2, 1080 / 2), 0, DrawingHelper.DrawingLevel.Medium, game, world, false);
 
             SyncedGameCollection.ComponentCollection.Add(player);
@@ -56,16 +56,17 @@ namespace Synced.Interface
             SyncedGameCollection.ComponentCollection.Add(frame);
             // End TODO: Test objects. Remove Later
 
+            // TODO: had to comment this
             _players = new List<Player>();
-            foreach (var item in _map.Data.Objects)
-            {
-                if (item is PlayerStart)
-                {
-                    PlayerStart temp = item as PlayerStart;
+            //foreach (var item in _map.Data.Objects)
+            //{
+            //    if (item is PlayerStart)
+            //    {
+            //        PlayerStart temp = item as PlayerStart;
 
-                    _players.Add(new Player(temp.PlayerIndex, Library.Character.Name.Circle, Library.Colors.ColorName.Blue, game, _map.World)); // TODO: All collision objects need world!
-                }
-            }
+            //        _players.Add(new Player(temp.PlayerIndex, Library.Character.Name.Circle, Library.Colors.ColorName.Blue, game, _map.World)); // TODO: All collision objects need world!
+            //    }
+            //}
         }
 
         public override void Update(GameTime gameTime)

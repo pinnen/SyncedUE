@@ -14,5 +14,7 @@ namespace Synced.MapNamespace
     {
         [XmlElement("PlayerIndex")]
         public PlayerIndex PlayerIndex;
+
+
     }
 }

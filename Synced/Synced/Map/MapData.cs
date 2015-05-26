@@ -20,7 +20,7 @@ namespace Synced.MapNamespace
 
         [XmlElement(typeof(PlayerStart))]
         [XmlElement(typeof(Obstacle))]
-        [XmlElement(typeof(Goal))]
+        [XmlElement(typeof(GoalData))]
         [XmlElement(typeof(MapObject))]
         public List<MapObject> Objects
         {
@@ -28,59 +28,58 @@ namespace Synced.MapNamespace
             set { _objects = value; }
         }
 
-        // TODO Temporary ctor for first map file
+        // TODO Temporary ctor for first map file // TODO: had to comment everything
         public MapData()
         {
             _objects = new List<MapObject>();
 
             // Players
-            _objects.Add(new PlayerStart()
-            {
-                PlayerIndex = PlayerIndex.One,
-                Position = new Vector2(100, 100),
-                TexturePath = ""
-            });
-            _objects.Add(new PlayerStart()
-            {
-                PlayerIndex = PlayerIndex.Two,
-                Position = new Vector2(300, 100),
-                TexturePath = ""
-            });
-            _objects.Add(new PlayerStart()
-            {
-                PlayerIndex = PlayerIndex.Three,
-                Position = new Vector2(300, 300),
-                TexturePath = ""
-            });
-            _objects.Add(new PlayerStart()
-            {
-                PlayerIndex = PlayerIndex.Four,
-                Position = new Vector2(100, 300),
-                TexturePath = ""
-            });
+            //_objects.Add(new PlayerStart()
+            //{
+            //    PlayerIndex = PlayerIndex.One,
+            //    Position = new Vector2(100, 100),
+            //    TexturePath = ""
+            //});
+            //_objects.Add(new PlayerStart()
+            //{
+            //    PlayerIndex = PlayerIndex.Two,
+            //    Position = new Vector2(300, 100),
+            //    TexturePath = ""
+            //});
+            //_objects.Add(new PlayerStart()
+            //{
+            //    PlayerIndex = PlayerIndex.Three,
+            //    Position = new Vector2(300, 300),
+            //    TexturePath = ""
+            //});
+            //_objects.Add(new PlayerStart()
+            //{
+            //    PlayerIndex = PlayerIndex.Four,
+            //    Position = new Vector2(100, 300),
+            //    TexturePath = ""
+            //});
 
             // Background
-            _objects.Add(new Obstacle()
-            {
-                Position = Vector2.Zero,
-                TexturePath = "Maps/Paper/frame",
-                CollisionCategory = Category.All
-            });
-            _objects.Add(new Obstacle()
-           {
-               Position = Vector2.Zero,
-               TexturePath = "Maps/Paper/background",
-               CollisionCategory = Category.None
-           });
+           // _objects.Add(new Obstacle()
+           // {
+           //     Position = Vector2.Zero,
+           //     TexturePath = "Maps/Paper/frame",
+           //     CollisionCategory = Category.All
+           // });
+           // _objects.Add(new Obstacle()
+           //{
+           //    Position = Vector2.Zero,
+           //    TexturePath = "Maps/Paper/background",
+           //    CollisionCategory = Category.None
+           //});
 
             // Goals
-            _objects.Add(new Goal()
-            {
-                Position = new Vector2(500, 500),
-                TexturePath = "Maps/Paper/Goal",
-                CollisionCategory = Category.All,
-                Radius = 50
-            });
+            //_objects.Add(new GoalData()
+            //{
+            //    Position = new Vector2(500, 500),
+            //    TexturePath = "Maps/Paper/Goal",
+            //    CollisionCategory = Category.All,
+            //});
         }
     }
 }

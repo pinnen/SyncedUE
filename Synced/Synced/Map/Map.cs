@@ -40,29 +40,15 @@ namespace Synced.MapNamespace
 
         public Map(string path, Game game) : base (game)
         {
-            Data = Library.Serialization<MapData>.DeserializeFromXmlFile(path);
+            //Data = Library.Serialization<MapData>.DeserializeFromXmlFile(path);
             World = new World(Vector2.Zero); // Topdown games have no gravity
             
+            // TODO: had to comment this
             //Process data
-            foreach (var mapObject in Data.Objects)
-            {
-                if (mapObject is Obstacle)
-                {
-                    SyncedGameCollection.ComponentCollection.Add(new Sprite(game.Content.Load<Texture2D>(mapObject.TexturePath), mapObject.Position, Static_Classes.DrawingHelper.DrawingLevel.Low, game));
-                }
-                else if (mapObject is Goal)
-                {
-                    SyncedGameCollection.ComponentCollection.Add(new Sprite(game.Content.Load<Texture2D>(mapObject.TexturePath), mapObject.Position, Static_Classes.DrawingHelper.DrawingLevel.Back, game));
-                }
-                else if (mapObject is PlayerStart)
-                {
-                    // TODO: Add player
-                }
-                else if (mapObject is MapObject)
-                {
-                    SyncedGameCollection.ComponentCollection.Add(new Sprite(game.Content.Load<Texture2D>(mapObject.TexturePath), mapObject.Position, Static_Classes.DrawingHelper.DrawingLevel.Back, game));
-                }
-            }
+            //foreach (var mapObject in Data.Objects)
+            //{
+            //    //SyncedGameCollection.ComponentCollection.Add(mapObject.GetComponent(game));
+            //}
         }
     }
 }

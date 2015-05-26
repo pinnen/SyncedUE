@@ -12,7 +12,12 @@ namespace Synced.MapNamespace
     [Serializable]
     public class Obstacle : MapObject
     {
+        [XmlElement("World")]
+        public World world;
+
         [XmlElement("CollisionCategory")]
         public Category CollisionCategory;
+
+      
     }
 }
