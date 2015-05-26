@@ -1,6 +1,17 @@
-17:08 2015-05-26/GF
-From: http://gameawards.se/news/swedish-game-awards-15-deadline-submission/
+17:52 2015-05-26/GF
 
+From: http://gameawards.se/competition/rules
+
+§1.4 A playable demo – not necessarily a completed game – must be submitted by each team by the competitions deadline. 
+This submission is referred to as the final entry. Additionally, each team is required to submit at least three (3) 
+in-game screenshots, a gameplay video or a trailer and a 200 word description of the game.
+
+§1.8 Teams may submit multiple game entries. This also means individuals may participate in multiple teams and entries during the same competition run.
+
+
+
+
+From: http://gameawards.se/news/swedish-game-awards-15-deadline-submission/
 
 The deadline is here! To enter you must send the following:
 
