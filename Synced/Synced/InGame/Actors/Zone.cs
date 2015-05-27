@@ -43,19 +43,20 @@ namespace Synced.Actors
             : base(texture,position, rotation ,DrawingHelper.DrawingLevel.Low,game,world,true)
         {
             Color = color;
-            
-            RigidBody.CollidesWith = Category.None;
+
+            RigidBody.CollisionCategories = Category.Cat5;
+            RigidBody.CollidesWith = Category.All;// ^ Category.Cat9;
             
             Origin = new Vector2(Texture.Width / 2, texture.Height / 2);
             _zoneState = ZoneState.Spawn;
             Scale = 0.05f;
             Alpha = 0.5f;
-            _scaleTarget = 0.8f;
+            _scaleTarget = 1.0f;
             _particleEffects = new ParticleEngine(100,Library.Particle.trailTexture,position,color*0.05f,Vector2.Zero,1.0f,0.0f,0.5f,DrawingHelper.DrawingLevel.Medium,game);
             SyncedGameCollection.ComponentCollection.Add(_particleEffects);
-
             
         }
+        
 
         public override void Update(GameTime gameTime)
         {
@@ -92,6 +93,7 @@ namespace Synced.Actors
                     break;
                 case ZoneState.Delete:
                     //_timeSinceSpawn
+                    RigidBody.Dispose();
                     SyncedGameCollection.ComponentCollection.Remove(this);
                     break;
                 default:
