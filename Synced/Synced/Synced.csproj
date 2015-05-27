@@ -60,6 +60,7 @@
     <Compile Include="InGame\Grabbable.cs" />
     <Compile Include="InGame\Movable.cs" />
     <Compile Include="InGame\MovableCollidable.cs" />
+    <Compile Include="Interface\ExitScreen.cs" />
     <Compile Include="Interface\Text.cs" />
     <Compile Include="Content\Library.cs" />
     <Compile Include="InGame\Actors\Ability.cs" />
