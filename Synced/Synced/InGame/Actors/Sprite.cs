@@ -27,6 +27,7 @@ namespace Synced.Actors
         public float Rotation { get; protected set; }
         public Vector2 Position { get; set; }
         public Texture2D Texture { get; set;}
+        public float Scale { get; protected set; }
 
         public Sprite(Texture2D texture, Vector2 position, Color color, DrawingHelper.DrawingLevel drawingLevel, bool centered, Game game)
             : base(game)
@@ -34,6 +35,7 @@ namespace Synced.Actors
             Color = color;
             Position = position;
             Texture = texture;
+            Scale = 1.0f;
 
             if (centered) Origin = new Vector2(texture.Width / 2, texture.Height / 2);
 
@@ -45,7 +47,7 @@ namespace Synced.Actors
         public override void Draw(GameTime gameTime)
         {
             _spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.LinearWrap, DepthStencilState.None, RasterizerState.CullNone, null, ResolutionManager.GetTransformationMatrix());
-            _spriteBatch.Draw(Texture, Position, null, Color, Rotation, Origin, 1.0f, SpriteEffects.None, 1.0f);
+            _spriteBatch.Draw(Texture, Position, null, Color, Rotation, Origin, Scale, SpriteEffects.None, 1.0f);
             _spriteBatch.End();
 
         }
