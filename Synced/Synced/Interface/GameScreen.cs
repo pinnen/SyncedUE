@@ -71,6 +71,9 @@ namespace Synced.Interface
             //        _players.Add(new Player(temp.PlayerIndex, Library.Character.Name.Circle, Library.Colors.ColorName.Blue, game, _map.World)); // TODO: All collision objects need world!
             //    }
             //}
+
+            // Audio
+            Library.Audio.PlaySong(Library.Audio.Songs.GameSong3);
         }
 
         public override void Update(GameTime gameTime)

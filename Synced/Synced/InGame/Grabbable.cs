@@ -20,13 +20,15 @@ namespace Synced.InGame
     {
 
         #region Variables
-        MovableCollidable _owner = null;
-        protected ParticleEngine _tail;
-        float shootForce;
+        protected MovableCollidable owner = null;
+        ParticleEngine _tail;
+        float _shootForce;
+        float _cooldownTimer;
+        float _cooldownInSeconds;
         #endregion
 
         public Grabbable(Texture2D texture, Vector2 position, DrawingHelper.DrawingLevel drawingLevel, Game game, World world, Color color)
-            : base(texture, position, drawingLevel, game, world) 
+            : base(texture, position, drawingLevel, game, world)
         {
             /* Setting up Farseer Physics */
             RigidBody = BodyFactory.CreateCircle(this.world, ConvertUnits.ToSimUnits(texture.Width / 2), 0, ConvertUnits.ToSimUnits(position));
@@ -40,51 +42,59 @@ namespace Synced.InGame
 
             /* Setting up Grabbable*/
             acceleration = maxAcceleration = 20;
-            shootForce = 3000f;
+            _shootForce = 2000f;
+            _cooldownInSeconds = 0.5f;
             Color = color;
             _tail = new ParticleEngine(1, Library.Particle.trailTexture, position, color, Origin, 1.0f, 0.0f, 0.2f, DrawingHelper.DrawingLevel.Low, game);
             SyncedGameCollection.ComponentCollection.Add(_tail);
         }
-        
-        public virtual Grabbable PickUp(MovableCollidable owner) 
+
+        public virtual Grabbable PickUp(MovableCollidable own)
         {
-            _owner = owner;
-            maxAcceleration = 100;
-            RigidBody.LinearDamping = 10f;
-            Library.Audio.PlaySoundEffect(Library.Audio.SoundEffects.CrystalPickUp);
+            if (_cooldownTimer > _cooldownInSeconds && owner == null)
+            {
+                owner = own;
+                maxAcceleration = 100;
+                RigidBody.LinearDamping = 10f;
+                Library.Audio.PlaySoundEffect(Library.Audio.SoundEffects.CrystalGrab);
+            }
             return this;
-        } 
-        
-        public virtual void Release() 
+        }
+
+        public virtual void Release()
         {
-            _owner = null;
+            owner = null;
             maxAcceleration = 20;
         }
-        
+
         public virtual void Shoot()
         {
-            if (_owner != null)
+            if (owner != null)
             {
                 RigidBody.LinearDamping = 0.5f;
-                RigidBody.ApplyForce(shootForce * new Vector2(-(_owner.Direction.X), (_owner.Direction.Y)));
+                RigidBody.ApplyForce(-_shootForce * new Vector2((float)Math.Cos(owner.Rotation), (float)Math.Sin(owner.Rotation)));
                 Direction = Vector2.Zero;
                 Release();
-                Library.Audio.PlaySoundEffect(Library.Audio.SoundEffects.CrystalShoot);
+                Library.Audio.PlaySoundEffect(Library.Audio.SoundEffects.Shoot);
+                _cooldownTimer = 0;
             }
         }
-        
+
         public override void Update(GameTime gameTime)
         {
 
-            float rotval = (float)0.002 * gameTime.ElapsedGameTime.Milliseconds; // TODO: Fix hardcode value
+            float rotval = 0.002f * (float)gameTime.ElapsedGameTime.TotalMilliseconds; // TODO: Fix hardcode value
             RigidBody.Rotation += rotval;
 
-            if (_owner != null)
+            if (_cooldownTimer < _cooldownInSeconds)
+                _cooldownTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+            if (owner != null)
             {
-                Vector2 ownerOffsetPosition =  new Vector2(_owner.Position.X + -(_owner.Direction.X / 4), _owner.Position.Y + (_owner.Direction.Y / 4));
+                Vector2 ownerOffsetPosition = new Vector2(owner.Position.X + -(owner.Direction.X / 4), owner.Position.Y + (owner.Direction.Y / 4));
                 float distance = (Position.X - ownerOffsetPosition.X) * (Position.X - ownerOffsetPosition.X) + (Position.Y - ownerOffsetPosition.Y) * (Position.Y - ownerOffsetPosition.Y);
                 acceleration = maxAcceleration * distance;
-        
+
                 direction = new Vector2(ownerOffsetPosition.X - this.Position.X, -(ownerOffsetPosition.Y - this.Position.Y));
                 direction.Normalize();
             }

@@ -46,6 +46,8 @@ namespace Synced.Interface
             GameComponents.Add(new CharacterSelector(PlayerIndex.Four, new Rectangle(w, h, w, h), Color.Yellow, Game));
             // Background
             GameComponents.Add(new Sprite(Library.Interface.MenuBackground, Vector2.Zero, DrawingHelper.DrawingLevel.Back, game));
+
+            Library.Audio.PlaySong(Library.Audio.Songs.MenuSong1);
         }
 
         public bool IsEveryoneReady()
