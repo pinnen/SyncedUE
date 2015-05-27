@@ -33,6 +33,7 @@ namespace Synced.Actors
         bool _useEffectParticles;
         Library.Colors.ColorName _teamColor;
         Texture2D _texture;
+        Vector2 lastNonZeroDirection; 
     
         #endregion
 
@@ -51,6 +52,10 @@ namespace Synced.Actors
         {
             get { return acceleration; }
             set { acceleration = value; }
+        }
+        public Vector2 LastNonZeroDirection
+        {
+            get { return lastNonZeroDirection; }
         }
         #endregion
 
@@ -105,9 +110,8 @@ namespace Synced.Actors
                 if (Item == null)
                 {
                     Crystal crystal = other as Crystal;
-                    crystal.PickUp(this);
+                    Item = crystal.PickUp(this);
                     crystal.ChangeColor(Library.Colors.getColor[Tuple.Create(_teamColor, Library.Colors.ColorVariation.Other)]);
-                    Item = crystal;
                 }
                 return false;
             }
@@ -120,8 +124,7 @@ namespace Synced.Actors
                 if (Item == null)
                 {
                     CompactZone compactzone = other as CompactZone;
-                    compactzone.PickUp(this);
-                    Item = compactzone;
+                    Item = compactzone.PickUp(this);
                 }
             }
             else if (other.Tag == TagCategories.BARRIER)
@@ -136,6 +139,7 @@ namespace Synced.Actors
         {
             if (direction != Vector2.Zero)
             {
+                lastNonZeroDirection = direction;
                 RigidBody.Rotation = (float)Math.Atan2(RigidBody.LinearVelocity.Y, RigidBody.LinearVelocity.X);
                 
             }
