@@ -61,7 +61,7 @@ namespace Synced.Actors
             RigidBody = BodyFactory.CreateCircle(this.world, ConvertUnits.ToSimUnits(texture.Width / 2), 0, ConvertUnits.ToSimUnits(position));
             RigidBody.BodyType = BodyType.Dynamic;
             RigidBody.CollisionCategories = Category.Cat1; /* UNIT Category & TEAM Category*/ // TODO: fix collisionCategory system. 
-            RigidBody.CollidesWith = Category.All | Category.Cat2;         
+            RigidBody.CollidesWith = Category.All ^ Category.Cat1;         
             RigidBody.Mass = 10f;                          
             RigidBody.LinearDamping = 5f;                  
             RigidBody.Restitution = 0.1f;                  
@@ -142,5 +142,7 @@ namespace Synced.Actors
 
             base.Update(gameTime);
         }
+
+
     }
 }

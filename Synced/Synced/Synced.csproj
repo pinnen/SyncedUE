@@ -49,6 +49,11 @@
     <Compile Include="InGame\Actors\CollidingSprite.cs" />
     <Compile Include="InGame\Actors\CompactZone.cs" />
     <Compile Include="InGame\Actors\Particle.cs" />
+    <Compile Include="InGame\Actors\Zones\CircleZone.cs" />
+    <Compile Include="InGame\Actors\Zones\HexagonZone.cs" />
+    <Compile Include="InGame\Actors\Zones\PentagonZone.cs" />
+    <Compile Include="InGame\Actors\Zones\SquareZone.cs" />
+    <Compile Include="InGame\Actors\Zones\TriangleZone.cs" />
     <Compile Include="InGame\Crystal.cs" />
     <Compile Include="InGame\IActive.cs" />
     <Compile Include="InGame\ICollidable.cs" />

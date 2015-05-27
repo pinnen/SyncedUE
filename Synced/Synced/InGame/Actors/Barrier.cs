@@ -16,15 +16,24 @@ namespace Synced.InGame.Actors
 {
     class Barrier : CollidingSprite
     {
+        #region Variables
         List<Body> _barrierBodies;
         Unit _start, _end;
         Body hiddenBody1;
         Body hiddenBody2;
+        bool isActive;
+        ParticleEngine EffectParticles;
+        #endregion
+
+        #region Properties
+        #endregion
 
         public Barrier(Texture2D texture, Unit start, Unit end, World world,Game game, Color color) 
             : base(texture, Vector2.Zero, DrawingHelper.DrawingLevel.High, game, world)
         {
             Color = color;
+            EffectParticles = new ParticleEngine(30, texture, Vector2.Zero, color, Vector2.Zero, 1, 0, 10, DrawingHelper.DrawingLevel.Top, game);
+            SyncedGameCollection.ComponentCollection.Add(EffectParticles);
 
             // Units to follow
             _start = start;
@@ -45,13 +54,13 @@ namespace Synced.InGame.Actors
 
             // create path object and set it to the init position. 
             Path barrierPath = new Path();
-            barrierPath.Add(start.Position);
-            barrierPath.Add(end.Position);
+            barrierPath.Add(start.RigidBody.Position);
+            barrierPath.Add(end.RigidBody.Position);
             barrierPath.Closed = false;
 
             // create barrier particle
             Vertices barrierParticle = PolygonTools.CreateCircle(ConvertUnits.ToSimUnits(texture.Width * 4), 8);
-            PolygonShape shape = new PolygonShape(barrierParticle, 0f);
+            Shape shape = new PolygonShape(barrierParticle, 0f);
 
             // distribute barrierParticle positions along the path between the two units. 
             _barrierBodies = PathManager.EvenlyDistributeShapesAlongPath(world, barrierPath, shape, BodyType.Dynamic, 30);
@@ -71,7 +80,7 @@ namespace Synced.InGame.Actors
                 _barrierBodies[i].UserData = "BARRIER";
                 _barrierBodies[i].OnCollision += OnCollision;
             }
-
+            //Deactivate();
         }
 
         public override bool OnCollision(Fixture f1, Fixture f2, FarseerPhysics.Dynamics.Contacts.Contact contact)
@@ -90,23 +99,54 @@ namespace Synced.InGame.Actors
 
         public override void Update(GameTime gameTime)
         {
-            // update hiddenbody position to match units. 
-            hiddenBody1.Position = _start.RigidBody.Position;
-            hiddenBody2.Position = _end.RigidBody.Position;
+            if (isActive)
+            {
+                // update hiddenbody position to match units. 
+                hiddenBody1.Position = _start.RigidBody.Position;
+                hiddenBody2.Position = _end.RigidBody.Position;
+            }
         }
 
         public override void Draw(GameTime gameTime)
         {
-            
-            _spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.LinearWrap, DepthStencilState.None, RasterizerState.CullNone, null, ResolutionManager.GetTransformationMatrix());
+            if (isActive)
+            {
+                _spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.LinearWrap, DepthStencilState.None, RasterizerState.CullNone, null, ResolutionManager.GetTransformationMatrix());
 
+                for (int i = 0; i < _barrierBodies.Count; i++)
+                {
+                    _spriteBatch.Draw(Texture, ConvertUnits.ToDisplayUnits(_barrierBodies[i].Position), null, Color, _barrierBodies[i].Rotation, Origin, 1.0f, SpriteEffects.None, 1f);
+                }
+
+                _spriteBatch.End();
+            }
+        }
+
+        public void Activate()
+        {
+            isActive = true;
+            hiddenBody1.Position = _start.RigidBody.Position;
+            hiddenBody2.Position = _end.RigidBody.Position;
             for (int i = 0; i < _barrierBodies.Count; i++)
             {
-                _spriteBatch.Draw(Texture, ConvertUnits.ToDisplayUnits(_barrierBodies[i].Position), null, Color, _barrierBodies[i].Rotation, Origin, 1.0f, SpriteEffects.None, 1f);
-                //_spriteBatch.Draw(_barrierTexture, ConvertUnits.ToDisplayUnits(_barrierBodies[i].Position), null, Color.Magenta, _barrierBodies[i].Rotation, new Vector2(_barrierTexture.Width / 2, _barrierTexture.Height / 2), 1.0f, SpriteEffects.None, 1.0f);
+                _barrierBodies[i].Enabled = true;
+                _barrierBodies[i].Position = hiddenBody1.Position;
             }
+            // TODO: creating animation? sound?
+        }
 
-            _spriteBatch.End();
+        public void Deactivate()
+        {
+            isActive = false;
+            List<Vector2> positions = new List<Vector2>();
+            for (int i = 0; i < _barrierBodies.Count; i++)
+            {
+                _barrierBodies[i].Enabled = false;
+                positions.Add(ConvertUnits.ToDisplayUnits(_barrierBodies[i].Position));
+            }
+            // TODO: destroy animation? sound?
+            EffectParticles.GenerateDynamicParticles(positions, 1, 10);
+            EffectParticles.ShatterParticles();
         }
 
     }

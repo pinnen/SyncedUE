@@ -124,6 +124,7 @@ namespace Synced.Content
                 Particle.minusSignTexture = content.Load<Texture2D>("GameObjects/minussign");
                 Particle.questionSignTexture = content.Load<Texture2D>("GameObjects/questionsign");
                 Particle.exclamationSignTexture = content.Load<Texture2D>("GameObjects/exclamationsign");
+                Particle.starTexture = content.Load<Texture2D>("GameObjects/star");
                 Particle.barrierParticle = content.Load<Texture2D>("GameObjects/BarrierParticle");
                 #endregion
                 #region Goal
@@ -263,6 +264,7 @@ namespace Synced.Content
             public static Texture2D minusSignTexture;
             public static Texture2D exclamationSignTexture;
             public static Texture2D questionSignTexture;
+            public static Texture2D starTexture;
             public static Texture2D barrierParticle;
         }
         public static class Goal

@@ -91,11 +91,11 @@ namespace Synced.InGame
 
             if (owner != null)
             {
-                Vector2 ownerOffsetPosition = new Vector2(owner.Position.X + -(owner.Direction.X / 4), owner.Position.Y + (owner.Direction.Y / 4));
-                float distance = (Position.X - ownerOffsetPosition.X) * (Position.X - ownerOffsetPosition.X) + (Position.Y - ownerOffsetPosition.Y) * (Position.Y - ownerOffsetPosition.Y);
+                Vector2 ownerOffsetPosition = new Vector2(owner.SimPosition.X + -(owner.Direction.X / 4), owner.SimPosition.Y + (owner.Direction.Y / 4));
+                float distance = (SimPosition.X - ownerOffsetPosition.X) * (SimPosition.X - ownerOffsetPosition.X) + (SimPosition.Y - ownerOffsetPosition.Y) * (SimPosition.Y - ownerOffsetPosition.Y);
                 acceleration = maxAcceleration * distance;
 
-                direction = new Vector2(ownerOffsetPosition.X - this.Position.X, -(ownerOffsetPosition.Y - this.Position.Y));
+                direction = new Vector2(ownerOffsetPosition.X - this.SimPosition.X, -(ownerOffsetPosition.Y - this.SimPosition.Y));
                 direction.Normalize();
             }
 

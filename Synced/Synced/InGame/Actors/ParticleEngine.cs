@@ -204,28 +204,51 @@ namespace Synced.InGame.Actors
             }
 			}
 
-        public void GenerateClusterParticles(float lifetime) // TODO: Is this generate method needed?
+        public void GenerateClusterParticles()
         {
-            int clusterParticleAmount = 300; // TODO: take in as parameter?
+            int clusterParticleAmount = 300;
 
             for (int i = 0; i < clusterParticleAmount; i++)
             {
                 Vector2 randomPosition = _particlePosition;
+                //Vector2 randomDirection = new Vector2((float)random.Next(-40,40),(float)random.Next(-40,40));
                 float randomRotation = random.Next();
-                float randomScale = random.Next();
-                Particle tempP = new Particle(_particleTexture, randomPosition, _particleColor, _particleOrigin, randomScale, randomRotation, lifetime, dLevel, game);
+                //float randomScale = random.Next();
+                Particle tempP = new Particle(_particleTexture, randomPosition, _particleColor, _particleOrigin, _particleScale, randomRotation, _particleLifetime, dLevel, game);
                 _particles.Add(tempP);
                 SyncedGameCollection.ComponentCollection.Add(tempP);
             }
 
         }
+
+        public void GenerateDynamicParticles(List<Vector2> positions, float scale, float lifetime)
+        {
+            _particleAmount = positions.Count;
+
+            for (int i = 0; i < _particleAmount; i++)
+            {
+                if (_sleepingParticles.Count == 0)
+                {
+                    Particle tempP = new Particle(_particleTexture, positions[i], _particleColor, _particleOrigin, scale, 0.0f, lifetime, dLevel, game);
+                    _particles.Add(tempP);
+                    SyncedGameCollection.ComponentCollection.Add(tempP);
+                }
+                else
+                {
+                    currentParticle = _sleepingParticles.Dequeue();
+                    currentParticle.WakeLineParticle(positions[i], _particleColor, scale, lifetime);
+                    _particles.Add(currentParticle);
+                }
+            }
+        }
+
         /// <summary>
         /// Shatters the particles
         /// </summary>
         public void ShatterParticles() 
         {
             int shatterDirection = 50;
-            int shatterSpeed = 200;
+            int shatterSpeed = 2;
 
             foreach (Particle p in _particles)
             {
@@ -271,12 +294,10 @@ namespace Synced.InGame.Actors
 
         public override void Draw(GameTime gameTime)
         {
-
             for (int i = 0; i < _particles.Count; i++)
             {
                 _particles[i].Draw(gameTime);
-            }
-            
+            }           
         }
 
         #endregion
