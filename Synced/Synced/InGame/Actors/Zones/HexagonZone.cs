@@ -12,6 +12,8 @@ namespace Synced.InGame.Actors.Zones
     {
         public HexagonZone(Texture2D texture, Vector2 position, Color color, Game game)
             : base(texture, position, color, game)
-        { }
+        {
+
+        }
     }
 }

@@ -32,6 +32,7 @@ namespace Synced.Actors
         // Effects
         float _scaleTarget;
         ParticleEngine _particleEffects;
+        protected ParticleEngine _victimParticles;
 
         public Zone(Texture2D texture, Vector2 position, Color color,Game game) 
             : base(texture,position,color,DrawingHelper.DrawingLevel.Low,true,game)
@@ -71,6 +72,7 @@ namespace Synced.Actors
                     {
                         //_particleEffects.GenerateClusterParticles();
                         //_particleEffects.ShatterParticles();
+                        //_particleEffects.ExpandAndRotate();
 
                         _zoneState = ZoneState.Delete;
                         _timeSinceSpawn = 0;
