@@ -64,6 +64,7 @@ namespace Synced.Actors
 
             SyncedGameCollection.ComponentCollection.Add(Left);
             SyncedGameCollection.ComponentCollection.Add(Right);
+            
         }
 
         public float GetDistanceBetweenUnits() 
@@ -134,6 +135,7 @@ namespace Synced.Actors
                     {
                         Vector2 spawnPosition = new Vector2((Left.RigidBody.Position.X + Right.RigidBody.Position.X)/2.0f,(Left.RigidBody.Position.Y + Right.RigidBody.Position.Y)/2.0f);
                         _compactZone = new CompactZone(Library.Zone.CompactTexture[shape], ConvertUnits.ToDisplayUnits(spawnPosition), DrawingHelper.DrawingLevel.Medium, _game, _world, Library.Colors.getColor[Tuple.Create(_teamColor, Library.Colors.ColorVariation.Other)]);
+                        SyncedGameCollection.ComponentCollection.Add(_compactZone);
                     }
                     else
                     {
