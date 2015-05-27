@@ -65,13 +65,13 @@ namespace Synced.InGame
             /* Setting up Grabbable*/
             acceleration = maxAcceleration = 20;
             _shootForce = 2000f;
-            _cooldownInSeconds = 1f;
+            _cooldownInSeconds = 0.5f;
             Color = color;
             _tail = new ParticleEngine(1, Library.Particle.trailTexture, position, color, Origin, 1.0f, 0.0f, 0.2f, DrawingHelper.DrawingLevel.Low, game);
             SyncedGameCollection.ComponentCollection.Add(_tail);
         }
 
-        public virtual Grabbable PickUp(Unit own) //TODO: only let it be stolen or picked up if some conditions are met. 
+        public virtual Grabbable PickUp(Unit own)
         {
             if (_cooldownTimer > _cooldownInSeconds)
             {
@@ -85,10 +85,8 @@ namespace Synced.InGame
                 maxAcceleration = 100;
                 RigidBody.LinearDamping = 10f;
                 Library.Audio.PlaySoundEffect(Library.Audio.SoundEffects.CrystalGrab);
-                _cooldownTimer = 0;
-                return this;
             }
-            return null;
+            return this;
         }
 
         public virtual void Release()
@@ -121,17 +119,7 @@ namespace Synced.InGame
 
             if (owner != null)
             {
-                Vector2 ownerOffsetPosition = Vector2.Zero;
-
-                if (owner.Direction != Vector2.Zero)
-                {
-                    ownerOffsetPosition = new Vector2(owner.SimPosition.X + -(owner.LastNonZeroDirection.X / 4), owner.SimPosition.Y + (owner.LastNonZeroDirection.Y / 4));
-                }
-                else
-                {
-                    ownerOffsetPosition = new Vector2(owner.SimPosition.X + -(owner.LastNonZeroDirection.X), owner.SimPosition.Y + (owner.LastNonZeroDirection.Y));
-                }
-                
+                Vector2 ownerOffsetPosition = new Vector2(owner.SimPosition.X + -(owner.Direction.X / 4), owner.SimPosition.Y + (owner.Direction.Y / 4));
                 float distance = (SimPosition.X - ownerOffsetPosition.X) * (SimPosition.X - ownerOffsetPosition.X) + (SimPosition.Y - ownerOffsetPosition.Y) * (SimPosition.Y - ownerOffsetPosition.Y);
                 acceleration = maxAcceleration * distance;
 
