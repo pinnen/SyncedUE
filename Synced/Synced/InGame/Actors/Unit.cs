@@ -31,6 +31,7 @@ namespace Synced.Actors
         float _trailParticleLifetime;
         ParticleEngine _effectParticles;
         bool _useEffectParticles;
+        Library.Colors.ColorName _teamColor;
     
         #endregion
 
@@ -53,13 +54,13 @@ namespace Synced.Actors
         #endregion
 
         public Grabbable Item { get; set; }
-        public Unit(Texture2D texture, Vector2 position, Color color, Game game, World world)
+        public Unit(Texture2D texture, Vector2 position, Color color, Game game, World world,Library.Colors.ColorName teamColor)
             : base(texture, position, DrawingHelper.DrawingLevel.Medium, game, world)
         {
             /* Setting up Farseer Physics */
             RigidBody = BodyFactory.CreateCircle(this.world, ConvertUnits.ToSimUnits(texture.Width / 2), 0, ConvertUnits.ToSimUnits(position));
             RigidBody.BodyType = BodyType.Dynamic;
-            RigidBody.CollisionCategories = Category.Cat5; /* UNIT Category & TEAM Category*/ // TODO: fix collisionCategory system. 
+            RigidBody.CollisionCategories = Category.Cat1; /* UNIT Category & TEAM Category*/ // TODO: fix collisionCategory system. 
             RigidBody.CollidesWith = Category.All | Category.Cat2;         
             RigidBody.Mass = 10f;                          
             RigidBody.LinearDamping = 5f;                  
@@ -70,9 +71,10 @@ namespace Synced.Actors
             acceleration = 40;
             Color = color;
             _trailParticleLifetime = 0.2f;
-            _trail = new ParticleEngine(1, Library.Particle.trailTexture, position, color, Origin, 1.0f, 0.0f, _trailParticleLifetime, DrawingHelper.DrawingLevel.Medium, game);
+            _trail = new ParticleEngine(1, Library.Particle.trailTexture, position, color, Origin, 1.0f, 0.0f, _trailParticleLifetime, DrawingHelper.DrawingLevel.Low, game);
             _effectParticles = new ParticleEngine(1, Library.Particle.plusSignTexture, position, color, Origin, 0.7f, 0.0f, 0.5f, DrawingHelper.DrawingLevel.High, game);
             _useEffectParticles = false;
+            _teamColor = teamColor;
             SyncedGameCollection.ComponentCollection.Add(_trail);
             SyncedGameCollection.ComponentCollection.Add(_effectParticles);
             Tag = TagCategories.UNIT;
@@ -91,16 +93,27 @@ namespace Synced.Actors
         {
             CollidingSprite other = SyncedGameCollection.GetCollisionComponent(f2);
 
-            if (other != null)
+            if (other != null && Item == null)
             {
                 if (other.Tag == TagCategories.CRYSTAL)
                 {
                     Crystal crystal = other as Crystal;
                     crystal.PickUp(this);
+                    crystal.ChangeColor(Library.Colors.getColor[Tuple.Create(_teamColor, Library.Colors.ColorVariation.Other)]);
                     Item = crystal;
                     return false;
                 }
                 else if (other.Tag == TagCategories.UNIT)
+                {
+                    return false;
+                }
+                else if (other.Tag == TagCategories.COMPACTZONE)
+                {
+                    CompactZone compactzone = other as CompactZone;
+                    compactzone.PickUp(this);
+                    Item = compactzone;
+                }
+                else if (other.Tag == TagCategories.BARRIER)
                 {
                     return false;
                 }

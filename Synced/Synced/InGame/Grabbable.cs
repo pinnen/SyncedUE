@@ -33,9 +33,9 @@ namespace Synced.InGame
             /* Setting up Farseer Physics */
             RigidBody = BodyFactory.CreateCircle(this.world, ConvertUnits.ToSimUnits(texture.Width / 2), 0, ConvertUnits.ToSimUnits(position));
             RigidBody.BodyType = BodyType.Dynamic;
-            RigidBody.CollisionCategories = Category.Cat5; /* GRABBABLE Category */
-            RigidBody.CollidesWith = Category.All;
-            RigidBody.Mass = 1f;
+            RigidBody.CollisionCategories = Category.Cat5;
+            RigidBody.CollidesWith = Category.All ^ Category.Cat9;
+            RigidBody.Mass = 1f; 
             RigidBody.LinearDamping = 0.5f;
             RigidBody.Restitution = 1f;
             Origin = new Vector2(Texture.Width / 2, Texture.Height / 2);
@@ -45,7 +45,7 @@ namespace Synced.InGame
             _shootForce = 2000f;
             _cooldownInSeconds = 0.5f;
             Color = color;
-            _tail = new ParticleEngine(1, Library.Particle.trailTexture, position, color, Origin, 1.0f, 0.0f, 0.2f, DrawingHelper.DrawingLevel.Medium, game);
+            _tail = new ParticleEngine(1, Library.Particle.trailTexture, position, color, Origin, 1.0f, 0.0f, 0.2f, DrawingHelper.DrawingLevel.Low, game);
             SyncedGameCollection.ComponentCollection.Add(_tail);
         }
 
