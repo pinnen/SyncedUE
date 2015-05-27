@@ -48,6 +48,7 @@ namespace Synced.InGame.Actors
         public void Detonate() 
         {
             SyncedGameCollection.ComponentCollection.Remove(this);
+            
         }
     }
 }

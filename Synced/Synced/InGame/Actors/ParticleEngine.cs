@@ -204,7 +204,7 @@ namespace Synced.InGame.Actors
             }
 			}
 
-        public void GenerateClusterParticles(float lifetime) // TODO: Is this generate method needed?
+        public void GenerateClusterParticles() // TODO: Is this generate method needed?
         {
             int clusterParticleAmount = 300; // TODO: take in as parameter?
 
@@ -213,7 +213,7 @@ namespace Synced.InGame.Actors
                 Vector2 randomPosition = _particlePosition;
                 float randomRotation = random.Next();
                 float randomScale = random.Next();
-                Particle tempP = new Particle(_particleTexture, randomPosition, _particleColor, _particleOrigin, randomScale, randomRotation, lifetime, dLevel, game);
+                Particle tempP = new Particle(_particleTexture, randomPosition, _particleColor, _particleOrigin, randomScale, randomRotation, _particleLifetime, dLevel, game);
                 _particles.Add(tempP);
                 SyncedGameCollection.ComponentCollection.Add(tempP);
             }

@@ -32,6 +32,7 @@ namespace Synced.Actors
         Game _game;
         World _world;
         Barrier _barrier;
+        List<Zone> _zones;
         #endregion
         
         #region Properties
@@ -68,6 +69,7 @@ namespace Synced.Actors
             shape = (Library.Zone.Name)character;
             _teamColor = teamcolor;
             _compactZones = new List<CompactZone>();
+            _zones = new List<Zone>();
 
             SyncedGameCollection.ComponentCollection.Add(Left);
             SyncedGameCollection.ComponentCollection.Add(Right);

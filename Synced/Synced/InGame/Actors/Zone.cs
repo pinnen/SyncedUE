@@ -17,9 +17,8 @@ using System.Text;
 
 namespace Synced.Actors
 {
-    class Zone : Sprite
+    abstract class Zone : Sprite
     {
-        public enum Name { Circle, Triangle, Square, Pentagon, Hexagon }
         enum ZoneState { None, Spawn, Active, Despawn, Delete }
 
         ZoneState _zoneState;
@@ -32,7 +31,7 @@ namespace Synced.Actors
 
         // Effects
         float _scaleTarget;
-        ParticleEngine particleEffects;
+        ParticleEngine _particleEffects;
 
         public Zone(Texture2D texture, Vector2 position, Color color,Game game) 
             : base(texture,position,DrawingHelper.DrawingLevel.Low,game)
@@ -41,7 +40,7 @@ namespace Synced.Actors
             //_victims = new List<IVictim>();
             Scale = 0.05f;
             _scaleTarget = 1.0f;
-            particleEffects = new ParticleEngine(100,Library.Particle.trailTexture,position,color,Vector2.Zero,1.0f,0.0f,10.0f,DrawingHelper.DrawingLevel.Medium,game);
+            _particleEffects = new ParticleEngine(100,Library.Particle.trailTexture,position,color,Vector2.Zero,1.0f,0.0f,10.0f,DrawingHelper.DrawingLevel.Medium,game);
         }
 
         public override void Update(GameTime gameTime)
@@ -58,10 +57,26 @@ namespace Synced.Actors
                     }
                     break;
                 case ZoneState.Active:
+                    _timeSinceSpawn += (float)gameTime.ElapsedGameTime.TotalSeconds;
+                    if (_timeSinceSpawn > _lifetime)
+                    {
+                        _zoneState = ZoneState.Despawn;
+                    }
                     break;
                 case ZoneState.Despawn:
+                    Scale -= 0.1f;
+                    if (Scale <= 0.0f)
+                    {
+                        _particleEffects.GenerateClusterParticles();
+                        _particleEffects.ShatterParticles();
+
+                        _zoneState = ZoneState.Delete;
+                        _timeSinceSpawn = 0;
+                        //DELETE COLLISION?
+                    }
                     break;
                 case ZoneState.Delete:
+                    //_timeSinceSpawn
                     break;
                 default:
                     break;
