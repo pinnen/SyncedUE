@@ -60,7 +60,7 @@ namespace Synced.Actors
             /* Setting up Farseer Physics */
             RigidBody = BodyFactory.CreateCircle(this.world, ConvertUnits.ToSimUnits(texture.Width / 2), 0, ConvertUnits.ToSimUnits(position));
             RigidBody.BodyType = BodyType.Dynamic;
-            RigidBody.CollisionCategories = Category.Cat5; /* UNIT Category & TEAM Category*/ // TODO: fix collisionCategory system. 
+            RigidBody.CollisionCategories = Category.Cat1; /* UNIT Category & TEAM Category*/ // TODO: fix collisionCategory system. 
             RigidBody.CollidesWith = Category.All | Category.Cat2;         
             RigidBody.Mass = 10f;                          
             RigidBody.LinearDamping = 5f;                  
@@ -112,6 +112,9 @@ namespace Synced.Actors
                     CompactZone compactzone = other as CompactZone;
                     compactzone.PickUp(this);
                     Item = compactzone;
+                }
+                else if (other.Tag == TagCategories.BARRIER)
+                {
                     return false;
                 }
             }
