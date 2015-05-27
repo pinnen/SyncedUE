@@ -39,6 +39,7 @@ namespace Synced.Interface
         public GameScreen(Game game) // TODO: tmp added world to parameters, might solve in a different way later. 
             : base (game)
         {
+            ScreenManager.Instance.AddScreen(new LoadingScreen());
             SyncedGameCollection.InitializeSyncedGameCollection(game);
             GameComponents.Add(SyncedGameCollection.Instance);
 

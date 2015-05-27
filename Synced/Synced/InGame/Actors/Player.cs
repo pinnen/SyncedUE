@@ -197,14 +197,14 @@ namespace Synced.Actors
                 Right.Direction = InputManager.RightStickDirection(_playerIndex);
 
                 // Switch unit positions
-                if (InputManager.LeftStickPressed(_playerIndex) && InputManager.RightStickPressed(_playerIndex) && !_haveSwitched)
+                if (InputManager.IsButtonPressed(Buttons.LeftStick, _playerIndex) && InputManager.IsButtonPressed(Buttons.RightStick, _playerIndex) && !_haveSwitched)
                 {
                     _haveSwitched = true;
                     Vector2 tmp = Left.Position;
                     Left.Position = Right.Position;
                     Right.Position = tmp;
                 }
-                else if (!InputManager.LeftStickPressed(_playerIndex) && !InputManager.RightStickPressed(_playerIndex))
+                else if (!InputManager.IsButtonPressed(Buttons.LeftStick, _playerIndex) && !InputManager.IsButtonPressed(Buttons.RightStick, _playerIndex))
                 {
                     _haveSwitched = false;
                 }
@@ -213,25 +213,24 @@ namespace Synced.Actors
                 {
                     DetonateZones();
                     Left.Shoot();
-
                 }
 
                 if (InputManager.IsButtonPressed(Buttons.RightShoulder, _playerIndex))
                 {
                     DetonateZones();
                     Right.Shoot();
+                }
 
-                }
-                if (InputManager.RightTriggerPressed(_playerIndex) != 0.0f)
+                if (InputManager.RightTriggerValue(_playerIndex) != 0.0f)
                 {
-                    Right.TrailParticleLifetime += (1.5f * InputManager.RightTriggerPressed(_playerIndex)); // TODO: constant
+                    Right.TrailParticleLifetime += (1.5f * InputManager.RightTriggerValue(_playerIndex)); // TODO: constant
                 }
-                if (InputManager.LeftTriggerPressed(_playerIndex) != 0.0f)
+                if (InputManager.LeftTriggerValue(_playerIndex) != 0.0f)
                 {
-                    Left.TrailParticleLifetime += (1.5f * InputManager.LeftTriggerPressed(_playerIndex)); // TODO: constant
+                    Left.TrailParticleLifetime += (1.5f * InputManager.LeftTriggerValue(_playerIndex)); // TODO: constant
                 }
                 _areTrailsActive = false;
-                if ((InputManager.RightTriggerPressed(_playerIndex) > 0.0f) && (InputManager.LeftTriggerPressed(_playerIndex) > 0.0f))
+                if ((InputManager.RightTriggerValue(_playerIndex) > 0.0f) && (InputManager.LeftTriggerValue(_playerIndex) > 0.0f))
                 {
                     _areTrailsActive = true;
                 }
@@ -241,11 +240,10 @@ namespace Synced.Actors
                 #region SpeedUp
                 if (AreTrailsActive)
                 {
-
                     if (ConvertUnits.ToSimUnits(GetDistanceBetweenUnits()) < 2.0f)// TODO: constant
                     {
-                        Math.Min(Left.Acceleration += 1.0f, 60.0f); //TODO: constant
-                        Math.Min(Right.Acceleration += 1.0f, 60.0f); // TODO: constant
+                        Math.Min(Left.Acceleration++, 60.0f); //TODO: constant
+                        Math.Min(Right.Acceleration++, 60.0f); // TODO: constant
                         Left.UseEffectParticles = true;
                         Right.UseEffectParticles = true;
                     }
@@ -286,7 +284,7 @@ namespace Synced.Actors
                 #endregion
 
                 #region Zones
-                if (InputManager.IsButtonPressed(Buttons.B, _playerIndex)) // FOR TESTING
+                if (InputManager.IsButtonPressed(Buttons.B, _playerIndex)) // TODO: Remove. This is for testing
                 {
                     Vector2 spawnPosition = new Vector2((Left.RigidBody.Position.X + Right.RigidBody.Position.X) / 2.0f, (Left.RigidBody.Position.Y + Right.RigidBody.Position.Y) / 2.0f);
                     _compactZone = new CompactZone(Library.Zone.CompactTexture[shape], ConvertUnits.ToDisplayUnits(spawnPosition), DrawingHelper.DrawingLevel.Medium, _game, _world, Library.Colors.getColor[Tuple.Create(_teamColor, Library.Colors.ColorVariation.Other)], shape);

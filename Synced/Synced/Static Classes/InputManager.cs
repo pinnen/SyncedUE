@@ -1,6 +1,6 @@
 ﻿// InputManager.cs
 // Introduced: 2015-04-14
-// Last edited: 2015-04-14
+// Last edited: 2015-05-27
 // Edited by:
 // Pontus Magnusson 
 using System;
@@ -20,26 +20,46 @@ namespace Synced.Static_Classes
                 _LastStates[p] = GamePad.GetState(p);
         }
 
+        // Button press
         public static bool IsButtonPressed(Buttons button, PlayerIndex playerIndex)
         {
             return (GamePad.GetState(playerIndex).IsButtonDown(button) && _LastStates[playerIndex].IsButtonUp(button));
         }
 
+        // Button down
+        public static bool IsButtonDown(PlayerIndex playerIndex, Buttons button)
+        {
+            return GamePad.GetState(playerIndex).IsButtonDown(button);
+        }
+
+        // Use stick as Dpad
         public static bool LeftStickLeft(PlayerIndex playerIndex)
         {
-            return (GamePad.GetState(playerIndex).ThumbSticks.Left.X > 0f && _LastStates[playerIndex].ThumbSticks.Left.X <= 0f);
+            return ((GamePad.GetState(playerIndex).ThumbSticks.Left.X > 0f && _LastStates[playerIndex].ThumbSticks.Left.X <= 0f))
+                || (IsButtonPressed(Buttons.DPadLeft, playerIndex));
         }
         public static bool LeftStickRight(PlayerIndex playerIndex)
         {
-            return (GamePad.GetState(playerIndex).ThumbSticks.Left.X < 0f && _LastStates[playerIndex].ThumbSticks.Left.X >= 0f);
+            return ((GamePad.GetState(playerIndex).ThumbSticks.Left.X < 0f && _LastStates[playerIndex].ThumbSticks.Left.X >= 0f))
+                || (IsButtonPressed(Buttons.DPadRight, playerIndex));
         }
         public static bool LeftStickUp(PlayerIndex playerIndex)
         {
-            return (GamePad.GetState(playerIndex).ThumbSticks.Left.Y > 0f && _LastStates[playerIndex].ThumbSticks.Left.Y <= 0f);
+            return (GamePad.GetState(playerIndex).ThumbSticks.Left.Y > 0f && _LastStates[playerIndex].ThumbSticks.Left.Y <= 0f)
+                || (IsButtonPressed(Buttons.DPadUp, playerIndex));
         }
         public static bool LeftStickDown(PlayerIndex playerIndex)
         {
-            return (GamePad.GetState(playerIndex).ThumbSticks.Left.Y < 0f && _LastStates[playerIndex].ThumbSticks.Left.Y >= 0f);
+            return (GamePad.GetState(playerIndex).ThumbSticks.Left.Y < 0f && _LastStates[playerIndex].ThumbSticks.Left.Y >= 0f)
+                || (IsButtonPressed(Buttons.DPadDown, playerIndex));
+        }
+        public static float LeftTriggerValue(PlayerIndex playerIndex)
+        {
+            return GamePad.GetState(playerIndex).Triggers.Left;
+        }
+        public static float RightTriggerValue(PlayerIndex playerIndex)
+        {
+            return GamePad.GetState(playerIndex).Triggers.Right;
         }
         public static Vector2 LeftStickDirection(PlayerIndex playerIndex)
         {
@@ -48,30 +68,6 @@ namespace Synced.Static_Classes
         public static Vector2 RightStickDirection(PlayerIndex playerIndex)
         {
             return GamePad.GetState(playerIndex, GamePadDeadZone.Circular).ThumbSticks.Right;
-        }
-        public static float LeftTriggerPressed(PlayerIndex playerIndex)
-        {
-            return GamePad.GetState(playerIndex).Triggers.Left;
-        }
-        public static float RightTriggerPressed(PlayerIndex playerIndex)
-        {
-            return GamePad.GetState(playerIndex).Triggers.Right;
-        }
-        public static bool LeftShoulderPressed(PlayerIndex playerIndex)
-        {
-            return GamePad.GetState(playerIndex).IsButtonDown(Buttons.LeftShoulder);
-        }
-        public static bool RightShoulderPressed(PlayerIndex playerIndex)
-        {
-            return GamePad.GetState(playerIndex).IsButtonDown(Buttons.RightShoulder);
-        }
-        public static bool LeftStickPressed(PlayerIndex playerIndex)
-        {
-            return GamePad.GetState(playerIndex).IsButtonDown(Buttons.LeftStick);
-        }
-        public static bool RightStickPressed(PlayerIndex playerIndex)
-        {
-            return GamePad.GetState(playerIndex).IsButtonDown(Buttons.RightStick);
         }
     }
 }
