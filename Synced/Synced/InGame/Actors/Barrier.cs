@@ -66,7 +66,7 @@ namespace Synced.InGame.Actors
             _barrierBodies = PathManager.EvenlyDistributeShapesAlongPath(world, barrierPath, shape, BodyType.Dynamic, 30);
 
             // fix the shapes together with the end and start point
-            JointFactory.CreateRevoluteJoint(world, hiddenBody1, _barrierBodies[0], new Vector2(0f, 0f));
+            JointFactory.CreateRevoluteJoint(world, hiddenBody1, _barrierBodies[0], new Vector2(0f, 0.01f));
             JointFactory.CreateRevoluteJoint(world, hiddenBody2, _barrierBodies[_barrierBodies.Count - 1], new Vector2(0f, 0f));
 
             // fix all the barrierParticles together in the path

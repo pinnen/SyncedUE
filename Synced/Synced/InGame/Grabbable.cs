@@ -36,7 +36,7 @@ namespace Synced.InGame
             RigidBody.CollisionCategories = Category.Cat5;
             RigidBody.CollidesWith = Category.All ^ Category.Cat9;
             RigidBody.Mass = 1f; 
-            RigidBody.LinearDamping = 0.5f;
+            RigidBody.LinearDamping = 0.0f;
             RigidBody.Restitution = 1f;
             Origin = new Vector2(Texture.Width / 2, Texture.Height / 2);
 
