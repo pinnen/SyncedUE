@@ -56,12 +56,12 @@ namespace Synced.Actors
         {
             // TODO: fix hardcode positions. 
             _playerIndex = playerIndex;
-            Left = new Unit(Library.Character.GameTexture[character], new Vector2(400, 300), Library.Colors.getColor[Tuple.Create(teamcolor,Library.Colors.ColorVariation.Left)], game, world);       // TODO: fix hardcoded values for positions. 
-            Right = new Unit(Library.Character.GameTexture[character], new Vector2(400, 250), Library.Colors.getColor[Tuple.Create(teamcolor, Library.Colors.ColorVariation.Right)], game, world);
+            Left = new Unit(Library.Character.GameTexture[character], new Vector2(500, 500), Library.Colors.getColor[Tuple.Create(teamcolor,Library.Colors.ColorVariation.Left)], game, world);       // TODO: fix hardcoded values for positions. 
+            Right = new Unit(Library.Character.GameTexture[character], new Vector2(500, 600), Library.Colors.getColor[Tuple.Create(teamcolor, Library.Colors.ColorVariation.Right)], game, world);
             _areTrailsActive = false;
             _game = game;
             _world = world;
-            _barrier = new Barrier(Library.Particle.plusSignTexture, Left, Right, world, game, Library.Colors.getColor[Tuple.Create(teamcolor, Library.Colors.ColorVariation.Left)]);
+            _barrier = new Barrier(Library.Particle.barrierParticle, Left, Right, world, game, Library.Colors.getColor[Tuple.Create(teamcolor, Library.Colors.ColorVariation.Left)]);
             shape = (Library.Zone.Name)character;
             _teamColor = teamcolor;
 

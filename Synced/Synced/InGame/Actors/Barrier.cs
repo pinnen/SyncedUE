@@ -33,8 +33,8 @@ namespace Synced.InGame.Actors
             // create two static hiddenBodies that mirror the position of the units
             hiddenBody1 = BodyFactory.CreateCircle(world, texture.Width / 2, 1, _start.RigidBody.Position);//_start.RigidBody;
             hiddenBody2 = BodyFactory.CreateCircle(world, texture.Width / 2, 1, _end.RigidBody.Position);//_end.RigidBody;
-            hiddenBody1.CollisionCategories = Category.Cat9;
-            hiddenBody2.CollisionCategories = Category.Cat9;
+            hiddenBody1.CollisionCategories = Category.None;
+            hiddenBody2.CollisionCategories = Category.None;
             hiddenBody1.CollidesWith = Category.None;
             hiddenBody2.CollidesWith = Category.None;
             hiddenBody1.BodyType = BodyType.Static;
@@ -50,26 +50,42 @@ namespace Synced.InGame.Actors
             barrierPath.Closed = false;
 
             // create barrier particle
-            Vertices barrierParticle = PolygonTools.CreateRectangle(texture.Width, texture.Height);// (texture.Width / 2, 10);
-            PolygonShape shape = new PolygonShape(barrierParticle, 1);
+            Vertices barrierParticle = PolygonTools.CreateCircle(ConvertUnits.ToSimUnits(texture.Width * 2), 8);
+            PolygonShape shape = new PolygonShape(barrierParticle, 0f);
 
             // distribute barrierParticle positions along the path between the two units. 
             _barrierBodies = PathManager.EvenlyDistributeShapesAlongPath(world, barrierPath, shape, BodyType.Dynamic, 25);
 
             // fix the shapes together with the end and start point
-            JointFactory.CreateRevoluteJoint(world, hiddenBody1, _barrierBodies[0], Vector2.Zero);
-            JointFactory.CreateRevoluteJoint(world, hiddenBody2,_barrierBodies[_barrierBodies.Count-1],Vector2.Zero);
+            JointFactory.CreateRevoluteJoint(world, hiddenBody1, _barrierBodies[0], new Vector2(0f, 0f));
+            JointFactory.CreateRevoluteJoint(world, hiddenBody2, _barrierBodies[_barrierBodies.Count - 1], new Vector2(0f, 0f));
 
             // fix all the barrierParticles together in the path
-            PathManager.AttachBodiesWithRevoluteJoint(world, _barrierBodies, Vector2.Zero, Vector2.Zero, false, false);
+            PathManager.AttachBodiesWithRevoluteJoint(world, _barrierBodies, new Vector2(0f, 0.5f), new Vector2(0f, 0.5f), false, false);
 
             // Set up OnCollision fale safe. 
             for (int i = 0; i < _barrierBodies.Count; i++)
             {
-                _barrierBodies[i].CollidesWith = Category.None;//Category.Cat5;
-                _barrierBodies[i].UserData = "";
+                _barrierBodies[i].CollisionCategories = Category.Cat10;
+                _barrierBodies[i].CollidesWith = Category.Cat5; /* should only collide with grabbables*/
+                _barrierBodies[i].UserData = "BARRIER";
+                _barrierBodies[i].OnCollision += OnCollision;
             }
 
+        }
+
+        public override bool OnCollision(Fixture f1, Fixture f2, FarseerPhysics.Dynamics.Contacts.Contact contact)
+        {
+            CollidingSprite other = SyncedGameCollection.GetCollisionComponent(f2);
+
+            if (other != null)
+            {
+                if (other.Tag == TagCategories.CRYSTAL)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
         public override void Update(GameTime gameTime)

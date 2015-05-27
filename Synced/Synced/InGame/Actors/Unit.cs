@@ -104,6 +104,10 @@ namespace Synced.Actors
                 {
                     return false;
                 }
+                else if (other.Tag == TagCategories.BARRIER)
+                {
+                    return false;
+                }
             }
 
             return true;

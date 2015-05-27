@@ -22,6 +22,7 @@ public enum TagCategories
     GOAL,
     COMPACTZONE,
     ZONE,
+    BARRIER
 }
 
 namespace Synced.InGame.Actors

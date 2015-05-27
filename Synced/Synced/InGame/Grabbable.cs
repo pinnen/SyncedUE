@@ -31,8 +31,8 @@ namespace Synced.InGame
             /* Setting up Farseer Physics */
             RigidBody = BodyFactory.CreateCircle(this.world, ConvertUnits.ToSimUnits(texture.Width / 2), 0, ConvertUnits.ToSimUnits(position));
             RigidBody.BodyType = BodyType.Dynamic;
-            RigidBody.CollisionCategories = Category.Cat5; /* GRABBABLE Category */
-            RigidBody.CollidesWith = Category.All;
+            RigidBody.CollisionCategories = Category.Cat5;
+            RigidBody.CollidesWith = Category.All ^ Category.Cat9;
             RigidBody.Mass = 1f; 
             RigidBody.LinearDamping = 0.5f;
             RigidBody.Restitution = 1f;
