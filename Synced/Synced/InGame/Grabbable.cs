@@ -27,13 +27,6 @@ namespace Synced.InGame
         float _cooldownInSeconds;
         #endregion
 
-        #region Properties
-        public MovableCollidable Owner
-        {
-            get { return owner; }
-        }
-        #endregion
-
         public Grabbable(Texture2D texture, Vector2 position, DrawingHelper.DrawingLevel drawingLevel, Game game, World world, Color color)
             : base(texture, position, drawingLevel, game, world)
         {
