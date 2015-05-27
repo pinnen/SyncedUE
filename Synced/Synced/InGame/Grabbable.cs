@@ -18,12 +18,13 @@ using System;
 
 namespace Synced.InGame
 {
-    abstract class Grabbable : MovableCollidable
+    abstract class Grabbable : MovableCollidable, IVictim
     {
 
         #region Variables
         protected Unit owner = null;
         protected ParticleEngine _tail;
+        
         float _shootForce;
         float _cooldownTimer;
         float _cooldownInSeconds;
@@ -67,8 +68,7 @@ namespace Synced.InGame
             _shootForce = 2000f;
             _cooldownInSeconds = 1f;
             Color = color;
-            _tail = new ParticleEngine(1, Library.Particle.trailTexture, position, color, Origin, 1.0f, 0.0f, 0.2f, DrawingHelper.DrawingLevel.Low, game);
-            SyncedGameCollection.ComponentCollection.Add(_tail);
+            
         }
 
         public virtual Grabbable PickUp(Unit own) //TODO: only let it be stolen or picked up if some conditions are met. 
@@ -139,9 +139,7 @@ namespace Synced.InGame
                 direction.Normalize();
             }
 
-            _tail.UpdatePosition(Position);
-            _tail.GenerateTrailParticles();
-
+            
             base.Update(gameTime);
         }
 
@@ -156,5 +154,24 @@ namespace Synced.InGame
 
             return true;
         }
+
+        // IVictim
+        float _circleEffectTimer = 0.0f;
+        float _triangleEffectTimer = 0.0f;
+        float _hexagonEffectTimer = 0.0f;
+        float _pentagonEffectTimer = 0.0f;
+        bool _fadeOut = false;
+
+
+        public float CircleEffectTimer { get { return _circleEffectTimer; } set { _circleEffectTimer = value; } }
+        public float TriangleEffectTimer { get { return _triangleEffectTimer; } set { _triangleEffectTimer = value; } }
+        public float HexagonEffectTimer { get { return _hexagonEffectTimer; } set { _hexagonEffectTimer = value; } }
+        public float PentagonEffectTimer { get { return _pentagonEffectTimer; } set { _pentagonEffectTimer = value; } }
+        public bool FadeOut { get { return _fadeOut; } set { _fadeOut = value; } }
+        public Texture2D VictimTexture { get { return this.Texture; } }
+        public float ParticleLifetime { get { return _tail.ParticleLifetime; } }
+        public float LocalTimeScale { get { throw new NotImplementedException(); } set { throw new NotImplementedException(); } }
+        public float InvisibilityAlpha { get { return this.Alpha; } set { this.Alpha = value; } }
+        public ParticleEngine TrailEngine { get { return _tail; } }
     }
 }

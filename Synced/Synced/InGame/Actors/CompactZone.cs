@@ -40,6 +40,7 @@ namespace Synced.InGame.Actors
             Tag = TagCategories.COMPACTZONE;
             _isShot = false;
             _shape = shape;
+            _tail = null;
 
         }
 

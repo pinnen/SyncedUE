@@ -10,7 +10,9 @@ using FarseerPhysics.Dynamics.Contacts;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Synced.Content;
+using Synced.InGame.Actors;
 using Synced.Static_Classes;
+using System;
 
 
 namespace Synced.InGame
@@ -30,8 +32,18 @@ namespace Synced.InGame
             /* Setting up Crystal */
             Tag = TagCategories.CRYSTAL;
 
+            _tail = new ParticleEngine(1, Library.Particle.trailTexture, position, color, Origin, 1.0f, 0.0f, 0.2f, DrawingHelper.DrawingLevel.Low, game);
+            SyncedGameCollection.ComponentCollection.Add(_tail);
             _tail.ParticleColor = Color.LightGray;
         }
+
+        public override void Update(GameTime gameTime)
+        {
+            _tail.UpdatePosition(Position);
+            _tail.GenerateTrailParticles();
+
+            base.Update(gameTime);
+        }
 
         public void ChangeColor(Color newColor) 
         {
@@ -43,6 +55,9 @@ namespace Synced.InGame
             this.Color = Color.White;
             _tail.ParticleColor = Color.LightGray;
         }
+
+
+        
 
     }
 }

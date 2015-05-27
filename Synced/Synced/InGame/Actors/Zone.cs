@@ -26,9 +26,9 @@ namespace Synced.Actors
 {
     abstract class Zone : TexturePolygon
     {
-        enum ZoneState { None, Spawn, Active, Despawn, Delete }
+        protected enum ZoneState { None, Spawn, Active, Despawn, Delete }
 
-        ZoneState _zoneState;
+        protected ZoneState _zoneState;
 
         //time
         float _timeSinceSpawn = 0.0f;

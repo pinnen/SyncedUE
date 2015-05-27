@@ -24,7 +24,7 @@ using Synced.Interface;
 
 namespace Synced.Actors
 {
-    class Unit : MovableCollidable//, IVictim
+    class Unit : MovableCollidable, IVictim
     {
         #region Variables
         ParticleEngine _trail;
