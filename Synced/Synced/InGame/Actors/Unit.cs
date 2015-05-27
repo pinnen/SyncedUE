@@ -24,7 +24,7 @@ using Synced.Interface;
 
 namespace Synced.Actors
 {
-    class Unit : MovableCollidable
+    class Unit : MovableCollidable//, IVictim
     {
         #region Variables
         ParticleEngine _trail;
@@ -32,6 +32,7 @@ namespace Synced.Actors
         ParticleEngine _effectParticles;
         bool _useEffectParticles;
         Library.Colors.ColorName _teamColor;
+        Texture2D _texture;
     
         #endregion
 
@@ -65,7 +66,7 @@ namespace Synced.Actors
             RigidBody.Mass = 10f;                          
             RigidBody.LinearDamping = 5f;                  
             RigidBody.Restitution = 0.1f;                  
-            Origin = new Vector2(Texture.Width / 2, texture.Height / 2);
+            Origin = new Vector2(texture.Width / 2, texture.Height / 2);
 
             /* Setting up Unit */
             acceleration = 40;
@@ -78,6 +79,7 @@ namespace Synced.Actors
             SyncedGameCollection.ComponentCollection.Add(_trail);
             SyncedGameCollection.ComponentCollection.Add(_effectParticles);
             Tag = TagCategories.UNIT;
+            _texture = texture;
         }
 
         public void Shoot()
@@ -152,5 +154,22 @@ namespace Synced.Actors
         }
 
 
+        // IVictim
+        float _circleEffectTimer = 0.0f;
+        float _triangleEffectTimer = 0.0f;
+        float _hexagonEffectTimer = 0.0f;
+        float _pentagonEffectTimer = 0.0f;
+        bool _fadeOut = false;
+
+        public float CircleEffectTimer { get { return _circleEffectTimer; } set { _circleEffectTimer = value; } }
+        public float TriangleEffectTimer{ get{ return _triangleEffectTimer;}set{_triangleEffectTimer = value;}}
+        public float HexagonEffectTimer { get { return _hexagonEffectTimer; } set { _hexagonEffectTimer = value; } }
+        public float PentagonEffectTimer {get{return _pentagonEffectTimer;} set{_pentagonEffectTimer = value;}}
+        public bool FadeOut { get { return _fadeOut; } set { _fadeOut = value; } }
+        public Texture2D VictimTexture{ get { return _texture; }}
+        public float ParticleLifetime { get { return _trailParticleLifetime; } }
+        public float LocalTimeScale{ get { throw new NotImplementedException(); } set { throw new NotImplementedException(); } }
+        public float InvisibilityAlpha { get { return this.Alpha; } set { this.Alpha = value; } }
+        public ParticleEngine TrailEngine { get { return _trail; } }
     }
 }

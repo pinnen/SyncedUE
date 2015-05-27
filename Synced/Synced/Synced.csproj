@@ -58,6 +58,7 @@
     <Compile Include="InGame\IActive.cs" />
     <Compile Include="InGame\ICollidable.cs" />
     <Compile Include="InGame\Grabbable.cs" />
+    <Compile Include="InGame\IVictim.cs" />
     <Compile Include="InGame\Movable.cs" />
     <Compile Include="InGame\MovableCollidable.cs" />
     <Compile Include="Interface\Text.cs" />

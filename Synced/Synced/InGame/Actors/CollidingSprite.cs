@@ -61,7 +61,7 @@ namespace Synced.InGame.Actors
         public new float Rotation 
         {
             get { return rigidBody.Rotation; }
-            protected set { rigidBody.Rotation = value; } 
+            set { rigidBody.Rotation = value; } 
         }
         public Guid ID
         {

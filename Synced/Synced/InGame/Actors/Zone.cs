@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Synced.CollisionShapes;
 using Synced.Content;
+using Synced.InGame;
 using Synced.InGame.Actors;
 using Synced.Interface;
 using Synced.Static_Classes;
@@ -38,6 +39,7 @@ namespace Synced.Actors
         float _scaleTarget;
         ParticleEngine _particleEffects;
         protected ParticleEngine _victimParticles;
+        protected List<IVictim> _victims;
 
         public Zone(Texture2D texture, Vector2 position,float rotation, Color color,Game game, World world) 
             : base(texture,position, rotation ,DrawingHelper.DrawingLevel.Low,game,world,false)
@@ -53,6 +55,7 @@ namespace Synced.Actors
             _scaleTarget = 1.0f;
             _particleEffects = new ParticleEngine(100,Library.Particle.trailTexture,position,color*0.05f,Vector2.Zero,1.0f,0.0f,0.5f,DrawingHelper.DrawingLevel.Medium,game);
             SyncedGameCollection.ComponentCollection.Add(_particleEffects);
+            _victims = new List<IVictim>();
             
         }
         

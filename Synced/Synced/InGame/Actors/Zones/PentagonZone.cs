@@ -21,7 +21,18 @@ namespace Synced.InGame.Actors.Zones
 
         public override void Update(GameTime gameTime)
         {
+            for (int i = 0; i < _victims.Count; i++)
+            {
+                _victims[i].PentagonEffectTimer -= (float)gameTime.ElapsedGameTime.TotalSeconds;
+                if (_victims[i].PentagonEffectTimer <= 0)
+                {
+                    if (_victims[i].FadeOut)
+                    {
 
+                    }
+                   
+                }
+            }
             base.Update(gameTime);
         }
         public override bool OnCollision(Fixture f1, Fixture f2, FarseerPhysics.Dynamics.Contacts.Contact contact)
@@ -30,14 +41,15 @@ namespace Synced.InGame.Actors.Zones
 
             if (other != null)
             {
-                if (other.Tag == TagCategories.UNIT)
+                if (other is IVictim) 
                 {
-                    Color = Color.Magenta;
-                    return false;
+                    _victims.Add((IVictim)other);
                 }
+                
             }
             return false;
 
         }
+
     }
 }
