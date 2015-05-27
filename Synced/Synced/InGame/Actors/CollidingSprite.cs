@@ -96,7 +96,7 @@ namespace Synced.InGame.Actors
         public override void Draw(GameTime gameTime)
         {       
             _spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.LinearWrap, DepthStencilState.None, RasterizerState.CullNone, null, ResolutionManager.GetTransformationMatrix());
-            _spriteBatch.Draw(Texture, ConvertUnits.ToDisplayUnits(rigidBody.Position), null, Color, rigidBody.Rotation, Origin, 1.0f, SpriteEffects.None, 1f);
+            _spriteBatch.Draw(Texture, ConvertUnits.ToDisplayUnits(rigidBody.Position), null, Color * Alpha, rigidBody.Rotation, Origin, 1.0f, SpriteEffects.None, 1f);
             _spriteBatch.End();
         }
     }

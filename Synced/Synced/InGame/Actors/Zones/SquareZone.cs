@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using FarseerPhysics.Dynamics;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Synced.Actors;
 using Synced.Content;
@@ -12,10 +13,16 @@ namespace Synced.InGame.Actors.Zones
 {
     class SquareZone : Zone
     {
-        public SquareZone (Texture2D texture, Vector2 position, Color color, Game game) 
-            : base(texture, position, color, game) 
+        public SquareZone(Texture2D texture, Vector2 position, float rotation, Color color, Game game, World world)
+            : base(texture, position,rotation, color, game,world) 
         {
             _victimParticles = new ParticleEngine(1, Library.Particle.exclamationSignTexture, position, Color.White, Vector2.Zero, 1.0f, 0.0f, 0.5f, DrawingHelper.DrawingLevel.Medium, game);
+        }
+
+        public override void Update(GameTime gameTime)
+        {
+
+            base.Update(gameTime);
         }
     }
 }

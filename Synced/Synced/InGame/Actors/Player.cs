@@ -173,39 +173,39 @@ namespace Synced.Actors
             {
                 if (_compactZones[i].IsShot)
                 {
-                    CreateZone(_compactZones[i].Shape, _compactZones[i].Position, _compactZones[i].Color);
+                    CreateZone(_compactZones[i].Shape, _compactZones[i].Position,_compactZones[i].Rotation, _compactZones[i].Color);
                     _compactZones[i].Detonate();
                     _compactZones.RemoveAt(i);
                 }
             }
         }
 
-        public void CreateZone(Library.Zone.Name zoneshape, Vector2 position, Color color) 
+        public void CreateZone(Library.Zone.Name zoneshape, Vector2 position,float rotation, Color color) 
         {
             switch (zoneshape)
             {
                 case Library.Zone.Name.Circle:
-                    CircleZone circleZ =new CircleZone(Library.Zone.Texture[shape],ConvertUnits.ToDisplayUnits(position),color,_game);
+                    CircleZone circleZ = new CircleZone(Library.Zone.Texture[shape], ConvertUnits.ToDisplayUnits(position), rotation, color, _game, _world);
                     _zones.Add(circleZ);
                     SyncedGameCollection.ComponentCollection.Add(circleZ);
                     break;
                 case Library.Zone.Name.Triangle:
-                    TriangleZone triangleZ = new TriangleZone(Library.Zone.Texture[shape], ConvertUnits.ToDisplayUnits(position), color, _game);
+                    TriangleZone triangleZ = new TriangleZone(Library.Zone.Texture[shape], ConvertUnits.ToDisplayUnits(position),rotation, color, _game,_world);
                     _zones.Add(triangleZ);
                     SyncedGameCollection.ComponentCollection.Add(triangleZ);
                     break;
                 case Library.Zone.Name.Square:
-                    SquareZone squareZ = new SquareZone(Library.Zone.Texture[shape], ConvertUnits.ToDisplayUnits(position), color, _game);
+                    SquareZone squareZ = new SquareZone(Library.Zone.Texture[shape], ConvertUnits.ToDisplayUnits(position), rotation, color, _game, _world);
                     _zones.Add(squareZ);
                     SyncedGameCollection.ComponentCollection.Add(squareZ);
                     break;
                 case Library.Zone.Name.Pentagon:
-                    PentagonZone pentagonZ = new PentagonZone(Library.Zone.Texture[shape], ConvertUnits.ToDisplayUnits(position), color, _game);
+                    PentagonZone pentagonZ = new PentagonZone(Library.Zone.Texture[shape], ConvertUnits.ToDisplayUnits(position), rotation, color, _game, _world);
                     _zones.Add(pentagonZ);
                     SyncedGameCollection.ComponentCollection.Add(pentagonZ);
                     break;
                 case Library.Zone.Name.Hexagon:
-                    HexagonZone hexagonZ = new HexagonZone(Library.Zone.Texture[shape], ConvertUnits.ToDisplayUnits(position), color, _game);
+                    HexagonZone hexagonZ = new HexagonZone(Library.Zone.Texture[shape], ConvertUnits.ToDisplayUnits(position), rotation, color, _game, _world);
                     _zones.Add(hexagonZ);
                     SyncedGameCollection.ComponentCollection.Add(hexagonZ);
                     break;

@@ -1,7 +1,13 @@
-﻿using Microsoft.Xna.Framework;
+﻿using FarseerPhysics;
+using FarseerPhysics.Collision;
+using FarseerPhysics.Dynamics;
+using FarseerPhysics.Factories;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Synced.CollisionShapes;
 using Synced.Content;
 using Synced.InGame.Actors;
+using Synced.Interface;
 using Synced.Static_Classes;
 // Zone.cs
 // Introduced: 2015-04-14
@@ -17,7 +23,7 @@ using System.Text;
 
 namespace Synced.Actors
 {
-    abstract class Zone : Sprite
+    abstract class Zone : TexturePolygon
     {
         enum ZoneState { None, Spawn, Active, Despawn, Delete }
 
@@ -27,23 +33,28 @@ namespace Synced.Actors
         float _timeSinceSpawn = 0.0f;
         float _lifetime = 10.0f;
 
-        //List<IVictim> _victims;
 
         // Effects
         float _scaleTarget;
         ParticleEngine _particleEffects;
         protected ParticleEngine _victimParticles;
 
-        public Zone(Texture2D texture, Vector2 position, Color color,Game game) 
-            : base(texture,position,color,DrawingHelper.DrawingLevel.Low,true,game)
+        public Zone(Texture2D texture, Vector2 position,float rotation, Color color,Game game, World world) 
+            : base(texture,position, rotation ,DrawingHelper.DrawingLevel.Low,game,world,true)
         {
+            Color = color;
+            
+            RigidBody.CollidesWith = Category.None;
+            
+            Origin = new Vector2(Texture.Width / 2, texture.Height / 2);
             _zoneState = ZoneState.Spawn;
-            //_victims = new List<IVictim>();
             Scale = 0.05f;
             Alpha = 0.5f;
             _scaleTarget = 0.8f;
             _particleEffects = new ParticleEngine(100,Library.Particle.trailTexture,position,color,Vector2.Zero,1.0f,0.0f,10.0f,DrawingHelper.DrawingLevel.Medium,game);
             SyncedGameCollection.ComponentCollection.Add(_particleEffects);
+
+            
         }
 
         public override void Update(GameTime gameTime)
@@ -76,7 +87,6 @@ namespace Synced.Actors
 
                         _zoneState = ZoneState.Delete;
                         _timeSinceSpawn = 0;
-                        //DELETE COLLISION?
                     }
                     break;
                 case ZoneState.Delete:
@@ -89,5 +99,6 @@ namespace Synced.Actors
 
             base.Update(gameTime);
         }
+
     }
 }
