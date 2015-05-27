@@ -1,9 +1,10 @@
-﻿// Sprite.cs
+﻿using FarseerPhysics;
+// Sprite.cs
 // Introduced: 2015-04-14
-// Last edited: 2015-04-30
+// Last edited: 2015-05-27
 // Edited by:
 // Pontus Magnusson
-//
+// Lina Juuso
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Synced.Interface;
@@ -28,6 +29,7 @@ namespace Synced.Actors
         public Vector2 Position { get; set; }
         public Texture2D Texture { get; set;}
         public float Scale { get; protected set; }
+        public float Alpha { get; protected set; }
 
         public Sprite(Texture2D texture, Vector2 position, Color color, DrawingHelper.DrawingLevel drawingLevel, bool centered, Game game)
             : base(game)
@@ -36,6 +38,7 @@ namespace Synced.Actors
             Position = position;
             Texture = texture;
             Scale = 1.0f;
+            Alpha = 1.0f;
 
             if (centered) Origin = new Vector2(texture.Width / 2, texture.Height / 2);
 
@@ -47,7 +50,7 @@ namespace Synced.Actors
         public override void Draw(GameTime gameTime)
         {
             _spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.LinearWrap, DepthStencilState.None, RasterizerState.CullNone, null, ResolutionManager.GetTransformationMatrix());
-            _spriteBatch.Draw(Texture, Position, null, Color, Rotation, Origin, Scale, SpriteEffects.None, 1.0f);
+            _spriteBatch.Draw(Texture, Position, null, Color * Alpha, Rotation, Origin, Scale, SpriteEffects.None, 1.0f);
             _spriteBatch.End();
 
         }

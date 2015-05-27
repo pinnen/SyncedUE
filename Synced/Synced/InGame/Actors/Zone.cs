@@ -34,13 +34,15 @@ namespace Synced.Actors
         ParticleEngine _particleEffects;
 
         public Zone(Texture2D texture, Vector2 position, Color color,Game game) 
-            : base(texture,position,DrawingHelper.DrawingLevel.Low,game)
+            : base(texture,position,color,DrawingHelper.DrawingLevel.Low,true,game)
         {
             _zoneState = ZoneState.Spawn;
             //_victims = new List<IVictim>();
             Scale = 0.05f;
-            _scaleTarget = 1.0f;
+            Alpha = 0.5f;
+            _scaleTarget = 0.8f;
             _particleEffects = new ParticleEngine(100,Library.Particle.trailTexture,position,color,Vector2.Zero,1.0f,0.0f,10.0f,DrawingHelper.DrawingLevel.Medium,game);
+            SyncedGameCollection.ComponentCollection.Add(_particleEffects);
         }
 
         public override void Update(GameTime gameTime)
@@ -67,8 +69,8 @@ namespace Synced.Actors
                     Scale -= 0.1f;
                     if (Scale <= 0.0f)
                     {
-                        _particleEffects.GenerateClusterParticles();
-                        _particleEffects.ShatterParticles();
+                        //_particleEffects.GenerateClusterParticles();
+                        //_particleEffects.ShatterParticles();
 
                         _zoneState = ZoneState.Delete;
                         _timeSinceSpawn = 0;
@@ -77,6 +79,7 @@ namespace Synced.Actors
                     break;
                 case ZoneState.Delete:
                     //_timeSinceSpawn
+                    SyncedGameCollection.ComponentCollection.Remove(this);
                     break;
                 default:
                     break;

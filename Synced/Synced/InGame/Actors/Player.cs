@@ -17,6 +17,7 @@ using Synced.InGame.Actors;
 using FarseerPhysics;
 using Synced.MapNamespace;
 using Synced.Interface;
+using Synced.InGame.Actors.Zones;
 
 namespace Synced.Actors
 {
@@ -158,7 +159,7 @@ namespace Synced.Actors
                 if (InputManager.IsButtonPressed(Buttons.B,_playerIndex)) // FOR TESTING
                 {
                     Vector2 spawnPosition = new Vector2((Left.RigidBody.Position.X + Right.RigidBody.Position.X)/2.0f,(Left.RigidBody.Position.Y + Right.RigidBody.Position.Y)/2.0f);
-                    _compactZone = new CompactZone(Library.Zone.CompactTexture[shape], ConvertUnits.ToDisplayUnits(spawnPosition), DrawingHelper.DrawingLevel.Medium, _game, _world, Library.Colors.getColor[Tuple.Create(_teamColor, Library.Colors.ColorVariation.Other)]);
+                    _compactZone = new CompactZone(Library.Zone.CompactTexture[shape], ConvertUnits.ToDisplayUnits(spawnPosition), DrawingHelper.DrawingLevel.Medium, _game, _world, Library.Colors.getColor[Tuple.Create(_teamColor, Library.Colors.ColorVariation.Other)],shape);
                     SyncedGameCollection.ComponentCollection.Add(_compactZone);
                     _compactZones.Add(_compactZone);
                 }
@@ -172,11 +173,33 @@ namespace Synced.Actors
             {
                 if (_compactZones[i].IsShot)
                 {
+                    CreateZone(_compactZones[i].Shape, _compactZones[i].Position, _compactZones[i].Color);
                     _compactZones[i].Detonate();
                     _compactZones.RemoveAt(i);
                 }
             }
         }
 
+        public void CreateZone(Library.Zone.Name zoneshape, Vector2 position, Color color) 
+        {
+            switch (zoneshape)
+            {
+                case Library.Zone.Name.Circle:
+                    CircleZone circleZ =new CircleZone(Library.Zone.Texture[shape],ConvertUnits.ToDisplayUnits(position),color,_game);
+                    _zones.Add(circleZ);
+                    SyncedGameCollection.ComponentCollection.Add(circleZ);
+                    break;
+                case Library.Zone.Name.Triangle:
+                    break;
+                case Library.Zone.Name.Square:
+                    break;
+                case Library.Zone.Name.Pentagon:
+                    break;
+                case Library.Zone.Name.Hexagon:
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 }
