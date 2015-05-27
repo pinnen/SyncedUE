@@ -80,7 +80,7 @@ namespace Synced.InGame.Actors
                 _barrierBodies[i].UserData = "BARRIER";
                 _barrierBodies[i].OnCollision += OnCollision;
             }
-            //Deactivate();
+            Deactivate();
         }
 
         public override bool OnCollision(Fixture f1, Fixture f2, FarseerPhysics.Dynamics.Contacts.Contact contact)

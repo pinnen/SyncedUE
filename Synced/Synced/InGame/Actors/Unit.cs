@@ -93,14 +93,17 @@ namespace Synced.Actors
         {
             CollidingSprite other = SyncedGameCollection.GetCollisionComponent(f2);
 
-            if (other != null && Item == null)
+            if (other != null)
             {
                 if (other.Tag == TagCategories.CRYSTAL)
                 {
-                    Crystal crystal = other as Crystal;
-                    crystal.PickUp(this);
-                    crystal.ChangeColor(Library.Colors.getColor[Tuple.Create(_teamColor, Library.Colors.ColorVariation.Other)]);
-                    Item = crystal;
+                    if (Item == null)
+                    {
+                        Crystal crystal = other as Crystal;
+                        crystal.PickUp(this);
+                        crystal.ChangeColor(Library.Colors.getColor[Tuple.Create(_teamColor, Library.Colors.ColorVariation.Other)]);
+                        Item = crystal;                  
+                    }
                     return false;
                 }
                 else if (other.Tag == TagCategories.UNIT)
@@ -109,9 +112,12 @@ namespace Synced.Actors
                 }
                 else if (other.Tag == TagCategories.COMPACTZONE)
                 {
-                    CompactZone compactzone = other as CompactZone;
-                    compactzone.PickUp(this);
-                    Item = compactzone;
+                    if (Item == null)
+                    {
+                        CompactZone compactzone = other as CompactZone;
+                        compactzone.PickUp(this);
+                        Item = compactzone;
+                    }
                 }
                 else if (other.Tag == TagCategories.BARRIER)
                 {
