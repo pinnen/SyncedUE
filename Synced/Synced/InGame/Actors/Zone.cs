@@ -52,7 +52,9 @@ namespace Synced.Actors
             Alpha = 0.5f;
             _scaleTarget = 0.8f;
             _particleEffects = new ParticleEngine(100,Library.Particle.trailTexture,position,color,Vector2.Zero,1.0f,0.0f,10.0f,DrawingHelper.DrawingLevel.Medium,game);
-            SyncedGameCollection.ComponentCollection.Add(_particleEffects);    
+            SyncedGameCollection.ComponentCollection.Add(_particleEffects);
+
+            
         }
 
         public override void Update(GameTime gameTime)
