@@ -40,14 +40,13 @@ namespace Synced.Actors
         protected ParticleEngine _victimParticles;
 
         public Zone(Texture2D texture, Vector2 position,float rotation, Color color,Game game, World world) 
-            : base(texture,position, rotation ,DrawingHelper.DrawingLevel.Low,game,world,true)
+            : base(texture,position, rotation ,DrawingHelper.DrawingLevel.Low,game,world,false)
         {
             Color = color;
 
             RigidBody.CollisionCategories = Category.Cat5;
             RigidBody.CollidesWith = Category.All;// ^ Category.Cat9;
             
-            Origin = new Vector2(Texture.Width / 2, texture.Height / 2);
             _zoneState = ZoneState.Spawn;
             Scale = 0.05f;
             Alpha = 0.5f;
