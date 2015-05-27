@@ -45,6 +45,7 @@
     <Compile Include="CollisionShapes\DummyCircle.cs" />
     <Compile Include="CollisionShapes\DummyComponent.cs" />
     <Compile Include="CollisionShapes\TexturePolygon.cs" />
+    <Compile Include="InGame\Actors\Barrier.cs" />
     <Compile Include="InGame\Actors\CollidingSprite.cs" />
     <Compile Include="InGame\Actors\CompactZone.cs" />
     <Compile Include="InGame\Actors\Particle.cs" />

@@ -31,6 +31,7 @@ namespace Synced.Actors
         List<CompactZone> _compactZones;
         Game _game;
         World _world;
+        Barrier _barrier;
         #endregion
         
         #region Properties
@@ -54,19 +55,23 @@ namespace Synced.Actors
         public Player(PlayerIndex playerIndex, Library.Character.Name character,Library.Colors.ColorName teamcolor, Game game, World world)
             : base(game)
         {
+            // TODO: fix hardcode positions. 
             _playerIndex = playerIndex;
-            Left = new Unit(Library.Character.GameTexture[character], new Vector2(200, 200), Library.Colors.getColor[Tuple.Create(teamcolor,Library.Colors.ColorVariation.Left)], game, world,teamcolor);       // TODO: fix hardcoded values for positions. 
-            Right = new Unit(Library.Character.GameTexture[character], new Vector2(200, 120), Library.Colors.getColor[Tuple.Create(teamcolor, Library.Colors.ColorVariation.Right)], game, world,teamcolor);
+
+            Left = new Unit(Library.Character.GameTexture[character], new Vector2(500, 500), Library.Colors.getColor[Tuple.Create(teamcolor,Library.Colors.ColorVariation.Left)], game, world, teamcolor);       // TODO: fix hardcoded values for positions. 
+            Right = new Unit(Library.Character.GameTexture[character], new Vector2(500, 600), Library.Colors.getColor[Tuple.Create(teamcolor, Library.Colors.ColorVariation.Right)], game, world, teamcolor);
+
             _areTrailsActive = false;
             _game = game;
             _world = world;
+            _barrier = new Barrier(Library.Particle.barrierParticle, Left, Right, world, game, Library.Colors.getColor[Tuple.Create(teamcolor, Library.Colors.ColorVariation.Other)]);
             shape = (Library.Zone.Name)character;
             _teamColor = teamcolor;
             _compactZones = new List<CompactZone>();
 
             SyncedGameCollection.ComponentCollection.Add(Left);
             SyncedGameCollection.ComponentCollection.Add(Right);
-            
+            SyncedGameCollection.ComponentCollection.Add(_barrier);
         }
 
         public float GetDistanceBetweenUnits() 
