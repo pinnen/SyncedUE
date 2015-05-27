@@ -59,17 +59,12 @@ namespace Synced
 
             // Load all content into a static library
             Library.Loader.Initialize(Content);
-            Library.Audio.PlaySoundEffect(Library.Audio.SoundEffects.GameStart); // ToDo: Test
 
             // ------------------------------------------------------------
             // Adds menu screen to ScreenManager
             // ------------------------------------------------------------
             ScreenManager.InitializeScreenManager(this);
             Components.Add(ScreenManager.Instance);
-
-            // TODO: Test objects. Remove later
-
-            // End TODO: Test objects. Remove Later
 
             base.Initialize(); // Initializes all components
         }

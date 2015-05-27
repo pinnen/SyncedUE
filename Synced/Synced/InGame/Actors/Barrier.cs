@@ -50,11 +50,11 @@ namespace Synced.InGame.Actors
             barrierPath.Closed = false;
 
             // create barrier particle
-            Vertices barrierParticle = PolygonTools.CreateCircle(ConvertUnits.ToSimUnits(texture.Width * 2), 8);
+            Vertices barrierParticle = PolygonTools.CreateCircle(ConvertUnits.ToSimUnits(texture.Width * 4), 8);
             PolygonShape shape = new PolygonShape(barrierParticle, 0f);
 
             // distribute barrierParticle positions along the path between the two units. 
-            _barrierBodies = PathManager.EvenlyDistributeShapesAlongPath(world, barrierPath, shape, BodyType.Dynamic, 25);
+            _barrierBodies = PathManager.EvenlyDistributeShapesAlongPath(world, barrierPath, shape, BodyType.Dynamic, 30);
 
             // fix the shapes together with the end and start point
             JointFactory.CreateRevoluteJoint(world, hiddenBody1, _barrierBodies[0], new Vector2(0f, 0f));
@@ -85,7 +85,7 @@ namespace Synced.InGame.Actors
                     return true;
                 }
             }
-            return false;
+            return true;
         }
 
         public override void Update(GameTime gameTime)
