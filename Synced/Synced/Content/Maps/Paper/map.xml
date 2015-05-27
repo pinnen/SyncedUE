@@ -1,4 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <MapData>
- 
+  <GoalData>
+    <Position>
+      <X>300</X>
+      <Y>540</Y>
+    </Position>
+    <TexturePath>Maps/Paper/Goal</TexturePath>
+    <CollisionCategory>All</CollisionCategory>
+    <Direction>West</Direction>
+    <Texture2Path>Gameobjects/GoalBorder</Texture2Path>
+  </GoalData>
+  <GoalData>
+    <Position>
+      <X>1620</X>
+      <Y>540</Y>
+    </Position>
+    <TexturePath>Maps/Paper/Goal</TexturePath>
+    <CollisionCategory>All</CollisionCategory>
+    <Direction>East</Direction>
+    <Texture2Path>Gameobjects/GoalBorder</Texture2Path>
+  </GoalData>
 </MapData>

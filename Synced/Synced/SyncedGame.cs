@@ -12,9 +12,11 @@ using Synced.Actors;
 using Synced.CollisionShapes;
 using Synced.Content;
 using Synced.InGame;
+using Synced.MapNamespace;
 using Synced.MapNameSpace;
 using Synced.Static_Classes;
 using System;
+using System.Collections.Generic;
 
 namespace Synced
 {
@@ -46,6 +48,9 @@ namespace Synced
         /// </summary>
         protected override void Initialize()
         {
+            //MapData tmp = new MapData();
+            //Library.Serialization<MapData>.SerializeToXmlFile(tmp, "mapData");
+
             // Initialize resolution and scaling
             ResolutionManager.Init(ref _graphics);
             ResolutionManager.SetVirtualResolution(1920, 1080); // TODO magic resolution values.

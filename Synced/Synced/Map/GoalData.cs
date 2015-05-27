@@ -18,11 +18,11 @@ namespace Synced.MapNamespace
         public GoalDirections Direction;
 
         [XmlElement("Texture2Path")]
-        public string Texture2Path;       
+        public string Texture2Path;
 
-        //public override Microsoft.Xna.Framework.GameComponent GetComponent(Microsoft.Xna.Framework.Game game)
-        //{
-        //    return new Goal(game.Content.Load<Texture2D>(TexturePath), game.Content.Load<Texture2D>(Texture2Path), Position, Direction, Static_Classes.DrawingHelper.DrawingLevel.Medium, game, world);
-        //}
+        public override Microsoft.Xna.Framework.GameComponent GetComponent(Microsoft.Xna.Framework.Game game, World world)
+        {
+            return new Goal(game.Content.Load<Texture2D>(TexturePath), game.Content.Load<Texture2D>(Texture2Path), Position, Direction, Static_Classes.DrawingHelper.DrawingLevel.Medium, game, world);
+        }
     }
 }
