@@ -63,11 +63,14 @@ namespace Synced.InGame
         
         public virtual void Shoot()
         {
-            RigidBody.LinearDamping = 0.5f;
-            RigidBody.ApplyForce(shootForce * new Vector2(-(_owner.Direction.X), (_owner.Direction.Y)));
-            Direction = Vector2.Zero;
-            Release();
-            Library.Audio.PlaySoundEffect(Library.Audio.SoundEffects.CrystalShoot);
+            if (_owner != null)
+            {
+                RigidBody.LinearDamping = 0.5f;
+                RigidBody.ApplyForce(shootForce * new Vector2(-(_owner.Direction.X), (_owner.Direction.Y)));
+                Direction = Vector2.Zero;
+                Release();
+                Library.Audio.PlaySoundEffect(Library.Audio.SoundEffects.CrystalShoot);
+            }
         }
         
         public override void Update(GameTime gameTime)

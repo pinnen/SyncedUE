@@ -93,7 +93,7 @@ namespace Synced.Actors
         {
             CollidingSprite other = SyncedGameCollection.GetCollisionComponent(f2);
 
-            if (other != null)
+            if (other != null && Item == null)
             {
                 if (other.Tag == TagCategories.CRYSTAL)
                 {
@@ -105,6 +105,13 @@ namespace Synced.Actors
                 }
                 else if (other.Tag == TagCategories.UNIT)
                 {
+                    return false;
+                }
+                else if (other.Tag == TagCategories.COMPACTZONE)
+                {
+                    CompactZone compactzone = other as CompactZone;
+                    compactzone.PickUp(this);
+                    Item = compactzone;
                     return false;
                 }
             }
