@@ -91,6 +91,8 @@ namespace Synced.InGame.Actors
             {
                 if (other.Tag == TagCategories.CRYSTAL)
                 {
+                    // if other.owner != null
+                    // if owner != my owners. 
                     return true;
                 }
             }
