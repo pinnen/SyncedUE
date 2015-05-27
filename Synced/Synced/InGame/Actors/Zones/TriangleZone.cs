@@ -34,11 +34,15 @@ namespace Synced.InGame.Actors.Zones
                 if (other.Tag == TagCategories.UNIT)
                 {
                     Color = Color.Magenta;
-                    return true;
+                    return false;
                 }
             }
             return false;
             
+        }
+
+        private void Teleport(CollidingSprite other)
+        {
         }
     }
 }
