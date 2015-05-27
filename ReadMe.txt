@@ -1,7 +1,7 @@
 Notes on Build Environment.
 ===========================
 
-16:23 2015-04-26/GF
+19:29 2015-05-27/GF
 
 
 In NetCenter PC:s the used files are stored here: 
@@ -93,3 +93,8 @@ Commands in Git Shell:
 5) Restore to original state with command:
 git checkout master
 
+
+
+Notes on NetCenter
+==============
+* Use netplwiz to protect GitHub-login
