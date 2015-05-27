@@ -21,7 +21,7 @@ namespace Synced.InGame
 
         #region Variables
         protected MovableCollidable owner = null;
-        ParticleEngine _tail;
+        protected ParticleEngine _tail;
         float _shootForce;
         float _cooldownTimer;
         float _cooldownInSeconds;
