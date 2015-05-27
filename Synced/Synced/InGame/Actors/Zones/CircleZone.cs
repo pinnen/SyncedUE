@@ -30,13 +30,16 @@ namespace Synced.InGame.Actors.Zones
         {
             CollidingSprite other = SyncedGameCollection.GetCollisionComponent(f2);
 
-            if (other.Tag == TagCategories.UNIT)
+            if (other != null)
             {
-                Color = Color.Magenta;
+                if (other.Tag == TagCategories.UNIT)
+                {
+                    Color = Color.Magenta;
+                    return false;
+                }
             }
+            return false;
 
-
-            return base.OnCollision(f1, f2, contact);
         }
 
     }
