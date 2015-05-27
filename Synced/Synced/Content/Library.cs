@@ -30,7 +30,7 @@ namespace Synced.Content
             {
                 // TODO: XML formatting maybe?
                 // Initialize
-                Interface.MenuBackground = content.Load<Texture2D>("Interface/ControllerSelectionBackground");
+                Interface.MenuBackground = content.Load<Texture2D>("Interface/ConrollerSelection");
                 Interface.Arrows = content.Load<Texture2D>("Interface/SelectionArrows");
 
                 #region Character
