@@ -142,7 +142,7 @@ namespace Synced.Actors
             {
                 if (_compactZones[i].IsShot)
                 {
-                    CreateZone(_compactZones[i].Shape, _compactZones[i].Position, _compactZones[i].Rotation, _compactZones[i].Color);
+                    CreateZone(_compactZones[i].Shape, _compactZones[i].SimPosition, _compactZones[i].Rotation, _compactZones[i].Color);
                     _compactZones[i].Detonate();
                     _compactZones.RemoveAt(i);
                 }
