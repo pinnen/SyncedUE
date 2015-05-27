@@ -38,6 +38,7 @@ namespace Synced.MapNameSpace
         {
             InnerCircle = new DummyCircle(position, ((goalTexture.Width / 2) / 2) / 2, game, world); // TODO: fix position
             InnerCircle.setOnCollisionFunction(OnCollision);
+            InnerCircle.SetCollisionCategory(Category.None);
             OuterCircle = new Circle(goalTexture, position, goalTexture.Width / 2, game, world);
             OuterCircle.RigidBody.CollisionCategories = Category.Cat9;
             OuterCircle.setOnCollisionFunction(OnCollision);

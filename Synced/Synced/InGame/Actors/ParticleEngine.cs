@@ -219,6 +219,28 @@ namespace Synced.InGame.Actors
             }
 
         }
+
+        public void GenerateDynamicParticles(List<Vector2> positions, float scale, float lifetime)
+        {
+            _particleAmount = positions.Count;
+
+            for (int i = 0; i < _particleAmount; i++)
+            {
+                if (_sleepingParticles.Count == 0)
+                {
+                    Particle tempP = new Particle(_particleTexture, positions[i], _particleColor, _particleOrigin, scale, 0.0f, lifetime, dLevel, game);
+                    _particles.Add(tempP);
+                    SyncedGameCollection.ComponentCollection.Add(tempP);
+                }
+                else
+                {
+                    currentParticle = _sleepingParticles.Dequeue();
+                    currentParticle.WakeLineParticle(positions[i], _particleColor, scale, lifetime);
+                    _particles.Add(currentParticle);
+                }
+            }
+        }
+
         /// <summary>
         /// Shatters the particles
         /// </summary>
@@ -271,12 +293,10 @@ namespace Synced.InGame.Actors
 
         public override void Draw(GameTime gameTime)
         {
-
             for (int i = 0; i < _particles.Count; i++)
             {
                 _particles[i].Draw(gameTime);
-            }
-            
+            }           
         }
 
         #endregion
