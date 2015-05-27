@@ -18,11 +18,26 @@ namespace Synced.InGame.Actors.Zones
             : base(texture, position,rotation, color, game,world) 
         {
             _victimParticles = new ParticleEngine(1,Library.Particle.minusSignTexture,position,Color.White,Vector2.Zero,1.0f,0.0f,0.5f,DrawingHelper.DrawingLevel.Medium,game);
+            SyncedGameCollection.ComponentCollection.Add(_victimParticles);
         }
 
         public override void Update(GameTime gameTime)
         {
+            for (int i = 0; i < _victims.Count; i++)
+            {
+                _victimParticles.UpdatePosition(_victims[i].Position);
+                _victimParticles.ParticleColor = _victims[i].Color;
+                _victimParticles.GenerateEffectParticles(1.0f, 0.2f);
 
+                _victims[i].CircleEffectTimer -= (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+                if (_victims[i].CircleEffectTimer <= 0.0f)
+                {
+                    ResetEffect(_victims[i]);
+                    _victims.RemoveAt(i);
+                    i--;
+                }
+            }
             base.Update(gameTime);
         }
 
@@ -32,14 +47,26 @@ namespace Synced.InGame.Actors.Zones
 
             if (other != null)
             {
-                if (other.Tag == TagCategories.UNIT)
+                if (other is IVictim) 
                 {
-                    Color = Color.Magenta;
-                    return false;
+                    if (!_victims.Contains((IVictim)other))
+                    {
+                        _victims.Add((IVictim)other);
+                        SlowDown((IVictim)other);
+                    } 
                 }
+                
             }
             return false;
 
+        }
+        private void SlowDown(IVictim victim) 
+        {
+            victim.LocalTimeScale = 0.2f;
+        }
+        private void ResetEffect(IVictim victim) 
+        {
+            victim.LocalTimeScale = 1.0f;
         }
 
     }

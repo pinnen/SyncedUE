@@ -59,12 +59,16 @@ namespace Synced.InGame.Actors.Zones
                     _victimParticles.UpdatePosition(_victims[i].Position);
                     _victimParticles.ParticleColor = _victims[i].Color;
                     _victimParticles.SetParticleFadeAlpha(_victims[i].InvisibilityAlpha);
-                    _victimParticles.GenerateEffectParticles(1.0f, 0.5f);
+                    _victimParticles.GenerateEffectParticles(1.0f, 0.2f);
 
                     if (this._zoneState == ZoneState.Despawn)
                     {
                         MakeVisible(_victims[i]);
-                        if (_victims[i].TrailEngine != null) { _victims[i].TrailEngine.SetParticleFadeAlpha(1.0f); }
+                        if (_victims[i].TrailEngine != null) 
+                        {
+                            _victims[i].TrailEngine.SetParticleFadeAlpha(1.0f);
+                            _victims[i].TrailEngine.GenerateTrailParticles();
+                        }
                     }
                    
                 }

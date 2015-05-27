@@ -290,6 +290,11 @@ namespace Synced.InGame.Actors
             {
                 _particles[i].FadeAlpha = alpha;
             }
+            foreach (Particle p in _sleepingParticles)
+            {
+                p.FadeAlpha = alpha;
+            }
+            
         }
 
 

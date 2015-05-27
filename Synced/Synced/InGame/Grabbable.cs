@@ -170,7 +170,7 @@ namespace Synced.InGame
         public bool FadeOut { get { return _fadeOut; } set { _fadeOut = value; } }
         public Texture2D VictimTexture { get { return this.Texture; } }
         public float ParticleLifetime { get { return _tail.ParticleLifetime; } }
-        public float LocalTimeScale { get { throw new NotImplementedException(); } set { throw new NotImplementedException(); } }
+        public float LocalTimeScale { get { return accelerationScaling; } set { accelerationScaling = value; } }
         public float InvisibilityAlpha { get { return this.Alpha; } set { this.Alpha = value; } }
         public ParticleEngine TrailEngine { get { return _tail; } }
     }

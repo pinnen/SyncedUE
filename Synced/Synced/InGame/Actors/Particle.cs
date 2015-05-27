@@ -37,21 +37,7 @@ namespace Synced.InGame.Actors
         #endregion
 
         #region Properties
-        //public float LifeTime 
-        //{
-        //    get { return _lifetime; }
-        //    set { _lifetime = value; }
-        //}
-        //public Vector2 Position
-        //{
-        //    get { return _position; }
-        //    set { _position = value; }
-        //}
-        //public bool IsMoving
-        //{
-        //    get { return _isMoving; }
-        //    set { _isMoving = value; }
-        //}
+
         public bool IsDead
         {
             get { return _lifetime <= _timeSinceStart; }
