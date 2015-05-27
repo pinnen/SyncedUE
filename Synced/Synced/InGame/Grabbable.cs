@@ -42,7 +42,7 @@ namespace Synced.InGame
             acceleration = maxAcceleration = 20;
             shootForce = 3000f;
             Color = color;
-            _tail = new ParticleEngine(1, Library.Particle.trailTexture, position, color, Origin, 1.0f, 0.0f, 0.2f, DrawingHelper.DrawingLevel.Medium, game);
+            _tail = new ParticleEngine(1, Library.Particle.trailTexture, position, color, Origin, 1.0f, 0.0f, 0.2f, DrawingHelper.DrawingLevel.Low, game);
             SyncedGameCollection.ComponentCollection.Add(_tail);
         }
         

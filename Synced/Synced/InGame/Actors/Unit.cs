@@ -70,7 +70,7 @@ namespace Synced.Actors
             acceleration = 40;
             Color = color;
             _trailParticleLifetime = 0.2f;
-            _trail = new ParticleEngine(1, Library.Particle.trailTexture, position, color, Origin, 1.0f, 0.0f, _trailParticleLifetime, DrawingHelper.DrawingLevel.Medium, game);
+            _trail = new ParticleEngine(1, Library.Particle.trailTexture, position, color, Origin, 1.0f, 0.0f, _trailParticleLifetime, DrawingHelper.DrawingLevel.Low, game);
             _effectParticles = new ParticleEngine(1, Library.Particle.plusSignTexture, position, color, Origin, 0.7f, 0.0f, 0.5f, DrawingHelper.DrawingLevel.High, game);
             _useEffectParticles = false;
             SyncedGameCollection.ComponentCollection.Add(_trail);
