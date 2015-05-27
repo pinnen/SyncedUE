@@ -248,7 +248,7 @@ namespace Synced.InGame.Actors
         public void ShatterParticles() 
         {
             int shatterDirection = 50;
-            int shatterSpeed = 2;
+            int shatterSpeed = 20;
 
             foreach (Particle p in _particles)
             {
