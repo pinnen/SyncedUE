@@ -144,14 +144,14 @@ namespace Synced.InGame.Actors
         public void GenerateEffectParticles(float scale, float lifetime) 
         {
             
-            int effectSize = 2; // TODO: ta in som parameter?
+            int effectSize = 80; // TODO: ta in som parameter?
 
             for (int i = 0; i < _particleAmount; i++)
             {
                 if (_sleepingParticles.Count == 0)
                 {
                     
-                    Vector2 randomPosition = new Vector2(_particlePosition.X + (float)random.Next(-effectSize,effectSize),_particlePosition.Y + (float)random.Next(-effectSize,effectSize));
+                    Vector2 randomPosition = new Vector2(_particlePosition.X + (float)random.Next(-effectSize,effectSize),_particlePosition.Y + (float)random.Next(-effectSize*50,effectSize*50));
                     Particle tempP = new Particle(_particleTexture,randomPosition,_particleColor,_particleOrigin,scale,0.0f,lifetime,dLevel,game);
                     _particles.Add(tempP);
                     SyncedGameCollection.ComponentCollection.Add(tempP);
