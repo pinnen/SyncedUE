@@ -6,9 +6,11 @@
 // Lina Ju
 using FarseerPhysics;
 using FarseerPhysics.Dynamics;
+using FarseerPhysics.Dynamics.Contacts;
 using FarseerPhysics.Factories;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Synced.Actors;
 using Synced.Content;
 using Synced.InGame.Actors;
 using Synced.Static_Classes;
@@ -20,7 +22,7 @@ namespace Synced.InGame
     {
 
         #region Variables
-        protected MovableCollidable owner = null;
+        protected Unit owner = null;
         protected ParticleEngine _tail;
         float _shootForce;
         float _cooldownTimer;
@@ -31,6 +33,19 @@ namespace Synced.InGame
         public MovableCollidable Owner
         {
             get { return owner; }
+        }
+        public bool HasOwner
+        {
+            get {
+                if (owner == null)
+                {
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+            }
         }
         #endregion
 
@@ -56,10 +71,16 @@ namespace Synced.InGame
             SyncedGameCollection.ComponentCollection.Add(_tail);
         }
 
-        public virtual Grabbable PickUp(MovableCollidable own)
+        public virtual Grabbable PickUp(Unit own)
         {
-            if (_cooldownTimer > _cooldownInSeconds && owner == null)
+            if (_cooldownTimer > _cooldownInSeconds)
             {
+                if (owner != null)
+                {
+                    // its a steal!
+                    owner.SetItem(null);
+                }
+
                 owner = own;
                 maxAcceleration = 100;
                 RigidBody.LinearDamping = 10f;
@@ -112,5 +133,16 @@ namespace Synced.InGame
             base.Update(gameTime);
         }
 
+        public override bool OnCollision(Fixture f1, Fixture f2, Contact contact)
+        {
+            CollidingSprite other = SyncedGameCollection.GetCollisionComponent(f2);
+
+            if (other.Tag == TagCategories.UNIT)
+            {
+                return false;
+            }
+
+            return true;
+        }
     }
 }

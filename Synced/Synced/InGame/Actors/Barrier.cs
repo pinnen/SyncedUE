@@ -91,9 +91,22 @@ namespace Synced.InGame.Actors
             {
                 if (other.Tag == TagCategories.CRYSTAL)
                 {
-                    // if other.owner != null
-                    // if owner != my owners. 
-                    return true;
+                    Grabbable g_other = (Grabbable)other;
+                    if (g_other.HasOwner)
+                    {
+                        if (g_other.Owner.ID == _start.ID || g_other.Owner.ID == _end.ID)
+                        {
+                            return false;
+                        }
+                        else
+                        {
+                           return true;
+                        }
+                    }
+                    else
+                    {
+                        return true;
+                    }
                 }
             }
             return true;

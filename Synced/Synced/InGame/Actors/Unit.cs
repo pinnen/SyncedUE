@@ -89,40 +89,42 @@ namespace Synced.Actors
             }
         }
 
+        public void SetItem(Grabbable item)
+        {
+            Item = item;
+        }
+
         public override bool OnCollision(Fixture f1, Fixture f2, Contact contact)
         {
             CollidingSprite other = SyncedGameCollection.GetCollisionComponent(f2);
 
-            if (other != null)
+            if (other.Tag == TagCategories.CRYSTAL)
             {
-                if (other.Tag == TagCategories.CRYSTAL)
+                if (Item == null)
                 {
-                    if (Item == null)
-                    {
-                        Crystal crystal = other as Crystal;
-                        crystal.PickUp(this);
-                        crystal.ChangeColor(Library.Colors.getColor[Tuple.Create(_teamColor, Library.Colors.ColorVariation.Other)]);
-                        Item = crystal;                  
-                    }
-                    return false;
+                    Crystal crystal = other as Crystal;
+                    crystal.PickUp(this);
+                    crystal.ChangeColor(Library.Colors.getColor[Tuple.Create(_teamColor, Library.Colors.ColorVariation.Other)]);
+                    Item = crystal;
                 }
-                else if (other.Tag == TagCategories.UNIT)
+                return false;
+            }
+            else if (other.Tag == TagCategories.UNIT)
+            {
+                return false;
+            }
+            else if (other.Tag == TagCategories.COMPACTZONE)
+            {
+                if (Item == null)
                 {
-                    return false;
+                    CompactZone compactzone = other as CompactZone;
+                    compactzone.PickUp(this);
+                    Item = compactzone;
                 }
-                else if (other.Tag == TagCategories.COMPACTZONE)
-                {
-                    if (Item == null)
-                    {
-                        CompactZone compactzone = other as CompactZone;
-                        compactzone.PickUp(this);
-                        Item = compactzone;
-                    }
-                }
-                else if (other.Tag == TagCategories.BARRIER)
-                {
-                    return false;
-                }
+            }
+            else if (other.Tag == TagCategories.BARRIER)
+            {
+                return false;
             }
 
             return true;
