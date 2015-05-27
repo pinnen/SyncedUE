@@ -65,5 +65,13 @@ namespace Synced.Static_Classes
         {
             return GamePad.GetState(playerIndex).IsButtonDown(Buttons.RightShoulder);
         }
+        public static bool LeftStickPressed(PlayerIndex playerIndex)
+        {
+            return GamePad.GetState(playerIndex).IsButtonDown(Buttons.LeftStick);
+        }
+        public static bool RightStickPressed(PlayerIndex playerIndex)
+        {
+            return GamePad.GetState(playerIndex).IsButtonDown(Buttons.RightStick);
+        }
     }
 }

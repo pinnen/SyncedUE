@@ -24,6 +24,7 @@ namespace Synced.Actors
     {
         #region Variables
         bool _areTrailsActive;
+        bool _haveSwitched;
         PlayerIndex _playerIndex;
         Library.Zone.Name shape;
         Library.Colors.ColorName _teamColor;
@@ -33,7 +34,7 @@ namespace Synced.Actors
         World _world;
         Barrier _barrier;
         #endregion
-        
+
         #region Properties
         public bool AreTrailsActive
         {
@@ -51,17 +52,18 @@ namespace Synced.Actors
         }
         #endregion
 
-        
-        public Player(PlayerIndex playerIndex, Library.Character.Name character,Library.Colors.ColorName teamcolor, Game game, World world)
+
+        public Player(PlayerIndex playerIndex, Library.Character.Name character, Library.Colors.ColorName teamcolor, Game game, World world)
             : base(game)
         {
             // TODO: fix hardcode positions. 
             _playerIndex = playerIndex;
 
-            Left = new Unit(Library.Character.GameTexture[character], new Vector2(500, 500), Library.Colors.getColor[Tuple.Create(teamcolor,Library.Colors.ColorVariation.Left)], game, world, teamcolor);       // TODO: fix hardcoded values for positions. 
+            Left = new Unit(Library.Character.GameTexture[character], new Vector2(500, 500), Library.Colors.getColor[Tuple.Create(teamcolor, Library.Colors.ColorVariation.Left)], game, world, teamcolor);       // TODO: fix hardcoded values for positions. 
             Right = new Unit(Library.Character.GameTexture[character], new Vector2(500, 600), Library.Colors.getColor[Tuple.Create(teamcolor, Library.Colors.ColorVariation.Right)], game, world, teamcolor);
 
             _areTrailsActive = false;
+            _haveSwitched = false;
             _game = game;
             _world = world;
             _barrier = new Barrier(Library.Particle.barrierParticle, Left, Right, world, game, Library.Colors.getColor[Tuple.Create(teamcolor, Library.Colors.ColorVariation.Other)]);
@@ -74,7 +76,7 @@ namespace Synced.Actors
             SyncedGameCollection.ComponentCollection.Add(_barrier);
         }
 
-        public float GetDistanceBetweenUnits() 
+        public float GetDistanceBetweenUnits()
         {
             float d_y = (Left.Position.Y - Right.Position.Y) * (Left.Position.Y - Right.Position.Y);
             float d_x = (Left.Position.X - Right.Position.X) * (Left.Position.X - Right.Position.X);
@@ -88,11 +90,24 @@ namespace Synced.Actors
                 Left.Direction = InputManager.LeftStickDirection(_playerIndex);
                 Right.Direction = InputManager.RightStickDirection(_playerIndex);
 
-                if (InputManager.IsButtonPressed(Buttons.LeftShoulder,_playerIndex))
+                // Switch unit positions
+                if (InputManager.LeftStickPressed(_playerIndex) && InputManager.RightStickPressed(_playerIndex) && !_haveSwitched)
+                {
+                    _haveSwitched = true;
+                    Vector2 tmp = Left.Position;
+                    Left.Position = Right.Position;
+                    Right.Position = tmp;
+                }
+                else if (!InputManager.LeftStickPressed(_playerIndex) && !InputManager.RightStickPressed(_playerIndex))
+                { 
+                    _haveSwitched = false;
+                }
+
+                if (InputManager.IsButtonPressed(Buttons.LeftShoulder, _playerIndex))
                 {
                     DetonateZones();
                     Left.Shoot();
-                    
+
                 }
                 //if (InputManager.LeftShoulderPressed(_playerIndex)) 
                 //{
@@ -100,17 +115,17 @@ namespace Synced.Actors
                 //    DetonateZones();
                 //}
 
-                if (InputManager.IsButtonPressed(Buttons.RightShoulder,_playerIndex))
+                if (InputManager.IsButtonPressed(Buttons.RightShoulder, _playerIndex))
                 {
                     DetonateZones();
                     Right.Shoot();
-                    
+
                 }
                 //if (InputManager.RightShoulderPressed(_playerIndex))
                 //{
-                    
+
                 //}
-                    
+
                 if (InputManager.RightTriggerPressed(_playerIndex) != 0.0f)
                 {
                     Right.TrailParticleLifetime += (1.5f * InputManager.RightTriggerPressed(_playerIndex)); // TODO: constant
@@ -124,15 +139,15 @@ namespace Synced.Actors
                 {
                     _areTrailsActive = true;
                 }
-                
+
                 //*****Speed up-ability*****
                 if (AreTrailsActive)
                 {
-                    
+
                     if (GetDistanceBetweenUnits() < 2.0f)// TODO: constant
                     {
-                        Math.Min(Left.Acceleration += 1.0f,60.0f); //TODO: constant
-                        Math.Min(Right.Acceleration += 1.0f,60.0f); // TODO: constant
+                        Math.Min(Left.Acceleration += 1.0f, 60.0f); //TODO: constant
+                        Math.Min(Right.Acceleration += 1.0f, 60.0f); // TODO: constant
                         Left.UseEffectParticles = true;
                         Right.UseEffectParticles = true;
                     }
@@ -155,17 +170,17 @@ namespace Synced.Actors
                 //***** CREATE COMPACT ZONE ******
                 if (InputManager.LeftShoulderPressed(_playerIndex) && InputManager.RightShoulderPressed(_playerIndex)) // FOR TESTING
                 {
-                    Vector2 spawnPosition = new Vector2((Left.RigidBody.Position.X + Right.RigidBody.Position.X)/2.0f,(Left.RigidBody.Position.Y + Right.RigidBody.Position.Y)/2.0f);
+                    Vector2 spawnPosition = new Vector2((Left.RigidBody.Position.X + Right.RigidBody.Position.X) / 2.0f, (Left.RigidBody.Position.Y + Right.RigidBody.Position.Y) / 2.0f);
                     _compactZone = new CompactZone(Library.Zone.CompactTexture[shape], ConvertUnits.ToDisplayUnits(spawnPosition), DrawingHelper.DrawingLevel.Medium, _game, _world, Library.Colors.getColor[Tuple.Create(_teamColor, Library.Colors.ColorVariation.Other)]);
                     SyncedGameCollection.ComponentCollection.Add(_compactZone);
                     _compactZones.Add(_compactZone);
                     //_compactZone.PickUp(Left);
                 }
-                
+
             }
         }
 
-        private void DetonateZones() 
+        private void DetonateZones()
         {
             for (int i = 0; i < _compactZones.Count; i++)
             {
