@@ -29,6 +29,12 @@ namespace Synced.InGame.Actors
         //Data for particles:
         Vector2 _particlePosition;
         Color _particleColor;
+
+        public Color ParticleColor
+        {
+            get { return _particleColor; }
+            set { _particleColor = value; }
+        }
         Vector2 _particleOrigin;
         float _particleScale;
         float _particleRotation;

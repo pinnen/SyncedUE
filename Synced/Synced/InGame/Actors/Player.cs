@@ -54,8 +54,8 @@ namespace Synced.Actors
             : base(game)
         {
             _playerIndex = playerIndex;
-            Left = new Unit(Library.Character.GameTexture[character], new Vector2(200, 200), Library.Colors.getColor[Tuple.Create(teamcolor,Library.Colors.ColorVariation.Left)], game, world);       // TODO: fix hardcoded values for positions. 
-            Right = new Unit(Library.Character.GameTexture[character], new Vector2(200, 120), Library.Colors.getColor[Tuple.Create(teamcolor, Library.Colors.ColorVariation.Right)], game, world);
+            Left = new Unit(Library.Character.GameTexture[character], new Vector2(200, 200), Library.Colors.getColor[Tuple.Create(teamcolor,Library.Colors.ColorVariation.Left)], game, world,teamcolor);       // TODO: fix hardcoded values for positions. 
+            Right = new Unit(Library.Character.GameTexture[character], new Vector2(200, 120), Library.Colors.getColor[Tuple.Create(teamcolor, Library.Colors.ColorVariation.Right)], game, world,teamcolor);
             _areTrailsActive = false;
             _game = game;
             _world = world;
