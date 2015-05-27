@@ -144,7 +144,7 @@ namespace Synced.InGame.Actors
         public override void Draw(GameTime gameTime)
         {
             _spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.LinearWrap, DepthStencilState.None, RasterizerState.CullNone, null, ResolutionManager.GetTransformationMatrix());
-            _spriteBatch.Draw(_texture, ConvertUnits.ToDisplayUnits(_position), null, (_color * _colorStrength * _fadeAlpha), _rotation, _origin, _scale, SpriteEffects.None, 1.0f); // TODO: use body pos/rot or Sprite pos/rot? 
+            _spriteBatch.Draw(_texture, _position, null, (_color * _colorStrength * _fadeAlpha), _rotation, _origin, _scale, SpriteEffects.None, 1.0f); // TODO: use body pos/rot or Sprite pos/rot? 
             _spriteBatch.End();
 
             //_spriteBatch.Begin(SpriteSortMode.FrontToBack, BlendState.AlphaBlend);

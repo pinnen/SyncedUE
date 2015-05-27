@@ -53,6 +53,8 @@ namespace Synced.Interface
             goalLeft = new Goal(Library.Goal.GoalTexture, Library.Goal.BorderTexture, new Vector2(300, 1080 / 2), GoalDirections.West, DrawingHelper.DrawingLevel.Medium, game, world);
             goalRight = new Goal(Library.Goal.GoalTexture, Library.Goal.BorderTexture, new Vector2(1920 - 300, 1080 / 2), GoalDirections.East, DrawingHelper.DrawingLevel.Medium, game, world);
             frame = new TexturePolygon(Library.Map.Texture2, new Vector2(1920 / 2, 1080 / 2), 0, DrawingHelper.DrawingLevel.Medium, game, world, false);
+            frame.SetCollisionCategory(Category.All);
+            frame.SetCollideWithCategory(Category.All);
 
             SyncedGameCollection.ComponentCollection.Add(background);
             SyncedGameCollection.ComponentCollection.Add(player);

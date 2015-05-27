@@ -50,6 +50,11 @@ namespace Synced.InGame.Actors
         }
         public new Vector2 Position
         {
+            get { return ConvertUnits.ToDisplayUnits(rigidBody.Position); } // TODO: check if it should be converted or not
+            set { rigidBody.Position = ConvertUnits.ToSimUnits(value); }
+        }
+        public Vector2 SimPosition
+        {
             get { return rigidBody.Position; } // TODO: check if it should be converted or not
             set { rigidBody.Position = value; }
         }
