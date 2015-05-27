@@ -51,7 +51,7 @@ namespace Synced.Actors
             Scale = 0.05f;
             Alpha = 0.5f;
             _scaleTarget = 0.8f;
-            _particleEffects = new ParticleEngine(100,Library.Particle.trailTexture,position,color*0.3f,Vector2.Zero,1.0f,0.0f,0.5f,DrawingHelper.DrawingLevel.Medium,game);
+            _particleEffects = new ParticleEngine(100,Library.Particle.trailTexture,position,color*0.05f,Vector2.Zero,1.0f,0.0f,0.5f,DrawingHelper.DrawingLevel.Medium,game);
             SyncedGameCollection.ComponentCollection.Add(_particleEffects);
 
             
@@ -83,6 +83,7 @@ namespace Synced.Actors
                     {
                         _particleEffects.GenerateClusterParticles();
                         _particleEffects.ShatterParticles(50,15);
+                        _particleEffects.ExpandAndRotate();
                         
 
                         _zoneState = ZoneState.Delete;

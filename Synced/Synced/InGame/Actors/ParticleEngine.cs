@@ -206,7 +206,7 @@ namespace Synced.InGame.Actors
 
         public void GenerateClusterParticles()
         {
-            int clusterParticleAmount = 100;
+            int clusterParticleAmount = 50;
 
             for (int i = 0; i < clusterParticleAmount; i++)
             {
@@ -266,8 +266,8 @@ namespace Synced.InGame.Actors
         {
             foreach (Particle p in _particles)
             {
-                p.pRotation += 0.05f;
-                p.Scale += 0.05f;
+                p.pRotation += 5.0f;
+                p.Scale += 5.0f;
             }
         }
 
