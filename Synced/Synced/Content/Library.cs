@@ -52,10 +52,10 @@ namespace Synced.Content
                 };
                 Character.AbilityText = new Dictionary<Character.Name, string>()
                 {
-                    {Character.Name.Circle,   "Tar Circle"},
+                    {Character.Name.Circle,   "Circle of Tar"},
                     {Character.Name.Triangle, "Bermuda Triangle"},
                     {Character.Name.Square,   "Prison Square"},
-                    {Character.Name.Pentagon, "Pentagons Secret"},
+                    {Character.Name.Pentagon, "Secret Pentagon"},
                     {Character.Name.Hexagon,  "Hexacopy"}
                 };
                 #endregion
