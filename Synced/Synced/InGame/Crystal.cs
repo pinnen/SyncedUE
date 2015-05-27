@@ -9,6 +9,7 @@ using FarseerPhysics.Dynamics;
 using FarseerPhysics.Dynamics.Contacts;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Synced.Content;
 using Synced.Static_Classes;
 
 
@@ -30,7 +31,7 @@ namespace Synced.InGame
         }
 
         public override bool OnCollision(Fixture f1, Fixture f2, Contact contact)
-        {    
+        {
             return true;
         }
     }

@@ -63,27 +63,28 @@ namespace Synced.Content
                 // Ref: http://rbwhitaker.wikidot.com/playing-background-music
                 Audio.SongDictionary = new Dictionary<Audio.Songs, Song>()
                 {
-                    {Audio.Songs.InGame, content.Load<Song>(@"Audio\song_InGame")},
-                    {Audio.Songs.InMenu, content.Load<Song>(@"Audio\song_InMenu")}
+                    {Audio.Songs.MenuSong1, content.Load<Song>(@"Audio\MenuSong1")},
+                    {Audio.Songs.GameSong1, content.Load<Song>(@"Audio\GameSong1")},
+                    {Audio.Songs.GameSong2, content.Load<Song>(@"Audio\GameSong2")},
+                    {Audio.Songs.GameSong3, content.Load<Song>(@"Audio\GameSong3")}
                 };
 
                 Audio.SoundEffectDictionary = new Dictionary<Audio.SoundEffects, SoundEffect>()
                 {
-                    // ToDo: other sound?
-                    { Audio.SoundEffects.MenuSelect,    content.Load<SoundEffect>(@"Audio\MenuSelect")}, 
-                    { Audio.SoundEffects.MenuConfirm,   content.Load<SoundEffect>(@"Audio\MenuConfirm")}, 
-                    { Audio.SoundEffects.GameStart,     content.Load<SoundEffect>(@"Audio\GameStart")},
-                    { Audio.SoundEffects.GameFinished,  content.Load<SoundEffect>(@"Audio\GameFinished")},
-                    { Audio.SoundEffects.UnitMove,      content.Load<SoundEffect>(@"Audio\UnitMove")},
-                    { Audio.SoundEffects.CrystalShoot,  content.Load<SoundEffect>(@"Audio\CrystalShoot")},
-                    { Audio.SoundEffects.CrystalPickUp, content.Load<SoundEffect>(@"Audio\CrystalPickUp")},
-                    { Audio.SoundEffects.ZoneShoot,     content.Load<SoundEffect>(@"Audio\ZoneShoot")},
-                    { Audio.SoundEffects.ZonePickUp,    content.Load<SoundEffect>(@"Audio\ZonePickUp")},
-                    { Audio.SoundEffects.ZoneCreate,    content.Load<SoundEffect>(@"Audio\ZoneCreate")},
-                    { Audio.SoundEffects.ZoneExplosion, content.Load<SoundEffect>(@"Audio\ZoneExplosion")},
+                    { Audio.SoundEffects.Bounce,        content.Load<SoundEffect>(@"Audio\Bounce")}, 
+                    { Audio.SoundEffects.Click1,        content.Load<SoundEffect>(@"Audio\Click1")}, 
+                    { Audio.SoundEffects.Click2,        content.Load<SoundEffect>(@"Audio\Click2")},
+                    { Audio.SoundEffects.Countdown,     content.Load<SoundEffect>(@"Audio\Countdown")},
+                    { Audio.SoundEffects.CrystalGrab,   content.Load<SoundEffect>(@"Audio\CrystalGrab")},
+                    { Audio.SoundEffects.MenuConfirm,   content.Load<SoundEffect>(@"Audio\MenuConfirm")},
+                    { Audio.SoundEffects.MenuSelect,    content.Load<SoundEffect>(@"Audio\MenuSelect")},
+                    { Audio.SoundEffects.Pause,         content.Load<SoundEffect>(@"Audio\Pause")},
                     { Audio.SoundEffects.Score,         content.Load<SoundEffect>(@"Audio\Score")},
+                    { Audio.SoundEffects.Shoot,         content.Load<SoundEffect>(@"Audio\Shoot")},
+                    { Audio.SoundEffects.ZoneExpand,    content.Load<SoundEffect>(@"Audio\ZoneExpand")},
+                    { Audio.SoundEffects.ZoneGrab,      content.Load<SoundEffect>(@"Audio\ZoneGrab")},
+                    { Audio.SoundEffects.ZoneSpawn,     content.Load<SoundEffect>(@"Audio\ZoneSpawn")}
                 };
-
                 #endregion
                 #region Font
                 Font.MenuFont = content.Load<SpriteFont>("Fonts/menufont");
@@ -179,23 +180,43 @@ namespace Synced.Content
         }
         public static class Audio
         {
-            public enum Songs { InMenu, InGame };
+            public enum Songs 
+            { 
+                MenuSong1, 
+                GameSong1,
+                GameSong2,
+                GameSong3
+            };
             public static Dictionary<Songs, Song> SongDictionary;
 
-            public enum SoundEffects { MenuSelect, MenuConfirm, GameStart, GameFinished, UnitMove, CrystalShoot, CrystalPickUp, ZoneShoot, ZonePickUp, ZoneCreate, ZoneExplosion, Score }
+            public enum SoundEffects 
+            {
+                Bounce,
+                Click1,
+                Click2,
+                Countdown,
+                CrystalGrab,
+                MenuConfirm,
+                MenuSelect,
+                Pause,
+                Score,
+                Shoot,
+                ZoneExpand,
+                ZoneGrab,
+                ZoneSpawn
+            }
+
             public static Dictionary<SoundEffects, SoundEffect> SoundEffectDictionary;
 
             public static void PlaySong(Songs song)
             {
-                if (MediaPlayer.State == MediaState.Playing)
-                    MediaPlayer.Stop();
                 MediaPlayer.Play(SongDictionary[song]);
                 MediaPlayer.IsRepeating = true;
             }
 
             public static void PlaySoundEffect(SoundEffects soundEffect)
             {
-                //SoundEffectDictionary[soundEffect].Play();
+                SoundEffectDictionary[soundEffect].Play();
             }
         }
         public static class Font
