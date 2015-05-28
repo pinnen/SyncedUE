@@ -9,6 +9,10 @@ namespace Synced.Interface
     class ScoreLabel : Label
     {
         int _score;
+        public int Score
+        {
+            get { return _score; }
+        }
         public PlayerIndex PlayerIndex;
         public ScoreLabel(PlayerIndex playerIndex, Rectangle rectangle, Game game)
             : base("", rectangle, game)

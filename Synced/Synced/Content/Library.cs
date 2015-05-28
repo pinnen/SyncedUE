@@ -38,7 +38,7 @@ namespace Synced.Content
                 {
                     {Character.Name.Circle,   content.Load<Texture2D>("Interface/Character/Circle")},
                     {Character.Name.Triangle, content.Load<Texture2D>("Interface/Character/Triangle")},
-                    {Character.Name.Square,   content.Load<Texture2D>("Interface/Character/Square")},
+                    //{Character.Name.Square,   content.Load<Texture2D>("Interface/Character/Square")},
                     {Character.Name.Pentagon, content.Load<Texture2D>("Interface/Character/Pentagon")},
                     {Character.Name.Hexagon,  content.Load<Texture2D>("Interface/Character/Hexagon")}
                 };
@@ -46,7 +46,7 @@ namespace Synced.Content
                 {
                     {Character.Name.Circle,   content.Load<Texture2D>("GameObjects/Characters/Circle")},
                     {Character.Name.Triangle, content.Load<Texture2D>("GameObjects/Characters/Triangle")},
-                    {Character.Name.Square,   content.Load<Texture2D>("GameObjects/Characters/Square")},
+                    //{Character.Name.Square,   content.Load<Texture2D>("GameObjects/Characters/Square")},
                     {Character.Name.Pentagon, content.Load<Texture2D>("GameObjects/Characters/Pentagon")},
                     {Character.Name.Hexagon,  content.Load<Texture2D>("GameObjects/Characters/Hexagon")}
                 };
@@ -54,7 +54,7 @@ namespace Synced.Content
                 {
                     {Character.Name.Circle,   "Circle of Tar"},
                     {Character.Name.Triangle, "Bermuda Triangle"},
-                    {Character.Name.Square,   "Prison Square"},
+                    //{Character.Name.Square,   "Prison Square"},
                     {Character.Name.Pentagon, "Secret Pentagon"},
                     {Character.Name.Hexagon,  "Hexacopy"}
                 };
@@ -89,6 +89,7 @@ namespace Synced.Content
                 #endregion
                 #region Font
                 Font.MenuFont = content.Load<SpriteFont>("Fonts/menufont");
+                Font.ScoreFont = content.Load<SpriteFont>("Fonts/ScoreFont");
                 #endregion
                 #region Zone
                 Zone.CompactTexture = new Dictionary<Zone.Name, Texture2D>()
@@ -96,7 +97,7 @@ namespace Synced.Content
                     {Zone.Name.Circle, content.Load<Texture2D>("GameObjects/Zones/CompactCircleZone")},
                     {Zone.Name.Hexagon, content.Load<Texture2D>("GameObjects/Zones/CompactHexagonZone")},
                     {Zone.Name.Pentagon, content.Load<Texture2D>("GameObjects/Zones/CompactPentagonZone")},
-                    {Zone.Name.Square, content.Load<Texture2D>("GameObjects/Zones/CompactSquareZone")},
+                    //{Zone.Name.Square, content.Load<Texture2D>("GameObjects/Zones/CompactSquareZone")},
                     {Zone.Name.Triangle, content.Load<Texture2D>("GameObjects/Zones/CompactTriangleZone")}
                 };
                 Zone.Texture = new Dictionary<Zone.Name, Texture2D>()
@@ -105,7 +106,7 @@ namespace Synced.Content
                     {Zone.Name.Circle, content.Load<Texture2D>("GameObjects/Zones/CircleZone")},
                     {Zone.Name.Hexagon, content.Load<Texture2D>("GameObjects/Zones/HexagonZone")},
                     {Zone.Name.Pentagon, content.Load<Texture2D>("GameObjects/Zones/PentagonZone")},
-                    {Zone.Name.Square, content.Load<Texture2D>("GameObjects/Zones/SquareZone")},
+                    //{Zone.Name.Square, content.Load<Texture2D>("GameObjects/Zones/SquareZone")},
                     {Zone.Name.Triangle, content.Load<Texture2D>("GameObjects/Zones/TriangleZone")}
                 };
                 #endregion
@@ -193,7 +194,7 @@ namespace Synced.Content
         }
         public static class Character
         {
-            public enum Name { Circle, Triangle, Square, Pentagon, Hexagon }
+            public enum Name { Circle, Triangle, /*Square, */Pentagon, Hexagon }
 
             public static Dictionary<Name, Texture2D> GameTexture;
             public static Dictionary<Name, Texture2D> InterfaceTexture;
@@ -249,11 +250,12 @@ namespace Synced.Content
         public static class Font
         {
             public static SpriteFont MenuFont;
+            public static SpriteFont ScoreFont;
 
         }
         public static class Zone
         {
-            public enum Name { Circle, Triangle, Square, Pentagon, Hexagon }
+            public enum Name { Circle, Triangle, /*Square, */Pentagon, Hexagon }
 
             public static Dictionary<Name, Texture2D> CompactTexture;
             public static Dictionary<Name, Texture2D> Texture;

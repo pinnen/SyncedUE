@@ -36,10 +36,10 @@ namespace Synced.Interface
             _map = new Map(Library.Map.Path[Library.Map.Name.Paper], game, world);
             GameComponents.Add(_map);
             // Controls
-            GameComponents.Add(new ScoreLabel(PlayerIndex.One, new Rectangle(10, 10, 40, 40), Game));
-            GameComponents.Add(new ScoreLabel(PlayerIndex.Two, new Rectangle(10, 1030, 40, 40), Game));
-            GameComponents.Add(new ScoreLabel(PlayerIndex.Three, new Rectangle(1870, 10, 40, 40), Game));
-            GameComponents.Add(new ScoreLabel(PlayerIndex.Four, new Rectangle(1870, 1030, 40, 40), Game));
+            GameComponents.Add(new ScoreLabel(PlayerIndex.One, new Rectangle(20, 20, 40, 40), Game));
+            GameComponents.Add(new ScoreLabel(PlayerIndex.Two, new Rectangle(20, 1020, 40, 40), Game));
+            GameComponents.Add(new ScoreLabel(PlayerIndex.Three, new Rectangle(1860, 20, 40, 40), Game));
+            GameComponents.Add(new ScoreLabel(PlayerIndex.Four, new Rectangle(1860, 1020, 40, 40), Game));
             // Audio
             Library.Audio.PlaySong(Library.Audio.Songs.GameSong3);
 
@@ -52,6 +52,22 @@ namespace Synced.Interface
                     (ob as Goal).Scored += GameScreen_Scored;
                 }
             }
+        }
+
+        public bool Winner(ref Library.Colors.ColorName winner)
+        {
+            foreach (var ob in GameComponents)
+            {
+                if (ob is ScoreLabel)
+                {
+                    if ((ob as ScoreLabel).Score >= 5)
+                    {
+                        winner = (Library.Colors.ColorName)((int)((ob as ScoreLabel).PlayerIndex));
+                        return true;
+                    }
+                }
+            }
+            return false;
         }
 
         void GameScreen_Scored(PlayerIndex playerIndex)
@@ -89,7 +105,7 @@ namespace Synced.Interface
             {
                 if (ob is ScoreLabel)
                 {
-                    (ob as ScoreLabel).SetFont = Library.Font.MenuFont;
+                    (ob as ScoreLabel).SetFont = Library.Font.ScoreFont;
                 }
             }
 

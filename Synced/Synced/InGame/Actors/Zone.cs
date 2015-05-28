@@ -50,6 +50,8 @@ namespace Synced.Actors
             RigidBody.CollidesWith = Category.All;// ^ Category.Cat9;
             
             _zoneState = ZoneState.Spawn;
+            Library.Audio.PlaySoundEffect(Library.Audio.SoundEffects.ZoneExpand);
+
             Scale = 0.05f;
             Alpha = 0.5f;
             _scaleTarget = 1.0f;
