@@ -11,12 +11,16 @@ namespace Synced.Interface
 {
     class WinScreen : SplashScreen
     {
+        #region Properties
         public enum TypeOfWin { SuddenDeath, TeamVictory }
         public TypeOfWin WinType
         {
             get;
             private set;
         }
+        #endregion
+
+        #region Constructors
         public WinScreen(Game game)
             : base(Library.WinScreens.Background, game)
         {
@@ -29,26 +33,24 @@ namespace Synced.Interface
         {
             WinType = TypeOfWin.TeamVictory;
             SplashTime = new TimeSpan(10);
-            Sprite teamColor = null;
             switch (player.TeamColor)
             {
                 case Synced.Content.Library.Colors.ColorName.Blue:
-                    teamColor = new Sprite(Library.WinScreens.BlueTeam, new Vector2(ResolutionManager.GetCenterPointWidth, ResolutionManager.GetCenterPointHeight), Static_Classes.DrawingHelper.DrawingLevel.Top, Game);
+                    GameComponents.Add(new Sprite(Library.WinScreens.BlueTeam, new Vector2(ResolutionManager.GetCenterPointWidth, ResolutionManager.GetCenterPointHeight), Static_Classes.DrawingHelper.DrawingLevel.Top, Game));
                     break;
                 case Synced.Content.Library.Colors.ColorName.Green:
-                    teamColor = new Sprite(Library.WinScreens.GreenTeam, new Vector2(ResolutionManager.GetCenterPointWidth, ResolutionManager.GetCenterPointHeight), Static_Classes.DrawingHelper.DrawingLevel.Top, Game);
+                    GameComponents.Add(new Sprite(Library.WinScreens.GreenTeam, new Vector2(ResolutionManager.GetCenterPointWidth, ResolutionManager.GetCenterPointHeight), Static_Classes.DrawingHelper.DrawingLevel.Top, Game));
                     break;
                 case Synced.Content.Library.Colors.ColorName.Red:
-                    teamColor = new Sprite(Library.WinScreens.RedTeam, new Vector2(ResolutionManager.GetCenterPointWidth, ResolutionManager.GetCenterPointHeight), Static_Classes.DrawingHelper.DrawingLevel.Top, Game);
+                    GameComponents.Add(new Sprite(Library.WinScreens.RedTeam, new Vector2(ResolutionManager.GetCenterPointWidth, ResolutionManager.GetCenterPointHeight), Static_Classes.DrawingHelper.DrawingLevel.Top, Game));
                     break;
                 case Synced.Content.Library.Colors.ColorName.Yellow:
-                    teamColor = new Sprite(Library.WinScreens.YellowTeam, new Vector2(ResolutionManager.GetCenterPointWidth, ResolutionManager.GetCenterPointHeight), Static_Classes.DrawingHelper.DrawingLevel.Top, Game);
+                    GameComponents.Add(new Sprite(Library.WinScreens.YellowTeam, new Vector2(ResolutionManager.GetCenterPointWidth, ResolutionManager.GetCenterPointHeight), Static_Classes.DrawingHelper.DrawingLevel.Top, Game));
                     break;
                 default:
                     break;
             }
-            GameComponents.Add(teamColor);
         }
-
+        #endregion
     }
 }
