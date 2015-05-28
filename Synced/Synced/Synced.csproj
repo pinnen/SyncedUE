@@ -63,8 +63,8 @@
     <Compile Include="InGame\IVictim.cs" />
     <Compile Include="InGame\Movable.cs" />
     <Compile Include="InGame\MovableCollidable.cs" />
-    <Compile Include="Interface\LoadingScreen_2.cs" />
     <Compile Include="Interface\ExitScreen.cs" />
+    <Compile Include="Interface\LoadingScreen.cs" />
     <Compile Include="Interface\Text.cs" />
     <Compile Include="Content\Library.cs" />
     <Compile Include="InGame\Actors\Ability.cs" />

@@ -28,7 +28,7 @@ namespace Synced.Actors
         public float Rotation { get; protected set; }
         public Vector2 Position { get; set; }
         public Texture2D Texture { get; set;}
-        public float Scale { get; protected set; }
+        public float Scale { get; set; }
         public float Alpha { get; protected set; }
 
         public Sprite(Texture2D texture, Vector2 position, Color color, DrawingHelper.DrawingLevel drawingLevel, bool centered, Game game)

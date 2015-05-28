@@ -48,11 +48,6 @@ namespace Synced.Actors
             get { return _useEffectParticles; }
             set { _useEffectParticles = value; }
         }
-        public float Acceleration 
-        {
-            get { return acceleration; }
-            set { acceleration = value; }
-        }
         public Vector2 LastNonZeroDirection
         {
             get { return lastNonZeroDirection; }

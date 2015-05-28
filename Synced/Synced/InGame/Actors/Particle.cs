@@ -14,10 +14,11 @@ using Microsoft.Xna.Framework.Graphics;
 using Synced.Static_Classes;
 using FarseerPhysics;
 using Synced.Interface;
+using Synced.Actors;
 
 namespace Synced.InGame.Actors
 {
-    class Particle : Synced.Actors.Sprite
+    class Particle : Sprite
     {
         #region Variables
         private float _timeSinceStart; // How long time the particle has existed.
@@ -46,11 +47,6 @@ namespace Synced.InGame.Actors
         {
             get { return _position; }
             set { _position = value; }
-        }
-        public float Scale
-        {
-            get { return _scale; }
-            set { _scale = value; }
         }
         public float pRotation
         {
