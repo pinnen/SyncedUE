@@ -23,7 +23,10 @@ namespace Synced.Interface
         public delegate void OnScreenDeactivateEventHandler(Screen screen, EventArgs e);
         public delegate void OnScreenTransitionEventHandler(Screen screen, EventArgs e);
         public delegate void OnScreenExitEventHandler(Screen screen, EventArgs e);
+        //Special event for new game 
         public delegate void StartNewGame(MenuScreen screen, EventArgs e);
+
+        public delegate void EndGame(Actors.Player player, EventArgs e);
 
         public event OnScreenActivateEventHandler OnActivated;
         public event OnScreenDeactivateEventHandler OnDeactivated;
