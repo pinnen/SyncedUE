@@ -20,6 +20,10 @@ namespace Synced.InGame
     class Crystal : Grabbable
     {
         #region Variables
+        Category defaultCollisiosCategory;
+        bool IsActive;
+        float inactiveTime;
+        Vector2 nextSpawnPosition;
         #endregion
 
         public Crystal(Texture2D texture, Vector2 position, DrawingHelper.DrawingLevel drawingLevel, Game game, World world, Color color)
@@ -27,7 +31,7 @@ namespace Synced.InGame
         {
             RigidBody.CollisionCategories = Category.Cat5;
             /* Setting up Farseer physics */
-            RigidBody.CollidesWith = Category.All ^ Category.Cat9;
+            RigidBody.CollidesWith = defaultCollisiosCategory = Category.All ^ Category.Cat9;
 
             /* Setting up Crystal */
             Tag = TagCategories.CRYSTAL;
@@ -35,12 +39,24 @@ namespace Synced.InGame
             _tail = new ParticleEngine(1, Library.Particle.trailTexture, position, color, Origin, 1.0f, 0.0f, 0.2f, DrawingHelper.DrawingLevel.Low, game);
             SyncedGameCollection.ComponentCollection.Add(_tail);
             _tail.ParticleColor = Color.LightGray;
+            IsActive = true;
         }
 
         public override void Update(GameTime gameTime)
         {
-            _tail.UpdatePosition(Position);
-            _tail.GenerateTrailParticles();
+            if (IsActive)
+            {
+                _tail.UpdatePosition(Position);
+                _tail.GenerateTrailParticles();
+            }
+            else
+            {
+                inactiveTime -= (float)gameTime.ElapsedGameTime.TotalSeconds;
+                if (inactiveTime <= 0)
+                {
+                    ActivateCrystal();
+                }
+            }
 
             base.Update(gameTime);
         }
@@ -61,10 +77,27 @@ namespace Synced.InGame
             _tail.ParticleColor = Color.LightGray;
         }
 
-        public void SetPosition(Vector2 position)
+        public void DeactivateCrystal(Vector2 position) //TODO: weird with position. 
         {
-            Position = position;
+            RigidBody.CollisionCategories = Category.None;
+            nextSpawnPosition = position;
+            RigidBody.LinearDamping = 100;
+            //RigidBody.BodyType = BodyType.Static;
+            Visible = false;
+            // cool particle effect! TODO: 
+            IsActive = false;
+            inactiveTime = 2;
+            
             ResetColor();
+        }
+        public void ActivateCrystal()
+        {
+            RigidBody.CollisionCategories = defaultCollisiosCategory;
+            Visible = true;
+            IsActive = true;
+            Position = nextSpawnPosition;
+            RigidBody.LinearDamping = 0.5f; // TODO: hardcoded value
+            //RigidBody.BodyType = BodyType.Dynamic;
         }
     }
 }
