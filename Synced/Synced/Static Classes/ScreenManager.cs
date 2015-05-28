@@ -178,9 +178,11 @@ namespace Synced.Static_Classes
 
         private void Screen_OnScreenExit(Screen screen, EventArgs e)
         {
-            if (Screens.Count <= 1)
-                CurrentState = ScreenState.MenuScreen;
             Pop();
+            if (Screens.Count <= 1)
+            {
+                CurrentState = ScreenState.MenuScreen;
+            }
          
         }
 
@@ -191,8 +193,6 @@ namespace Synced.Static_Classes
 
         private void NewGameEvent(MenuScreen screen, EventArgs e)
         {
-            int playerCount = screen.Count;
-
             _screenManager.Screens.Peek().Deactivated();
             _screenManager.AddScreen(GameScreen);
             (Screens.Peek() as GameScreen).InitializeGameScreen(Game, screen.SelectedCharacter);

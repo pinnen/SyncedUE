@@ -99,7 +99,7 @@ namespace Synced
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            if (Keyboard.GetState().IsKeyDown(Keys.Escape) && _lastState.IsKeyUp(Keys.Escape) || GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed && _lastGamepad.Buttons.Back == ButtonState.Released)
+            if (Keyboard.GetState().IsKeyDown(Keys.Escape) && _lastState.IsKeyUp(Keys.Escape) || InputManager.IsButtonPressed(Buttons.Back, PlayerIndex.One))
                 ScreenManager.Instance.HandleBackEvent();
 
             #region Debug
@@ -107,14 +107,6 @@ namespace Synced
             {
                 _graphics.ToggleFullScreen();
             }
-
-            // TODO: Test objects. Remove later
-            _lastGamepad = GamePad.GetState(PlayerIndex.One);
-
-            // Update the statemachine
-
-            // Update the debugger
-            DebuggingHelper.Update();
             _lastState = Keyboard.GetState();
             #endregion
             base.Update(gameTime);

@@ -30,7 +30,6 @@ namespace Synced.Interface
         Sprite _arrowHolder;        // Sprite that displays the selection arrows
         Label _stateText;
 
-        PlayerIndex _playerIndex;
         GamePadState _previousState;
         #endregion
 
@@ -44,6 +43,8 @@ namespace Synced.Interface
             get;
             set;
         }
+        public PlayerIndex PlayerIndex { get; set; }
+
         public Library.Character.Name SelectedCharacter
         {
             get;
@@ -58,7 +59,7 @@ namespace Synced.Interface
             _color = color;
             _currentState = State.Unconnected;
             _rectangle = rectangle;
-            _playerIndex = playerIndex;
+            PlayerIndex = playerIndex;
             DrawOrder = (int)DrawingHelper.DrawingLevel.Top;
         }
 
@@ -91,23 +92,23 @@ namespace Synced.Interface
             switch (_currentState)
             {
                 case State.Unconnected:
-                    if (GamePad.GetState(_playerIndex).IsConnected) _connect();
+                    if (GamePad.GetState(PlayerIndex).IsConnected) _connect();
                     break;
                 case State.Connected:
-                    if (InputManager.IsButtonPressed(Buttons.A, _playerIndex))
+                    if (InputManager.IsButtonPressed(Buttons.A, PlayerIndex))
                     {
                         _join();
                     }
                     break;
                 case State.Joined:
-                    if (InputManager.IsButtonPressed(Buttons.A, _playerIndex))
+                    if (InputManager.IsButtonPressed(Buttons.A, PlayerIndex))
                     {
                         _ready();
                     }
                     _readInput();
                     break;
                 case State.Ready:
-                    if (InputManager.IsButtonPressed(Buttons.B, _playerIndex))
+                    if (InputManager.IsButtonPressed(Buttons.B, PlayerIndex))
                     {
                         _join();
                     }
@@ -116,7 +117,7 @@ namespace Synced.Interface
 
             CheckForDisconnect();
 
-            _previousState = GamePad.GetState(_playerIndex);
+            _previousState = GamePad.GetState(PlayerIndex);
             base.Update(gameTime);
         }
         public override void Draw(GameTime gameTime)
@@ -145,9 +146,13 @@ namespace Synced.Interface
         {
             return _currentState == State.Ready;
         }
+        public bool IsConnected()
+        {
+            return _currentState != State.Unconnected;
+        }
         void CheckForDisconnect()
         {
-            if (!GamePad.GetState(_playerIndex).IsConnected)
+            if (!GamePad.GetState(PlayerIndex).IsConnected)
             {
                 _currentState = State.Unconnected;
                 _stateText.Content = "Unconnected";
@@ -191,10 +196,10 @@ namespace Synced.Interface
 
         void _readInput()
         {
-            if (InputManager.LeftStickLeft(_playerIndex))
+            if (InputManager.LeftStickLeft(PlayerIndex))
                 _nextCharacter(-1);
 
-            else if (InputManager.LeftStickRight(_playerIndex))
+            else if (InputManager.LeftStickRight(PlayerIndex))
                 _nextCharacter(1);
         }
     }
