@@ -104,7 +104,11 @@ namespace Synced.MapNameSpace
             {
                 if (Scored != null)
                 {
-                    Scored((crystal as Crystal).GetPlayerIndex());
+                    try //TODO: please nooo!
+                    {
+                            Scored((crystal as Crystal).GetPlayerIndex());
+                    }
+                    catch { }
                 }
                 return false;
             }

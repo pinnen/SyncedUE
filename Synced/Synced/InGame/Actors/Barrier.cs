@@ -100,6 +100,7 @@ namespace Synced.InGame.Actors
                         }
                         else
                         {
+                            g_other.ForcedRelease();
                            return true;
                         }
                     }

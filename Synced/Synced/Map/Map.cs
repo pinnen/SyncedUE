@@ -113,7 +113,7 @@ namespace Synced.MapNamespace
         {
             for (int i = 0; i < playerinfo.Count; i++)
             {
-                SyncedGameCollection.ComponentCollection.Add(new Player(playerStartData[i].PlayerIndex, playerinfo[i], (Library.Colors.ColorName)i, Game, World)); //TODO: get color from menuscreen
+                SyncedGameCollection.ComponentCollection.Add(new Player(playerStartData[i].PlayerIndex, playerinfo[i], (Library.Colors.ColorName)i, Game, World, playerStartData[i].Position, playerStartData[i].Position2)); //TODO: get color from menuscreen
             }
         }
         private void SetupCrystal()
