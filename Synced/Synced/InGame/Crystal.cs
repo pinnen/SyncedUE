@@ -63,7 +63,7 @@ namespace Synced.InGame
 
         public PlayerIndex GetPlayerIndex() // TODO: fix this
         {
-                return PreviousOwner.PlayerIndex;
+            return (PreviousOwner!=null)? PreviousOwner.PlayerIndex : (PlayerIndex)(-1);
         }
 
         public void ChangeColor(Color newColor) 

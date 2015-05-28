@@ -30,8 +30,9 @@ namespace Synced.Interface
         public GameScreen(Game game, List<Library.Character.Name> playerinfo) // TODO: tmp added world to parameters, might solve in a different way later. 
             : base(game)
         {
-            world = new World(Vector2.Zero);
             SyncedGameCollection.InitializeSyncedGameCollection(game);
+            world = new World(Vector2.Zero);
+
             GameComponents.Add(SyncedGameCollection.Instance);
 
             _map = new Map(Library.Map.Path[Library.Map.Name.Paper], game, world);
@@ -130,13 +131,13 @@ namespace Synced.Interface
         }
         protected override void Dispose(bool disposing)
         {
-            ResetGame();
             base.Dispose(disposing);
         }
-        private void ResetGame()
+        public void ResetGame()
         {
             SyncedGameCollection.ComponentCollection.Clear();
             world.Clear();
+            GameComponents.Clear();
         }
     }
 }

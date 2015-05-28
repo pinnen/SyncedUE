@@ -8,6 +8,7 @@ using FarseerPhysics.Dynamics.Contacts;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Synced.CollisionShapes;
+using Synced.Content;
 using Synced.InGame;
 using Synced.InGame.Actors;
 using Synced.Interface;
@@ -31,13 +32,14 @@ namespace Synced.MapNameSpace
         NorthWest
     }
 
-    class Goal: GameComponent
+    class Goal : GameComponent
     {
         DummyCircle InnerCircle;
         Circle OuterCircle;
         TexturePolygon Border;
 
-        public Goal(Texture2D goalTexture, Texture2D borderTexture, Vector2 position, GoalDirections direction, DrawingHelper.DrawingLevel drawingLevel, Game game, World world) : base(game)
+        public Goal(Texture2D goalTexture, Texture2D borderTexture, Vector2 position, GoalDirections direction, DrawingHelper.DrawingLevel drawingLevel, Game game, World world)
+            : base(game)
         {
             InnerCircle = new DummyCircle(position, ((goalTexture.Width / 2) / 2) / 2, game, world);
             InnerCircle.setOnCollisionFunction(OnCollision);
@@ -78,7 +80,7 @@ namespace Synced.MapNameSpace
                     break;
                 case GoalDirections.West:
                     borderRotation = (float)Math.PI;
-                    borderPosition = new Vector2((position.X - borderTexture.Width / 2) -5.30973f, (position.Y) +0.63129f); // TODO: other solution for very specific offset for texture/vertice position
+                    borderPosition = new Vector2((position.X - borderTexture.Width / 2) - 5.30973f, (position.Y) + 0.63129f); // TODO: other solution for very specific offset for texture/vertice position
                     break;
                 case GoalDirections.NorthWest:
                     borderRotation = 0;
@@ -104,11 +106,12 @@ namespace Synced.MapNameSpace
             {
                 if (Scored != null)
                 {
-                    try //TODO: please nooo!
+                    PlayerIndex p = (crystal as Crystal).GetPlayerIndex();
+                    if ((int)p != -1)
                     {
-                            Scored((crystal as Crystal).GetPlayerIndex());
+                        Scored(p);
+                        Library.Audio.PlaySoundEffect(Library.Audio.SoundEffects.Score);
                     }
-                    catch { }
                 }
                 return false;
             }

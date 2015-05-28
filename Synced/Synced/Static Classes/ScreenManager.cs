@@ -187,6 +187,7 @@ namespace Synced.Static_Classes
                 CurrentState = ScreenState.MenuScreen;
                 AddScreen(new MenuScreen(Game));
                 Screens.Peek().Activated();
+                (Screens.Peek() as MenuScreen).NewGame += Instance.NewGameEvent;
             }
             else if (Screens.Count == 1)
             {
@@ -204,12 +205,14 @@ namespace Synced.Static_Classes
         {
             _screenManager.Screens.Pop();
             _screenManager.AddScreen(new GameScreen(Game,screen.SelectedCharacter));
+            Screens.Peek().Activated();
             (Screens.Peek() as GameScreen).GameEnded += ScreenManager_GameEnded;
             CurrentState = ScreenState.GameScreen;
         }
 
         void ScreenManager_GameEnded(Library.Colors.ColorName color, EventArgs e)
         {
+            (Screens.Peek() as GameScreen).ResetGame();
             Pop();
             AddScreen(new WinScreen(Game, color));
             Screens.Peek().Activated();

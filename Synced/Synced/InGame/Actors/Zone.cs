@@ -55,7 +55,7 @@ namespace Synced.Actors
             Scale = 0.05f;
             Alpha = 0.5f;
             _scaleTarget = 1.0f;
-            _particleEffects = new ParticleEngine(100,Library.Particle.trailTexture,position,color*0.05f,Vector2.Zero,1.0f,0.0f,0.5f,DrawingHelper.DrawingLevel.Medium,game);
+            _particleEffects = new ParticleEngine(100,Library.Particle.trailTexture,position,color*0.05f,Vector2.Zero,5.0f,0.0f,0.5f,DrawingHelper.DrawingLevel.Medium,game);
             SyncedGameCollection.ComponentCollection.Add(_particleEffects);
             _victims = new List<IVictim>();
             
