@@ -40,7 +40,7 @@ namespace Synced.MapNameSpace
         {
             InnerCircle = new DummyCircle(position, ((goalTexture.Width / 2) / 2) / 2, game, world);
             InnerCircle.setOnCollisionFunction(OnCollision);
-
+            InnerCircle.SetCollisionCategory(Category.None);
             OuterCircle = new Circle(goalTexture, position, goalTexture.Width / 2, game, world);
             OuterCircle.RigidBody.CollisionCategories = Category.Cat9;
             OuterCircle.setOnCollisionFunction(OnCollision);
@@ -87,6 +87,8 @@ namespace Synced.MapNameSpace
             #endregion
 
             Border = new TexturePolygon(borderTexture, borderPosition, borderRotation, DrawingHelper.DrawingLevel.High, game, world, false);
+            Border.SetCollisionCategory(Category.Cat10);
+            Border.SetCollideWithCategory(Category.All);
 
             SyncedGameCollection.ComponentCollection.Add(OuterCircle);
             SyncedGameCollection.ComponentCollection.Add(InnerCircle);

@@ -29,10 +29,21 @@ namespace Synced.InGame.Actors
         //Data for particles:
         Vector2 _particlePosition;
         Color _particleColor;
+
+        public Color ParticleColor
+        {
+            get { return _particleColor; }
+            set { _particleColor = value; }
+        }
         Vector2 _particleOrigin;
         float _particleScale;
         float _particleRotation;
         float _particleLifetime;
+        public float ParticleLifetime
+        {
+            get { return _particleLifetime; }
+        }
+        
 
         Particle currentParticle;
         DrawingHelper.DrawingLevel dLevel;
@@ -115,7 +126,9 @@ namespace Synced.InGame.Actors
             {
                 if (_sleepingParticles.Count == 0)
                 {
-                    _particles.Add(new Particle(_particleTexture, _particlePosition, _particleColor, _particleOrigin, scale, _particleRotation, lifetime,dLevel,game));
+                    Particle tempP = new Particle(_particleTexture, _particlePosition, _particleColor, _particleOrigin, scale, _particleRotation, lifetime,dLevel,game);
+                    _particles.Add(tempP);
+                    SyncedGameCollection.ComponentCollection.Add(tempP);
                 }
                 else
                 {
@@ -136,15 +149,17 @@ namespace Synced.InGame.Actors
         public void GenerateEffectParticles(float scale, float lifetime) 
         {
             
-            int effectSize = 2; // TODO: ta in som parameter?
+            int effectSize = 80; // TODO: ta in som parameter?
 
             for (int i = 0; i < _particleAmount; i++)
             {
                 if (_sleepingParticles.Count == 0)
                 {
                     
-                    Vector2 randomPosition = new Vector2(_particlePosition.X + (float)random.Next(-effectSize,effectSize),_particlePosition.Y + (float)random.Next(-effectSize,effectSize));
-                    _particles.Add(new Particle(_particleTexture,randomPosition,_particleColor,_particleOrigin,scale,0.0f,lifetime,dLevel,game));
+                    Vector2 randomPosition = new Vector2(_particlePosition.X + (float)random.Next(-effectSize,effectSize),_particlePosition.Y + (float)random.Next(-effectSize*50,effectSize*50));
+                    Particle tempP = new Particle(_particleTexture,randomPosition,_particleColor,_particleOrigin,scale,0.0f,lifetime,dLevel,game);
+                    _particles.Add(tempP);
+                    SyncedGameCollection.ComponentCollection.Add(tempP);
                 }
                 else
                 {
@@ -181,7 +196,9 @@ namespace Synced.InGame.Actors
 
                 if (_sleepingParticles.Count == 0)
                 {
-                    _particles.Add(new Particle(_particleTexture, tmpPosition, _particleColor, _particleOrigin, scale, 0.0f, lifetime,dLevel, game));
+                    Particle tempP = new Particle(_particleTexture, tmpPosition, _particleColor, _particleOrigin, scale, 0.0f, lifetime,dLevel, game);
+                    _particles.Add(tempP);
+                    SyncedGameCollection.ComponentCollection.Add(tempP);
                 }
                 else
                 {
@@ -192,26 +209,54 @@ namespace Synced.InGame.Actors
             }
 			}
 
-        public void GenerateClusterParticles(float lifetime) // TODO: Is this generate method needed?
+        public void GenerateClusterParticles()
         {
-            int clusterParticleAmount = 300; // TODO: take in as parameter?
+            int clusterParticleAmount = 50;
 
             for (int i = 0; i < clusterParticleAmount; i++)
             {
                 Vector2 randomPosition = _particlePosition;
+                //Vector2 randomDirection = new Vector2((float)random.Next(-40,40),(float)random.Next(-40,40));
                 float randomRotation = random.Next();
-                float randomScale = random.Next();
-                _particles.Add(new Particle(_particleTexture, randomPosition, _particleColor, _particleOrigin, randomScale, randomRotation, lifetime, dLevel, game));
+                //float randomScale = random.Next();
+                Particle tempP = new Particle(_particleTexture, randomPosition, _particleColor, _particleOrigin, _particleScale, randomRotation, _particleLifetime, dLevel, game);
+                _particles.Add(tempP);
+                SyncedGameCollection.ComponentCollection.Add(tempP);
             }
 
         }
+
+        public void GenerateDynamicParticles(List<Vector2> positions, float scale, float lifetime)
+        {
+            _particleAmount = positions.Count;
+
+            for (int i = 0; i < _particleAmount; i++)
+            {
+                if (_sleepingParticles.Count == 0)
+                {
+                    Particle tempP = new Particle(_particleTexture, positions[i], _particleColor, _particleOrigin, scale, 0.0f, lifetime, dLevel, game);
+                    _particles.Add(tempP);
+                    SyncedGameCollection.ComponentCollection.Add(tempP);
+                }
+                else
+                {
+                    currentParticle = _sleepingParticles.Dequeue();
+                    currentParticle.WakeLineParticle(positions[i], _particleColor, scale, lifetime);
+                    _particles.Add(currentParticle);
+                }
+            }
+        }
+
         /// <summary>
         /// Shatters the particles
         /// </summary>
+        /// 
         public void ShatterParticles() 
         {
-            int shatterDirection = 50;
-            int shatterSpeed = 200;
+            ShatterParticles(100, 20);
+        }
+        public void ShatterParticles(int shatterDirection,int shatterSpeed) 
+        {
 
             foreach (Particle p in _particles)
             {
@@ -221,13 +266,17 @@ namespace Synced.InGame.Actors
                 p.SetMovement(direction, speed);
             }
         }
-
         public void ExpandAndRotate()
+        {
+            ExpandAndRotate(5.0f, 5.0f);
+        }
+
+        public void ExpandAndRotate(float rotation, float expansion)
         {
             foreach (Particle p in _particles)
             {
-                p.pRotation += 0.05f;
-                p.Scale += 0.05f;
+                p.pRotation += rotation;
+                p.Scale += expansion;
             }
         }
 
@@ -241,28 +290,24 @@ namespace Synced.InGame.Actors
 
         public void SetParticleFadeAlpha(float alpha) 
         {
-            foreach (Particle p in _particles)
+            for (int i = 0; i < _particles.Count; i++)
+            {
+                _particles[i].FadeAlpha = alpha;
+            }
+            foreach (Particle p in _sleepingParticles)
             {
                 p.FadeAlpha = alpha;
             }
+            
         }
 
-        public void ResetParticleFadeAlpha() 
-        {
-            foreach (Particle p in _particles)
-            {
-                p.FadeAlpha = 1.0f;
-            }
-        }
 
         public override void Draw(GameTime gameTime)
         {
-
             for (int i = 0; i < _particles.Count; i++)
             {
                 _particles[i].Draw(gameTime);
-            }
-            
+            }           
         }
 
         #endregion

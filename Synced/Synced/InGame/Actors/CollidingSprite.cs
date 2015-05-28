@@ -22,6 +22,7 @@ public enum TagCategories
     GOAL,
     COMPACTZONE,
     ZONE,
+    BARRIER
 }
 
 namespace Synced.InGame.Actors
@@ -49,13 +50,18 @@ namespace Synced.InGame.Actors
         }
         public new Vector2 Position
         {
+            get { return ConvertUnits.ToDisplayUnits(rigidBody.Position); } // TODO: check if it should be converted or not
+            set { rigidBody.Position = ConvertUnits.ToSimUnits(value); }
+        }
+        public Vector2 SimPosition
+        {
             get { return rigidBody.Position; } // TODO: check if it should be converted or not
             set { rigidBody.Position = value; }
         }
         public new float Rotation 
         {
             get { return rigidBody.Rotation; }
-            protected set { rigidBody.Rotation = value; } 
+            set { rigidBody.Rotation = value; } 
         }
         public Guid ID
         {
@@ -95,7 +101,7 @@ namespace Synced.InGame.Actors
         public override void Draw(GameTime gameTime)
         {       
             _spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.LinearWrap, DepthStencilState.None, RasterizerState.CullNone, null, ResolutionManager.GetTransformationMatrix());
-            _spriteBatch.Draw(Texture, ConvertUnits.ToDisplayUnits(rigidBody.Position), null, Color, rigidBody.Rotation, Origin, 1.0f, SpriteEffects.None, 1f);
+            _spriteBatch.Draw(Texture, ConvertUnits.ToDisplayUnits(rigidBody.Position), null, Color * Alpha, rigidBody.Rotation, Origin, Scale, SpriteEffects.None, 1f);
             _spriteBatch.End();
         }
     }

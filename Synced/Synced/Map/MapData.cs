@@ -72,8 +72,8 @@ namespace Synced.MapNamespace
             _objects.Add(new GoalData()
             {
                 Position = new Vector2(1920 - 300, 1080 / 2),
-                TexturePath = "Maps/Paper/Goal",
-                Texture2Path = "Gameobjects/GoalBorder",
+                TexturePath = "GameObjects/Goal",
+                Texture2Path = "GameObjects/GoalBorder",
                 CollisionCategory = Category.All,
                 Direction = GoalDirections.East
             });

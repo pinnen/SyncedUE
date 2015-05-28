@@ -37,21 +37,7 @@ namespace Synced.InGame.Actors
         #endregion
 
         #region Properties
-        //public float LifeTime 
-        //{
-        //    get { return _lifetime; }
-        //    set { _lifetime = value; }
-        //}
-        //public Vector2 Position
-        //{
-        //    get { return _position; }
-        //    set { _position = value; }
-        //}
-        //public bool IsMoving
-        //{
-        //    get { return _isMoving; }
-        //    set { _isMoving = value; }
-        //}
+
         public bool IsDead
         {
             get { return _lifetime <= _timeSinceStart; }
@@ -91,7 +77,6 @@ namespace Synced.InGame.Actors
             _scale = scale;
             _rotation = rotation;
             _fadeAlpha = 1.0f;
-            SyncedGameCollection.ComponentCollection.Add(this); // TODO: all objects should be added here right? for drawing and collision purposes. 
         }
         #endregion
 
@@ -145,7 +130,7 @@ namespace Synced.InGame.Actors
         public override void Draw(GameTime gameTime)
         {
             _spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.LinearWrap, DepthStencilState.None, RasterizerState.CullNone, null, ResolutionManager.GetTransformationMatrix());
-            _spriteBatch.Draw(_texture, ConvertUnits.ToDisplayUnits(_position), null, (_color * _colorStrength * _fadeAlpha), _rotation, _origin, _scale, SpriteEffects.None, 1.0f); // TODO: use body pos/rot or Sprite pos/rot? 
+            _spriteBatch.Draw(_texture, _position, null, (_color * _colorStrength * _fadeAlpha), _rotation, _origin, _scale, SpriteEffects.None, 1.0f); // TODO: use body pos/rot or Sprite pos/rot? 
             _spriteBatch.End();
 
             //_spriteBatch.Begin(SpriteSortMode.FrontToBack, BlendState.AlphaBlend);

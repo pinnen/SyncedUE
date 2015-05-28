@@ -14,7 +14,6 @@ using Synced.Content;
 using Synced.InGame;
 using Synced.InGame.Actors;
 using Synced.MapNamespace;
-using Synced.MapNameSpace;
 using Synced.Static_Classes;
 using System;
 using System.Collections.Generic;
@@ -31,8 +30,6 @@ namespace Synced.Interface
         Sprite background;
         Player player;
         Crystal crystal;
-        //Goal goalLeft;
-        //Goal goalRight;
         TexturePolygon frame;
         // End TODO: Test objects. Remove Later
 
@@ -49,11 +46,11 @@ namespace Synced.Interface
             // TODO: Test objects. Remove later
            
             background = new Sprite(game.Content.Load<Texture2D>("Maps/Paper/background"), new Vector2(129,111), DrawingHelper.DrawingLevel.Back, game);
-            player = new Player(PlayerIndex.One, Library.Character.Name.Circle, Library.Colors.ColorName.Blue, game, world);
-            crystal = new Crystal(Library.Crystal.Texture, new Vector2(500, 500), DrawingHelper.DrawingLevel.Medium, game, world, Color.White);
-            //goalLeft = new Goal(Library.Goal.GoalTexture, Library.Goal.BorderTexture, new Vector2(300, 1080 / 2), GoalDirections.West, DrawingHelper.DrawingLevel.Medium, game, world);
-            //goalRight = new Goal(Library.Goal.GoalTexture, Library.Goal.BorderTexture, new Vector2(1920 - 300, 1080 / 2), GoalDirections.East, DrawingHelper.DrawingLevel.Medium, game, world);
+            player = new Player(PlayerIndex.One, Library.Character.Name.Triangle, Library.Colors.ColorName.Green, game, world);
+            crystal = new Crystal(Library.Crystal.Texture, new Vector2(1920 / 2, 1080 / 2), DrawingHelper.DrawingLevel.Medium, game, world, Color.White);
             frame = new TexturePolygon(Library.Map.Texture2, new Vector2(1920 / 2, 1080 / 2), 0, DrawingHelper.DrawingLevel.Medium, game, world, false);
+            frame.SetCollisionCategory(Category.All);
+            frame.SetCollideWithCategory(Category.All);
 
             SyncedGameCollection.ComponentCollection.Add(background);
             SyncedGameCollection.ComponentCollection.Add(player);
@@ -72,12 +69,30 @@ namespace Synced.Interface
             //        _players.Add(new Player(temp.PlayerIndex, Library.Character.Name.Circle, Library.Colors.ColorName.Blue, game, _map.World)); // TODO: All collision objects need world!
             //    }
             //}
+
+            // Audio
+            Library.Audio.PlaySong(Library.Audio.Songs.GameSong3);
+        }
+
+        public void InitializeGameScreen() // Send in playerinformation
+        { 
+            // init map
         }
 
         public override void Update(GameTime gameTime)
         {
             world.Step(Math.Min((float)gameTime.ElapsedGameTime.TotalSeconds, (1f / 30f)));
             base.Update(gameTime);
+        }
+        protected override void Dispose(bool disposing)
+        {
+            ResetGame();
+            base.Dispose(disposing);
+        }
+        private void ResetGame()
+        {
+            SyncedGameCollection.ComponentCollection.Clear();
+            world.Clear();
         }
     }
 }

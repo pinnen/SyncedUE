@@ -595,84 +595,6 @@
 #begin Maps/Paper/map.xml
 /copy:Maps/Paper/map.xml
 
-#begin Audio/CrystalPickUp.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:Audio/CrystalPickUp.wav
-
-#begin Audio/CrystalShoot.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:Audio/CrystalShoot.wav
-
-#begin Audio/GameFinished.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:Audio/GameFinished.wav
-
-#begin Audio/GameStart.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:Audio/GameStart.wav
-
-#begin Audio/MenuConfirm.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:Audio/MenuConfirm.wav
-
-#begin Audio/MenuSelect.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:Audio/MenuSelect.wav
-
-#begin Audio/Score.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:Audio/Score.wav
-
-#begin Audio/UnitMove.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:Audio/UnitMove.wav
-
-#begin Audio/ZoneCreate.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:Audio/ZoneCreate.wav
-
-#begin Audio/ZoneExplosion.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:Audio/ZoneExplosion.wav
-
-#begin Audio/ZonePickUp.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:Audio/ZonePickUp.wav
-
-#begin Audio/ZoneShoot.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:Audio/ZoneShoot.wav
-
-#begin Audio/song_InMenu.wav
-/importer:WavImporter
-/processor:SongProcessor
-/processorParam:Quality=Best
-/build:Audio/song_InMenu.wav
-
 #begin GameObjects/Goal.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -705,12 +627,6 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:TextureFormat=Color
 /build:Maps/Paper/frame2.png
-
-#begin Audio/song_InGame.mp3
-/importer:Mp3Importer
-/processor:SongProcessor
-/processorParam:Quality=Best
-/build:Audio/song_InGame.mp3
 
 #begin GameObjects/plussign.png
 /importer:TextureImporter
@@ -788,4 +704,117 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:TextureFormat=Color
 /build:Interface/SplashAlpha.png
+
+#begin Audio/Bounce.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/Bounce.mp3
+
+#begin Audio/Click1.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/Click1.wav
+
+#begin Audio/Click2.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/Click2.wav
+
+#begin Audio/Countdown.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/Countdown.mp3
+
+#begin Audio/CrystalGrab.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/CrystalGrab.wav
+
+#begin Audio/GameSong1.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Audio/GameSong1.mp3
+
+#begin Audio/GameSong2.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Audio/GameSong2.mp3
+
+#begin Audio/GameSong3.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Audio/GameSong3.mp3
+
+#begin Audio/MenuConfirm.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/MenuConfirm.wav
+
+#begin Audio/MenuSelect.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/MenuSelect.wav
+
+#begin Audio/MenuSong1.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Audio/MenuSong1.mp3
+
+#begin Audio/Pause.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/Pause.mp3
+
+#begin Audio/Score.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/Score.wav
+
+#begin Audio/Shoot.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/Shoot.mp3
+
+#begin Audio/ZoneExpand.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/ZoneExpand.wav
+
+#begin Audio/ZoneGrab.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/ZoneGrab.wav
+
+#begin Audio/ZoneSpawn.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/ZoneSpawn.mp3
+
+#begin Interface/ConrollerSelection.jpg
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:TextureFormat=Color
+/build:Interface/ConrollerSelection.jpg
 

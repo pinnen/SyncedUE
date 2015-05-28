@@ -64,17 +64,12 @@ namespace Synced
 
             // Load all content into a static library
             Library.Loader.Initialize(Content);
-            Library.Audio.PlaySoundEffect(Library.Audio.SoundEffects.GameStart); // ToDo: Test
 
             // ------------------------------------------------------------
             // Adds menu screen to ScreenManager
             // ------------------------------------------------------------
             ScreenManager.InitializeScreenManager(this);
             Components.Add(ScreenManager.Instance);
-
-            // TODO: Test objects. Remove later
-
-            // End TODO: Test objects. Remove Later
 
             base.Initialize(); // Initializes all components
         }
@@ -104,7 +99,11 @@ namespace Synced
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+            if (Keyboard.GetState().IsKeyDown(Keys.Escape) && _lastState.IsKeyUp(Keys.Escape))
+                ScreenManager.Instance.HandleBackEvent();
+
+            //TEMP EXIT FOR GAMEPADS
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 Exit();
             #region Debug
             if (Keyboard.GetState().IsKeyDown(Keys.F11) && _lastState.IsKeyUp(Keys.F11))

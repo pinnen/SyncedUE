@@ -17,12 +17,9 @@ namespace Synced.Static_Classes
     /// </summary>
     sealed class ScreenManager : DrawableGameComponent
     {
-        public ScreenState CurrentState
-        { 
-            get; 
-            private set;
-        }
-        public enum ScreenState { SplashScreen, MenuScreen, GameScreen }
+        #region Delegates & Events & Raisers
+        //TODO: FIX EVENTS AND DELEGATES FOR THIS SCREENMANAGER
+        #endregion
 
         #region Singelton
         private static ScreenManager _screenManager;
@@ -49,21 +46,26 @@ namespace Synced.Static_Classes
             _screenManager.MenuScreen = new MenuScreen(game);
             _screenManager.MenuScreen.NewGame += Instance.NewGameEvent;
             _screenManager.AddScreen(_screenManager.MenuScreen);
-            //_screenManager.Screens.Peek().Deactivated();
-            
-            ////------------------------------------------------------------------------
-            //// Splash screens
-            ////------------------------------------------------------------------------
-            ////Second splash screen
-            //Screen screen2 = new SplashScreen(Library.SplashScreen.SplashSeven, game);
-            //screen2.Deactivated();
-            //_screenManager.AddScreen(screen2);
+            _screenManager.Screens.Peek().Deactivated();
 
-            ////First splash screen
-            //Screen screen = new SplashScreen(Library.SplashScreen.SplashAlpha, game);
-            //screen.Activated();
-            //_screenManager.AddScreen(screen);
-           // _screenManager.AddScreen(Instance.GameScreen);
+            //------------------------------------------------------------------------
+            // **********************Splash screens***********************************
+            //------------------------------------------------------------------------
+            //Second splash screen
+            Screen screen2 = new SplashScreen(Library.SplashScreen.SplashSeven, game);
+            screen2.Deactivated();
+            _screenManager.AddScreen(screen2);
+
+            //First splash screen
+            Screen screen = new SplashScreen(Library.SplashScreen.SplashAlpha, game);
+            screen.Activated();
+            _screenManager.AddScreen(screen);
+            _screenManager.CurrentState = ScreenState.SplashScreen;
+            //------------------------------------------------------------------------
+            // **********************Game Screen**************************************
+            //FOR DEBUG
+            //------------------------------------------------------------------------
+            //_screenManager.AddScreen(Instance.GameScreen);
             //TODO: Add this functionality properly. 
         }
 
@@ -99,6 +101,7 @@ namespace Synced.Static_Classes
         {
             if (!Initialized || screen == null)
                 return;
+
             //Binds events to screen
             screen.OnScreenExit += ScreenManager.Instance.Screen_OnScreenExit;
             screen.OnActivated += ScreenManager.Instance.Screen_OnActivated;
@@ -129,6 +132,7 @@ namespace Synced.Static_Classes
                     //If we have no more screens we add a menu screen to back it up.
                     ScreenManager.Instance.AddScreen(Instance.MenuScreen);
                     ScreenManager.Instance.Screens.Peek().Activated();
+                    ScreenManager.Instance.CurrentState = ScreenState.MenuScreen;
                     return null;
                 }
                 ScreenManager.Instance.Screens.Peek().Deactivated(); //NOT SURE WHAT TO DO HERE.
@@ -171,7 +175,10 @@ namespace Synced.Static_Classes
 
         private void Screen_OnScreenExit(Screen screen, EventArgs e)
         {
+            if (Screens.Count <= 1)
+                CurrentState = ScreenState.MenuScreen;
             Pop();
+         
         }
 
         private void OnActivated(Screen screen, EventArgs e)
@@ -183,9 +190,42 @@ namespace Synced.Static_Classes
         {
             _screenManager.Screens.Peek().Deactivated();
             _screenManager.AddScreen(GameScreen);
+            CurrentState = ScreenState.GameScreen;
+        }
+        public void HandleBackEvent()
+        {
+            switch (ScreenManager.Instance.CurrentState)  
+            {
+                case ScreenState.SplashScreen:
+                    Pop();
+                    if (Screens.Count <= 1)
+                        CurrentState = ScreenState.MenuScreen;
+
+                    break;
+                case ScreenState.MenuScreen:
+                    Game.Exit();
+                    break;
+                case ScreenState.GameScreen:
+                    //TODO:
+                    
+                    //Screens.Pop();
+                    //Screens.Peek().Activated();
+                    //CurrentState = ScreenState.MenuScreen;
+                    break;
+                default:
+                    break;
+            }
+            
         }
         #endregion
         #region ScreenManager Properties
+        public ScreenState CurrentState
+        {
+            get;
+            private set;
+        }
+        public enum ScreenState { SplashScreen, MenuScreen, GameScreen }
+
         public MenuScreen MenuScreen
         {
             get;

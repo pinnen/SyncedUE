@@ -23,8 +23,10 @@ namespace Synced.MapNamespace
     class Map : DrawableGameComponent// : Screen
     {
         #region Variables
-        // Crystal Spawns
-        // Player Spawns
+        int CrystalStartIndex;
+        public static List<CrystalSpawnData> crystalSpawnList;
+        public static List<PlayerStartData> playerStartData;
+
         // World
         #endregion
         #region Properties
@@ -42,14 +44,56 @@ namespace Synced.MapNamespace
 
         public Map(string path, Game game, World world) : base (game)
         {
+            if (crystalSpawnList == null)
+            {
+                crystalSpawnList = new List<CrystalSpawnData>();
+            }
+            else
+            {
+                crystalSpawnList.Clear();
+            }
+
+            if (playerStartData == null)
+            {
+                playerStartData = new List<PlayerStartData>();
+            }
+            else
+            {
+                playerStartData.Clear();
+            }
+
             Data = Library.Serialization<MapData>.DeserializeFromXmlFile(path);
             World = world;
-            
+        }
+
+        public void LoadMap(Game game) // playerData
+        {
             //Process data
             foreach (var mapObject in Data.Objects)
             {
-                SyncedGameCollection.ComponentCollection.Add(mapObject.GetComponent(game, World));
+                if (mapObject is CrystalSpawnData)
+                {
+                    crystalSpawnList.Add((CrystalSpawnData)mapObject);
+                }
+                if (mapObject is PlayerStartData)
+                {
+                    playerStartData.Add((PlayerStartData)mapObject);
+                }
+                else
+                {
+                    SyncedGameCollection.ComponentCollection.Add(mapObject.GetComponent(game, World));
+                }
             }
+        }
+        private void SetupPlayer()
+        { 
+        
+        }
+        
+        public void ClearData()
+        {
+            crystalSpawnList.Clear();
+            playerStartData.Clear();
         }
     }
 }
