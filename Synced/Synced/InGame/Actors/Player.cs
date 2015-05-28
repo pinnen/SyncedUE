@@ -34,6 +34,8 @@ namespace Synced.Actors
         World _world;
         Barrier _barrier;
         List<Zone> _zones;
+        float _zoneCreationCooldown;
+        bool _canCreateZone;
         #endregion
         
         #region Properties
@@ -76,6 +78,8 @@ namespace Synced.Actors
             _teamColor = teamcolor;
             _compactZones = new List<CompactZone>();
             _zones = new List<Zone>();
+            _zoneCreationCooldown = 10.0f;
+            _canCreateZone = true;
 
             SyncedGameCollection.ComponentCollection.Add(Left);
             SyncedGameCollection.ComponentCollection.Add(Right);
@@ -285,12 +289,13 @@ namespace Synced.Actors
                 #endregion
 
                 #region Zones
-                if (InputManager.IsButtonPressed(Buttons.B, _playerIndex)) // TODO: Remove. This is for testing
+                if (InputManager.IsButtonPressed(Buttons.B, _playerIndex) && _canCreateZone) // TODO: Remove. This is for testing
                 {
                     Vector2 spawnPosition = new Vector2((Left.RigidBody.Position.X + Right.RigidBody.Position.X)/2.0f,(Left.RigidBody.Position.Y + Right.RigidBody.Position.Y)/2.0f);
                     _compactZone = new CompactZone(Library.Zone.CompactTexture[shape], ConvertUnits.ToDisplayUnits(spawnPosition), DrawingHelper.DrawingLevel.Medium, Game, _world, Library.Colors.getColor[Tuple.Create(_teamColor, Library.Colors.ColorVariation.Other)],shape);
                     SyncedGameCollection.ComponentCollection.Add(_compactZone);
                     _compactZones.Add(_compactZone);
+                    _canCreateZone = false;
                 }
 
                 for (int i = 0; i < _compactZones.Count; i++)
@@ -303,7 +308,16 @@ namespace Synced.Actors
                         i--;
                     }
                 }
-                #endregion            
+                #endregion        
+    
+                _zoneCreationCooldown -= (float)gameTime.ElapsedGameTime.TotalSeconds;
+                if (_zoneCreationCooldown <= 0)
+                {
+                    Left.TrailEngine.ParticleColor = Library.Colors.getColor[Tuple.Create(_teamColor, Library.Colors.ColorVariation.Left)];
+                    Right.TrailEngine.ParticleColor = Library.Colors.getColor[Tuple.Create(_teamColor, Library.Colors.ColorVariation.Right)];
+                    _canCreateZone = true;
+                    _zoneCreationCooldown = 10.0f;
+                }
                 
             }
         }
