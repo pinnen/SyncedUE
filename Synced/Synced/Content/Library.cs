@@ -83,7 +83,8 @@ namespace Synced.Content
                     { Audio.SoundEffects.Shoot,         content.Load<SoundEffect>(@"Audio\Shoot")},
                     { Audio.SoundEffects.ZoneExpand,    content.Load<SoundEffect>(@"Audio\ZoneExpand")},
                     { Audio.SoundEffects.ZoneGrab,      content.Load<SoundEffect>(@"Audio\ZoneGrab")},
-                    { Audio.SoundEffects.ZoneSpawn,     content.Load<SoundEffect>(@"Audio\ZoneSpawn")}
+                    { Audio.SoundEffects.ZoneSpawn,     content.Load<SoundEffect>(@"Audio\ZoneSpawn")},
+                    { Audio.SoundEffects.BarrierBreak,  content.Load<SoundEffect>(@"Audio\BarrierBreak")}
                 };
                 #endregion
                 #region Font
@@ -228,7 +229,8 @@ namespace Synced.Content
                 Shoot,
                 ZoneExpand,
                 ZoneGrab,
-                ZoneSpawn
+                ZoneSpawn,
+                BarrierBreak
             }
 
             public static Dictionary<SoundEffects, SoundEffect> SoundEffectDictionary;
