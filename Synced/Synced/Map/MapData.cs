@@ -17,13 +17,13 @@ namespace Synced.MapNamespace
     [XmlRoot("MapData")]
     public class MapData
     {
-        List<MapObject> _objects;
+        List<MapObjectData> _objects;
 
-        [XmlElement(typeof(PlayerStart))]
-        [XmlElement(typeof(Obstacle))]
+        [XmlElement(typeof(PlayerStartData))]
+        [XmlElement(typeof(ObstacleData))]
         [XmlElement(typeof(GoalData))]
-        [XmlElement(typeof(MapObject))]
-        public List<MapObject> Objects
+        [XmlElement(typeof(MapObjectData))]
+        public List<MapObjectData> Objects
         {
             get { return _objects; }
             set { _objects = value; }
@@ -32,7 +32,7 @@ namespace Synced.MapNamespace
         // TODO Temporary ctor for first map file // TODO: had to comment everything
         public MapData()
         {
-            _objects = new List<MapObject>();
+            _objects = new List<MapObjectData>();
 
             //Players
             //_objects.Add(new PlayerStart()

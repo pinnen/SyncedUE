@@ -10,7 +10,7 @@ using System.Xml.Serialization;
 namespace Synced.MapNamespace
 {
     [Serializable]
-    public class Obstacle : MapObject
+    public class ObstacleData : MapObjectData
     {
         //[XmlElement("World")]
         //public World world;

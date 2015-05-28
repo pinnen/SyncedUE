@@ -10,7 +10,7 @@ using System.Xml.Serialization;
 namespace Synced.MapNamespace
 {
     [Serializable]
-    public class PlayerStart : MapObject
+    public class PlayerStartData : MapObjectData
     {
         [XmlElement("PlayerIndex")]
         public PlayerIndex PlayerIndex;

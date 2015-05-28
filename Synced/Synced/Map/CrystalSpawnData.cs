@@ -1,26 +1,22 @@
 ﻿using FarseerPhysics.Dynamics;
-// MapObject.cs
-// Introduced: 2015-04-14
-// Last edited: 2015-05-13
-// Edited by:
-// Pontus Magnusson
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Synced.Actors;
+using Synced.MapNamespace;
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using System.Xml.Serialization;
 
-namespace Synced.MapNamespace
+namespace Synced.Map
 {
-    [Serializable]
-    public class MapObject
+    class CrystalSpawnData : MapObjectData
     {
-        [XmlElement("Position")]
-        public Vector2 Position;
+        [XmlElement("IsStart")]
+        public bool IsStart;
 
-        [XmlElement("TexturePath")]
-        public string TexturePath;
-
+        [Serializable]
         public virtual GameComponent GetComponent(Game game, World world)
         {
             return new Sprite(game.Content.Load<Texture2D>(TexturePath), Position, Static_Classes.DrawingHelper.DrawingLevel.Medium, game);

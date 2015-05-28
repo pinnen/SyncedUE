@@ -23,7 +23,9 @@ namespace Synced.MapNamespace
     class Map : DrawableGameComponent// : Screen
     {
         #region Variables
-
+        // Crystal Spawns
+        // Player Spawns
+        // World
         #endregion
         #region Properties
         public MapData Data
