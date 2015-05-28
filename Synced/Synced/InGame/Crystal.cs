@@ -87,6 +87,8 @@ namespace Synced.InGame
             // cool particle effect! TODO: 
             IsActive = false;
             inactiveTime = 2;
+            PreviousOwner = null;
+            owner = null;
             
             ResetColor();
         }
