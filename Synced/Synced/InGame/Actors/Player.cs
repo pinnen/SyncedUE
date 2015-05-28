@@ -322,11 +322,5 @@ namespace Synced.Actors
                 
             }
         }
-
-        public Library.Colors.ColorName TeamColor 
-        {
-            get { return _teamColor; }
-            //set { _teamColor = value; }
-        }
     }
 }
