@@ -43,7 +43,8 @@ namespace Synced.InGame
             _tail.GenerateTrailParticles();
 
             base.Update(gameTime);
-        }
+        }
+
         public PlayerIndex GetPlayerIndex()
         {
             return PreviousOwner.PlayerIndex;
@@ -58,6 +59,12 @@ namespace Synced.InGame
         {
             this.Color = Color.White;
             _tail.ParticleColor = Color.LightGray;
+        }
+
+        public void SetPosition(Vector2 position)
+        {
+            Position = position;
+            ResetColor();
         }
     }
 }
