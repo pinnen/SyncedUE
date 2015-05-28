@@ -83,7 +83,11 @@ namespace Synced.Interface
             world.Step(Math.Min((float)gameTime.ElapsedGameTime.TotalSeconds, (1f / 30f)));
             base.Update(gameTime);
         }
-
+        protected override void Dispose(bool disposing)
+        {
+            ResetGame();
+            base.Dispose(disposing);
+        }
         public void ResetGame()
         {
             SyncedGameCollection.ComponentCollection.Clear();

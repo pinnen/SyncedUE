@@ -207,6 +207,7 @@ namespace Synced.Static_Classes
                     break;
                 case ScreenState.GameScreen:
                     //TODO:
+                    
                     //Screens.Pop();
                     //Screens.Peek().Activated();
                     //CurrentState = ScreenState.MenuScreen;
