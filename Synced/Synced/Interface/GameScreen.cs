@@ -23,14 +23,7 @@ namespace Synced.Interface
     class GameScreen : Screen
     {
         Map _map;
-
-        // TODO: Test objects. Remove later
         World world;
-        //Sprite background;
-        //Player player;
-        //Crystal crystal;
-        //TexturePolygon frame;
-        // End TODO: Test objects. Remove Later
 
         public GameScreen(Game game) // TODO: tmp added world to parameters, might solve in a different way later. 
             : base (game)
@@ -41,20 +34,6 @@ namespace Synced.Interface
 
             _map = new Map(Library.Map.Path[Library.Map.Name.Paper], game, world);
             GameComponents.Add(_map);
-            
-            // TODO: Test objects. Remove later       
-            //background = new Sprite(game.Content.Load<Texture2D>("Maps/Paper/background"), new Vector2(129,111), DrawingHelper.DrawingLevel.Back, game);
-            //player = new Player(PlayerIndex.One, Library.Character.Name.Triangle, Library.Colors.ColorName.Green, game, world);
-            //crystal = new Crystal(Library.Crystal.Texture, new Vector2(1920 / 2, 1080 / 2), DrawingHelper.DrawingLevel.Medium, game, world, Color.White);
-            //frame = new TexturePolygon(Library.Map.Texture2, new Vector2(1920 / 2, 1080 / 2), 0, DrawingHelper.DrawingLevel.Medium, game, world, false);
-            //frame.SetCollisionCategory(Category.All);
-            //frame.SetCollideWithCategory(Category.All);
-
-            //SyncedGameCollection.ComponentCollection.Add(background);
-            //SyncedGameCollection.ComponentCollection.Add(player);
-            //SyncedGameCollection.ComponentCollection.Add(crystal);
-            //SyncedGameCollection.ComponentCollection.Add(frame);
-            // End TODO: Test objects. Remove Later
             
             // Audio
             Library.Audio.PlaySong(Library.Audio.Songs.GameSong3);
