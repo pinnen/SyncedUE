@@ -119,6 +119,12 @@ namespace Synced.Interface
         {
             world.Step(Math.Min((float)gameTime.ElapsedGameTime.TotalSeconds, (1f / 30f)));
 
+            // Have we won?
+            Library.Colors.ColorName color = Library.Colors.ColorName.Blue;
+            if (Winner(ref color))
+            {
+            }
+
             base.Update(gameTime);
         }
         protected override void Dispose(bool disposing)
