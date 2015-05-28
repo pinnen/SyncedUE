@@ -14,10 +14,12 @@ using Synced.MapNamespace;
 using Synced.Static_Classes;
 using System;
 
+
+
 namespace Synced.MapNameSpace
 {
     public enum GoalDirections
-    { 
+    {
         North,
         NorthEast,
         East,
@@ -36,7 +38,7 @@ namespace Synced.MapNameSpace
 
         public Goal(Texture2D goalTexture, Texture2D borderTexture, Vector2 position, GoalDirections direction, DrawingHelper.DrawingLevel drawingLevel, Game game, World world) : base(game)
         {
-            InnerCircle = new DummyCircle(position, ((goalTexture.Width / 2) / 2) / 2, game, world); // TODO: fix position
+            InnerCircle = new DummyCircle(position, ((goalTexture.Width / 2) / 2) / 2, game, world);
             InnerCircle.setOnCollisionFunction(OnCollision);
             InnerCircle.SetCollisionCategory(Category.None);
             OuterCircle = new Circle(goalTexture, position, goalTexture.Width / 2, game, world);
@@ -46,6 +48,7 @@ namespace Synced.MapNameSpace
             float borderRotation = 0;
             Vector2 borderPosition = Vector2.Zero;
 
+            #region direction cases
             switch (direction) // TODO: Add all directions. 
             {
                 case GoalDirections.North:
@@ -81,6 +84,7 @@ namespace Synced.MapNameSpace
                     borderPosition = new Vector2(position.X + borderTexture.Width / 2, position.Y);
                     break;
             }
+            #endregion
 
             Border = new TexturePolygon(borderTexture, borderPosition, borderRotation, DrawingHelper.DrawingLevel.High, game, world, false);
             Border.SetCollisionCategory(Category.Cat10);

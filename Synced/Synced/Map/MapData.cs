@@ -5,6 +5,7 @@
 // Pontus Magnusson
 using FarseerPhysics.Dynamics;
 using Microsoft.Xna.Framework;
+using Synced.MapNameSpace;
 using System;
 using System.Collections.Generic;
 using System.Xml;
@@ -16,13 +17,14 @@ namespace Synced.MapNamespace
     [XmlRoot("MapData")]
     public class MapData
     {
-        List<MapObject> _objects;
+        List<MapObjectData> _objects;
 
-        [XmlElement(typeof(PlayerStart))]
-        [XmlElement(typeof(Obstacle))]
+        [XmlElement(typeof(PlayerStartData))]
+        [XmlElement(typeof(CrystalSpawnData))]
+        [XmlElement(typeof(BorderData))]
         [XmlElement(typeof(GoalData))]
-        [XmlElement(typeof(MapObject))]
-        public List<MapObject> Objects
+        [XmlElement(typeof(MapObjectData))]
+        public List<MapObjectData> Objects
         {
             get { return _objects; }
             set { _objects = value; }
@@ -31,55 +33,118 @@ namespace Synced.MapNamespace
         // TODO Temporary ctor for first map file // TODO: had to comment everything
         public MapData()
         {
-           // _objects = new List<MapObject>();
+            _objects = new List<MapObjectData>();
 
-           // //Players
-           // _objects.Add(new PlayerStart()
-           // {
-           //     PlayerIndex = PlayerIndex.One,
-           //     Position = new Vector2(100, 100),
-           //     TexturePath = ""
-           // });
-           // _objects.Add(new PlayerStart()
-           // {
-           //     PlayerIndex = PlayerIndex.Two,
-           //     Position = new Vector2(300, 100),
-           //     TexturePath = ""
-           // });
-           // _objects.Add(new PlayerStart()
-           // {
-           //     PlayerIndex = PlayerIndex.Three,
-           //     Position = new Vector2(300, 300),
-           //     TexturePath = ""
-           // });
-           // _objects.Add(new PlayerStart()
-           // {
-           //     PlayerIndex = PlayerIndex.Four,
-           //     Position = new Vector2(100, 300),
-           //     TexturePath = ""
-           // });
+            #region Players
+            _objects.Add(new PlayerStartData()
+            {
+                TexturePath = "",
+                drawingLevel = 3,
+                PlayerIndex = PlayerIndex.One,
+                Position = new Vector2(400, 400),
+                Position2 = new Vector2(400, 450),
+                Rotation = 0,
+            });
+            _objects.Add(new PlayerStartData()
+            {
+                TexturePath = "",
+                drawingLevel = 3,
+                PlayerIndex = PlayerIndex.Two,
+                Position = new Vector2(1920 - 400, 400),
+                Position2 = new Vector2(1920 - 400, 450),
+                Rotation = 0,
+            });
+            _objects.Add(new PlayerStartData()
+            {
+                TexturePath = "",
+                drawingLevel = 3,
+                PlayerIndex = PlayerIndex.Three,
+                Position = new Vector2(400, 1080 - 400),
+                Position2 = new Vector2(400, 1080 - 450),
+                Rotation = 0,
+            });
+            _objects.Add(new PlayerStartData()
+            {
+                TexturePath = "",
+                drawingLevel = 3,
+                PlayerIndex = PlayerIndex.Four,
+                Position = new Vector2(1920 - 400, 1080 - 400),
+                Position2 = new Vector2(1920 - 400, 1080 - 450),
+                Rotation = 0,
+            });
+            #endregion
 
-           //  //Background
-           // _objects.Add(new Obstacle()
-           // {
-           //     Position = Vector2.Zero,
-           //     TexturePath = "Maps/Paper/frame",
-           //     CollisionCategory = Category.All
-           // });
-           // _objects.Add(new Obstacle()
-           //{
-           //    Position = Vector2.Zero,
-           //    TexturePath = "Maps/Paper/background",
-           //    CollisionCategory = Category.None
-           //});
+            #region Crystals
+            _objects.Add(new CrystalSpawnData()
+            {
+                TexturePath = "GameObjects/Crystal",
+                drawingLevel = 3,
+                Position = new Vector2(1920 / 2, 1080 / 2),
+                IsStart = true,
+            });
+            _objects.Add(new CrystalSpawnData()
+            {
+                TexturePath = "GameObjects/Crystal",
+                drawingLevel = 3,
+                Position = new Vector2(1920 / 2, 1080 / 2),
+                IsStart = false,
+            });
+            _objects.Add(new CrystalSpawnData()
+            {
+                TexturePath = "GameObjects/Crystal",
+                drawingLevel = 3,
+                Position = new Vector2(1920 / 2, 1080 / 2),
+                IsStart = false,
+            });
+            _objects.Add(new CrystalSpawnData()
+            {
+                TexturePath = "GameObjects/Crystal",
+                drawingLevel = 3,
+                Position = new Vector2(1920 / 2, 1080 / 2),
+                IsStart = false,
+            });
+            _objects.Add(new CrystalSpawnData()
+            {
+                TexturePath = "GameObjects/Crystal",
+                drawingLevel = 3,
+                Position = new Vector2(1920 / 2, 1080 / 2),
+                IsStart = false,
+            });
+            #endregion
 
-           //  //Goals
-           // _objects.Add(new GoalData()
-           // {
-           //     Position = new Vector2(500, 500),
-           //     TexturePath = "Maps/Paper/Goal",
-           //     CollisionCategory = Category.All,
-           // });
+            #region Map
+            _objects.Add(new MapObjectData()
+            {
+                Position = new Vector2(129, 111),
+                TexturePath = "Maps/Paper/background",
+                drawingLevel = 1,
+            });
+            _objects.Add(new BorderData()
+            {
+                Position = new Vector2(1920 / 2, 1080 / 2),
+                TexturePath = "Maps/Paper/Frame2",
+                drawingLevel = 3,
+            });
+            #endregion
+
+            #region Goals
+            _objects.Add(new GoalData()
+            {
+                Position = new Vector2(300, 1080 / 2),
+                TexturePath = "Maps/Paper/Goal",
+                Texture2Path = "GameObjects/GoalBorder",
+                drawingLevel = 3,
+                Direction = GoalDirections.West,
+            });
+            _objects.Add(new GoalData()
+            {
+                Position = new Vector2(1920 - 300, 1080 / 2),
+                TexturePath = "GameObjects/Goal",
+                Texture2Path = "GameObjects/GoalBorder",
+                drawingLevel = 3,
+                Direction = GoalDirections.East,
+            });
+            #endregion
         }
     }
 }

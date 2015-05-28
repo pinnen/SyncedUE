@@ -23,7 +23,11 @@ namespace Synced.MapNamespace
     class Map : DrawableGameComponent// : Screen
     {
         #region Variables
+        int CrystalStartIndex;
+        public static List<CrystalSpawnData> crystalSpawnList;
+        public static List<PlayerStartData> playerStartData;
 
+        // World
         #endregion
         #region Properties
         public MapData Data
@@ -36,35 +40,85 @@ namespace Synced.MapNamespace
             get;
             set;
         }
+        public static List<CrystalSpawnData> CrystalSpawnList
+        {
+            get { return crystalSpawnList; }
+        }
         #endregion
 
-        public Map(string path, Game game) : base (game)
+        public Map(string path, Game game, World world) : base (game)
         {
-            //Data = Library.Serialization<MapData>.DeserializeFromXmlFile(path);
-            World = new World(Vector2.Zero); // Topdown games have no gravity
-            
-            //Process data
-            //foreach (var mapObject in Data.Objects)
-            //{
-            //    //SyncedGameCollection.ComponentCollection.Add(mapObject.GetComponent(game));
+            /* Set up data containers */
+            if (crystalSpawnList == null)
+            {
+                crystalSpawnList = new List<CrystalSpawnData>();
+            }
+            else
+            {
+                crystalSpawnList.Clear();
+            }
 
-            //    if (mapObject is Obstacle)
-            //    {
-            //        SyncedGameCollection.ComponentCollection.Add(new Sprite(game.Content.Load<Texture2D>(mapObject.TexturePath), mapObject.Position, Static_Classes.DrawingHelper.DrawingLevel.Low, game));
-            //    }
-            //    else if (mapObject is GoalData)
-            //    {
-            //        SyncedGameCollection.ComponentCollection.Add(new Sprite(game.Content.Load<Texture2D>(mapObject.TexturePath), mapObject.Position, Static_Classes.DrawingHelper.DrawingLevel.Back, game));
-            //    }
-            //    else if (mapObject is PlayerStart)
-            //    {
-            //        // TODO: Add player
-            //    }
-            //    else if (mapObject is MapObject)
-            //    {
-            //        SyncedGameCollection.ComponentCollection.Add(new Sprite(game.Content.Load<Texture2D>(mapObject.TexturePath), mapObject.Position, Static_Classes.DrawingHelper.DrawingLevel.Back, game));
-            //    }
-            //}
+            if (playerStartData == null)
+            {
+                playerStartData = new List<PlayerStartData>();
+            }
+            else
+            {
+                playerStartData.Clear();
+            }
+
+            Data = Library.Serialization<MapData>.DeserializeFromXmlFile(path);
+            World = world;
+        }
+
+        public void LoadMap(Game game, List<Library.Character.Name> playerinfo) // playerData
+        {
+            //Process data
+            foreach (var mapObject in Data.Objects)
+            {
+                if (mapObject is CrystalSpawnData)
+                {
+                    crystalSpawnList.Add((CrystalSpawnData)mapObject);
+                    if (crystalSpawnList[crystalSpawnList.Count - 1].IsStart)
+                    {
+                        CrystalStartIndex = crystalSpawnList.Count - 1;
+                    }
+                }
+                else if (mapObject is PlayerStartData)
+                {
+                    playerStartData.Add((PlayerStartData)mapObject);
+                }
+                else if (mapObject is BorderData)
+                {
+                    TexturePolygon tmp = (TexturePolygon)mapObject.GetComponent(game, World);
+                    tmp.SetCollisionCategory(Category.All);
+                    tmp.SetCollideWithCategory(Category.All);
+                    SyncedGameCollection.ComponentCollection.Add(tmp);
+                }
+                else
+                {
+                    SyncedGameCollection.ComponentCollection.Add(mapObject.GetComponent(game, World));
+                }
+            }
+            SetupPlayers(playerinfo);
+            SetupCrystal();
+        }
+        public void ClearData()
+        {
+            crystalSpawnList.Clear();
+            playerStartData.Clear();
+        }
+
+        private void SetupPlayers(List<Library.Character.Name> playerinfo)
+        {
+            for (int i = 0; i < playerinfo.Count; i++)
+            {
+                SyncedGameCollection.ComponentCollection.Add(new Player(playerStartData[i].PlayerIndex, playerinfo[i], (Library.Colors.ColorName)i, Game, World)); //TODO: get color from menuscreen
+            }
+        }
+        private void SetupCrystal()
+        {
+            SyncedGameCollection.ComponentCollection.Add(new Crystal(Library.Crystal.Texture, crystalSpawnList[CrystalStartIndex].Position, DrawingHelper.DrawingLevel.Medium, Game, World, Color.LightGray));
         }
     }
 }
