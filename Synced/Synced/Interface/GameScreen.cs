@@ -23,6 +23,7 @@ namespace Synced.Interface
 {
     class GameScreen : Screen
     {
+        public event EndGame GameEnded;
         Map _map;
         World world;
 
@@ -36,7 +37,7 @@ namespace Synced.Interface
             _map = new Map(Library.Map.Path[Library.Map.Name.Paper], game, world);
             GameComponents.Add(_map);
 
-            Rectangle[] rectangles = new Rectangle[] { new Rectangle(10, 10, 40, 40), new Rectangle(1870, 10, 40, 40),new Rectangle(10, 1030, 40, 40), new Rectangle(1870, 1030, 40, 40) };
+            Rectangle[] rectangles = new Rectangle[] { new Rectangle(20, 20, 40, 40), new Rectangle(1860, 20, 40, 40),new Rectangle(20, 1020, 40, 40), new Rectangle(1860, 1020, 40, 40) };
             // Controls
             for (int i = 0; i < playerinfo.Count; i++)
             {
@@ -54,6 +55,22 @@ namespace Synced.Interface
                     (ob as Goal).Scored += GameScreen_Scored;
                 }
             }
+        }
+
+        public bool Winner(ref Library.Colors.ColorName winner)
+        {
+            foreach (var ob in GameComponents)
+            {
+                if (ob is ScoreLabel)
+                {
+                    if ((ob as ScoreLabel).Score >= 5)
+                    {
+                        winner = (Library.Colors.ColorName)((int)((ob as ScoreLabel).PlayerIndex));
+                        return true;
+                    }
+                }
+            }
+            return false;
         }
 
         void GameScreen_Scored(PlayerIndex playerIndex)
@@ -91,7 +108,7 @@ namespace Synced.Interface
             {
                 if (ob is ScoreLabel)
                 {
-                    (ob as ScoreLabel).SetFont = Library.Font.MenuFont;
+                    (ob as ScoreLabel).SetFont = Library.Font.ScoreFont;
                 }
             }
 

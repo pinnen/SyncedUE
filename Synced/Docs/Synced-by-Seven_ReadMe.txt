@@ -7,6 +7,9 @@ Recommended Platform: Windows 7
 
 Recommended Screen:   1920 x 1200
 
+Requirements for installation:
+		      Latest DirectX and .NET framework!
+
 Accessories:          Gamepads: one Xbox 360 Controller per player (e.g. USB-connected, with two thumb sticks))
 
 Players:              1-4 (2-4 recommended) - each player will get its own colour:  Red, Blue, Green, Yellow.

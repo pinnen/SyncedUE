@@ -171,11 +171,11 @@ namespace Synced.Actors
                     _zones.Add(triangleZ);
                     SyncedGameCollection.ComponentCollection.Add(triangleZ);
                     break;
-                case Library.Zone.Name.Square:
-                    SquareZone squareZ = new SquareZone(Library.Zone.Texture[shape], ConvertUnits.ToDisplayUnits(position), rotation, color, Game, _world);
-                    _zones.Add(squareZ);
-                    SyncedGameCollection.ComponentCollection.Add(squareZ);
-                    break;
+                //case Library.Zone.Name.Square:
+                //    SquareZone squareZ = new SquareZone(Library.Zone.Texture[shape], ConvertUnits.ToDisplayUnits(position), rotation, color, Game, _world);
+                //    _zones.Add(squareZ);
+                //    SyncedGameCollection.ComponentCollection.Add(squareZ);
+                //    break;
                 case Library.Zone.Name.Pentagon:
                     PentagonZone pentagonZ = new PentagonZone(Library.Zone.Texture[shape], ConvertUnits.ToDisplayUnits(position), rotation, color, Game, _world);
                     _zones.Add(pentagonZ);
@@ -189,6 +189,7 @@ namespace Synced.Actors
                 default:
                     break;
             }
+            Library.Audio.PlaySoundEffect(Library.Audio.SoundEffects.ZoneExpand);
         }
         
         #endregion
@@ -296,6 +297,7 @@ namespace Synced.Actors
                     SyncedGameCollection.ComponentCollection.Add(_compactZone);
                     _compactZones.Add(_compactZone);
                     _canCreateZone = false;
+                    Library.Audio.PlaySoundEffect(Library.Audio.SoundEffects.ZoneSpawn);
                 }
 
                 for (int i = 0; i < _compactZones.Count; i++)

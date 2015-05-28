@@ -6,6 +6,7 @@ using FarseerPhysics.Factories;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Synced.Actors;
+using Synced.Content;
 using Synced.Static_Classes;
 using System;
 using System.Collections.Generic;
@@ -160,9 +161,10 @@ namespace Synced.InGame.Actors
                 _barrierBodies[i].Enabled = false;
                 positions.Add(ConvertUnits.ToDisplayUnits(_barrierBodies[i].Position));
             }
-            // TODO: destroy animation? sound?
             EffectParticles.GenerateDynamicParticles(positions, 1, 10);
             EffectParticles.ShatterParticles();
+
+            Library.Audio.PlaySoundEffect(Library.Audio.SoundEffects.BarrierBreak);
         }
 
     }
