@@ -9,6 +9,8 @@ using Synced.Interface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Synced.Static_Classes
 {
@@ -178,9 +180,11 @@ namespace Synced.Static_Classes
 
         private void Screen_OnScreenExit(Screen screen, EventArgs e)
         {
-            if (Screens.Count <= 1)
-                CurrentState = ScreenState.MenuScreen;
             Pop();
+            if (Screens.Count <= 1)
+            {
+                CurrentState = ScreenState.MenuScreen;
+            }
          
         }
 
@@ -191,28 +195,28 @@ namespace Synced.Static_Classes
 
         private void NewGameEvent(MenuScreen screen, EventArgs e)
         {
-            int playerCount = screen.Count;
-
             _screenManager.Screens.Peek().Deactivated();
+            
             _screenManager.AddScreen(GameScreen);
             (Screens.Peek() as GameScreen).InitializeGameScreen(Game, screen.SelectedCharacter);
             CurrentState = ScreenState.GameScreen;
         }
+
         public void HandleBackEvent()
         {
             switch (ScreenManager.Instance.CurrentState)  
             {
                 case ScreenState.SplashScreen:
-                    Pop();
-                    if (Screens.Count <= 1)
-                        CurrentState = ScreenState.MenuScreen;
+                    //Pop();
+                    //if (Screens.Count <= 1)
+                    //    CurrentState = ScreenState.MenuScreen;
 
                     break;
                 case ScreenState.MenuScreen:
                     Game.Exit();
                     break;
                 case ScreenState.GameScreen:
-                    //TODO:
+                    //TODO: From game to menu
                     if (Screens.Peek() is GameScreen)
                     {
                         //Screens.Pop();

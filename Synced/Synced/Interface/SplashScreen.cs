@@ -35,7 +35,7 @@ namespace Synced.Interface
             DrawOrder = (int)DrawingHelper.DrawingLevel.Top;
             FadeInTime = TimeSpan.FromSeconds(0.5);
             FadeOutTime = TimeSpan.FromSeconds(0.5);
-            SplashTime = TimeSpan.FromSeconds(2.0);
+            SplashTime = TimeSpan.FromSeconds(2.1);
             // Temporary screen variables (Half of screen)
             int w = ResolutionManager.GetCenterPointWidth;
             int h = ResolutionManager.GetCenterPointHeight;

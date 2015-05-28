@@ -18,7 +18,6 @@ namespace Synced.InGame
         protected Vector2 direction;
         protected float acceleration;
         protected float maxAcceleration;
-        protected float minAcceleration;
         protected float accelerationScaling;
         float force;                                 
         #endregion

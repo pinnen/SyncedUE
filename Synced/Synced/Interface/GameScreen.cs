@@ -14,6 +14,7 @@ using Synced.Content;
 using Synced.InGame;
 using Synced.InGame.Actors;
 using Synced.MapNamespace;
+using Synced.MapNameSpace;
 using Synced.Static_Classes;
 using System;
 using System.Collections.Generic;
@@ -23,17 +24,15 @@ namespace Synced.Interface
     class GameScreen : Screen
     {
         Map _map;
-
-        // TODO: Test objects. Remove later
         World world;
-        //Sprite background;
-        //Player player;
-        //Crystal crystal;
-        //TexturePolygon frame;
-        // End TODO: Test objects. Remove Later
+
+        ScoreLabel playerOneScoreLabel;
+        ScoreLabel playerTwoScoreLabel;
+        ScoreLabel playerThreeScoreLabel;
+        ScoreLabel playerFourScoreLabel;
 
         public GameScreen(Game game) // TODO: tmp added world to parameters, might solve in a different way later. 
-            : base (game)
+            : base(game)
         {
             world = new World(Vector2.Zero);
             SyncedGameCollection.InitializeSyncedGameCollection(game);
@@ -41,33 +40,76 @@ namespace Synced.Interface
 
             _map = new Map(Library.Map.Path[Library.Map.Name.Paper], game, world);
             GameComponents.Add(_map);
-            
-            // TODO: Test objects. Remove later       
-            //background = new Sprite(game.Content.Load<Texture2D>("Maps/Paper/background"), new Vector2(129,111), DrawingHelper.DrawingLevel.Back, game);
-            //player = new Player(PlayerIndex.One, Library.Character.Name.Triangle, Library.Colors.ColorName.Green, game, world);
-            //crystal = new Crystal(Library.Crystal.Texture, new Vector2(1920 / 2, 1080 / 2), DrawingHelper.DrawingLevel.Medium, game, world, Color.White);
-            //frame = new TexturePolygon(Library.Map.Texture2, new Vector2(1920 / 2, 1080 / 2), 0, DrawingHelper.DrawingLevel.Medium, game, world, false);
-            //frame.SetCollisionCategory(Category.All);
-            //frame.SetCollideWithCategory(Category.All);
 
-            //SyncedGameCollection.ComponentCollection.Add(background);
-            //SyncedGameCollection.ComponentCollection.Add(player);
-            //SyncedGameCollection.ComponentCollection.Add(crystal);
-            //SyncedGameCollection.ComponentCollection.Add(frame);
-            // End TODO: Test objects. Remove Later
-            
+            // Score labels
+            GameComponents.Add(new ScoreLabel(PlayerIndex.One, new Rectangle(10, 10, 40, 40), game));
+            GameComponents.Add(new ScoreLabel(PlayerIndex.Two, new Rectangle(10, 1030, 40, 40), game));
+            GameComponents.Add(new ScoreLabel(PlayerIndex.Three, new Rectangle(1870, 10, 40, 40), game));
+            GameComponents.Add(new ScoreLabel(PlayerIndex.Four, new Rectangle(1870, 1030, 40, 40), game));
+
             // Audio
             Library.Audio.PlaySong(Library.Audio.Songs.GameSong3);
+        }
+
+        void GameScreen_Scored(PlayerIndex playerIndex)
+        {
+            foreach (var ob in GameComponents)
+            {
+                if (ob is ScoreLabel)
+                {
+                    if ((ob as ScoreLabel).PlayerIndex == playerIndex)
+                    {
+                        (ob as ScoreLabel).IncreaseScore();
+
+                        // Move Crystal
+                        foreach (var crys in GameComponents)
+                        {
+                            if (crys is Crystal)
+                            {
+                                (crys as Crystal).RandomPosition();
+                            }
+                        }
+
+                    }
+                }
+            }
         }
 
         public void InitializeGameScreen(Game game, List<Library.Character.Name> playerinfo) // Send in playerinformation
         {
             _map.LoadMap(game, playerinfo); // send in player information
+
+            // Add score event
+            foreach (var ob in SyncedGameCollection.ComponentCollection)
+            {
+                if (ob is Goal)
+                {
+                    (ob as Goal).Scored += GameScreen_Scored;
+                }
+            }
+        }
+        public override void Initialize()
+        {
+            base.Initialize();
+        }
+        protected override void LoadContent()
+        {
+            foreach (var ob in GameComponents)
+            {
+                if (ob is ScoreLabel)
+                {
+                    (ob as ScoreLabel).SetFont = Library.Font.MenuFont;
+                }
+            }
+
+            base.LoadContent();
         }
 
         public override void Update(GameTime gameTime)
         {
             world.Step(Math.Min((float)gameTime.ElapsedGameTime.TotalSeconds, (1f / 30f)));
+
+
             base.Update(gameTime);
         }
         protected override void Dispose(bool disposing)
@@ -83,4 +125,3 @@ namespace Synced.Interface
     }
 }
 
-            

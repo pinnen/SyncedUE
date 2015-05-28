@@ -48,21 +48,24 @@ namespace Synced.Actors
             get { return _useEffectParticles; }
             set { _useEffectParticles = value; }
         }
-        public float Acceleration 
-        {
-            get { return acceleration; }
-            set { acceleration = value; }
-        }
         public Vector2 LastNonZeroDirection
         {
             get { return lastNonZeroDirection; }
         }
+        public PlayerIndex PlayerIndex
+        {
+            get;
+            private set;
+        }
+
         #endregion
 
         public Grabbable Item { get; set; }
-        public Unit(Texture2D texture, Vector2 position, Color color, Game game, World world,Library.Colors.ColorName teamColor)
+        public Unit(PlayerIndex playerIndex, Texture2D texture, Vector2 position, Color color, Game game, World world,Library.Colors.ColorName teamColor)
             : base(texture, position, DrawingHelper.DrawingLevel.Medium, game, world)
         {
+            PlayerIndex = playerIndex;
+
             /* Setting up Farseer Physics */
             RigidBody = BodyFactory.CreateCircle(this.world, ConvertUnits.ToSimUnits(texture.Width / 2), 0, ConvertUnits.ToSimUnits(position));
             RigidBody.BodyType = BodyType.Dynamic;

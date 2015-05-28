@@ -8,6 +8,7 @@ using FarseerPhysics.Dynamics.Contacts;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Synced.CollisionShapes;
+using Synced.InGame;
 using Synced.InGame.Actors;
 using Synced.Interface;
 using Synced.MapNamespace;
@@ -40,10 +41,10 @@ namespace Synced.MapNameSpace
         {
             InnerCircle = new DummyCircle(position, ((goalTexture.Width / 2) / 2) / 2, game, world);
             InnerCircle.setOnCollisionFunction(OnCollision);
-            InnerCircle.SetCollisionCategory(Category.None);
+            InnerCircle.SetCollisionCategory(Category.Cat10);
             OuterCircle = new Circle(goalTexture, position, goalTexture.Width / 2, game, world);
             OuterCircle.RigidBody.CollisionCategories = Category.Cat9;
-            OuterCircle.setOnCollisionFunction(OnCollision);
+            //OuterCircle.setOnCollisionFunction(OnCollision);
 
             float borderRotation = 0;
             Vector2 borderPosition = Vector2.Zero;
@@ -97,7 +98,19 @@ namespace Synced.MapNameSpace
 
         public bool OnCollision(Fixture f1, Fixture f2, Contact contact)
         {
+            CollidingSprite crystal = SyncedGameCollection.GetCollisionComponent(f2);
+
+            if (crystal.Tag == TagCategories.CRYSTAL)
+            {   
+                if (Scored != null)
+                    Scored((crystal as Crystal).GetPlayerIndex());
+                return false;
+            }
             return true;
         }
+
+        public delegate void IncreaseScore(PlayerIndex playerIndex);
+
+        public event IncreaseScore Scored;
     }
 }

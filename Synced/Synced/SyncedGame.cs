@@ -29,8 +29,6 @@ namespace Synced
         SpriteBatch _spriteBatch;
         bool fullscreen = false;
         KeyboardState _lastState;
-        GamePadState _lastGamepad;
-        // TODO: Test objects. Remove later
 
 
         public SyncedGame()
@@ -48,15 +46,13 @@ namespace Synced
         /// </summary>
         protected override void Initialize()
         {
-            //MapData tmp = new MapData();
-            //Library.Serialization<MapData>.SerializeToXmlFile(tmp, "map");
-
             // Initialize resolution and scaling
             ResolutionManager.Init(ref _graphics);
             ResolutionManager.SetVirtualResolution(1920, 1080); // TODO magic resolution values.
             ResolutionManager.SetResolution(GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width, GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height, fullscreen);
+            
             // Initialize Simulator Unit to Pixel ratio
-            ConvertUnits.SetDisplayUnitToSimUnitRatio(35f);     // 35 pixels = 1 meter // TODO: Use 'magic resolution values' to adapt. 
+            ConvertUnits.SetDisplayUnitToSimUnitRatio(35f);     // 35 pixels = 1 meter 
 
             // Create a new spritebatch and add it as service for access by other classes
             _spriteBatch = new SpriteBatch(GraphicsDevice);
@@ -99,7 +95,7 @@ namespace Synced
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            if (Keyboard.GetState().IsKeyDown(Keys.Escape) && _lastState.IsKeyUp(Keys.Escape) || GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed && _lastGamepad.Buttons.Back == ButtonState.Released)
+            if (Keyboard.GetState().IsKeyDown(Keys.Escape) && _lastState.IsKeyUp(Keys.Escape) || InputManager.IsButtonPressed(Buttons.Back, PlayerIndex.One))
                 ScreenManager.Instance.HandleBackEvent();
 
             #region Debug
@@ -107,14 +103,6 @@ namespace Synced
             {
                 _graphics.ToggleFullScreen();
             }
-
-            // TODO: Test objects. Remove later
-            _lastGamepad = GamePad.GetState(PlayerIndex.One);
-
-            // Update the statemachine
-
-            // Update the debugger
-            DebuggingHelper.Update();
             _lastState = Keyboard.GetState();
             #endregion
             base.Update(gameTime);

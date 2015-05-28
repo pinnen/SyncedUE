@@ -5,6 +5,7 @@
 // Pontus Magnusson
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using Synced.Actors;
 using Synced.Content;
 using Synced.Static_Classes;
@@ -16,7 +17,7 @@ namespace Synced.Interface
     class MenuScreen : Screen
     {
         #region Delegates & Event & Raisers
-        
+
         public event StartNewGame NewGame;
 
         #endregion
@@ -31,7 +32,7 @@ namespace Synced.Interface
 
 
         #endregion
-        
+
 
         public MenuScreen(Game game)
             : base(game)
@@ -53,44 +54,40 @@ namespace Synced.Interface
             Library.Audio.PlaySong(Library.Audio.Songs.MenuSong1);
         }
 
-        public int Count
-        {
-            get;
-            private set;
-        }
         public bool IsEveryoneReady()
         {
-            Count = 0;
+            int count = 0;
+            int total = 0;
             foreach (var item in GameComponents)
             {
                 if (item is CharacterSelector)
                 {
                     if ((item as CharacterSelector).IsReady())
-                        Count++;
+                        count++;
+                    if ((item as CharacterSelector).IsConnected())
+                        total++;
                 }
             }
-            return (Count >= _minimumPlayersConstant);
+            return (count >= total && count >= _minimumPlayersConstant);
         }
         public List<Library.Character.Name> SelectedCharacter = new List<Library.Character.Name>();
 
         public override void Update(GameTime gameTime)
         {
-            if (IsEveryoneReady())
+            if (IsEveryoneReady() && NewGame != null 
+                && InputManager.IsButtonPressed(Buttons.Start, PlayerIndex.One))
             {
-                if (NewGame != null)
+                foreach (var item in GameComponents)
                 {
-                    foreach (var item in GameComponents)
+                    if (item is CharacterSelector)
                     {
-                        if (item is CharacterSelector)
-                            if ((item as CharacterSelector).IsReady())
-                            {
-                                SelectedCharacter.Add((item as CharacterSelector).SelectedCharacter);
-                            }
-                            
+                        if ((item as CharacterSelector).IsReady())
+                        {
+                            SelectedCharacter.Add((item as CharacterSelector).SelectedCharacter);
+                        }
                     }
-         
-                    NewGame(this, new EventArgs());
-                }                
+                }
+                NewGame(this, new EventArgs());
             }
             base.Update(gameTime);
         }
