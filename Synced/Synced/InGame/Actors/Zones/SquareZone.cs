@@ -39,5 +39,10 @@ namespace Synced.InGame.Actors.Zones
             return false;
 
         }
+        public override void Delete()
+        {
+            _victimParticles.DeleteParticleEngine();
+            base.Delete();
+        }
     }
 }

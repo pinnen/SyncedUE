@@ -124,11 +124,11 @@ namespace Synced.InGame.Actors.Zones
             while (_evilCrystalList.Count > 0)
             {
                 world.RemoveBody(_evilCrystalList[0].RigidBody);
-                //_particleEffects.UpdatePosition(_evilCrystalList[0].Position);
-                //_particleEffects.ParticleColor = _evilCrystalList[0].Color * 0.01f;
-                //_particleEffects.GenerateClusterParticles();
-                //_particleEffects.ShatterParticles(50, 5);
-                //_particleEffects.ExpandAndRotate();
+                _particleEffects.UpdatePosition(_evilCrystalList[0].Position);
+                _particleEffects.ParticleColor = _evilCrystalList[0].Color * 0.01f;
+                _particleEffects.GenerateClusterParticles();
+                _particleEffects.ShatterParticles(50, 5);
+                _particleEffects.ExpandAndRotate();
                 SyncedGameCollection.ComponentCollection.Remove(_evilCrystalList[0]);
                 _evilCrystalList.RemoveAt(0);
             }
@@ -136,16 +136,17 @@ namespace Synced.InGame.Actors.Zones
             while (_evilUnitList.Count > 0)
             {
                 world.RemoveBody(_evilUnitList[0].RigidBody);
-                //_particleEffects.UpdatePosition(_evilUnitList[0].Position);
-                //_particleEffects.ParticleColor = _evilUnitList[0].Color * 0.01f;
-                //_particleEffects.GenerateClusterParticles();
-                //_particleEffects.ShatterParticles(50, 5);
-                //_particleEffects.ExpandAndRotate();
+                _particleEffects.UpdatePosition(_evilUnitList[0].Position);
+                _particleEffects.ParticleColor = _evilUnitList[0].Color * 0.01f;
+                _particleEffects.GenerateClusterParticles();
+                _particleEffects.ShatterParticles(50, 5);
+                _particleEffects.ExpandAndRotate();
                 SyncedGameCollection.ComponentCollection.Remove(_evilUnitList[0]);
                 _evilUnitList.RemoveAt(0);
             }
             _evilUnitList.Clear();
             _evilCrystalList.Clear();
+            _particleEffects.DeleteParticleEngine();
             base.Delete();
         }
     }

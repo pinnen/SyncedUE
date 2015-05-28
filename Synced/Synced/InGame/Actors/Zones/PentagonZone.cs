@@ -99,5 +99,11 @@ namespace Synced.InGame.Actors.Zones
             victim.InvisibilityAlpha = 1.0f;
         }
 
+        public override void Delete()
+        {
+            _victimParticles.DeleteParticleEngine();
+            base.Delete();
+        }
+
     }
 }
