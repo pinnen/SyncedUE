@@ -196,9 +196,7 @@ namespace Synced.Static_Classes
         private void NewGameEvent(MenuScreen screen, EventArgs e)
         {
             _screenManager.Screens.Peek().Deactivated();
-            
-            _screenManager.AddScreen(GameScreen);
-            (Screens.Peek() as GameScreen).InitializeGameScreen(Game, screen.SelectedCharacter);
+            _screenManager.AddScreen(new GameScreen(Game,screen.SelectedCharacter));
             CurrentState = ScreenState.GameScreen;
         }
 
@@ -247,10 +245,6 @@ namespace Synced.Static_Classes
         {
             get;
             private set;
-        }
-        public GameScreen GameScreen
-        {
-            get { return new GameScreen(Game); }
         }
         #endregion
 

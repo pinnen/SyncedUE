@@ -26,7 +26,7 @@ namespace Synced.Interface
         Map _map;
         World world;
 
-        public GameScreen(Game game) // TODO: tmp added world to parameters, might solve in a different way later. 
+        public GameScreen(Game game, List<Library.Character.Name> playerinfo) // TODO: tmp added world to parameters, might solve in a different way later. 
             : base(game)
         {
             world = new World(Vector2.Zero);
@@ -35,15 +35,23 @@ namespace Synced.Interface
 
             _map = new Map(Library.Map.Path[Library.Map.Name.Paper], game, world);
             GameComponents.Add(_map);
-
-            // Score labels
-            GameComponents.Add(new ScoreLabel(PlayerIndex.One, new Rectangle(10, 10, 40, 40), game));
-            GameComponents.Add(new ScoreLabel(PlayerIndex.Two, new Rectangle(10, 1030, 40, 40), game));
-            GameComponents.Add(new ScoreLabel(PlayerIndex.Three, new Rectangle(1870, 10, 40, 40), game));
-            GameComponents.Add(new ScoreLabel(PlayerIndex.Four, new Rectangle(1870, 1030, 40, 40), game));
-
+            // Controls
+            GameComponents.Add(new ScoreLabel(PlayerIndex.One, new Rectangle(10, 10, 40, 40), Game));
+            GameComponents.Add(new ScoreLabel(PlayerIndex.Two, new Rectangle(10, 1030, 40, 40), Game));
+            GameComponents.Add(new ScoreLabel(PlayerIndex.Three, new Rectangle(1870, 10, 40, 40), Game));
+            GameComponents.Add(new ScoreLabel(PlayerIndex.Four, new Rectangle(1870, 1030, 40, 40), Game));
             // Audio
             Library.Audio.PlaySong(Library.Audio.Songs.GameSong3);
+
+            _map.LoadMap(game, playerinfo); // send in player information
+
+            foreach (var ob in SyncedGameCollection.ComponentCollection)
+            {
+                if (ob is Goal)
+                {
+                    (ob as Goal).Scored += GameScreen_Scored;
+                }
+            }
         }
 
         void GameScreen_Scored(PlayerIndex playerIndex)
@@ -71,19 +79,6 @@ namespace Synced.Interface
             }
         }
 
-        public void InitializeGameScreen(Game game, List<Library.Character.Name> playerinfo) // Send in playerinformation
-        {
-            _map.LoadMap(game, playerinfo); // send in player information
-
-            // Add score event
-            foreach (var ob in SyncedGameCollection.ComponentCollection)
-            {
-                if (ob is Goal)
-                {
-                    (ob as Goal).Scored += GameScreen_Scored;
-                }
-            }
-        }
         public override void Initialize()
         {
             base.Initialize();
