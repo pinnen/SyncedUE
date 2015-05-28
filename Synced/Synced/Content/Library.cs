@@ -134,21 +134,21 @@ namespace Synced.Content
                 #region Colors
                 Colors.getColor = new Dictionary<Tuple<Colors.ColorName, Colors.ColorVariation>, Color>() 
                 {
-                    {Tuple.Create(Colors.ColorName.Blue,Colors.ColorVariation.Left),Color.Blue},
-                    {Tuple.Create(Colors.ColorName.Blue,Colors.ColorVariation.Right),Color.DarkBlue},
-                    {Tuple.Create(Colors.ColorName.Blue,Colors.ColorVariation.Other),new Color(0, 0, 180, 255)},
+                    {Tuple.Create(Colors.ColorName.Blue,Colors.ColorVariation.Left), new Color(50, 199, 201, 255)}, // Left
+                    {Tuple.Create(Colors.ColorName.Blue,Colors.ColorVariation.Right),new Color(33, 144, 143, 255)}, // Right
+                    {Tuple.Create(Colors.ColorName.Blue,Colors.ColorVariation.Other),new Color(160, 235, 233, 255)},// Other
 
-                    {Tuple.Create(Colors.ColorName.Green,Colors.ColorVariation.Left),new Color(0, 255, 0, 255)},
-                    {Tuple.Create(Colors.ColorName.Green,Colors.ColorVariation.Right),new Color(0, 139, 0, 255)},
-                    {Tuple.Create(Colors.ColorName.Green,Colors.ColorVariation.Other),new Color(0, 180, 0, 255)},
+                    {Tuple.Create(Colors.ColorName.Green,Colors.ColorVariation.Left),new Color(135, 236, 125, 255)},
+                    {Tuple.Create(Colors.ColorName.Green,Colors.ColorVariation.Right),new Color(86, 184, 76, 255)},
+                    {Tuple.Create(Colors.ColorName.Green,Colors.ColorVariation.Other),new Color(146, 211, 141, 255)},
 
-                    {Tuple.Create(Colors.ColorName.Red,Colors.ColorVariation.Left),Color.Red},
-                    {Tuple.Create(Colors.ColorName.Red,Colors.ColorVariation.Right),Color.DarkRed},
-                    {Tuple.Create(Colors.ColorName.Red,Colors.ColorVariation.Other),new Color(180, 0, 0, 255)},
+                    {Tuple.Create(Colors.ColorName.Red,Colors.ColorVariation.Left), new Color(231, 112, 75, 255)},
+                    {Tuple.Create(Colors.ColorName.Red,Colors.ColorVariation.Right),new Color(172, 76, 34, 255)},
+                    {Tuple.Create(Colors.ColorName.Red,Colors.ColorVariation.Other),new Color(234, 179, 158, 255)},
 
-                    {Tuple.Create(Colors.ColorName.Yellow,Colors.ColorVariation.Left),Color.Yellow},
-                    {Tuple.Create(Colors.ColorName.Yellow,Colors.ColorVariation.Right),new Color(139, 139, 0, 255)},
-                    {Tuple.Create(Colors.ColorName.Yellow,Colors.ColorVariation.Other),new Color(180, 180, 0, 255)},
+                    {Tuple.Create(Colors.ColorName.Yellow,Colors.ColorVariation.Left), new Color(241, 239, 90, 255)},
+                    {Tuple.Create(Colors.ColorName.Yellow,Colors.ColorVariation.Right),new Color(236, 215, 40, 255)},
+                    {Tuple.Create(Colors.ColorName.Yellow,Colors.ColorVariation.Other),new Color(224, 221, 7, 255)},
                 };
                 #endregion
                 #region SplashScreen
