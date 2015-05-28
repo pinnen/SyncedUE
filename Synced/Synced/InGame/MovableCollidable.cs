@@ -29,6 +29,16 @@ namespace Synced.InGame
             get { return direction; } 
             set { direction = value;} 
         }
+        public float Acceleration 
+        {
+            get { return acceleration; }
+            set { acceleration = value; }
+        }
+        public Vector2 LinearVelocity 
+        {
+            get { return RigidBody.LinearVelocity;}
+            set { RigidBody.LinearVelocity = value; }
+        }
         #endregion
 
         /// <summary>

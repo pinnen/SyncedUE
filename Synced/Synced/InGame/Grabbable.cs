@@ -159,7 +159,7 @@ namespace Synced.InGame
         // IVictim
         float _circleEffectTimer = 0.0f;
         float _triangleEffectTimer = 0.12f;
-        float _hexagonEffectTimer = 0.0f;
+        float _hexagonEffectTimer = 0.4f;
         float _pentagonEffectTimer = 0.12f;
         bool _fadeOut = false;
 
@@ -174,5 +174,6 @@ namespace Synced.InGame
         public float LocalTimeScale { get { return accelerationScaling; } set { accelerationScaling = value; } }
         public float InvisibilityAlpha { get { return this.Alpha; } set { this.Alpha = value; } }
         public ParticleEngine TrailEngine { get { return _tail; } }
+        public Vector2 VictimLinearVelocity { get { return LinearVelocity; } }
     }
 }

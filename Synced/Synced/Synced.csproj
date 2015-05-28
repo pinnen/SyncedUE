@@ -50,6 +50,8 @@
     <Compile Include="InGame\Actors\CompactZone.cs" />
     <Compile Include="InGame\Actors\Particle.cs" />
     <Compile Include="InGame\Actors\Zones\CircleZone.cs" />
+    <Compile Include="InGame\Actors\Zones\EvilCrystal.cs" />
+    <Compile Include="InGame\Actors\Zones\EvilUnit.cs" />
     <Compile Include="InGame\Actors\Zones\HexagonZone.cs" />
     <Compile Include="InGame\Actors\Zones\PentagonZone.cs" />
     <Compile Include="InGame\Actors\Zones\SquareZone.cs" />
