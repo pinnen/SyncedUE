@@ -321,14 +321,5 @@ namespace Synced.Actors
                 
             }
         }
-<<<<<<< HEAD
-=======
-
-        //public Library.Colors.ColorName TeamColor 
-        //{
-        //    get { return _teamColor; }
-        //    //set { _teamColor = value; }
-        //}
->>>>>>> origin/master
     }
 }
