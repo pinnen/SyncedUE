@@ -47,7 +47,6 @@ Game Beginning:       The game starts with a menu screen; here each player selec
                                                                                  all moving the same way but after a few seconds all but one will disappear.
                                 Pentagon          Secret Penterrorist            Captured player is made invisible but continues anyhow to be controlled and moved,
                                                                                  after a few seconds it reappears.
-                                Square            Square Prison                  Captured player is stuck inside the box.
                                 Triangle          Bermuda Triangle               Captured player disappears and the reappears somewhere else.
                         (3) Click on button A again to confirm the selected icon.
                         (4) When all players have done the selection, the game will begin when player 1 clicks on the small Xbox Start-button.
@@ -68,7 +67,8 @@ Game Mischiefs:       Control your two icons in selected patterns and there is a
 
 Game Patterns:        The game pattern detection is active when the Power-Up control (Xbox Left/Right Trigger) is pressed - indication: the icons have "smoke"-exhaust.
                       Speed-up            - make your two icons go closely in parallel.
-                      Create Zone Bomb    - make one icon tightly circle your other icon and a new bomb is created and picked-upped by circled icon.
+                      Create Zone Bomb    - by pressing the B-button on the controller, a compact zone will appear between you icons that can be picked up and shot to create a zone.
+					    After you have created a compact zone there will be a cooldown for 10 seconds before you can make a new one.
                       Create Capture Net  - make your two icons cross at an angle and you will get a net between your icons. 
                                             The net will persist until your icons get too far apart. The net is useful for capturing the crystal.
 
@@ -79,6 +79,7 @@ Overview Xbox Controller usage:
 See also: http://en.wikipedia.org/wiki/Xbox_360_Controller
 
 Button A                   -  Start/Confirm icon/zone selection
+Button B		   -  Create a compact zone
 Button Start               -  Starts the game (only in player 1 controller)
 Button Back                -  Ends the game unconditionally.
 Left Thumbstick            -  Controls first Icon    (angle = speed, direction = direction)

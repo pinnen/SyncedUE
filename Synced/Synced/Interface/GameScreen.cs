@@ -35,11 +35,13 @@ namespace Synced.Interface
 
             _map = new Map(Library.Map.Path[Library.Map.Name.Paper], game, world);
             GameComponents.Add(_map);
+
+            Rectangle[] rectangles = new Rectangle[] { new Rectangle(20, 20, 40, 40), new Rectangle(1860, 20, 40, 40),new Rectangle(20, 1020, 40, 40), new Rectangle(1860, 1020, 40, 40) };
             // Controls
-            GameComponents.Add(new ScoreLabel(PlayerIndex.One, new Rectangle(20, 20, 40, 40), Game));
-            GameComponents.Add(new ScoreLabel(PlayerIndex.Two, new Rectangle(20, 1020, 40, 40), Game));
-            GameComponents.Add(new ScoreLabel(PlayerIndex.Three, new Rectangle(1860, 20, 40, 40), Game));
-            GameComponents.Add(new ScoreLabel(PlayerIndex.Four, new Rectangle(1860, 1020, 40, 40), Game));
+            for (int i = 0; i < playerinfo.Count; i++)
+            {
+                GameComponents.Add(new ScoreLabel((PlayerIndex)i, rectangles[i], Game));
+            }
             // Audio
             Library.Audio.PlaySong(Library.Audio.Songs.GameSong3);
 
