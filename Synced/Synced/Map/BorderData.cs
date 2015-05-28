@@ -11,7 +11,7 @@ using System.Text;
 namespace Synced.MapNamespace
 {
     [Serializable]
-    class BorderData : MapObjectData
+    public class BorderData : MapObjectData
     {
         public override GameComponent GetComponent(Game game, World world)
         {

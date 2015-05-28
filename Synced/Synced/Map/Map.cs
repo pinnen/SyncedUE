@@ -71,7 +71,7 @@ namespace Synced.MapNamespace
             World = world;
         }
 
-        public void LoadMap(Game game) // playerData
+        public void LoadMap(Game game, List<Library.Character.Name> playerinfo) // playerData
         {
             //Process data
             foreach (var mapObject in Data.Objects)
@@ -79,6 +79,10 @@ namespace Synced.MapNamespace
                 if (mapObject is CrystalSpawnData)
                 {
                     crystalSpawnList.Add((CrystalSpawnData)mapObject);
+                    if (crystalSpawnList[crystalSpawnList.Count - 1].IsStart)
+                    {
+                        CrystalStartIndex = crystalSpawnList.Count - 1;
+                    }
                 }
                 if (mapObject is PlayerStartData)
                 {
@@ -89,6 +93,7 @@ namespace Synced.MapNamespace
                     SyncedGameCollection.ComponentCollection.Add(mapObject.GetComponent(game, World));
                 }
             }
+            SetupPlayers(playerinfo);
         }
         public void ClearData()
         {
@@ -96,17 +101,12 @@ namespace Synced.MapNamespace
             playerStartData.Clear();
         }
 
-        private void SetupPlayer()
+        private void SetupPlayers(List<Library.Character.Name> playerinfo)
         {
-            //foreach (var item in _map.Data.Objects)
-            //{
-            //    if (item is PlayerStart)
-            //    {
-            //        PlayerStart temp = item as PlayerStart;
-
-            //        _players.Add(new Player(temp.PlayerIndex, Library.Character.Name.Circle, Library.Colors.ColorName.Blue, game, _map.World)); // TODO: All collision objects need world!
-            //    }
-            //}
+            for (int i = 0; i < playerinfo.Count; i++)
+            {
+                SyncedGameCollection.ComponentCollection.Add(new Player(playerStartData[i].PlayerIndex, playerinfo[i], (Library.Colors.ColorName)i, Game, World)); //TODO: get color from menuscreen
+            }
         }
     }
 }

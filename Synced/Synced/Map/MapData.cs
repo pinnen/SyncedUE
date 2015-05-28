@@ -20,7 +20,8 @@ namespace Synced.MapNamespace
         List<MapObjectData> _objects;
 
         [XmlElement(typeof(PlayerStartData))]
-        [XmlElement(typeof(ObstacleData))]
+        [XmlElement(typeof(CrystalSpawnData))]
+        [XmlElement(typeof(BorderData))]
         [XmlElement(typeof(GoalData))]
         [XmlElement(typeof(MapObjectData))]
         public List<MapObjectData> Objects
@@ -42,8 +43,7 @@ namespace Synced.MapNamespace
                 PlayerIndex = PlayerIndex.One,
                 Position = new Vector2(400, 400),
                 Position2 = new Vector2(400, 450),
-                Rotation = 0
-                
+                Rotation = 0,
             });
             _objects.Add(new PlayerStartData()
             {
@@ -52,8 +52,7 @@ namespace Synced.MapNamespace
                 PlayerIndex = PlayerIndex.Two,
                 Position = new Vector2(1920 - 400, 400),
                 Position2 = new Vector2(1920 - 400, 450),
-                Rotation = 0
-
+                Rotation = 0,
             });
             _objects.Add(new PlayerStartData()
             {
@@ -62,8 +61,7 @@ namespace Synced.MapNamespace
                 PlayerIndex = PlayerIndex.Three,
                 Position = new Vector2(400, 1080 - 400),
                 Position2 = new Vector2(400, 1080 - 450),
-                Rotation = 0
-
+                Rotation = 0,
             });
             _objects.Add(new PlayerStartData()
             {
@@ -71,9 +69,8 @@ namespace Synced.MapNamespace
                 drawingLevel = 3,
                 PlayerIndex = PlayerIndex.Four,
                 Position = new Vector2(1920 - 400, 1080 - 400),
-                Position2 = new Vector2(190 - 400, 1080 - 450),
-                Rotation = 0
-
+                Position2 = new Vector2(1920 - 400, 1080 - 450),
+                Rotation = 0,
             });
             #endregion
 
@@ -83,35 +80,35 @@ namespace Synced.MapNamespace
                 TexturePath = "",
                 drawingLevel = 3,
                 Position = new Vector2(1920 / 2, 1080 / 2),
-                IsStart = false
+                IsStart = true,
             });
             _objects.Add(new CrystalSpawnData()
             {
                 TexturePath = "",
                 drawingLevel = 3,
                 Position = new Vector2(1920 / 2, 1080 / 2),
-                IsStart = false
+                IsStart = false,
             });
             _objects.Add(new CrystalSpawnData()
             {
                 TexturePath = "",
                 drawingLevel = 3,
                 Position = new Vector2(1920 / 2, 1080 / 2),
-                IsStart = false
+                IsStart = false,
             });
             _objects.Add(new CrystalSpawnData()
             {
                 TexturePath = "",
                 drawingLevel = 3,
                 Position = new Vector2(1920 / 2, 1080 / 2),
-                IsStart = false
+                IsStart = false,
             });
             _objects.Add(new CrystalSpawnData()
             {
                 TexturePath = "",
                 drawingLevel = 3,
                 Position = new Vector2(1920 / 2, 1080 / 2),
-                IsStart = false
+                IsStart = false,
             });
             #endregion
 
@@ -120,13 +117,13 @@ namespace Synced.MapNamespace
             {
                 Position = new Vector2(129, 111),
                 TexturePath = "Maps/Paper/background",
-                drawingLevel = 1
+                drawingLevel = 1,
             });
             _objects.Add(new BorderData()
             {
                 Position = new Vector2(1920 / 2, 1080 / 2),
                 TexturePath = "Maps/Paper/Frame2",
-                drawingLevel = 3
+                drawingLevel = 3,
             });
             #endregion
 
@@ -136,14 +133,16 @@ namespace Synced.MapNamespace
                 Position = new Vector2(300, 1080 / 2),
                 TexturePath = "Maps/Paper/Goal",
                 Texture2Path = "Gameobjects/GoalBorder",
-                Direction = GoalDirections.West
+                drawingLevel = 3,
+                Direction = GoalDirections.West,
             });
             _objects.Add(new GoalData()
             {
                 Position = new Vector2(1920 - 300, 1080 / 2),
                 TexturePath = "GameObjects/Goal",
                 Texture2Path = "GameObjects/GoalBorder",
-                Direction = GoalDirections.East
+                drawingLevel = 3,
+                Direction = GoalDirections.East,
             });
             #endregion
         }

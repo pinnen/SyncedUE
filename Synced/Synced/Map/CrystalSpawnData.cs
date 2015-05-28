@@ -13,14 +13,9 @@ using System.Xml.Serialization;
 namespace Synced.MapNamespace
 {
     [Serializable]
-    class CrystalSpawnData : MapObjectData
+    public class CrystalSpawnData : MapObjectData
     {
         [XmlElement("IsStart")]
         public bool IsStart;
-   
-        public override GameComponent GetComponent(Game game, World world)
-        {
-            return new Sprite(game.Content.Load<Texture2D>(TexturePath), Position, (DrawingHelper.DrawingLevel)drawingLevel, game);
-        }
     }
 }

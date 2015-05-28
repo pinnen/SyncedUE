@@ -49,7 +49,7 @@ namespace Synced
         protected override void Initialize()
         {
             //MapData tmp = new MapData();
-            //Library.Serialization<MapData>.SerializeToXmlFile(tmp, "mapData");
+            //Library.Serialization<MapData>.SerializeToXmlFile(tmp, "map");
 
             // Initialize resolution and scaling
             ResolutionManager.Init(ref _graphics);

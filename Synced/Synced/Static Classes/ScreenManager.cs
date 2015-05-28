@@ -195,6 +195,7 @@ namespace Synced.Static_Classes
 
             _screenManager.Screens.Peek().Deactivated();
             _screenManager.AddScreen(GameScreen);
+            (Screens.Peek() as GameScreen).InitializeGameScreen(Game, screen.SelectedCharacter);
             CurrentState = ScreenState.GameScreen;
         }
         public void HandleBackEvent()
