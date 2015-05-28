@@ -66,11 +66,9 @@ namespace Synced.Interface
                         {
                             if (crys is Crystal)
                             {
-
                                 //(crys as Crystal).RandomPosition();
 
                                 int rnd = new Random().Next(0,Map.crystalSpawnList.Count);
-
                                 (crys as Crystal).DeactivateCrystal(Map.crystalSpawnList[rnd].Position);
                                 break;
 

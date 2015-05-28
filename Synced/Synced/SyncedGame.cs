@@ -46,8 +46,8 @@ namespace Synced
         /// </summary>
         protected override void Initialize()
         {
-            MapData tmp = new MapData();
-            Library.Serialization<MapData>.SerializeToXmlFile(tmp, "map");
+            //MapData tmp = new MapData();
+            //Library.Serialization<MapData>.SerializeToXmlFile(tmp, "map");
 
             // Initialize resolution and scaling
             ResolutionManager.Init(ref _graphics);

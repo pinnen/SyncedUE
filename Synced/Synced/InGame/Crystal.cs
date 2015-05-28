@@ -61,9 +61,9 @@ namespace Synced.InGame
             base.Update(gameTime);
         }
 
-        public PlayerIndex GetPlayerIndex()
+        public PlayerIndex GetPlayerIndex() // TODO: fix this
         {
-            return PreviousOwner.PlayerIndex;
+                return PreviousOwner.PlayerIndex;
         }
 
         public void ChangeColor(Color newColor) 
