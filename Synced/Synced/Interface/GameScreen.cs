@@ -123,6 +123,7 @@ namespace Synced.Interface
             Library.Colors.ColorName color = Library.Colors.ColorName.Blue;
             if (Winner(ref color))
             {
+                GameEnded(color, new EventArgs());
             }
 
             base.Update(gameTime);

@@ -133,14 +133,14 @@ namespace Synced.Static_Classes
         {
             if (Initialized)
             {
-                if (ScreenManager.Instance.Screens.Count < 1)
-                {
-                    //If we have no more screens we add a menu screen to back it up.
-                    ScreenManager.Instance.AddScreen(Instance.MenuScreen);
-                    ScreenManager.Instance.Screens.Peek().Activated();
-                    ScreenManager.Instance.CurrentState = ScreenState.MenuScreen;
-                    return null;
-                }
+                //if (ScreenManager.Instance.Screens.Count < 1)
+                //{
+                //    //If we have no more screens we add a menu screen to back it up.
+                //    ScreenManager.Instance.AddScreen(Instance.MenuScreen);
+                //    ScreenManager.Instance.Screens.Peek().Activated();
+                //    ScreenManager.Instance.CurrentState = ScreenState.MenuScreen;
+                //    return null;
+                //}
                 ScreenManager.Instance.Screens.Peek().Deactivated(); //NOT SURE WHAT TO DO HERE.
                 Screen prev = ScreenManager.Instance.Screens.Pop(); // RETURN OR NOT RETURN IS THE QUESTION
                 if (CurrentScreen != null)
@@ -182,7 +182,13 @@ namespace Synced.Static_Classes
         private void Screen_OnScreenExit(Screen screen, EventArgs e)
         {
             Pop();
-            if (Screens.Count <= 1)
+            if (Screens.Count < 1)
+            {
+                CurrentState = ScreenState.MenuScreen;
+                AddScreen(new MenuScreen(Game));
+                Screens.Peek().Activated();
+            }
+            else if (Screens.Count == 1)
             {
                 CurrentState = ScreenState.MenuScreen;
             }
@@ -196,16 +202,16 @@ namespace Synced.Static_Classes
 
         private void NewGameEvent(MenuScreen screen, EventArgs e)
         {
-            _screenManager.Screens.Peek().Deactivated();
+            _screenManager.Screens.Pop();
             _screenManager.AddScreen(new GameScreen(Game,screen.SelectedCharacter));
             (Screens.Peek() as GameScreen).GameEnded += ScreenManager_GameEnded;
             CurrentState = ScreenState.GameScreen;
         }
 
-        void ScreenManager_GameEnded(Actors.Player player, EventArgs e)
+        void ScreenManager_GameEnded(Library.Colors.ColorName color, EventArgs e)
         {
             Pop();
-            AddScreen(new WinScreen(Game, player));
+            AddScreen(new WinScreen(Game, color));
             Screens.Peek().Activated();
         }
 

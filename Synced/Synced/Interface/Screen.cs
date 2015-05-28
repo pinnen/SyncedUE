@@ -5,6 +5,7 @@
 // Robin Calmegård
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Synced.Content;
 using Synced.InGame;
 using Synced.Static_Classes;
 using System;
@@ -26,7 +27,7 @@ namespace Synced.Interface
         //Special event for new game 
         public delegate void StartNewGame(MenuScreen screen, EventArgs e);
 
-        public delegate void EndGame(Actors.Player player, EventArgs e);
+        public delegate void EndGame(Library.Colors.ColorName color, EventArgs e);
 
         public event OnScreenActivateEventHandler OnActivated;
         public event OnScreenDeactivateEventHandler OnDeactivated;
