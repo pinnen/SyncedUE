@@ -238,7 +238,7 @@ namespace Synced.Content
 
         public static class Colors
         {
-            public enum ColorName {Blue, Green, Red, Yellow }
+            public enum ColorName {Red,Blue,Green,Yellow }
             public enum ColorVariation { Left, Right, Other }
             public static Dictionary<Tuple<ColorName, ColorVariation>,Color> getColor;
 

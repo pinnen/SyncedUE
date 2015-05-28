@@ -87,7 +87,7 @@ namespace Synced.Actors
                         _particleEffects.GenerateClusterParticles();
                         _particleEffects.ShatterParticles(50,15);
                         _particleEffects.ExpandAndRotate();
-                        _particleEffects.SetParticleEngineOneShot(4);
+                        
 
                         _zoneState = ZoneState.Delete;
                         _timeSinceSpawn = 0;
@@ -95,6 +95,7 @@ namespace Synced.Actors
                     break;
                 case ZoneState.Delete:
                     //_timeSinceSpawn
+                    RigidBody.Dispose();
                     this.Delete();
                     
                     break;
@@ -107,10 +108,7 @@ namespace Synced.Actors
 
         public virtual void Delete() 
         {
-            world.RemoveBody(RigidBody);
-            
-            //SyncedGameCollection.ComponentCollection.Remove(_particleEffects);
-            SyncedGameCollection.ComponentCollection.Remove(this);      
+            SyncedGameCollection.ComponentCollection.Remove(this);
         }
 
     }

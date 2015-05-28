@@ -24,9 +24,7 @@ namespace Synced.InGame.Actors
         Random random;
         Game game;
         Texture2D _particleTexture;
-        bool isOneShot;
-        float OneShotLifeTime;
-        float OneShotElapsedTimeStart;
+
 
         //Data for particles:
         Vector2 _particlePosition;
@@ -70,7 +68,6 @@ namespace Synced.InGame.Actors
             _particleOrigin.Y = _particleTexture.Height / 2;
             this.game = game;
             dLevel = drawingLevel;
-            isOneShot = false;
         }
         #endregion
 
@@ -86,7 +83,27 @@ namespace Synced.InGame.Actors
             _particlePosition = newPosition;
         }
 
+        public override void Update(GameTime gameTime)
+        {
 
+            float elapsedTime = (float)gameTime.ElapsedGameTime.TotalSeconds; //TODO: gångra med timescalevariabel? Se gamla koden.
+
+            for (int i = 0; i < _particles.Count; i++)
+            {
+                if (!_particles[i].IsDead) // Update particle if it's alive.
+                {
+                    _particles[i].Update(elapsedTime);
+                }
+                else
+                {
+                    _particles[i].Sleep();
+                    _sleepingParticles.Enqueue(_particles[i]); // Add particle to sleeping queue
+                    _particles.RemoveAt(i);
+                }
+            }
+            
+            base.Update(gameTime);
+        }
         /// <summary>
         /// Starts the particle engine for trails.
         /// </summary>
@@ -253,6 +270,7 @@ namespace Synced.InGame.Actors
         {
             ExpandAndRotate(5.0f, 5.0f);
         }
+
         public void ExpandAndRotate(float rotation, float expansion)
         {
             foreach (Particle p in _particles)
@@ -261,6 +279,7 @@ namespace Synced.InGame.Actors
                 p.Scale += expansion;
             }
         }
+
         public void AddOffset(Vector2 positionOffset) 
         {
             foreach (Particle p in _particles)
@@ -268,6 +287,7 @@ namespace Synced.InGame.Actors
                 p.pPosition += positionOffset;
             }
         }
+
         public void SetParticleFadeAlpha(float alpha) 
         {
             for (int i = 0; i < _particles.Count; i++)
@@ -281,78 +301,13 @@ namespace Synced.InGame.Actors
             
         }
 
-        public override void Update(GameTime gameTime)
-        {
-            float elapsedTime = (float)gameTime.ElapsedGameTime.TotalSeconds; //TODO: gångra med timescalevariabel? Se gamla koden.
-            
-            for (int i = 0; i < _particles.Count; i++)
-            {
-                if (!_particles[i].IsDead) // Update particle if it's alive.
-                {
-                    _particles[i].Update(elapsedTime);
-                }
-                else
-                {
-                    _particles[i].Sleep();
-                    _sleepingParticles.Enqueue(_particles[i]); // Add particle to sleeping queue
-                    _particles.RemoveAt(i);
-                }
-            }
 
-            if (isOneShot)
-            {
-                OneShotLifeTime -= (float)gameTime.ElapsedGameTime.TotalSeconds;
-                if (OneShotLifeTime <= 0)
-                {
-                    Delete();
-                }
-            }
-
-            base.Update(gameTime);
-        }
         public override void Draw(GameTime gameTime)
         {
-            //for (int i = 0; i < _particles.Count; i++)
-            //{
-            //    _particles[i].Draw(gameTime);
-            //}           
-        }
-
-        public void SetParticleEngineOneShot(float _timeSeconds)
-        {
-            OneShotLifeTime = _timeSeconds;
-            isOneShot = true;
-        }
-        private void Delete()
-        {
-            // delete all particles
-            while (_particles.Count > 0)
+            for (int i = 0; i < _particles.Count; i++)
             {
-                SyncedGameCollection.ComponentCollection.Remove(_particles[0]);
-                _particles.RemoveAt(0);
-            }
-            foreach (Particle p in _sleepingParticles)
-            {
-                SyncedGameCollection.ComponentCollection.Remove(p);
-            }
-            _particles.Clear();
-            _sleepingParticles.Clear();
-            SyncedGameCollection.ComponentCollection.Remove(this);
-        }
-        public void DeleteParticleEngine()
-        {
-            // delete all particles
-            while (_particles.Count > 0)
-            {
-                SyncedGameCollection.ComponentCollection.Remove(_particles[0]);
-                _particles.RemoveAt(0);
-            }
-            foreach (Particle p in _sleepingParticles)
-            {
-                SyncedGameCollection.ComponentCollection.Remove(p);
-            }
-            _particles.Clear();
-            _sleepingParticles.Clear();
+                _particles[i].Draw(gameTime);
+            }           
         }
 
         #endregion

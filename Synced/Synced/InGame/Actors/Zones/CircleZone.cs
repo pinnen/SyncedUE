@@ -69,10 +69,5 @@ namespace Synced.InGame.Actors.Zones
             victim.LocalTimeScale = 1.0f;
         }
 
-        public override void Delete()
-        {
-            _victimParticles.DeleteParticleEngine();
-            base.Delete();
-        }
     }
 }

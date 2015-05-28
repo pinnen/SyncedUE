@@ -76,8 +76,9 @@ namespace Synced.InGame.Actors
 
         public void Detonate() 
         {
-            world.RemoveBody(RigidBody);
             SyncedGameCollection.ComponentCollection.Remove(this);
+            
+            
         }
     }
 }
