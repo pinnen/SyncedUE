@@ -31,9 +31,14 @@ namespace Synced.InGame
         #endregion
 
         #region Properties
-        public MovableCollidable Owner
+        public Unit Owner
         {
             get { return owner; }
+        }
+        public Unit PreviousOwner
+        {
+            get;
+            set;
         }
         public bool HasOwner
         {
@@ -94,6 +99,7 @@ namespace Synced.InGame
 
         public virtual void Release()
         {
+            PreviousOwner = owner;
             owner = null;
             maxAcceleration = 20;
         }

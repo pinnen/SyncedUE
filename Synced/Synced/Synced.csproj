@@ -58,14 +58,13 @@
     <Compile Include="InGame\Actors\Zones\TriangleZone.cs" />
     <Compile Include="InGame\Crystal.cs" />
     <Compile Include="InGame\IActive.cs" />
-    <Compile Include="InGame\ICollidable.cs" />
     <Compile Include="InGame\Grabbable.cs" />
     <Compile Include="InGame\IVictim.cs" />
     <Compile Include="InGame\Movable.cs" />
     <Compile Include="InGame\MovableCollidable.cs" />
     <Compile Include="Interface\ExitScreen.cs" />
+    <Compile Include="Interface\Label.cs" />
     <Compile Include="Interface\LoadingScreen.cs" />
-    <Compile Include="Interface\Text.cs" />
     <Compile Include="Content\Library.cs" />
     <Compile Include="InGame\Actors\Ability.cs" />
     <Compile Include="InGame\Actors\ParticleEngine.cs" />
@@ -73,6 +72,7 @@
     <Compile Include="InGame\Actors\Unit.cs" />
     <Compile Include="InGame\Actors\Zone.cs" />
     <Compile Include="InGame\Actors\Sprite.cs" />
+    <Compile Include="Interface\ScoreLabel.cs" />
     <Compile Include="Interface\SplashScreen.cs" />
     <Compile Include="Interface\WinScreen.cs" />
     <Compile Include="Map\BorderData.cs" />
@@ -90,7 +90,6 @@
     <Compile Include="Interface\IDrawableObject.cs" />
     <Compile Include="Interface\MenuScreen.cs" />
     <Compile Include="Interface\Screen.cs" />
-    <Compile Include="Interface\Button.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Static Classes\DebuggingHelper.cs" />
     <Compile Include="Static Classes\DrawingHelper.cs" />

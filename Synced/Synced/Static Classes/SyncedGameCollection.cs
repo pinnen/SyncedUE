@@ -68,8 +68,6 @@ namespace Synced.Static_Classes
 
         public override void Update(GameTime gameTime)
         {
-
-
             //Updates every component in GameComponents
             foreach (IUpdateable gc in ComponentCollection.OfType<IUpdateable>().Where<IUpdateable>(x => x.Enabled).OrderBy<IUpdateable, int>(x => x.UpdateOrder))
                 gc.Update(gameTime);

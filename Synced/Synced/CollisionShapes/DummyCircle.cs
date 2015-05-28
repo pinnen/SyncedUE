@@ -25,6 +25,11 @@ namespace Synced.CollisionShapes
             Origin = new Vector2(r, r);
         }
 
+        public void SetTag(TagCategories tag)
+        {
+            Tag = tag;
+        }
+
         public void setOnCollisionFunction(OnCollisionEventHandler onCollisionFunc)
         {
             RigidBody.OnCollision += onCollisionFunc;
@@ -42,7 +47,7 @@ namespace Synced.CollisionShapes
 
         public override void Draw(GameTime gameTime)
         {
-            // do nothing. 
+            // NO BASE CALL
         }
     }
 }

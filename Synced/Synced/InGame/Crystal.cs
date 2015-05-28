@@ -44,6 +44,10 @@ namespace Synced.InGame
 
             base.Update(gameTime);
         }
+        public PlayerIndex GetPlayerIndex()
+        {
+            return PreviousOwner.PlayerIndex;
+        }
 
         public void ChangeColor(Color newColor) 
         {
@@ -55,9 +59,5 @@ namespace Synced.InGame
             this.Color = Color.White;
             _tail.ParticleColor = Color.LightGray;
         }
-
-
-        
-
     }
 }
