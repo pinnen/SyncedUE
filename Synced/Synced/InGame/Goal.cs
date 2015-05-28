@@ -101,9 +101,11 @@ namespace Synced.MapNameSpace
             CollidingSprite crystal = SyncedGameCollection.GetCollisionComponent(f2);
 
             if (crystal.Tag == TagCategories.CRYSTAL)
-            {   
+            {
                 if (Scored != null)
+                {
                     Scored((crystal as Crystal).GetPlayerIndex());
+                }
                 return false;
             }
             return true;

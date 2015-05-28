@@ -62,16 +62,13 @@ namespace Synced.Interface
                         (ob as ScoreLabel).IncreaseScore();
 
                         // Move Crystal
-                        foreach (var crys in GameComponents)
+                        foreach (var crys in SyncedGameCollection.ComponentCollection)
                         {
                             if (crys is Crystal)
                             {
-<<<<<<< HEAD
                                 int rnd = new Random().Next(0,Map.crystalSpawnList.Count);
-                                (crys as Crystal).SetPosition(Map.crystalSpawnList[rnd].Position);
-=======
-                                //(crys as Crystal).RandomPosition();
->>>>>>> origin/master
+                                (crys as Crystal).DeactivateCrystal(Map.crystalSpawnList[rnd].Position);
+                                break;
                             }
                         }
 
@@ -113,7 +110,6 @@ namespace Synced.Interface
         public override void Update(GameTime gameTime)
         {
             world.Step(Math.Min((float)gameTime.ElapsedGameTime.TotalSeconds, (1f / 30f)));
-
 
             base.Update(gameTime);
         }
