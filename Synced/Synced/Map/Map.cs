@@ -40,10 +40,15 @@ namespace Synced.MapNamespace
             get;
             set;
         }
+        public static List<CrystalSpawnData> CrystalSpawnList
+        {
+            get { return crystalSpawnList; }
+        }
         #endregion
 
         public Map(string path, Game game, World world) : base (game)
         {
+            /* Set up data containers */
             if (crystalSpawnList == null)
             {
                 crystalSpawnList = new List<CrystalSpawnData>();
@@ -85,15 +90,23 @@ namespace Synced.MapNamespace
                 }
             }
         }
-        private void SetupPlayer()
-        { 
-        
-        }
-        
         public void ClearData()
         {
             crystalSpawnList.Clear();
             playerStartData.Clear();
+        }
+
+        private void SetupPlayer()
+        {
+            //foreach (var item in _map.Data.Objects)
+            //{
+            //    if (item is PlayerStart)
+            //    {
+            //        PlayerStart temp = item as PlayerStart;
+
+            //        _players.Add(new Player(temp.PlayerIndex, Library.Character.Name.Circle, Library.Colors.ColorName.Blue, game, _map.World)); // TODO: All collision objects need world!
+            //    }
+            //}
         }
     }
 }

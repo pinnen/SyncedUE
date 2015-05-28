@@ -14,7 +14,7 @@ using System.Xml.Serialization;
 namespace Synced.MapNamespace
 {
     [Serializable]
-    public class GoalData : ObstacleData
+    public class GoalData :MapObjectData
     {
         [XmlElement("Direction")]
         public GoalDirections Direction;

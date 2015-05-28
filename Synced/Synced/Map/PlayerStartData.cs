@@ -26,7 +26,7 @@ namespace Synced.MapNamespace
         public Vector2 Position2;
 
         // TODO: what should this return? 
-        public virtual GameComponent GetComponent(Game game, World world)
+        public override GameComponent GetComponent(Game game, World world)
         {
             return new Sprite(game.Content.Load<Texture2D>(TexturePath), Position, (DrawingHelper.DrawingLevel)drawingLevel, game);
         }

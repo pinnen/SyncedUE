@@ -23,7 +23,6 @@ namespace Synced.Interface
     class GameScreen : Screen
     {
         Map _map;
-        List<Player> _players;
 
         // TODO: Test objects. Remove later
         World world;
@@ -42,9 +41,9 @@ namespace Synced.Interface
 
             _map = new Map(Library.Map.Path[Library.Map.Name.Paper], game, world);
             GameComponents.Add(_map);
+            
 
-            // TODO: Test objects. Remove later
-           
+            // TODO: Test objects. Remove later       
             background = new Sprite(game.Content.Load<Texture2D>("Maps/Paper/background"), new Vector2(129,111), DrawingHelper.DrawingLevel.Back, game);
             player = new Player(PlayerIndex.One, Library.Character.Name.Triangle, Library.Colors.ColorName.Green, game, world);
             crystal = new Crystal(Library.Crystal.Texture, new Vector2(1920 / 2, 1080 / 2), DrawingHelper.DrawingLevel.Medium, game, world, Color.White);
@@ -57,26 +56,14 @@ namespace Synced.Interface
             SyncedGameCollection.ComponentCollection.Add(crystal);
             SyncedGameCollection.ComponentCollection.Add(frame);
             // End TODO: Test objects. Remove Later
-
-
-            _players = new List<Player>();
-            //foreach (var item in _map.Data.Objects)
-            //{
-            //    if (item is PlayerStart)
-            //    {
-            //        PlayerStart temp = item as PlayerStart;
-
-            //        _players.Add(new Player(temp.PlayerIndex, Library.Character.Name.Circle, Library.Colors.ColorName.Blue, game, _map.World)); // TODO: All collision objects need world!
-            //    }
-            //}
-
+            
             // Audio
             Library.Audio.PlaySong(Library.Audio.Songs.GameSong3);
         }
 
-        public void InitializeGameScreen() // Send in playerinformation
-        { 
-            // init map
+        public void InitializeGameScreen(Game game) // Send in playerinformation
+        {
+            _map.LoadMap(game); // send in player information
         }
 
         public override void Update(GameTime gameTime)
