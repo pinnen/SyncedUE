@@ -50,6 +50,8 @@
     <Compile Include="InGame\Actors\CompactZone.cs" />
     <Compile Include="InGame\Actors\Particle.cs" />
     <Compile Include="InGame\Actors\Zones\CircleZone.cs" />
+    <Compile Include="InGame\Actors\Zones\EvilCrystal.cs" />
+    <Compile Include="InGame\Actors\Zones\EvilUnit.cs" />
     <Compile Include="InGame\Actors\Zones\HexagonZone.cs" />
     <Compile Include="InGame\Actors\Zones\PentagonZone.cs" />
     <Compile Include="InGame\Actors\Zones\SquareZone.cs" />
@@ -62,6 +64,7 @@
     <Compile Include="InGame\Movable.cs" />
     <Compile Include="InGame\MovableCollidable.cs" />
     <Compile Include="Interface\LoadingScreen_2.cs" />
+    <Compile Include="Interface\ExitScreen.cs" />
     <Compile Include="Interface\Text.cs" />
     <Compile Include="Content\Library.cs" />
     <Compile Include="InGame\Actors\Ability.cs" />

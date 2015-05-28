@@ -24,6 +24,7 @@ namespace Synced.InGame
         bool FadeOut { get; set; }
         float InvisibilityAlpha { get; set; }
         ParticleEngine TrailEngine { get; }
+        Vector2 VictimLinearVelocity { get; }
 
     }
 }

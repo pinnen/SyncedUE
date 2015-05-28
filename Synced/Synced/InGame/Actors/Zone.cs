@@ -26,9 +26,9 @@ namespace Synced.Actors
 {
     abstract class Zone : TexturePolygon
     {
-        enum ZoneState { None, Spawn, Active, Despawn, Delete }
+        protected enum ZoneState { None, Spawn, Active, Despawn, Delete }
 
-        ZoneState _zoneState;
+        protected ZoneState _zoneState;
 
         //time
         float _timeSinceSpawn = 0.0f;
@@ -42,7 +42,7 @@ namespace Synced.Actors
         protected List<IVictim> _victims;
 
         public Zone(Texture2D texture, Vector2 position,float rotation, Color color,Game game, World world) 
-            : base(texture,position, rotation ,DrawingHelper.DrawingLevel.Low,game,world,false)
+            : base(texture,position, rotation ,DrawingHelper.DrawingLevel.Medium,game,world,false)
         {
             Color = color;
 
@@ -96,13 +96,19 @@ namespace Synced.Actors
                 case ZoneState.Delete:
                     //_timeSinceSpawn
                     RigidBody.Dispose();
-                    SyncedGameCollection.ComponentCollection.Remove(this);
+                    this.Delete();
+                    
                     break;
                 default:
                     break;
             }
 
             base.Update(gameTime);
+        }
+
+        public virtual void Delete() 
+        {
+            SyncedGameCollection.ComponentCollection.Remove(this);
         }
 
     }

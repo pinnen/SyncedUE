@@ -9,6 +9,7 @@ using Synced.Actors;
 using Synced.Content;
 using Synced.Static_Classes;
 using System;
+using System.Collections.Generic;
 
 namespace Synced.Interface
 {
@@ -23,10 +24,12 @@ namespace Synced.Interface
         #region Variables & Properties
         const int _minimumPlayersConstant = 1;
 
-        SpriteBatch _spriteBatch
-        {
-            get { return (SpriteBatch)Game.Services.GetService(typeof(SpriteBatch)); }
-        }
+        //SpriteBatch _spriteBatch
+        //{
+        //    get { return (SpriteBatch)Game.Services.GetService(typeof(SpriteBatch)); }
+        //}
+
+
         #endregion
         
 
@@ -50,27 +53,44 @@ namespace Synced.Interface
             Library.Audio.PlaySong(Library.Audio.Songs.MenuSong1);
         }
 
+        public int Count
+        {
+            get;
+            private set;
+        }
         public bool IsEveryoneReady()
         {
-            int count = 0;
+            Count = 0;
             foreach (var item in GameComponents)
             {
                 if (item is CharacterSelector)
                 {
                     if ((item as CharacterSelector).IsReady())
-                        count++;
+                        Count++;
                 }
             }
-            return (count >= _minimumPlayersConstant);
+            return (Count >= _minimumPlayersConstant);
         }
+        public List<Library.Character.Name> SelectedCharacter = new List<Library.Character.Name>();
 
         public override void Update(GameTime gameTime)
         {
             if (IsEveryoneReady())
             {
                 if (NewGame != null)
+                {
+                    foreach (var item in GameComponents)
+                    {
+                        if (item is CharacterSelector)
+                            if ((item as CharacterSelector).IsReady())
+                            {
+                                SelectedCharacter.Add((item as CharacterSelector).SelectedCharacter);
+                            }
+                            
+                    }
+         
                     NewGame(this, new EventArgs());
-                
+                }                
             }
             base.Update(gameTime);
         }

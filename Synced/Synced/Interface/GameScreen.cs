@@ -39,7 +39,6 @@ namespace Synced.Interface
         public GameScreen(Game game) // TODO: tmp added world to parameters, might solve in a different way later. 
             : base (game)
         {
-            ScreenManager.Instance.AddScreen(new LoadingScreen(game));
             SyncedGameCollection.InitializeSyncedGameCollection(game);
             GameComponents.Add(SyncedGameCollection.Instance);
 
@@ -49,7 +48,7 @@ namespace Synced.Interface
             // TODO: Test objects. Remove later
             world = new World(Vector2.Zero);
             background = new Sprite(game.Content.Load<Texture2D>("Maps/Paper/background"), new Vector2(129,111), DrawingHelper.DrawingLevel.Back, game);
-            player = new Player(PlayerIndex.One, Library.Character.Name.Triangle, Library.Colors.ColorName.Blue, game, world);
+            player = new Player(PlayerIndex.One, Library.Character.Name.Hexagon, Library.Colors.ColorName.Green, game, world);
             crystal = new Crystal(Library.Crystal.Texture, new Vector2(1920 / 2, 1080 / 2), DrawingHelper.DrawingLevel.Medium, game, world, Color.White);
             goalLeft = new Goal(Library.Goal.GoalTexture, Library.Goal.BorderTexture, new Vector2(300, 1080 / 2), GoalDirections.West, DrawingHelper.DrawingLevel.Medium, game, world);
             goalRight = new Goal(Library.Goal.GoalTexture, Library.Goal.BorderTexture, new Vector2(1920 - 300, 1080 / 2), GoalDirections.East, DrawingHelper.DrawingLevel.Medium, game, world);
@@ -75,7 +74,6 @@ namespace Synced.Interface
             //    }
             //}
 
-            ScreenManager.Pop(); // Pop the Loadingscreen
             // Audio
             Library.Audio.PlaySong(Library.Audio.Songs.GameSong3);
         }
@@ -84,6 +82,16 @@ namespace Synced.Interface
         {
             world.Step(Math.Min((float)gameTime.ElapsedGameTime.TotalSeconds, (1f / 30f)));
             base.Update(gameTime);
+        }
+        protected override void Dispose(bool disposing)
+        {
+            ResetGame();
+            base.Dispose(disposing);
+        }
+        public void ResetGame()
+        {
+            SyncedGameCollection.ComponentCollection.Clear();
+            world.Clear();
         }
     }
 }

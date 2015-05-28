@@ -19,6 +19,7 @@ namespace Synced.InGame
         protected float acceleration;
         protected float maxAcceleration;
         protected float minAcceleration;
+        protected float accelerationScaling;
         float force;                                 
         #endregion
 
@@ -27,6 +28,16 @@ namespace Synced.InGame
         {
             get { return direction; } 
             set { direction = value;} 
+        }
+        public float Acceleration 
+        {
+            get { return acceleration; }
+            set { acceleration = value; }
+        }
+        public Vector2 LinearVelocity 
+        {
+            get { return RigidBody.LinearVelocity;}
+            set { RigidBody.LinearVelocity = value; }
         }
         #endregion
 
@@ -39,6 +50,7 @@ namespace Synced.InGame
             /* Setting up MovableCollidable */
             direction = Vector2.Zero;
             acceleration = 0;
+            accelerationScaling = 1.0f;
         }
 
         public override void Update(GameTime gameTime)
@@ -46,7 +58,7 @@ namespace Synced.InGame
             // Basic Movement
             if (direction != Vector2.Zero)
             {
-                force = RigidBody.Mass * acceleration;
+                force = RigidBody.Mass * (acceleration * accelerationScaling);
                 RigidBody.ApplyForce(force * new Vector2(direction.X, -direction.Y));
             }
 

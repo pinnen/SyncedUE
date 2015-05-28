@@ -39,6 +39,11 @@ namespace Synced.InGame.Actors
         float _particleScale;
         float _particleRotation;
         float _particleLifetime;
+        public float ParticleLifetime
+        {
+            get { return _particleLifetime; }
+        }
+        
 
         Particle currentParticle;
         DrawingHelper.DrawingLevel dLevel;
@@ -261,13 +266,17 @@ namespace Synced.InGame.Actors
                 p.SetMovement(direction, speed);
             }
         }
-
         public void ExpandAndRotate()
+        {
+            ExpandAndRotate(5.0f, 5.0f);
+        }
+
+        public void ExpandAndRotate(float rotation, float expansion)
         {
             foreach (Particle p in _particles)
             {
-                p.pRotation += 5.0f;
-                p.Scale += 5.0f;
+                p.pRotation += rotation;
+                p.Scale += expansion;
             }
         }
 
@@ -281,19 +290,17 @@ namespace Synced.InGame.Actors
 
         public void SetParticleFadeAlpha(float alpha) 
         {
-            foreach (Particle p in _particles)
+            for (int i = 0; i < _particles.Count; i++)
+            {
+                _particles[i].FadeAlpha = alpha;
+            }
+            foreach (Particle p in _sleepingParticles)
             {
                 p.FadeAlpha = alpha;
             }
+            
         }
 
-        public void ResetParticleFadeAlpha() 
-        {
-            foreach (Particle p in _particles)
-            {
-                p.FadeAlpha = 1.0f;
-            }
-        }
 
         public override void Draw(GameTime gameTime)
         {
