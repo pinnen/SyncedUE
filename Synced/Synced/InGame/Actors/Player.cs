@@ -25,6 +25,7 @@ namespace Synced.Actors
     {
         #region Variables
         bool _areTrailsActive;
+        bool _haveSwitched;
         PlayerIndex _playerIndex;
         Library.Zone.Name shape;
         Library.Colors.ColorName _teamColor;
@@ -64,6 +65,7 @@ namespace Synced.Actors
             Right = new Unit(Library.Character.GameTexture[character], new Vector2(500, 600), Library.Colors.getColor[Tuple.Create(teamcolor, Library.Colors.ColorVariation.Right)], game, world, teamcolor);
 
             _areTrailsActive = false;
+            _haveSwitched = false;
             _game = game;
             _world = world;
             _barrier = new Barrier(Library.Particle.barrierParticle, Left, Right, world, game, Library.Colors.getColor[Tuple.Create(teamcolor, Library.Colors.ColorVariation.Other)]);
@@ -194,7 +196,20 @@ namespace Synced.Actors
                 Left.Direction = InputManager.LeftStickDirection(_playerIndex);
                 Right.Direction = InputManager.RightStickDirection(_playerIndex);
 
-                if (InputManager.IsButtonPressed(Buttons.LeftShoulder,_playerIndex))
+                // Switch unit positions
+                if (InputManager.IsButtonPressed(Buttons.LeftStick, _playerIndex) && InputManager.IsButtonPressed(Buttons.RightStick, _playerIndex) && !_haveSwitched)
+                {
+                    _haveSwitched = true;
+                    Vector2 tmp = Left.Position;
+                    Left.Position = Right.Position;
+                    Right.Position = tmp;
+                }
+                else if (!InputManager.IsButtonPressed(Buttons.LeftStick, _playerIndex) && !InputManager.IsButtonPressed(Buttons.RightStick, _playerIndex))
+                {
+                    _haveSwitched = false;
+                }
+
+                if (InputManager.IsButtonPressed(Buttons.LeftShoulder, _playerIndex))
                 {
                     DetonateZones();
                     Left.Shoot();
@@ -205,17 +220,17 @@ namespace Synced.Actors
                     DetonateZones();
                     Right.Shoot();
                 }
-                    
-                if (InputManager.RightTriggerPressed(_playerIndex) != 0.0f)
+
+                if (InputManager.RightTriggerValue(_playerIndex) != 0.0f)                    
                 {
-                    Right.TrailParticleLifetime += (1.5f * InputManager.RightTriggerPressed(_playerIndex)); // TODO: constant
+                    Right.TrailParticleLifetime += (1.5f * InputManager.RightTriggerValue(_playerIndex)); // TODO: constant
                 }
-                if (InputManager.LeftTriggerPressed(_playerIndex) != 0.0f)
+                if (InputManager.LeftTriggerValue(_playerIndex) != 0.0f)
                 {
-                    Left.TrailParticleLifetime += (1.5f * InputManager.LeftTriggerPressed(_playerIndex)); // TODO: constant
+                    Left.TrailParticleLifetime += (1.5f * InputManager.LeftTriggerValue(_playerIndex)); // TODO: constant
                 }
                 _areTrailsActive = false;
-                if ((InputManager.RightTriggerPressed(_playerIndex) > 0.0f) && (InputManager.LeftTriggerPressed(_playerIndex) > 0.0f))
+                if ((InputManager.RightTriggerValue(_playerIndex) > 0.0f) && (InputManager.LeftTriggerValue(_playerIndex) > 0.0f))
                 {
                     _areTrailsActive = true;
                 }
@@ -237,11 +252,10 @@ namespace Synced.Actors
                 #region SpeedUp
                 if (AreTrailsActive)
                 {
-                    
                     if (ConvertUnits.ToSimUnits(GetDistanceBetweenUnits()) < 2.0f)// TODO: constant
                     {
-                        Math.Min(Left.Acceleration += 1.0f,60.0f); //TODO: constant
-                        Math.Min(Right.Acceleration += 1.0f,60.0f); // TODO: constant
+                        Math.Min(Left.Acceleration++, 60.0f); //TODO: constant
+                        Math.Min(Right.Acceleration++, 60.0f); // TODO: constant
                         Left.UseEffectParticles = true;
                         Right.UseEffectParticles = true;
                     }
@@ -282,7 +296,7 @@ namespace Synced.Actors
                 #endregion
 
                 #region Zones
-                if (InputManager.IsButtonPressed(Buttons.B,_playerIndex)) // FOR TESTING
+                if (InputManager.IsButtonPressed(Buttons.B, _playerIndex)) // TODO: Remove. This is for testing
                 {
                     Vector2 spawnPosition = new Vector2((Left.RigidBody.Position.X + Right.RigidBody.Position.X)/2.0f,(Left.RigidBody.Position.Y + Right.RigidBody.Position.Y)/2.0f);
                     _compactZone = new CompactZone(Library.Zone.CompactTexture[shape], ConvertUnits.ToDisplayUnits(spawnPosition), DrawingHelper.DrawingLevel.Medium, _game, _world, Library.Colors.getColor[Tuple.Create(_teamColor, Library.Colors.ColorVariation.Other)],shape);
