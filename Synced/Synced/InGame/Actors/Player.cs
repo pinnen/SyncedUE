@@ -51,6 +51,11 @@ namespace Synced.Actors
             get;
             set;
         }
+
+        public Library.Colors.ColorName TeamColor
+        {
+            get { return _teamColor; }
+        }
         #endregion
 
         

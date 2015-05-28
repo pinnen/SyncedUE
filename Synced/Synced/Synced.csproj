@@ -71,6 +71,7 @@
     <Compile Include="InGame\Actors\Zone.cs" />
     <Compile Include="InGame\Actors\Sprite.cs" />
     <Compile Include="Interface\SplashScreen.cs" />
+    <Compile Include="Interface\WinScreen.cs" />
     <Compile Include="Map\BorderData.cs" />
     <Compile Include="Map\CrystalSpawnData.cs" />
     <Compile Include="InGame\Goal.cs" />

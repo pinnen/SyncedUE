@@ -155,6 +155,14 @@ namespace Synced.Content
                 SplashScreen.SplashAlpha = content.Load<Texture2D>("Interface/SplashAlpha");
                 SplashScreen.SplashSeven = content.Load<Texture2D>("Interface/Splash2");
                 #endregion
+                #region WinScreen
+                WinScreens.YellowTeam = content.Load<Texture2D>("Interface/yellowwins");
+                WinScreens.BlueTeam = content.Load<Texture2D>("Interface/bluewins");
+                WinScreens.RedTeam = content.Load<Texture2D>("Interface/redwins");
+                WinScreens.GreenTeam = content.Load<Texture2D>("Interface/greenwins");
+                WinScreens.SuddenTeam = content.Load<Texture2D>("Interface/greenwins");
+                WinScreens.Background = content.Load<Texture2D>("Interface/greenwins");
+                #endregion
 
             }
         }
@@ -162,6 +170,16 @@ namespace Synced.Content
         {
             public static Texture2D SplashAlpha;
             public static Texture2D SplashSeven;
+        }
+        public static class WinScreens
+        {
+            public static Texture2D BlueTeam;
+            public static Texture2D GreenTeam;
+            public static Texture2D RedTeam;
+            public static Texture2D YellowTeam;
+            public static Texture2D SuddenTeam;
+
+            public static Texture2D Background;
         }
         public static class Crystal
         {
