@@ -24,5 +24,25 @@ namespace Synced.InGame.Actors.Zones
 
             base.Update(gameTime);
         }
+
+        public override bool OnCollision(Fixture f1, Fixture f2, FarseerPhysics.Dynamics.Contacts.Contact contact)
+        {
+            CollidingSprite other = SyncedGameCollection.GetCollisionComponent(f2);
+
+            if (other != null)
+            {
+                if (other.Tag == TagCategories.UNIT)
+                {
+                    Color = Color.Magenta;
+                    return false;
+                }
+            }
+            return false;
+            
+        }
+
+        private void Teleport(CollidingSprite other)
+        {
+        }
     }
 }

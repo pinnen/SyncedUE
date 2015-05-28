@@ -80,7 +80,7 @@ namespace Synced.InGame.Actors
                 _barrierBodies[i].UserData = "BARRIER";
                 _barrierBodies[i].OnCollision += OnCollision;
             }
-            //Deactivate();
+            Deactivate();
         }
 
         public override bool OnCollision(Fixture f1, Fixture f2, FarseerPhysics.Dynamics.Contacts.Contact contact)
@@ -91,7 +91,22 @@ namespace Synced.InGame.Actors
             {
                 if (other.Tag == TagCategories.CRYSTAL)
                 {
-                    return true;
+                    Grabbable g_other = (Grabbable)other;
+                    if (g_other.HasOwner)
+                    {
+                        if (g_other.Owner.ID == _start.ID || g_other.Owner.ID == _end.ID)
+                        {
+                            return false;
+                        }
+                        else
+                        {
+                           return true;
+                        }
+                    }
+                    else
+                    {
+                        return true;
+                    }
                 }
             }
             return true;

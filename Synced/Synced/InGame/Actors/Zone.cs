@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Synced.CollisionShapes;
 using Synced.Content;
+using Synced.InGame;
 using Synced.InGame.Actors;
 using Synced.Interface;
 using Synced.Static_Classes;
@@ -38,24 +39,26 @@ namespace Synced.Actors
         float _scaleTarget;
         ParticleEngine _particleEffects;
         protected ParticleEngine _victimParticles;
+        protected List<IVictim> _victims;
 
         public Zone(Texture2D texture, Vector2 position,float rotation, Color color,Game game, World world) 
-            : base(texture,position, rotation ,DrawingHelper.DrawingLevel.Low,game,world,true)
+            : base(texture,position, rotation ,DrawingHelper.DrawingLevel.Low,game,world,false)
         {
             Color = color;
+
+            RigidBody.CollisionCategories = Category.Cat5;
+            RigidBody.CollidesWith = Category.All;// ^ Category.Cat9;
             
-            RigidBody.CollidesWith = Category.None;
-            
-            Origin = new Vector2(Texture.Width / 2, texture.Height / 2);
             _zoneState = ZoneState.Spawn;
             Scale = 0.05f;
             Alpha = 0.5f;
-            _scaleTarget = 0.8f;
-            _particleEffects = new ParticleEngine(100,Library.Particle.trailTexture,position,color,Vector2.Zero,1.0f,0.0f,10.0f,DrawingHelper.DrawingLevel.Medium,game);
+            _scaleTarget = 1.0f;
+            _particleEffects = new ParticleEngine(100,Library.Particle.trailTexture,position,color*0.05f,Vector2.Zero,1.0f,0.0f,0.5f,DrawingHelper.DrawingLevel.Medium,game);
             SyncedGameCollection.ComponentCollection.Add(_particleEffects);
-
+            _victims = new List<IVictim>();
             
         }
+        
 
         public override void Update(GameTime gameTime)
         {
@@ -79,11 +82,12 @@ namespace Synced.Actors
                     break;
                 case ZoneState.Despawn:
                     Scale -= 0.1f;
-                    if (Scale <= 0.0f)
+                    if (Scale <= 0.05f)
                     {
-                        //_particleEffects.GenerateClusterParticles();
-                        //_particleEffects.ShatterParticles();
-                        //_particleEffects.ExpandAndRotate();
+                        _particleEffects.GenerateClusterParticles();
+                        _particleEffects.ShatterParticles(50,15);
+                        _particleEffects.ExpandAndRotate();
+                        
 
                         _zoneState = ZoneState.Delete;
                         _timeSinceSpawn = 0;
@@ -91,6 +95,7 @@ namespace Synced.Actors
                     break;
                 case ZoneState.Delete:
                     //_timeSinceSpawn
+                    RigidBody.Dispose();
                     SyncedGameCollection.ComponentCollection.Remove(this);
                     break;
                 default:

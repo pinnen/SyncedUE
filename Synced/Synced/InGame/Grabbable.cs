@@ -6,9 +6,11 @@
 // Lina Ju
 using FarseerPhysics;
 using FarseerPhysics.Dynamics;
+using FarseerPhysics.Dynamics.Contacts;
 using FarseerPhysics.Factories;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Synced.Actors;
 using Synced.Content;
 using Synced.InGame.Actors;
 using Synced.Static_Classes;
@@ -20,11 +22,31 @@ namespace Synced.InGame
     {
 
         #region Variables
-        protected MovableCollidable owner = null;
+        protected Unit owner = null;
         protected ParticleEngine _tail;
         float _shootForce;
         float _cooldownTimer;
         float _cooldownInSeconds;
+        #endregion
+
+        #region Properties
+        public MovableCollidable Owner
+        {
+            get { return owner; }
+        }
+        public bool HasOwner
+        {
+            get {
+                if (owner == null)
+                {
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+            }
+        }
         #endregion
 
         public Grabbable(Texture2D texture, Vector2 position, DrawingHelper.DrawingLevel drawingLevel, Game game, World world, Color color)
@@ -43,22 +65,30 @@ namespace Synced.InGame
             /* Setting up Grabbable*/
             acceleration = maxAcceleration = 20;
             _shootForce = 2000f;
-            _cooldownInSeconds = 0.5f;
+            _cooldownInSeconds = 1f;
             Color = color;
             _tail = new ParticleEngine(1, Library.Particle.trailTexture, position, color, Origin, 1.0f, 0.0f, 0.2f, DrawingHelper.DrawingLevel.Low, game);
             SyncedGameCollection.ComponentCollection.Add(_tail);
         }
 
-        public virtual Grabbable PickUp(MovableCollidable own)
+        public virtual Grabbable PickUp(Unit own) //TODO: only let it be stolen or picked up if some conditions are met. 
         {
-            if (_cooldownTimer > _cooldownInSeconds && owner == null)
+            if (_cooldownTimer > _cooldownInSeconds)
             {
+                if (owner != null)
+                {
+                    // its a steal!
+                    owner.SetItem(null);
+                }
+
                 owner = own;
                 maxAcceleration = 100;
                 RigidBody.LinearDamping = 10f;
                 Library.Audio.PlaySoundEffect(Library.Audio.SoundEffects.CrystalGrab);
+                _cooldownTimer = 0;
+                return this;
             }
-            return this;
+            return null;
         }
 
         public virtual void Release()
@@ -91,7 +121,17 @@ namespace Synced.InGame
 
             if (owner != null)
             {
-                Vector2 ownerOffsetPosition = new Vector2(owner.SimPosition.X + -(owner.Direction.X / 4), owner.SimPosition.Y + (owner.Direction.Y / 4));
+                Vector2 ownerOffsetPosition = Vector2.Zero;
+
+                if (owner.Direction != Vector2.Zero)
+                {
+                    ownerOffsetPosition = new Vector2(owner.SimPosition.X + -(owner.LastNonZeroDirection.X / 4), owner.SimPosition.Y + (owner.LastNonZeroDirection.Y / 4));
+                }
+                else
+                {
+                    ownerOffsetPosition = new Vector2(owner.SimPosition.X + -(owner.LastNonZeroDirection.X), owner.SimPosition.Y + (owner.LastNonZeroDirection.Y));
+                }
+                
                 float distance = (SimPosition.X - ownerOffsetPosition.X) * (SimPosition.X - ownerOffsetPosition.X) + (SimPosition.Y - ownerOffsetPosition.Y) * (SimPosition.Y - ownerOffsetPosition.Y);
                 acceleration = maxAcceleration * distance;
 
@@ -105,5 +145,16 @@ namespace Synced.InGame
             base.Update(gameTime);
         }
 
+        public override bool OnCollision(Fixture f1, Fixture f2, Contact contact)
+        {
+            CollidingSprite other = SyncedGameCollection.GetCollisionComponent(f2);
+
+            if (other.Tag == TagCategories.UNIT)
+            {
+                return false;
+            }
+
+            return true;
+        }
     }
 }

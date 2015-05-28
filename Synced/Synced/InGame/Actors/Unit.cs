@@ -24,7 +24,7 @@ using Synced.Interface;
 
 namespace Synced.Actors
 {
-    class Unit : MovableCollidable
+    class Unit : MovableCollidable//, IVictim
     {
         #region Variables
         ParticleEngine _trail;
@@ -32,6 +32,8 @@ namespace Synced.Actors
         ParticleEngine _effectParticles;
         bool _useEffectParticles;
         Library.Colors.ColorName _teamColor;
+        Texture2D _texture;
+        Vector2 lastNonZeroDirection; 
     
         #endregion
 
@@ -51,6 +53,10 @@ namespace Synced.Actors
             get { return acceleration; }
             set { acceleration = value; }
         }
+        public Vector2 LastNonZeroDirection
+        {
+            get { return lastNonZeroDirection; }
+        }
         #endregion
 
         public Grabbable Item { get; set; }
@@ -65,7 +71,7 @@ namespace Synced.Actors
             RigidBody.Mass = 10f;                          
             RigidBody.LinearDamping = 5f;                  
             RigidBody.Restitution = 0.1f;                  
-            Origin = new Vector2(Texture.Width / 2, texture.Height / 2);
+            Origin = new Vector2(texture.Width / 2, texture.Height / 2);
 
             /* Setting up Unit */
             acceleration = 40;
@@ -78,6 +84,7 @@ namespace Synced.Actors
             SyncedGameCollection.ComponentCollection.Add(_trail);
             SyncedGameCollection.ComponentCollection.Add(_effectParticles);
             Tag = TagCategories.UNIT;
+            _texture = texture;
         }
 
         public void Shoot()
@@ -89,34 +96,40 @@ namespace Synced.Actors
             }
         }
 
+        public void SetItem(Grabbable item)
+        {
+            Item = item;
+        }
+
         public override bool OnCollision(Fixture f1, Fixture f2, Contact contact)
         {
             CollidingSprite other = SyncedGameCollection.GetCollisionComponent(f2);
 
-            if (other != null && Item == null)
+            if (other.Tag == TagCategories.CRYSTAL)
             {
-                if (other.Tag == TagCategories.CRYSTAL)
+                if (Item == null)
                 {
                     Crystal crystal = other as Crystal;
-                    crystal.PickUp(this);
+                    Item = crystal.PickUp(this);
                     crystal.ChangeColor(Library.Colors.getColor[Tuple.Create(_teamColor, Library.Colors.ColorVariation.Other)]);
-                    Item = crystal;
-                    return false;
                 }
-                else if (other.Tag == TagCategories.UNIT)
-                {
-                    return false;
-                }
-                else if (other.Tag == TagCategories.COMPACTZONE)
+                return false;
+            }
+            else if (other.Tag == TagCategories.UNIT)
+            {
+                return false;
+            }
+            else if (other.Tag == TagCategories.COMPACTZONE)
+            {
+                if (Item == null)
                 {
                     CompactZone compactzone = other as CompactZone;
-                    compactzone.PickUp(this);
-                    Item = compactzone;
+                    Item = compactzone.PickUp(this);
                 }
-                else if (other.Tag == TagCategories.BARRIER)
-                {
-                    return false;
-                }
+            }
+            else if (other.Tag == TagCategories.BARRIER)
+            {
+                return false;
             }
 
             return true;
@@ -126,6 +139,7 @@ namespace Synced.Actors
         {
             if (direction != Vector2.Zero)
             {
+                lastNonZeroDirection = direction;
                 RigidBody.Rotation = (float)Math.Atan2(RigidBody.LinearVelocity.Y, RigidBody.LinearVelocity.X);
                 
             }
@@ -144,5 +158,22 @@ namespace Synced.Actors
         }
 
 
+        // IVictim
+        float _circleEffectTimer = 0.0f;
+        float _triangleEffectTimer = 0.0f;
+        float _hexagonEffectTimer = 0.0f;
+        float _pentagonEffectTimer = 0.0f;
+        bool _fadeOut = false;
+
+        public float CircleEffectTimer { get { return _circleEffectTimer; } set { _circleEffectTimer = value; } }
+        public float TriangleEffectTimer{ get{ return _triangleEffectTimer;}set{_triangleEffectTimer = value;}}
+        public float HexagonEffectTimer { get { return _hexagonEffectTimer; } set { _hexagonEffectTimer = value; } }
+        public float PentagonEffectTimer {get{return _pentagonEffectTimer;} set{_pentagonEffectTimer = value;}}
+        public bool FadeOut { get { return _fadeOut; } set { _fadeOut = value; } }
+        public Texture2D VictimTexture{ get { return _texture; }}
+        public float ParticleLifetime { get { return _trailParticleLifetime; } }
+        public float LocalTimeScale{ get { throw new NotImplementedException(); } set { throw new NotImplementedException(); } }
+        public float InvisibilityAlpha { get { return this.Alpha; } set { this.Alpha = value; } }
+        public ParticleEngine TrailEngine { get { return _trail; } }
     }
 }

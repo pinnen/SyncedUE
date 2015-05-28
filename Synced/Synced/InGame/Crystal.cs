@@ -33,10 +33,6 @@ namespace Synced.InGame
             _tail.ParticleColor = Color.LightGray;
         }
 
-        public override bool OnCollision(Fixture f1, Fixture f2, Contact contact)
-        {
-            return true;
-        }
         public void ChangeColor(Color newColor) 
         {
             this.Color = newColor;

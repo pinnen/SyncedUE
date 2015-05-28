@@ -144,14 +144,14 @@ namespace Synced.InGame.Actors
         public void GenerateEffectParticles(float scale, float lifetime) 
         {
             
-            int effectSize = 2; // TODO: ta in som parameter?
+            int effectSize = 80; // TODO: ta in som parameter?
 
             for (int i = 0; i < _particleAmount; i++)
             {
                 if (_sleepingParticles.Count == 0)
                 {
                     
-                    Vector2 randomPosition = new Vector2(_particlePosition.X + (float)random.Next(-effectSize,effectSize),_particlePosition.Y + (float)random.Next(-effectSize,effectSize));
+                    Vector2 randomPosition = new Vector2(_particlePosition.X + (float)random.Next(-effectSize,effectSize),_particlePosition.Y + (float)random.Next(-effectSize*50,effectSize*50));
                     Particle tempP = new Particle(_particleTexture,randomPosition,_particleColor,_particleOrigin,scale,0.0f,lifetime,dLevel,game);
                     _particles.Add(tempP);
                     SyncedGameCollection.ComponentCollection.Add(tempP);
@@ -206,7 +206,7 @@ namespace Synced.InGame.Actors
 
         public void GenerateClusterParticles()
         {
-            int clusterParticleAmount = 300;
+            int clusterParticleAmount = 50;
 
             for (int i = 0; i < clusterParticleAmount; i++)
             {
@@ -245,10 +245,13 @@ namespace Synced.InGame.Actors
         /// <summary>
         /// Shatters the particles
         /// </summary>
+        /// 
         public void ShatterParticles() 
         {
-            int shatterDirection = 50;
-            int shatterSpeed = 2;
+            ShatterParticles(100, 20);
+        }
+        public void ShatterParticles(int shatterDirection,int shatterSpeed) 
+        {
 
             foreach (Particle p in _particles)
             {
@@ -263,8 +266,8 @@ namespace Synced.InGame.Actors
         {
             foreach (Particle p in _particles)
             {
-                p.pRotation += 0.05f;
-                p.Scale += 0.05f;
+                p.pRotation += 5.0f;
+                p.Scale += 5.0f;
             }
         }
 

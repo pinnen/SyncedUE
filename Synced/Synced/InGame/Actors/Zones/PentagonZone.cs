@@ -21,8 +21,35 @@ namespace Synced.InGame.Actors.Zones
 
         public override void Update(GameTime gameTime)
         {
+            for (int i = 0; i < _victims.Count; i++)
+            {
+                _victims[i].PentagonEffectTimer -= (float)gameTime.ElapsedGameTime.TotalSeconds;
+                if (_victims[i].PentagonEffectTimer <= 0)
+                {
+                    if (_victims[i].FadeOut)
+                    {
 
+                    }
+                   
+                }
+            }
             base.Update(gameTime);
         }
+        public override bool OnCollision(Fixture f1, Fixture f2, FarseerPhysics.Dynamics.Contacts.Contact contact)
+        {
+            CollidingSprite other = SyncedGameCollection.GetCollisionComponent(f2);
+
+            if (other != null)
+            {
+                if (other is IVictim) 
+                {
+                    _victims.Add((IVictim)other);
+                }
+                
+            }
+            return false;
+
+        }
+
     }
 }

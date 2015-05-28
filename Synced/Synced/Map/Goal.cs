@@ -83,6 +83,8 @@ namespace Synced.MapNameSpace
             }
 
             Border = new TexturePolygon(borderTexture, borderPosition, borderRotation, DrawingHelper.DrawingLevel.High, game, world, false);
+            Border.SetCollisionCategory(Category.Cat10);
+            Border.SetCollideWithCategory(Category.All);
 
             SyncedGameCollection.ComponentCollection.Add(OuterCircle);
             SyncedGameCollection.ComponentCollection.Add(InnerCircle);
