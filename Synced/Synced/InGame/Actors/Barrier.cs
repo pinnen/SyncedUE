@@ -29,7 +29,7 @@ namespace Synced.InGame.Actors
         #endregion
 
         public Barrier(Texture2D texture, Unit start, Unit end, World world,Game game, Color color) 
-            : base(texture, Vector2.Zero, DrawingHelper.DrawingLevel.High, game, world)
+            : base(texture, Vector2.Zero, DrawingHelper.DrawingLevel.Low, game, world)
         {
             Color = color;
             EffectParticles = new ParticleEngine(30, texture, Vector2.Zero, color, Vector2.Zero, 1, 0, 10, DrawingHelper.DrawingLevel.Top, game);

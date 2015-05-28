@@ -84,7 +84,6 @@ namespace Synced.Actors
 
         private float GetDistanceBetweenUnits()
         {
-            //TODO: create more efficient way to do this
             float d_y = (Left.Position.Y - Right.Position.Y) * (Left.Position.Y - Right.Position.Y);
             float d_x = (Left.Position.X - Right.Position.X) * (Left.Position.X - Right.Position.X);
             return (float)Math.Sqrt(d_y + d_x);
@@ -226,54 +225,41 @@ namespace Synced.Actors
 
                 if (InputManager.RightTriggerValue(_playerIndex) != 0.0f)                    
                 {
-                    Right.TrailParticleLifetime += (1.5f * InputManager.RightTriggerValue(_playerIndex)); // TODO: constant
+                    Right.TrailParticleLifetime += (1.5f * InputManager.RightTriggerValue(_playerIndex));
                 }
                 if (InputManager.LeftTriggerValue(_playerIndex) != 0.0f)
                 {
-                    Left.TrailParticleLifetime += (1.5f * InputManager.LeftTriggerValue(_playerIndex)); // TODO: constant
+                    Left.TrailParticleLifetime += (1.5f * InputManager.LeftTriggerValue(_playerIndex));
                 }
                 _areTrailsActive = false;
                 if ((InputManager.RightTriggerValue(_playerIndex) > 0.0f) && (InputManager.LeftTriggerValue(_playerIndex) > 0.0f))
                 {
                     _areTrailsActive = true;
                 }
-
-                if (InputManager.IsButtonPressed(Buttons.LeftStick,_playerIndex) && InputManager.IsButtonPressed(Buttons.RightStick,_playerIndex))
-                {
-                    Unit temp = Left;
-                    Left = Right;
-                    Right = temp;
-                    Color tempColor = Left.Color;
-                    Left.Color = Right.Color;
-                    Right.Color = tempColor;
-                    Color temp2 = Left.TrailEngine.ParticleColor;
-                    Left.TrailEngine.ParticleColor = Right.TrailEngine.ParticleColor;
-                    Right.TrailEngine.ParticleColor = temp2;
-                }
                 #endregion
 
                 #region SpeedUp
                 if (AreTrailsActive)
                 {
-                    if (ConvertUnits.ToSimUnits(GetDistanceBetweenUnits()) < 2.0f)// TODO: constant
+                    if (ConvertUnits.ToSimUnits(GetDistanceBetweenUnits()) < 2.0f)
                     {
-                        Math.Min(Left.Acceleration++, 60.0f); //TODO: constant
-                        Math.Min(Right.Acceleration++, 60.0f); // TODO: constant
+                        Left.Acceleration = 70.0f;
+                        Right.Acceleration = 70.0f;
                         Left.UseEffectParticles = true;
                         Right.UseEffectParticles = true;
                     }
                     else
                     {
-                        Left.Acceleration = 40.0f; //TODO: constant
-                        Right.Acceleration = 40.0f; //TODO: constant
+                        Left.Acceleration = 40.0f;
+                        Right.Acceleration = 40.0f;
                         Left.UseEffectParticles = false;
                         Right.UseEffectParticles = false;
                     }
                 }
                 else
                 {
-                    Left.Acceleration = 40.0f; //TODO: constant
-                    Right.Acceleration = 40.0f; //TODO: constant
+                    Left.Acceleration = 40.0f;
+                    Right.Acceleration = 40.0f;
                     Left.UseEffectParticles = false;
                     Right.UseEffectParticles = false;
                 }

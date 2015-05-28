@@ -146,6 +146,8 @@ namespace Synced.InGame.Actors.Zones
             }
             _evilUnitList.Clear();
             _evilCrystalList.Clear();
+            //_particleEffects.SetParticleEngineOneShot(4);
+            //_particleEffects.DeleteParticleEngine();
             base.Delete();
         }
     }

@@ -85,5 +85,10 @@ namespace Synced.InGame.Actors.Zones
             victim.Rotation = (float)(_random.Next(-180, 180) / 10);
             victim.Position = new Vector2(x, y);
         }
+        public override void Delete()
+        {
+            _victimParticles.DeleteParticleEngine();
+            base.Delete();
+        }
     }
 }

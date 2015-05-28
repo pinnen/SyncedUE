@@ -26,7 +26,6 @@ namespace Synced.InGame.Actors
         Texture2D _particleTexture;
         bool isOneShot;
         float OneShotLifeTime;
-        float OneShotElapsedTimeStart;
 
         //Data for particles:
         Vector2 _particlePosition;
@@ -162,8 +161,6 @@ namespace Synced.InGame.Actors
             tmpDirection.Normalize();
 
             // Get distance between the positions.
-            //float s_x = (float)Math.Pow(endPosition.X - startPosition.X, 2); // old code
-            //float s_y = (float)Math.Pow(endPosition.Y - startPosition.Y, 2); // old code
             float s_x = (endPosition.X - startPosition.X) * (endPosition.X - startPosition.X);
             float s_y = (endPosition.Y - startPosition.Y) * (endPosition.Y - startPosition.Y);
             float distance = (float)Math.Sqrt(s_x + s_y);
@@ -199,9 +196,7 @@ namespace Synced.InGame.Actors
             for (int i = 0; i < clusterParticleAmount; i++)
             {
                 Vector2 randomPosition = _particlePosition;
-                //Vector2 randomDirection = new Vector2((float)random.Next(-40,40),(float)random.Next(-40,40));
                 float randomRotation = random.Next();
-                //float randomScale = random.Next();
                 Particle tempP = new Particle(_particleTexture, randomPosition, _particleColor, _particleOrigin, _particleScale, randomRotation, _particleLifetime, dLevel, game);
                 _particles.Add(tempP);
                 SyncedGameCollection.ComponentCollection.Add(tempP);
