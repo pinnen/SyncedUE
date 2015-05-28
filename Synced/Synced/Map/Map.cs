@@ -84,9 +84,16 @@ namespace Synced.MapNamespace
                         CrystalStartIndex = crystalSpawnList.Count - 1;
                     }
                 }
-                if (mapObject is PlayerStartData)
+                else if (mapObject is PlayerStartData)
                 {
                     playerStartData.Add((PlayerStartData)mapObject);
+                }
+                else if (mapObject is BorderData)
+                {
+                    TexturePolygon tmp = (TexturePolygon)mapObject.GetComponent(game, World);
+                    tmp.SetCollisionCategory(Category.All);
+                    tmp.SetCollideWithCategory(Category.All);
+                    SyncedGameCollection.ComponentCollection.Add(tmp);
                 }
                 else
                 {
@@ -94,6 +101,7 @@ namespace Synced.MapNamespace
                 }
             }
             SetupPlayers(playerinfo);
+            SetupCrystal();
         }
         public void ClearData()
         {
@@ -107,6 +115,10 @@ namespace Synced.MapNamespace
             {
                 SyncedGameCollection.ComponentCollection.Add(new Player(playerStartData[i].PlayerIndex, playerinfo[i], (Library.Colors.ColorName)i, Game, World)); //TODO: get color from menuscreen
             }
+        }
+        private void SetupCrystal()
+        {
+            SyncedGameCollection.ComponentCollection.Add(new Crystal(Library.Crystal.Texture, crystalSpawnList[CrystalStartIndex].Position, DrawingHelper.DrawingLevel.Medium, Game, World, Color.LightGray));
         }
     }
 }

@@ -61,7 +61,7 @@
       <X>960</X>
       <Y>540</Y>
     </Position>
-    <TexturePath />
+    <TexturePath>GameObjects/Crystal</TexturePath>
     <DrawingLevel>3</DrawingLevel>
     <IsStart>true</IsStart>
   </CrystalSpawnData>
@@ -70,7 +70,7 @@
       <X>960</X>
       <Y>540</Y>
     </Position>
-    <TexturePath />
+    <TexturePath>GameObjects/Crystal</TexturePath>
     <DrawingLevel>3</DrawingLevel>
     <IsStart>false</IsStart>
   </CrystalSpawnData>
@@ -79,7 +79,7 @@
       <X>960</X>
       <Y>540</Y>
     </Position>
-    <TexturePath />
+    <TexturePath>GameObjects/Crystal</TexturePath>
     <DrawingLevel>3</DrawingLevel>
     <IsStart>false</IsStart>
   </CrystalSpawnData>
@@ -88,7 +88,7 @@
       <X>960</X>
       <Y>540</Y>
     </Position>
-    <TexturePath />
+    <TexturePath>GameObjects/Crystal</TexturePath>
     <DrawingLevel>3</DrawingLevel>
     <IsStart>false</IsStart>
   </CrystalSpawnData>
@@ -97,7 +97,7 @@
       <X>960</X>
       <Y>540</Y>
     </Position>
-    <TexturePath />
+    <TexturePath>GameObjects/Crystal</TexturePath>
     <DrawingLevel>3</DrawingLevel>
     <IsStart>false</IsStart>
   </CrystalSpawnData>
@@ -122,10 +122,10 @@
       <X>300</X>
       <Y>540</Y>
     </Position>
-    <TexturePath>Maps/Paper/Goal</TexturePath>
+    <TexturePath>GameObjects/Goal</TexturePath>
     <DrawingLevel>3</DrawingLevel>
     <Direction>West</Direction>
-    <Texture2Path>Gameobjects/GoalBorder</Texture2Path>
+    <Texture2Path>GameObjects/GoalBorder</Texture2Path>
   </GoalData>
   <GoalData>
     <Position>

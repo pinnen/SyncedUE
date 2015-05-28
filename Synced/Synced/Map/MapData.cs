@@ -77,35 +77,35 @@ namespace Synced.MapNamespace
             #region Crystals
             _objects.Add(new CrystalSpawnData()
             {
-                TexturePath = "",
+                TexturePath = "GameObjects/Crystal",
                 drawingLevel = 3,
                 Position = new Vector2(1920 / 2, 1080 / 2),
                 IsStart = true,
             });
             _objects.Add(new CrystalSpawnData()
             {
-                TexturePath = "",
+                TexturePath = "GameObjects/Crystal",
                 drawingLevel = 3,
                 Position = new Vector2(1920 / 2, 1080 / 2),
                 IsStart = false,
             });
             _objects.Add(new CrystalSpawnData()
             {
-                TexturePath = "",
+                TexturePath = "GameObjects/Crystal",
                 drawingLevel = 3,
                 Position = new Vector2(1920 / 2, 1080 / 2),
                 IsStart = false,
             });
             _objects.Add(new CrystalSpawnData()
             {
-                TexturePath = "",
+                TexturePath = "GameObjects/Crystal",
                 drawingLevel = 3,
                 Position = new Vector2(1920 / 2, 1080 / 2),
                 IsStart = false,
             });
             _objects.Add(new CrystalSpawnData()
             {
-                TexturePath = "",
+                TexturePath = "GameObjects/Crystal",
                 drawingLevel = 3,
                 Position = new Vector2(1920 / 2, 1080 / 2),
                 IsStart = false,
@@ -132,7 +132,7 @@ namespace Synced.MapNamespace
             {
                 Position = new Vector2(300, 1080 / 2),
                 TexturePath = "Maps/Paper/Goal",
-                Texture2Path = "Gameobjects/GoalBorder",
+                Texture2Path = "GameObjects/GoalBorder",
                 drawingLevel = 3,
                 Direction = GoalDirections.West,
             });
