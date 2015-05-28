@@ -86,6 +86,7 @@ namespace Synced.InGame
                 RigidBody.LinearDamping = 10f;
                 Library.Audio.PlaySoundEffect(Library.Audio.SoundEffects.CrystalGrab);
                 _cooldownTimer = 0;
+
                 return this;
             }
             return null;
@@ -157,9 +158,9 @@ namespace Synced.InGame
 
         // IVictim
         float _circleEffectTimer = 0.0f;
-        float _triangleEffectTimer = 0.0f;
+        float _triangleEffectTimer = 0.12f;
         float _hexagonEffectTimer = 0.0f;
-        float _pentagonEffectTimer = 0.0f;
+        float _pentagonEffectTimer = 0.12f;
         bool _fadeOut = false;
 
 

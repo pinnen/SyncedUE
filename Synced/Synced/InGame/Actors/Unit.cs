@@ -160,7 +160,7 @@ namespace Synced.Actors
 
         // IVictim
         float _circleEffectTimer = 0.0f;
-        float _triangleEffectTimer = 0.0f;
+        float _triangleEffectTimer = 0.12f;
         float _hexagonEffectTimer = 0.0f;
         float _pentagonEffectTimer = 0.0f;
         bool _fadeOut = false;
