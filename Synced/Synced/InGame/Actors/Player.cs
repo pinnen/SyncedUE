@@ -198,14 +198,12 @@ namespace Synced.Actors
                 {
                     DetonateZones();
                     Left.Shoot();
-                    
                 }
 
                 if (InputManager.IsButtonPressed(Buttons.RightShoulder,_playerIndex))
                 {
                     DetonateZones();
                     Right.Shoot();
-                    
                 }
                     
                 if (InputManager.RightTriggerPressed(_playerIndex) != 0.0f)
@@ -220,6 +218,19 @@ namespace Synced.Actors
                 if ((InputManager.RightTriggerPressed(_playerIndex) > 0.0f) && (InputManager.LeftTriggerPressed(_playerIndex) > 0.0f))
                 {
                     _areTrailsActive = true;
+                }
+
+                if (InputManager.IsButtonPressed(Buttons.LeftStick,_playerIndex) && InputManager.IsButtonPressed(Buttons.RightStick,_playerIndex))
+                {
+                    Unit temp = Left;
+                    Left = Right;
+                    Right = temp;
+                    Color tempColor = Left.Color;
+                    Left.Color = Right.Color;
+                    Right.Color = tempColor;
+                    Color temp2 = Left.TrailEngine.ParticleColor;
+                    Left.TrailEngine.ParticleColor = Right.TrailEngine.ParticleColor;
+                    Right.TrailEngine.ParticleColor = temp2;
                 }
                 #endregion
 
@@ -277,6 +288,17 @@ namespace Synced.Actors
                     _compactZone = new CompactZone(Library.Zone.CompactTexture[shape], ConvertUnits.ToDisplayUnits(spawnPosition), DrawingHelper.DrawingLevel.Medium, _game, _world, Library.Colors.getColor[Tuple.Create(_teamColor, Library.Colors.ColorVariation.Other)],shape);
                     SyncedGameCollection.ComponentCollection.Add(_compactZone);
                     _compactZones.Add(_compactZone);
+                }
+
+                for (int i = 0; i < _compactZones.Count; i++)
+                {
+                    if (_compactZones[i].UpdateCompactZone())
+                    {
+                        CreateZone(_compactZones[i].Shape, _compactZones[i].SimPosition, _compactZones[i].Rotation, _compactZones[i].Color);
+                        _compactZones[i].Detonate();
+                        _compactZones.RemoveAt(i);
+                        i--;
+                    }
                 }
                 #endregion            
                 

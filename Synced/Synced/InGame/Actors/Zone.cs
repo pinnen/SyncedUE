@@ -42,7 +42,7 @@ namespace Synced.Actors
         protected List<IVictim> _victims;
 
         public Zone(Texture2D texture, Vector2 position,float rotation, Color color,Game game, World world) 
-            : base(texture,position, rotation ,DrawingHelper.DrawingLevel.Low,game,world,false)
+            : base(texture,position, rotation ,DrawingHelper.DrawingLevel.Medium,game,world,false)
         {
             Color = color;
 

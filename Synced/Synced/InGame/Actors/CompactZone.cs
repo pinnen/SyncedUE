@@ -18,6 +18,8 @@ namespace Synced.InGame.Actors
         Game _game;
         bool _isShot;
         Library.Zone.Name _shape;
+        int _timer;
+        int _detonationTime;
 
         internal Library.Zone.Name Shape
         {
@@ -41,8 +43,11 @@ namespace Synced.InGame.Actors
             _isShot = false;
             _shape = shape;
             _tail = null;
+            _detonationTime = 70;
+            _timer = _detonationTime;
 
         }
+
 
         public override void Shoot()
         {
@@ -50,9 +55,23 @@ namespace Synced.InGame.Actors
             _isShot = true;
         }
 
-        public override void Update(GameTime gameTime)
+        public bool UpdateCompactZone()
         {
-            base.Update(gameTime);
+            if (_isShot)
+            {
+                _timer--;
+                if (_timer <= 0)
+                {
+                    return true;
+                }
+            }
+            else
+            {
+                _timer = _detonationTime;
+            
+            }
+            return false;
+
         }
 
         public void Detonate() 

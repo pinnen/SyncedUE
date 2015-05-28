@@ -266,13 +266,17 @@ namespace Synced.InGame.Actors
                 p.SetMovement(direction, speed);
             }
         }
-
         public void ExpandAndRotate()
+        {
+            ExpandAndRotate(5.0f, 5.0f);
+        }
+
+        public void ExpandAndRotate(float rotation, float expansion)
         {
             foreach (Particle p in _particles)
             {
-                p.pRotation += 5.0f;
-                p.Scale += 5.0f;
+                p.pRotation += rotation;
+                p.Scale += expansion;
             }
         }
 

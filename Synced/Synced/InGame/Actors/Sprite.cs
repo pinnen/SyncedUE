@@ -24,7 +24,7 @@ namespace Synced.Actors
             get { return (SpriteBatch)Game.Services.GetService(typeof(SpriteBatch)); }
         }
         public Vector2 Origin { get; set; }
-        public Color Color { get; protected set; }
+        public Color Color { get;  set; }
         public float Rotation { get; protected set; }
         public Vector2 Position { get; set; }
         public Texture2D Texture { get; set;}
