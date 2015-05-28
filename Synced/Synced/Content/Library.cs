@@ -157,7 +157,13 @@ namespace Synced.Content
                 Screens.LoadScreen = content.Load<Texture2D>("Interface/LoadingScreen");
                 #endregion
                 #region WinScreens
+                WinScreens.Background = content.Load<Texture2D>("Interface/winscreenbackground");
+                WinScreens.SuddenTeam = content.Load<Texture2D>("Interface/bluewins");
 
+                WinScreens.BlueTeam = content.Load<Texture2D>("Interface/bluewins");
+                WinScreens.GreenTeam = content.Load<Texture2D>("Interface/greenwins");
+                WinScreens.RedTeam = content.Load<Texture2D>("Interface/redwins");
+                WinScreens.YellowTeam = content.Load<Texture2D>("Interface/yellowwins");
                 #endregion
             }
         }
