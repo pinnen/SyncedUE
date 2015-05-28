@@ -9,7 +9,7 @@ using System.Text;
 
 namespace Synced.Interface
 {
-    class WinScreen : Screen
+    class WinScreen : SplashScreen
     {
         public enum TypeOfWin { SuddenDeath, TeamVictory}
         public TypeOfWin WinType
@@ -17,15 +17,16 @@ namespace Synced.Interface
             get;
             private set;
         }
-        public WinScreen(Game game) : base(game)
+        public WinScreen(Game game) : base(Library.WinScreens.Background,game)
         {
             WinType = TypeOfWin.SuddenDeath;
-            GameComponents.Add(new Sprite(Library.WinScreens.Background, Vector2.Zero, DrawingHelper.DrawingLevel.Back, Game));
+            SplashTime = new TimeSpan(10);
             GameComponents.Add(new Sprite(Library.WinScreens.SuddenTeam,new Vector2(ResolutionManager.GetCenterPointWidth,ResolutionManager.GetCenterPointHeight), Static_Classes.DrawingHelper.DrawingLevel.Top, Game));
         }
-        public WinScreen(Game game, Player player) : base(game)
+        public WinScreen(Game game, Player player) : base(Library.WinScreens.Background,game)
         {
             WinType = TypeOfWin.TeamVictory;
+            SplashTime = new TimeSpan(10);
             Sprite teamColor = null;
             switch (player.TeamColor)
             {
@@ -44,7 +45,6 @@ namespace Synced.Interface
                 default:
                     break;
             }
-            GameComponents.Add(new Sprite(Library.WinScreens.Background, Vector2.Zero, DrawingHelper.DrawingLevel.Back, Game));
             GameComponents.Add(teamColor);
         }
         
