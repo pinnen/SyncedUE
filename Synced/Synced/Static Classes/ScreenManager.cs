@@ -63,6 +63,7 @@ namespace Synced.Static_Classes
             screen.Activated();
             _screenManager.AddScreen(screen);
             _screenManager.CurrentState = ScreenState.SplashScreen;
+
             //------------------------------------------------------------------------
             // **********************Game Screen**************************************
             //FOR DEBUG
@@ -197,7 +198,15 @@ namespace Synced.Static_Classes
         {
             _screenManager.Screens.Peek().Deactivated();
             _screenManager.AddScreen(new GameScreen(Game,screen.SelectedCharacter));
+            (Screens.Peek() as GameScreen).GameEnded += ScreenManager_GameEnded;
             CurrentState = ScreenState.GameScreen;
+        }
+
+        void ScreenManager_GameEnded(Actors.Player player, EventArgs e)
+        {
+            Pop();
+            AddScreen(new WinScreen(Game, player));
+            Screens.Peek().Activated();
         }
 
         public void HandleBackEvent()

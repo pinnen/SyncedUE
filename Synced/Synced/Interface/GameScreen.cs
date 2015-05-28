@@ -23,6 +23,7 @@ namespace Synced.Interface
 {
     class GameScreen : Screen
     {
+        public event EndGame GameEnded;
         Map _map;
         World world;
 
