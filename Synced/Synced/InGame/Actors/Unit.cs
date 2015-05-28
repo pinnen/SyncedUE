@@ -90,6 +90,14 @@ namespace Synced.Actors
             _texture = texture;
         }
 
+        public void ForcedRelease()
+        {
+            if (Item != null)
+            {
+                Item = null;
+            }
+        }
+
         public void Shoot()
         {
             if (Item != null)
@@ -113,8 +121,7 @@ namespace Synced.Actors
                 if (Item == null)
                 {
                     Crystal crystal = other as Crystal;
-                    Item = crystal.PickUp(this);
-                    crystal.ChangeColor(Library.Colors.getColor[Tuple.Create(_teamColor, Library.Colors.ColorVariation.Other)]);
+                    Item = crystal.PickUp(this, _teamColor);
                 }
                 return false;
             }
@@ -127,7 +134,7 @@ namespace Synced.Actors
                 if (Item == null)
                 {
                     CompactZone compactzone = other as CompactZone;
-                    Item = compactzone.PickUp(this);
+                    Item = compactzone.PickUp(this, _teamColor);
                 }
             }
             else if (other.Tag == TagCategories.BARRIER)

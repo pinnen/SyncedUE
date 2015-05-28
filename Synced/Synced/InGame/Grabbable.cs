@@ -71,12 +71,12 @@ namespace Synced.InGame
             /* Setting up Grabbable*/
             acceleration = maxAcceleration = 20;
             _shootForce = 2000f;
-            _cooldownInSeconds = 1f;
+            _cooldownInSeconds = 0.5f;
             Color = color;
             
         }
 
-        public virtual Grabbable PickUp(Unit own) //TODO: only let it be stolen or picked up if some conditions are met. 
+        public virtual Grabbable PickUp(Unit own, Library.Colors.ColorName teamColor) //TODO: only let it be stolen or picked up if some conditions are met. 
         {
             if (_cooldownTimer > _cooldownInSeconds)
             {
@@ -90,11 +90,22 @@ namespace Synced.InGame
                 maxAcceleration = 100;
                 RigidBody.LinearDamping = 10f;
                 Library.Audio.PlaySoundEffect(Library.Audio.SoundEffects.CrystalGrab);
+                Color =  Library.Colors.getColor[Tuple.Create(teamColor, Library.Colors.ColorVariation.Other)];
                 _cooldownTimer = 0;
 
                 return this;
             }
             return null;
+        }
+
+        public void ForcedRelease()
+        {
+            owner.ForcedRelease();
+            owner = null;
+            maxAcceleration = 20;
+            this.Color = Color.White;
+            _tail.ParticleColor = Color.LightGray;
+            direction = Vector2.Zero;
         }
 
         public virtual void Release()
