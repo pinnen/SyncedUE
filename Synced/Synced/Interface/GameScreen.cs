@@ -26,11 +26,6 @@ namespace Synced.Interface
         Map _map;
         World world;
 
-        ScoreLabel playerOneScoreLabel;
-        ScoreLabel playerTwoScoreLabel;
-        ScoreLabel playerThreeScoreLabel;
-        ScoreLabel playerFourScoreLabel;
-
         public GameScreen(Game game) // TODO: tmp added world to parameters, might solve in a different way later. 
             : base(game)
         {
@@ -66,14 +61,8 @@ namespace Synced.Interface
                         {
                             if (crys is Crystal)
                             {
-
-                                //(crys as Crystal).RandomPosition();
-
-                                int rnd = new Random().Next(0,Map.crystalSpawnList.Count);
-
-                                (crys as Crystal).DeactivateCrystal(Map.crystalSpawnList[rnd].Position);
+                                (crys as Crystal).DeactivateCrystal(Map.crystalSpawnList[new Random().Next(0,Map.crystalSpawnList.Count)].Position);
                                 break;
-
                             }
                         }
 

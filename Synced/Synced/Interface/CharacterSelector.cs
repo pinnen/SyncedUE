@@ -34,10 +34,6 @@ namespace Synced.Interface
         #endregion
 
         #region Properties
-        SpriteBatch _spriteBatch
-        {
-            get { return (SpriteBatch)Game.Services.GetService(typeof(SpriteBatch)); }
-        }
         State _currentState
         {
             get;
