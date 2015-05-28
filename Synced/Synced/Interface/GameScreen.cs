@@ -67,10 +67,10 @@ namespace Synced.Interface
                             if (crys is Crystal)
                             {
 
+                                //(crys as Crystal).RandomPosition();
+
                                 int rnd = new Random().Next(0,Map.crystalSpawnList.Count);
                                 (crys as Crystal).SetPosition(Map.crystalSpawnList[rnd].Position);
-
-                                //(crys as Crystal).RandomPosition();
 
                             }
                         }
