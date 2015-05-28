@@ -29,7 +29,7 @@ namespace Synced
         SpriteBatch _spriteBatch;
         bool fullscreen = false;
         KeyboardState _lastState;
-
+        GamePadState _lastGamepad;
         // TODO: Test objects. Remove later
 
 
@@ -99,12 +99,9 @@ namespace Synced
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            if (Keyboard.GetState().IsKeyDown(Keys.Escape) && _lastState.IsKeyUp(Keys.Escape))
+            if (Keyboard.GetState().IsKeyDown(Keys.Escape) && _lastState.IsKeyUp(Keys.Escape) || GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed && _lastGamepad.Buttons.Back == ButtonState.Released)
                 ScreenManager.Instance.HandleBackEvent();
 
-            //TEMP EXIT FOR GAMEPADS
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
-                Exit();
             #region Debug
             if (Keyboard.GetState().IsKeyDown(Keys.F11) && _lastState.IsKeyUp(Keys.F11))
             {
@@ -112,7 +109,7 @@ namespace Synced
             }
 
             // TODO: Test objects. Remove later
-            
+            _lastGamepad = GamePad.GetState(PlayerIndex.One);
 
             // Update the statemachine
 

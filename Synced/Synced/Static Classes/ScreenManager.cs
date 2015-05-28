@@ -69,6 +69,9 @@ namespace Synced.Static_Classes
             //TODO: Add this functionality properly. 
         }
 
+        /// <summary>
+        /// Check if the ScreenManager have been properly initialized in the game components
+        /// </summary>
         public static bool Initialized
         {
             get;
@@ -186,8 +189,10 @@ namespace Synced.Static_Classes
             throw new NotImplementedException();
         }
 
-        private void NewGameEvent(Screen screen, EventArgs e)
+        private void NewGameEvent(MenuScreen screen, EventArgs e)
         {
+            int playerCount = screen.Count;
+
             _screenManager.Screens.Peek().Deactivated();
             _screenManager.AddScreen(GameScreen);
             CurrentState = ScreenState.GameScreen;
@@ -207,10 +212,17 @@ namespace Synced.Static_Classes
                     break;
                 case ScreenState.GameScreen:
                     //TODO:
+                    if (Screens.Peek() is GameScreen)
+                    {
+                        //Screens.Pop();
+                        //Screens.Peek().Activated();
+                        //CurrentState = ScreenState.MenuScreen;
+                    }
+                    else
+                    {
+                        //Screens.Pop();
+                    }
                     
-                    //Screens.Pop();
-                    //Screens.Peek().Activated();
-                    //CurrentState = ScreenState.MenuScreen;
                     break;
                 default:
                     break;
