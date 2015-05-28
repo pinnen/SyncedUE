@@ -69,6 +69,7 @@ namespace Synced.InGame.Actors.Zones
                         {
                             if (_evilCrystalList.Count + _evilUnitList.Count > _maximumBunshin && _evilUnitList.Count > 0)
                             {
+                                world.RemoveBody(_evilUnitList[0].RigidBody);
                                 SyncedGameCollection.ComponentCollection.Remove(_evilUnitList[0]);
                                 _evilUnitList.RemoveAt(0);
                             }
@@ -79,6 +80,7 @@ namespace Synced.InGame.Actors.Zones
                         {
                             if (_evilCrystalList.Count + _evilUnitList.Count > _maximumBunshin && _evilCrystalList.Count > 0) 
                             {
+                                world.RemoveBody(_evilCrystalList[0].RigidBody);
                                 SyncedGameCollection.ComponentCollection.Remove(_evilCrystalList[0]);
                                 _evilCrystalList.RemoveAt(0);
                             }
@@ -119,28 +121,31 @@ namespace Synced.InGame.Actors.Zones
 
         public override void Delete() 
         {
-            for (int i = 0; i < _evilCrystalList.Count; i++)
+            while (_evilCrystalList.Count > 0)
             {
-                _particleEffects.UpdatePosition(_evilCrystalList[i].Position);
-                _particleEffects.ParticleColor = _evilCrystalList[i].Color * 0.01f;
-                _particleEffects.GenerateClusterParticles();
-                _particleEffects.ShatterParticles(50, 5);
-                _particleEffects.ExpandAndRotate();
-                SyncedGameCollection.ComponentCollection.Remove(_evilCrystalList[i]);
-                //_evilCrystalList[i].Dispose();
+                world.RemoveBody(_evilCrystalList[0].RigidBody);
+                //_particleEffects.UpdatePosition(_evilCrystalList[0].Position);
+                //_particleEffects.ParticleColor = _evilCrystalList[0].Color * 0.01f;
+                //_particleEffects.GenerateClusterParticles();
+                //_particleEffects.ShatterParticles(50, 5);
+                //_particleEffects.ExpandAndRotate();
+                SyncedGameCollection.ComponentCollection.Remove(_evilCrystalList[0]);
+                _evilCrystalList.RemoveAt(0);
             }
             _evilCrystalList.Clear();
-            for (int i = 0; i < _evilUnitList.Count; i++)
+            while (_evilUnitList.Count > 0)
             {
-                _particleEffects.UpdatePosition(_evilUnitList[i].Position);
-                _particleEffects.ParticleColor = _evilUnitList[i].Color * 0.01f;
-                _particleEffects.GenerateClusterParticles();
-                _particleEffects.ShatterParticles(50, 5);
-                _particleEffects.ExpandAndRotate();
-                SyncedGameCollection.ComponentCollection.Remove(_evilUnitList[i]);
-                //_evilUnitList[i].Dispose();
+                world.RemoveBody(_evilUnitList[0].RigidBody);
+                //_particleEffects.UpdatePosition(_evilUnitList[0].Position);
+                //_particleEffects.ParticleColor = _evilUnitList[0].Color * 0.01f;
+                //_particleEffects.GenerateClusterParticles();
+                //_particleEffects.ShatterParticles(50, 5);
+                //_particleEffects.ExpandAndRotate();
+                SyncedGameCollection.ComponentCollection.Remove(_evilUnitList[0]);
+                _evilUnitList.RemoveAt(0);
             }
             _evilUnitList.Clear();
+            _evilCrystalList.Clear();
             base.Delete();
         }
     }

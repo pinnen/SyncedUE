@@ -66,7 +66,7 @@ namespace Synced.Interface
                         {
                             if (crys is Crystal)
                             {
-                                (crys as Crystal).RandomPosition();
+                                //(crys as Crystal).RandomPosition();
                             }
                         }
 
