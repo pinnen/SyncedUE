@@ -161,8 +161,8 @@ namespace Synced.Actors
         // IVictim
         float _circleEffectTimer = 0.0f;
         float _triangleEffectTimer = 0.12f;
-        float _hexagonEffectTimer = 0.0f;
-        float _pentagonEffectTimer = 0.0f;
+        float _hexagonEffectTimer = 0.4f;
+        float _pentagonEffectTimer = 0.12f;
         bool _fadeOut = false;
 
         public float CircleEffectTimer { get { return _circleEffectTimer; } set { _circleEffectTimer = value; } }
@@ -175,5 +175,6 @@ namespace Synced.Actors
         public float LocalTimeScale { get { return accelerationScaling; } set { accelerationScaling = value; } }
         public float InvisibilityAlpha { get { return this.Alpha; } set { this.Alpha = value; } }
         public ParticleEngine TrailEngine { get { return _trail; } }
+        public Vector2 VictimLinearVelocity { get { return LinearVelocity; } }
     }
 }

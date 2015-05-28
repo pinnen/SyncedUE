@@ -96,13 +96,19 @@ namespace Synced.Actors
                 case ZoneState.Delete:
                     //_timeSinceSpawn
                     RigidBody.Dispose();
-                    SyncedGameCollection.ComponentCollection.Remove(this);
+                    this.Delete();
+                    
                     break;
                 default:
                     break;
             }
 
             base.Update(gameTime);
+        }
+
+        public virtual void Delete() 
+        {
+            SyncedGameCollection.ComponentCollection.Remove(this);
         }
 
     }

@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Synced.Actors;
+using Synced.Content;
 using Synced.Static_Classes;
 using System;
 using System.Collections.Generic;
@@ -12,14 +13,45 @@ namespace Synced.InGame.Actors.Zones
 {
     class HexagonZone : Zone
     {
+        Random _random;
+        Game _game;
+        World _world;
+        int _maximumBunshin;
+
+        List<EvilCrystal> _evilCrystalList;
+        List<EvilUnit> _evilUnitList;
+
+        float _waitTime;
+        ParticleEngine _particleEffects;
+
         public HexagonZone(Texture2D texture, Vector2 position, float rotation, Color color, Game game, World world)
             : base(texture, position, rotation, color, game, world)
         {
+            _random = new Random();
+            _evilCrystalList = new List<EvilCrystal>();
+            _evilUnitList = new List<EvilUnit>();
+            _game = game;
+            _world = world;
+            _maximumBunshin = 15;
+            _waitTime = 0.4f;
 
+            _particleEffects = new ParticleEngine(100, Library.Particle.trailTexture, position, color * 0.005f, Vector2.Zero, 0.2f, 0.0f, 0.5f, DrawingHelper.DrawingLevel.Medium, game);
+            SyncedGameCollection.ComponentCollection.Add(_particleEffects);
         }
 
         public override void Update(GameTime gameTime)
         {
+            for (int i = 0; i < _victims.Count; i++)
+            {
+                _victims[i].HexagonEffectTimer -= (float)gameTime.ElapsedGameTime.TotalSeconds;
+                if (_victims[i].HexagonEffectTimer <= 0.0f)
+                {
+                    _victims[i].HexagonEffectTimer = _waitTime;
+                    _victims.RemoveAt(i);
+                    i--;
+
+                }
+            }
 
             base.Update(gameTime);
         }
@@ -29,14 +61,87 @@ namespace Synced.InGame.Actors.Zones
 
             if (other != null)
             {
-                if (other.Tag == TagCategories.UNIT)
+                if (other is IVictim)
                 {
-                    Color = Color.Magenta;
-                    return false;
+                    if (!_victims.Contains((IVictim)other))
+                    {
+                        if (other is Unit)
+                        {
+                            if (_evilCrystalList.Count + _evilUnitList.Count > _maximumBunshin && _evilUnitList.Count > 0)
+                            {
+                                SyncedGameCollection.ComponentCollection.Remove(_evilUnitList[0]);
+                                _evilUnitList.RemoveAt(0);
+                            }
+                            CreateVictimBunshin((IVictim) other);
+                            _victims.Add((IVictim)other);
+                        }
+                        else if (other is Crystal)
+                        {
+                            if (_evilCrystalList.Count + _evilUnitList.Count > _maximumBunshin && _evilCrystalList.Count > 0) 
+                            {
+                                SyncedGameCollection.ComponentCollection.Remove(_evilCrystalList[0]);
+                                _evilCrystalList.RemoveAt(0);
+                            }
+                            CreateVictimBunshin((IVictim) other);
+                            _victims.Add((IVictim)other);
+                        }
+                    }
                 }
+
             }
             return false;
 
+        }
+
+        private void CreateVictimBunshin(IVictim victim) 
+        {
+            if (victim is Crystal)
+            {
+                Vector2 randomDirection = new Vector2(_random.Next(-30,30),_random.Next(-30,30));
+                randomDirection.Normalize();
+                EvilCrystal tempEvilCrystal = new EvilCrystal(victim.VictimTexture, victim.Position, DrawingHelper.DrawingLevel.Medium, _game, _world, victim.Color);
+                tempEvilCrystal.Direction = randomDirection;
+                tempEvilCrystal.LinearVelocity = victim.VictimLinearVelocity;
+                _evilCrystalList.Add(tempEvilCrystal);
+                SyncedGameCollection.ComponentCollection.Add(tempEvilCrystal);
+            }
+
+            else if(victim is Unit)
+            {
+                float randomAngleOffset = (_random.Next(-180,180)/10);
+                EvilUnit tempEvilUnit = new EvilUnit(victim.VictimTexture, victim.Position, victim.Color, _game, _world, DrawingHelper.DrawingLevel.Medium, (Unit)victim,randomAngleOffset);
+
+                _evilUnitList.Add(tempEvilUnit);
+                SyncedGameCollection.ComponentCollection.Add(tempEvilUnit);
+
+            }
+        }
+
+        public override void Delete() 
+        {
+            for (int i = 0; i < _evilCrystalList.Count; i++)
+            {
+                _particleEffects.UpdatePosition(_evilCrystalList[i].Position);
+                _particleEffects.ParticleColor = _evilCrystalList[i].Color * 0.01f;
+                _particleEffects.GenerateClusterParticles();
+                _particleEffects.ShatterParticles(50, 5);
+                _particleEffects.ExpandAndRotate();
+                SyncedGameCollection.ComponentCollection.Remove(_evilCrystalList[i]);
+                //_evilCrystalList[i].Dispose();
+            }
+            _evilCrystalList.Clear();
+            for (int i = 0; i < _evilUnitList.Count; i++)
+            {
+                _particleEffects.UpdatePosition(_evilUnitList[i].Position);
+                _particleEffects.ParticleColor = _evilUnitList[i].Color * 0.01f;
+                _particleEffects.GenerateClusterParticles();
+                _particleEffects.ShatterParticles(50, 5);
+                _particleEffects.ExpandAndRotate();
+                SyncedGameCollection.ComponentCollection.Remove(_evilUnitList[i]);
+                //_evilUnitList[i].Dispose();
+            }
+            _evilUnitList.Clear();
+            base.Delete();
         }
     }
 }
