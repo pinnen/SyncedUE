@@ -7,12 +7,8 @@
 // Robin Calmegård
 using FarseerPhysics.Dynamics;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using Synced.Actors;
-using Synced.CollisionShapes;
 using Synced.Content;
 using Synced.InGame;
-using Synced.InGame.Actors;
 using Synced.MapNamespace;
 using Synced.MapNameSpace;
 using Synced.Static_Classes;
@@ -23,6 +19,7 @@ namespace Synced.Interface
 {
     class GameScreen : Screen
     {
+        public int GameScore = 5;
         public event EndGame GameEnded;
         Map _map;
         World world;
@@ -64,7 +61,7 @@ namespace Synced.Interface
             {
                 if (ob is ScoreLabel)
                 {
-                    if ((ob as ScoreLabel).Score >= 5)
+                    if ((ob as ScoreLabel).Score >= GameScore)
                     {
                         winner = (Library.Colors.ColorName)((int)((ob as ScoreLabel).PlayerIndex));
                         return true;

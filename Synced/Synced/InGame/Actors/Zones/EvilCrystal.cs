@@ -15,9 +15,6 @@ namespace Synced.InGame.Actors.Zones
     class EvilCrystal : MovableCollidable
     {
         ParticleEngine _tail;
-        float _shootForce;
-        float _cooldownTimer;
-        float _cooldownInSeconds;
 
         public EvilCrystal(Texture2D texture, Vector2 position, DrawingHelper.DrawingLevel drawingLevel, Game game, World world, Color color)
             : base(texture, position, drawingLevel, game, world)
@@ -37,8 +34,6 @@ namespace Synced.InGame.Actors.Zones
             if(color == Color.White)_tail.ParticleColor = Color.LightGray;
 
             acceleration = maxAcceleration = 20;
-            _shootForce = 2000f;
-            _cooldownInSeconds = 1f;
             Color = color;
         }
 

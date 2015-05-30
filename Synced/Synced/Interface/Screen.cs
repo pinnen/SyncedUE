@@ -56,10 +56,6 @@ namespace Synced.Interface
         }
         #endregion
 
-        #region Variables
-        static GameComponentCollection staticGameComponents;
-        #endregion
-
         #region Properties
         /// <summary>
         /// Screen Position

@@ -4,7 +4,6 @@
 // Edited by:
 // Pontus Magnusson
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Synced.Actors;
 using Synced.Content;
