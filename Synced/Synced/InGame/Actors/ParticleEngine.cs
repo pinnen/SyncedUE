@@ -22,7 +22,6 @@ namespace Synced.InGame.Actors
         Queue<Particle> _sleepingParticles;
         int _particleAmount; // Number of particles to generate each update
         Random random;
-        Game game;
         Texture2D _particleTexture;
         bool isOneShot;
         float OneShotLifeTime;
@@ -67,7 +66,6 @@ namespace Synced.InGame.Actors
             _particleTexture = particleTexture;
             _particleOrigin.X = _particleTexture.Width / 2;
             _particleOrigin.Y = _particleTexture.Height / 2;
-            this.game = game;
             dLevel = drawingLevel;
             isOneShot = false;
         }
@@ -108,7 +106,7 @@ namespace Synced.InGame.Actors
             {
                 if (_sleepingParticles.Count == 0)
                 {
-                    Particle tempP = new Particle(_particleTexture, _particlePosition, _particleColor, _particleOrigin, scale, _particleRotation, lifetime,dLevel,game);
+                    Particle tempP = new Particle(_particleTexture, _particlePosition, _particleColor, _particleOrigin, scale, _particleRotation, lifetime,dLevel,Game);
                     _particles.Add(tempP);
                     SyncedGameCollection.ComponentCollection.Add(tempP);
                 }
@@ -139,7 +137,7 @@ namespace Synced.InGame.Actors
                 {
                     
                     Vector2 randomPosition = new Vector2(_particlePosition.X + (float)random.Next(-effectSize,effectSize),_particlePosition.Y + (float)random.Next(-effectSize*50,effectSize*50));
-                    Particle tempP = new Particle(_particleTexture,randomPosition,_particleColor,_particleOrigin,scale,0.0f,lifetime,dLevel,game);
+                    Particle tempP = new Particle(_particleTexture,randomPosition,_particleColor,_particleOrigin,scale,0.0f,lifetime,dLevel,Game);
                     _particles.Add(tempP);
                     SyncedGameCollection.ComponentCollection.Add(tempP);
                 }
@@ -176,7 +174,7 @@ namespace Synced.InGame.Actors
 
                 if (_sleepingParticles.Count == 0)
                 {
-                    Particle tempP = new Particle(_particleTexture, tmpPosition, _particleColor, _particleOrigin, scale, 0.0f, lifetime,dLevel, game);
+                    Particle tempP = new Particle(_particleTexture, tmpPosition, _particleColor, _particleOrigin, scale, 0.0f, lifetime,dLevel, Game);
                     _particles.Add(tempP);
                     SyncedGameCollection.ComponentCollection.Add(tempP);
                 }
@@ -197,7 +195,7 @@ namespace Synced.InGame.Actors
             {
                 Vector2 randomPosition = _particlePosition;
                 float randomRotation = random.Next();
-                Particle tempP = new Particle(_particleTexture, randomPosition, _particleColor, _particleOrigin, _particleScale, randomRotation, _particleLifetime, dLevel, game);
+                Particle tempP = new Particle(_particleTexture, randomPosition, _particleColor, _particleOrigin, _particleScale, randomRotation, _particleLifetime, dLevel, Game);
                 _particles.Add(tempP);
                 SyncedGameCollection.ComponentCollection.Add(tempP);
             }
@@ -212,7 +210,7 @@ namespace Synced.InGame.Actors
             {
                 if (_sleepingParticles.Count == 0)
                 {
-                    Particle tempP = new Particle(_particleTexture, positions[i], _particleColor, _particleOrigin, scale, 0.0f, lifetime, dLevel, game);
+                    Particle tempP = new Particle(_particleTexture, positions[i], _particleColor, _particleOrigin, scale, 0.0f, lifetime, dLevel, Game);
                     _particles.Add(tempP);
                     SyncedGameCollection.ComponentCollection.Add(tempP);
                 }
