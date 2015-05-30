@@ -73,6 +73,7 @@
     <Compile Include="InGame\Actors\Zone.cs" />
     <Compile Include="InGame\Actors\Sprite.cs" />
     <Compile Include="Interface\ScoreLabel.cs" />
+    <Compile Include="Interface\SettingsScreen.cs" />
     <Compile Include="Interface\SplashScreen.cs" />
     <Compile Include="Interface\WinScreen.cs" />
     <Compile Include="Map\BorderData.cs" />
