@@ -23,17 +23,10 @@ namespace Synced.InGame.Actors
         #region Variables
         private float _timeSinceStart; // How long time the particle has existed.
         private float _lifetime; // The predefined length of the particle's existence.
-        private Texture2D _texture;
-        private Vector2 _position;
-        private Color _color;
-        private Vector2 _origin;
-        private float _scale;
-        private float _rotation;
         private bool _isMoving;
         private Vector2 _direction;
         private float _speed;
         private float _colorStrength;
-        private float _fadeAlpha;
         private float _procentualLifetime;
         #endregion
 
@@ -43,21 +36,6 @@ namespace Synced.InGame.Actors
         {
             get { return _lifetime <= _timeSinceStart; }
         }
-        public Vector2 pPosition
-        {
-            get { return _position; }
-            set { _position = value; }
-        }
-        public float pRotation
-        {
-            get { return _rotation; }
-            set { _rotation = value; }
-        }
-        public float FadeAlpha
-        {
-            get { return _fadeAlpha; }
-            set { _fadeAlpha = value; }
-        }
         #endregion
 
         #region Constructors
@@ -66,13 +44,11 @@ namespace Synced.InGame.Actors
         {
             _lifetime = lifetime;
             _timeSinceStart = 0.0f;
-            _texture = texture;
-            _position = position;
-            _color = color;
-            _origin = origin;
-            _scale = scale;
-            _rotation = rotation;
-            _fadeAlpha = 1.0f;
+            Color = color;
+            Origin = origin;
+            Scale = scale;
+            Rotation = rotation;
+            Alpha = 1.0f;
         }
         #endregion
 
@@ -88,25 +64,25 @@ namespace Synced.InGame.Actors
 
         public void WakeTrailParticle(Vector2 position, Color color, float scale, float lifetime) 
         {
-            _position = position;
-            _color = color;
-            _scale = scale;
+            Position = position;
+            Color = color;
+            Scale = scale;
             _lifetime = lifetime;
         }
 
         public void WakeRandomParticle(Vector2 position, Color color, float scale, float lifetime, float randomX, float randomY)
         {
-            _position = new Vector2(position.X + randomX, position.Y + randomY);
-            _color = color;
-            _scale = scale;
+            Position = new Vector2(position.X + randomX, position.Y + randomY);
+            Color = color;
+            Scale = scale;
             _lifetime = lifetime;
         }
 
         public void WakeLineParticle(Vector2 position, Color color, float scale, float lifetime)
         {
-            _position = position;
-            _color = color;
-            _scale = scale;
+            Position = position;
+            Color = color;
+            Scale = scale;
             _lifetime = lifetime;
         }
 
@@ -119,14 +95,14 @@ namespace Synced.InGame.Actors
 
             if (_isMoving)
             {
-                _position += (_direction * _speed);
+                Position += (_direction * _speed);
             }
         }
 
         public override void Draw(GameTime gameTime)
         {
             _spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.LinearWrap, DepthStencilState.None, RasterizerState.CullNone, null, ResolutionManager.GetTransformationMatrix());
-            _spriteBatch.Draw(_texture, _position, null, (_color * _colorStrength * _fadeAlpha), _rotation, _origin, _scale, SpriteEffects.None, 1.0f); // TODO: use body pos/rot or Sprite pos/rot? 
+            _spriteBatch.Draw(Texture, Position, null, (Color * _colorStrength * Alpha), Rotation, Origin, Scale, SpriteEffects.None, 1.0f); // TODO: use body pos/rot or Sprite pos/rot? 
             _spriteBatch.End();
 
             //_spriteBatch.Begin(SpriteSortMode.FrontToBack, BlendState.AlphaBlend);

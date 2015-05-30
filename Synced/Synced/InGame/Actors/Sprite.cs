@@ -1,5 +1,4 @@
-﻿using FarseerPhysics;
-// Sprite.cs
+﻿// Sprite.cs
 // Introduced: 2015-04-14
 // Last edited: 2015-05-27
 // Edited by:
@@ -9,10 +8,6 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Synced.Interface;
 using Synced.Static_Classes;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Synced.Actors
 {
@@ -25,11 +20,11 @@ namespace Synced.Actors
         }
         public Vector2 Origin { get; set; }
         public Color Color { get;  set; }
-        public float Rotation { get; protected set; }
+        public float Rotation { get; set; }
         public Vector2 Position { get; set; }
         public Texture2D Texture { get; set;}
         public float Scale { get; set; }
-        public float Alpha { get; protected set; }
+        public float Alpha { get; set; }
 
         public Sprite(Texture2D texture, Vector2 position, Color color, DrawingHelper.DrawingLevel drawingLevel, bool centered, Game game)
             : base(game)

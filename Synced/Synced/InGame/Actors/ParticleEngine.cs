@@ -250,7 +250,7 @@ namespace Synced.InGame.Actors
         {
             foreach (Particle p in _particles)
             {
-                p.pRotation += rotation;
+                p.Rotation += rotation;
                 p.Scale += expansion;
             }
         }
@@ -258,18 +258,18 @@ namespace Synced.InGame.Actors
         {
             foreach (Particle p in _particles)
             {
-                p.pPosition += positionOffset;
+                p.Position += positionOffset;
             }
         }
         public void SetParticleFadeAlpha(float alpha) 
         {
             for (int i = 0; i < _particles.Count; i++)
             {
-                _particles[i].FadeAlpha = alpha;
+                _particles[i].Alpha = alpha;
             }
             foreach (Particle p in _sleepingParticles)
             {
-                p.FadeAlpha = alpha;
+                p.Alpha = alpha;
             }
             
         }
