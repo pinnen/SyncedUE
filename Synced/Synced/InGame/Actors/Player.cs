@@ -244,30 +244,41 @@ namespace Synced.Actors
                 #endregion
 
                 #region SpeedUp
-                if (AreTrailsActive)
+                Left.Acceleration = 40.0f;
+                Right.Acceleration = 40.0f;
+                Left.UseEffectParticles = false;
+                Right.UseEffectParticles = false;
+                if (AreTrailsActive && ConvertUnits.ToSimUnits(GetDistanceBetweenUnits()) < 2.0f)
                 {
-                    if (ConvertUnits.ToSimUnits(GetDistanceBetweenUnits()) < 2.0f)
-                    {
-                        Left.Acceleration = 70.0f;
-                        Right.Acceleration = 70.0f;
-                        Left.UseEffectParticles = true;
-                        Right.UseEffectParticles = true;
-                    }
-                    else
-                    {
-                        Left.Acceleration = 40.0f;
-                        Right.Acceleration = 40.0f;
-                        Left.UseEffectParticles = false;
-                        Right.UseEffectParticles = false;
-                    }
+                    Left.Acceleration = 70.0f;
+                    Right.Acceleration = 70.0f;
+                    Left.UseEffectParticles = true;
+                    Right.UseEffectParticles = true;
                 }
-                else
-                {
-                    Left.Acceleration = 40.0f;
-                    Right.Acceleration = 40.0f;
-                    Left.UseEffectParticles = false;
-                    Right.UseEffectParticles = false;
-                }
+                //if (AreTrailsActive)
+                //{
+                //    if (ConvertUnits.ToSimUnits(GetDistanceBetweenUnits()) < 2.0f)
+                //    {
+                //        Left.Acceleration = 70.0f;
+                //        Right.Acceleration = 70.0f;
+                //        Left.UseEffectParticles = true;
+                //        Right.UseEffectParticles = true;
+                //    }
+                //    else
+                //    {
+                //        Left.Acceleration = 40.0f;
+                //        Right.Acceleration = 40.0f;
+                //        Left.UseEffectParticles = false;
+                //        Right.UseEffectParticles = false;
+                //    }
+                //}
+                //else
+                //{
+                //    Left.Acceleration = 40.0f;
+                //    Right.Acceleration = 40.0f;
+                //    Left.UseEffectParticles = false;
+                //    Right.UseEffectParticles = false;
+                //}
                 #endregion
 
                 #region Barrier
