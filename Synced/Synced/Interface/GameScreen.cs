@@ -37,7 +37,7 @@ namespace Synced.Interface
 
             Rectangle[] rectangles = new Rectangle[] { new Rectangle(140, 20, 40, 40), new Rectangle(1700, 20, 40, 40),new Rectangle(140, 1020, 40, 40), new Rectangle(1700, 1020, 40, 40) };
             // Controls
-            for (int i = 0; i < 4; i++)
+            for (int i = 0; i < playerinfo.Count; i++)
             {
                 GameComponents.Add(new ScoreLabel((PlayerIndex)i, rectangles[i], Game));
             }
