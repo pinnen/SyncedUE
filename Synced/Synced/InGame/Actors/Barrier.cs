@@ -15,7 +15,7 @@ using System.Text;
 
 namespace Synced.InGame.Actors
 {
-    class Barrier : CollidingSprite
+    class Barrier : CollidingSprite, IActive
     {
         #region Variables
         List<Body> _barrierBodies;
@@ -81,7 +81,7 @@ namespace Synced.InGame.Actors
                 _barrierBodies[i].UserData = "BARRIER";
                 _barrierBodies[i].OnCollision += OnCollision;
             }
-            Deactivate();
+            Deactivated();
         }
 
         public override bool OnCollision(Fixture f1, Fixture f2, FarseerPhysics.Dynamics.Contacts.Contact contact)
@@ -139,7 +139,7 @@ namespace Synced.InGame.Actors
             }
         }
 
-        public void Activate()
+        public void Activated()
         {
             isActive = true;
             hiddenBody1.Position = _start.RigidBody.Position;
@@ -152,7 +152,7 @@ namespace Synced.InGame.Actors
             // TODO: creating animation? sound?
         }
 
-        public void Deactivate()
+        public void Deactivated()
         {
             isActive = false;
             List<Vector2> positions = new List<Vector2>();
@@ -166,6 +166,5 @@ namespace Synced.InGame.Actors
 
             Library.Audio.PlaySoundEffect(Library.Audio.SoundEffects.BarrierBreak);
         }
-
     }
 }

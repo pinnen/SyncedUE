@@ -6,8 +6,6 @@
 // 
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Microsoft.Xna.Framework;
 using Synced.Content;
 using Synced.Static_Classes;
@@ -15,8 +13,6 @@ using Microsoft.Xna.Framework.Input;
 using FarseerPhysics.Dynamics;
 using Synced.InGame.Actors;
 using FarseerPhysics;
-using Synced.MapNamespace;
-using Synced.Interface;
 using Synced.InGame.Actors.Zones;
 
 namespace Synced.Actors
@@ -119,11 +115,11 @@ namespace Synced.Actors
         }
         private void ActivateBarrier()
         {
-            _barrier.Activate();
+            _barrier.Activated();
         }
         private void DeActivateBarrier()
         {
-            _barrier.Deactivate();
+            _barrier.Deactivated();
         }
         #endregion
 
@@ -286,7 +282,7 @@ namespace Synced.Actors
                 {
                     if (CheckBarrierActivationCondition())
                     {
-                        _barrier.Activate();
+                        _barrier.Activated();
                         isBarrierActive = true;
                     }
                 }
@@ -294,7 +290,7 @@ namespace Synced.Actors
                 {
                     if (CheckBarrierDeactivationCondition())
                     {
-                        _barrier.Deactivate();
+                        _barrier.Deactivated();
                         isBarrierActive = false;
                     }
                 }

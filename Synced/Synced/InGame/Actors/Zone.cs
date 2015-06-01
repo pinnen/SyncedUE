@@ -1,14 +1,10 @@
-﻿using FarseerPhysics;
-using FarseerPhysics.Collision;
-using FarseerPhysics.Dynamics;
-using FarseerPhysics.Factories;
+﻿using FarseerPhysics.Dynamics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Synced.CollisionShapes;
 using Synced.Content;
 using Synced.InGame;
 using Synced.InGame.Actors;
-using Synced.Interface;
 using Synced.Static_Classes;
 // Zone.cs
 // Introduced: 2015-04-14
@@ -17,10 +13,7 @@ using Synced.Static_Classes;
 // Pontus Magnusson
 // Lina Juuso
 // 
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Synced.Actors
 {
