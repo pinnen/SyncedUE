@@ -20,6 +20,7 @@ namespace Synced.Interface
             _score = 0;
             PlayerIndex = playerIndex;
             Content = ScoreFormat();
+            SetFont = Synced.Content.Library.Font.ScoreFont;
         }
 
         public void IncreaseScore()
