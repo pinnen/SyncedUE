@@ -102,14 +102,6 @@ namespace Synced.Interface
         }
         protected override void LoadContent()
         {
-            foreach (var ob in GameComponents)
-            {
-                if (ob is ScoreLabel)
-                {
-                    (ob as ScoreLabel).SetFont = Library.Font.ScoreFont;
-                }
-            }
-
             base.LoadContent();
         }
 
