@@ -19,13 +19,29 @@ namespace Synced.Interface
         {
             _score = 0;
             PlayerIndex = playerIndex;
-            Content = _score.ToString();
+            Content = ScoreFormat();
         }
 
         public void IncreaseScore()
         {
             _score++;
-            Content = _score.ToString();
+            Content = ScoreFormat();
+        }
+        private string ScoreFormat()
+        {
+            switch (PlayerIndex)
+            {
+                case PlayerIndex.Four:
+                    return String.Format("{1} :{0}", PlayerIndex.ToString(), _score.ToString());
+                case PlayerIndex.One:
+                    return String.Format("{0}: {1}", PlayerIndex.ToString(), _score.ToString());
+                case PlayerIndex.Three:
+                    return String.Format("{0}: {1}", PlayerIndex.ToString(), _score.ToString());
+                case PlayerIndex.Two:
+                    return String.Format("{1} :{0}", PlayerIndex.ToString(), _score.ToString());
+                default:
+                    return "";
+            }
         }
     }
 }

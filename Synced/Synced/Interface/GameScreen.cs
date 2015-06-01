@@ -35,9 +35,9 @@ namespace Synced.Interface
             _map = new Map(Library.Map.Path[Library.Map.Name.Paper], game, world);
             GameComponents.Add(_map);
 
-            Rectangle[] rectangles = new Rectangle[] { new Rectangle(20, 20, 40, 40), new Rectangle(1860, 20, 40, 40),new Rectangle(20, 1020, 40, 40), new Rectangle(1860, 1020, 40, 40) };
+            Rectangle[] rectangles = new Rectangle[] { new Rectangle(140, 20, 40, 40), new Rectangle(1700, 20, 40, 40),new Rectangle(140, 1020, 40, 40), new Rectangle(1700, 1020, 40, 40) };
             // Controls
-            for (int i = 0; i < playerinfo.Count; i++)
+            for (int i = 0; i < 4; i++)
             {
                 GameComponents.Add(new ScoreLabel((PlayerIndex)i, rectangles[i], Game));
             }
