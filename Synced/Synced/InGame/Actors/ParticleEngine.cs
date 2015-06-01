@@ -101,21 +101,19 @@ namespace Synced.InGame.Actors
 
             _particleRotation = MathHelper.ToRadians(random.Next(0, 360));
 
-
+            Particle tempP;
             for (int i = 0; i < _particleAmount; i++)
             {
                 if (_sleepingParticles.Count == 0)
                 {
-                    Particle tempP = new Particle(_particleTexture, _particlePosition, _particleColor, _particleOrigin, scale, _particleRotation, lifetime,dLevel,Game);
+                    tempP = new Particle(_particleTexture, _particlePosition, _particleColor, _particleOrigin, scale, _particleRotation, lifetime,dLevel,Game);
                     _particles.Add(tempP);
                     SyncedGameCollection.ComponentCollection.Add(tempP);
+                    continue;
                 }
-                else
-                {
-                    currentParticle = _sleepingParticles.Dequeue();
-                    currentParticle.WakeTrailParticle(_particlePosition, _particleColor, scale, lifetime);
-                    _particles.Add(currentParticle);
-                }
+                currentParticle = _sleepingParticles.Dequeue();
+                currentParticle.WakeTrailParticle(_particlePosition, _particleColor, scale, lifetime);
+                _particles.Add(currentParticle);
             }
         }
         /// <summary>
@@ -135,18 +133,15 @@ namespace Synced.InGame.Actors
             {
                 if (_sleepingParticles.Count == 0)
                 {
-                    
                     Vector2 randomPosition = new Vector2(_particlePosition.X + (float)random.Next(-effectSize,effectSize),_particlePosition.Y + (float)random.Next(-effectSize*50,effectSize*50));
                     Particle tempP = new Particle(_particleTexture,randomPosition,_particleColor,_particleOrigin,scale,0.0f,lifetime,dLevel,Game);
                     _particles.Add(tempP);
                     SyncedGameCollection.ComponentCollection.Add(tempP);
+                    continue;
                 }
-                else
-                {
-                    currentParticle = _sleepingParticles.Dequeue();
-                    currentParticle.WakeRandomParticle(_particlePosition, _particleColor, scale, lifetime, (float)random.Next(-effectSize, effectSize), (float)random.Next(-effectSize, effectSize));
-                    _particles.Add(currentParticle);
-                }
+                currentParticle = _sleepingParticles.Dequeue();
+                currentParticle.WakeRandomParticle(_particlePosition, _particleColor, scale, lifetime, (float)random.Next(-effectSize, effectSize), (float)random.Next(-effectSize, effectSize));
+                _particles.Add(currentParticle);
             }
         }
 
@@ -233,12 +228,13 @@ namespace Synced.InGame.Actors
         }
         public void ShatterParticles(int shatterDirection,int shatterSpeed) 
         {
-
+            Vector2 direction;
+            float speed;
             foreach (Particle p in _particles)
             {
-                Vector2 direction = new Vector2(random.Next(-shatterDirection, shatterDirection), random.Next(-shatterDirection, shatterDirection));
+                direction = new Vector2(random.Next(-shatterDirection, shatterDirection), random.Next(-shatterDirection, shatterDirection));
                 direction.Normalize();
-                float speed = random.Next(-shatterSpeed, shatterSpeed);
+                speed = random.Next(-shatterSpeed, shatterSpeed);
                 p.SetMovement(direction, speed);
             }
         }
