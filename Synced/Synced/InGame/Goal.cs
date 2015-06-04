@@ -32,18 +32,18 @@ namespace Synced.MapNameSpace
         NorthWest
     }
 
-    class Goal : GameComponent
+    class Goal : DrawableGameComponent
     {
-        DummyCircle InnerCircle;
-        Circle OuterCircle;
-        TexturePolygon Border;
+        DummyCircle _innerCircle;
+        public Circle OuterCircle;
+        public TexturePolygon Border;
 
         public Goal(Texture2D goalTexture, Texture2D borderTexture, Vector2 position, GoalDirections direction, DrawingHelper.DrawingLevel drawingLevel, Game game, World world)
             : base(game)
         {
-            InnerCircle = new DummyCircle(position, ((goalTexture.Width / 2) / 2) / 2, game, world);
-            InnerCircle.setOnCollisionFunction(OnCollision);
-            InnerCircle.SetCollisionCategory(Category.Cat10);
+            _innerCircle = new DummyCircle(position, ((goalTexture.Width / 2) / 2) / 2, game, world);
+            _innerCircle.setOnCollisionFunction(OnCollision);
+            _innerCircle.SetCollisionCategory(Category.Cat10);
             OuterCircle = new Circle(goalTexture, position, goalTexture.Width / 2, game, world);
             OuterCircle.RigidBody.CollisionCategories = Category.Cat9;
             //OuterCircle.setOnCollisionFunction(OnCollision);

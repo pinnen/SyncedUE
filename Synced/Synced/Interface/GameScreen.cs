@@ -7,6 +7,7 @@
 // Robin Calmegård
 using FarseerPhysics.Dynamics;
 using Microsoft.Xna.Framework;
+using Synced.Actors;
 using Synced.Content;
 using Synced.InGame;
 using Synced.MapNamespace;
@@ -33,26 +34,36 @@ namespace Synced.Interface
             //GameComponents.Add(SyncedGameCollection.Instance);
 
             _map = new Map(Library.Map.Path[Library.Map.Name.Paper], game, world);
-            GameComponents.Add(_map);
+            foreach (var item in _map.Components)
+            {
+                GameComponents.Add(item);
+            }
 
-            Rectangle[] rectangles = new Rectangle[] { new Rectangle(140, 20, 40, 40), new Rectangle(1700, 20, 40, 40),new Rectangle(140, 1020, 40, 40), new Rectangle(1700, 1020, 40, 40) };
-            // Controls
+            Rectangle[] rectangles = new Rectangle[] { new Rectangle(140, 20, 40, 40), new Rectangle(1700, 20, 40, 40), new Rectangle(140, 1020, 40, 40), new Rectangle(1700, 1020, 40, 40) };
+
+            // Player & Score
             for (int i = 0; i < playerinfo.Count; i++)
             {
                 GameComponents.Add(new ScoreLabel((PlayerIndex)i, rectangles[i], Game));
+                Player p = new Player(_map.playerStartData[i].PlayerIndex, playerinfo[i], (Library.Colors.ColorName)i, Game, world, _map.playerStartData[i].Position, _map.playerStartData[i].Position2);
+                GameComponents.Add(p);
+                GameComponents.Add(p.Right);
+                GameComponents.Add(p.Left);
             }
+
+            // Crystal
+            GameComponents.Add(new Crystal(Library.Crystal.Texture, _map.crystalSpawnPosition, DrawingHelper.DrawingLevel.Medium, Game, world, Color.LightGray));
+
             // Audio
             Library.Audio.PlaySong(Library.Audio.Songs.GameSong3);
 
-            _map.LoadMap(game, playerinfo); // send in player information
-
-            //foreach (var ob in SyncedGameCollection.ComponentCollection)
-            //{
-            //    if (ob is Goal)
-            //    {
-            //        (ob as Goal).Scored += GameScreen_Scored;
-            //    }
-            //}
+            foreach (var ob in GameComponents)
+            {
+                if (ob is Goal)
+                {
+                    (ob as Goal).Scored += GameScreen_Scored;
+                }
+            }
         }
 
         public bool Winner(ref Library.Colors.ColorName winner)
@@ -81,15 +92,15 @@ namespace Synced.Interface
                     {
                         (ob as ScoreLabel).IncreaseScore();
 
-                        // Move Crystal
-                        //foreach (var crys in SyncedGameCollection.ComponentCollection)
-                        //{
-                        //    if (crys is Crystal)
-                        //    {
-                        //        (crys as Crystal).DeactivateCrystal(Map.crystalSpawnList[new Random().Next(0,Map.crystalSpawnList.Count)].Position);
-                        //        break;
-                        //    }
-                        //}
+                        //Move Crystal
+                        foreach (var crys in GameComponents)
+                        {
+                            if (crys is Crystal)
+                            {
+                                (crys as Crystal).DeactivateCrystal(_map.crystalSpawnPosition);
+                                break;
+                            }
+                        }
 
                     }
                 }

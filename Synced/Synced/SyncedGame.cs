@@ -27,7 +27,11 @@ namespace Synced
     {
         GraphicsDeviceManager _graphics;
         SpriteBatch _spriteBatch;
+#if DEBUG
+        bool fullscreen = false;
+#elif !DEBUG
         bool fullscreen = true;
+#endif
         KeyboardState _lastState;
 
 

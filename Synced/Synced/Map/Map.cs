@@ -20,13 +20,13 @@ using Synced.Static_Classes;
 
 namespace Synced.MapNamespace
 {
-    class Map : DrawableGameComponent// : Screen
+    class Map : DrawableGameComponent
     {
         #region Variables
         int CrystalStartIndex;
-        public static List<CrystalSpawnData> crystalSpawnList;
-        public static List<PlayerStartData> playerStartData;
-
+        public Vector2 crystalSpawnPosition;
+        public List<PlayerStartData> playerStartData;
+        public List<DrawableGameComponent> Components;
         // World
         #endregion
         #region Properties
@@ -40,49 +40,30 @@ namespace Synced.MapNamespace
             get;
             set;
         }
-        public static List<CrystalSpawnData> CrystalSpawnList
-        {
-            get { return crystalSpawnList; }
-        }
         #endregion
 
-        public Map(string path, Game game, World world) : base (game)
+        public Map(string path, Game game, World world)
+            : base(game)
         {
-            /* Set up data containers */
-            if (crystalSpawnList == null)
-            {
-                crystalSpawnList = new List<CrystalSpawnData>();
-            }
-            else
-            {
-                crystalSpawnList.Clear();
-            }
-
-            if (playerStartData == null)
-            {
-                playerStartData = new List<PlayerStartData>();
-            }
-            else
-            {
-                playerStartData.Clear();
-            }
-
-            Data = Library.Serialization<MapData>.DeserializeFromXmlFile(path);
             World = world;
+
+            /* Set up data containers */
+            Components = new List<DrawableGameComponent>();
+            playerStartData = new List<PlayerStartData>();
+
+            Data = new MapData(); // Library.Serialization<MapData>.DeserializeFromXmlFile(path);
+            processData();
+
         }
 
-        public void LoadMap(Game game, List<Library.Character.Name> playerinfo) // playerData
+        void processData() // playerData
         {
             //Process data
             foreach (var mapObject in Data.Objects)
             {
                 if (mapObject is CrystalSpawnData)
                 {
-                    crystalSpawnList.Add((CrystalSpawnData)mapObject);
-                    if (crystalSpawnList[crystalSpawnList.Count - 1].IsStart)
-                    {
-                        CrystalStartIndex = crystalSpawnList.Count - 1;
-                    }
+                    crystalSpawnPosition = (mapObject as CrystalSpawnData).Position;
                 }
                 else if (mapObject is PlayerStartData)
                 {
@@ -90,22 +71,31 @@ namespace Synced.MapNamespace
                 }
                 else if (mapObject is BorderData)
                 {
-                    TexturePolygon tmp = (TexturePolygon)mapObject.GetComponent(game, World);
+                    TexturePolygon tmp = (TexturePolygon)mapObject.GetComponent(Game, World);
                     tmp.SetCollisionCategory(Category.All);
                     tmp.SetCollideWithCategory(Category.All);
                     //SyncedGameCollection.ComponentCollection.Add(tmp);
+                    Components.Add(tmp);
+                }
+                else if (mapObject is GoalData)
+                {
+                    Goal tmp = (Goal)mapObject.GetComponent(Game, World);
+                    //SyncedGameCollection.ComponentCollection.Add(tmp);
+                    Components.Add(tmp);
+                    Components.Add(tmp.Border);
+                    Components.Add(tmp.OuterCircle);
                 }
                 else
                 {
                     //SyncedGameCollection.ComponentCollection.Add(mapObject.GetComponent(game, World));
+                    Components.Add(mapObject.GetComponent(Game, World));
                 }
             }
-            SetupPlayers(playerinfo);
+            //SetupPlayers(playerinfo);
             SetupCrystal();
         }
         public void ClearData()
         {
-            crystalSpawnList.Clear();
             playerStartData.Clear();
         }
 

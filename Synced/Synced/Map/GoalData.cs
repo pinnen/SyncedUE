@@ -22,7 +22,7 @@ namespace Synced.MapNamespace
         [XmlElement("Texture2Path")]
         public string Texture2Path;
 
-        public override GameComponent GetComponent(Microsoft.Xna.Framework.Game game, World world)
+        public override DrawableGameComponent GetComponent(Microsoft.Xna.Framework.Game game, World world)
         {
             return new Goal(game.Content.Load<Texture2D>(TexturePath), game.Content.Load<Texture2D>(Texture2Path), Position, Direction, (DrawingHelper.DrawingLevel)drawingLevel, game, world);
         }

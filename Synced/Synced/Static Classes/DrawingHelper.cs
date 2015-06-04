@@ -9,7 +9,7 @@ using System;
 
 namespace Synced.Static_Classes
 {
-    static class DrawingHelper
+    public static class DrawingHelper
     {
         public enum DrawingLevel { Back = 1, Low = 2, Medium = 3 , High = 4, Top = 5 }
         

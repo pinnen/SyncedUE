@@ -46,21 +46,21 @@ namespace Synced.Static_Classes
             _screenManager.MenuScreen = new MenuScreen(game);
             _screenManager.MenuScreen.NewGame += Instance.NewGameEvent;
             _screenManager.AddScreen(_screenManager.MenuScreen);
-            _screenManager.Screens.Peek().Deactivated();
+            //_screenManager.Screens.Peek().Deactivated();
 
             //------------------------------------------------------------------------
             // **********************Splash screens***********************************
             //------------------------------------------------------------------------
             //Second splash screen
-            Screen screen2 = new SplashScreen(Library.Screens.SplashSeven, game);
-            screen2.Deactivated();
-            _screenManager.AddScreen(screen2);
+            //Screen screen2 = new SplashScreen(Library.Screens.SplashSeven, game);
+            //screen2.Deactivated();
+            //_screenManager.AddScreen(screen2);
 
-            //First splash screen
-            Screen screen = new SplashScreen(Library.Screens.SplashAlpha, game);
-            screen.Activated();
-            _screenManager.AddScreen(screen);
-            _screenManager.CurrentState = ScreenState.SplashScreen;
+            ////First splash screen
+            //Screen screen = new SplashScreen(Library.Screens.SplashAlpha, game);
+            //screen.Activated();
+            //_screenManager.AddScreen(screen);
+            //_screenManager.CurrentState = ScreenState.SplashScreen;
 
             //------------------------------------------------------------------------
             // **********************Game Screen**************************************

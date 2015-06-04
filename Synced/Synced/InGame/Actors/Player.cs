@@ -17,7 +17,7 @@ using Synced.InGame.Actors.Zones;
 
 namespace Synced.Actors
 {
-    class Player : GameComponent
+    class Player : DrawableGameComponent
     {
         #region Variables
         bool _areTrailsActive;

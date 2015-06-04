@@ -13,7 +13,7 @@ namespace Synced.MapNamespace
     [Serializable]
     public class BorderData : MapObjectData
     {
-        public override GameComponent GetComponent(Game game, World world)
+        public override DrawableGameComponent GetComponent(Game game, World world)
         {
             return new TexturePolygon(game.Content.Load<Texture2D>(TexturePath), Position, 0, (DrawingHelper.DrawingLevel)drawingLevel, game, world, false);
         }

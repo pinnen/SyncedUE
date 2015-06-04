@@ -23,11 +23,11 @@ namespace Synced.MapNamespace
         public string TexturePath;
 
         [XmlElement("DrawingLevel")]
-        public int drawingLevel; /* Low 1- 5 High */
+        public DrawingHelper.DrawingLevel drawingLevel; /* Low 1- 5 High */
 
-        public virtual GameComponent GetComponent(Game game, World world)
+        public virtual DrawableGameComponent GetComponent(Game game, World world)
         {
-            return new Sprite(game.Content.Load<Texture2D>(TexturePath), Position, (DrawingHelper.DrawingLevel)drawingLevel, game);
+            return new Sprite(game.Content.Load<Texture2D>(TexturePath), Position, drawingLevel, game);
         }
     }
 }
