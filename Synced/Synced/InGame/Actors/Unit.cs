@@ -84,8 +84,8 @@ namespace Synced.Actors
             _effectParticles = new ParticleEngine(1, Library.Particle.plusSignTexture, position, color, Origin, 0.7f, 0.0f, 0.5f, DrawingHelper.DrawingLevel.High, game);
             _useEffectParticles = false;
             _teamColor = teamColor;
-            SyncedGameCollection.ComponentCollection.Add(_trail);
-            SyncedGameCollection.ComponentCollection.Add(_effectParticles);
+            //SyncedGameCollection.ComponentCollection.Add(_trail);
+            //SyncedGameCollection.ComponentCollection.Add(_effectParticles);
             Tag = TagCategories.UNIT;
             _texture = texture;
         }
@@ -114,33 +114,33 @@ namespace Synced.Actors
 
         public override bool OnCollision(Fixture f1, Fixture f2, Contact contact)
         {
-            CollidingSprite other = SyncedGameCollection.GetCollisionComponent(f2);
+            //CollidingSprite other = SyncedGameCollection.GetCollisionComponent(f2);
 
-            if (other.Tag == TagCategories.CRYSTAL)
-            {
-                if (Item == null)
-                {
-                    Crystal crystal = other as Crystal;
-                    Item = crystal.PickUp(this, _teamColor);
-                }
-                return false;
-            }
-            else if (other.Tag == TagCategories.UNIT)
-            {
-                return false;
-            }
-            else if (other.Tag == TagCategories.COMPACTZONE)
-            {
-                if (Item == null)
-                {
-                    CompactZone compactzone = other as CompactZone;
-                    Item = compactzone.PickUp(this, _teamColor);
-                }
-            }
-            else if (other.Tag == TagCategories.BARRIER)
-            {
-                return false;
-            }
+            //if (other.Tag == TagCategories.CRYSTAL)
+            //{
+            //    if (Item == null)
+            //    {
+            //        Crystal crystal = other as Crystal;
+            //        Item = crystal.PickUp(this, _teamColor);
+            //    }
+            //    return false;
+            //}
+            //else if (other.Tag == TagCategories.UNIT)
+            //{
+            //    return false;
+            //}
+            //else if (other.Tag == TagCategories.COMPACTZONE)
+            //{
+            //    if (Item == null)
+            //    {
+            //        CompactZone compactzone = other as CompactZone;
+            //        Item = compactzone.PickUp(this, _teamColor);
+            //    }
+            //}
+            //else if (other.Tag == TagCategories.BARRIER)
+            //{
+            //    return false;
+            //}
 
             return true;
         }

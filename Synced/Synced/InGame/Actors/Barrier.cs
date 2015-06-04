@@ -23,7 +23,7 @@ namespace Synced.InGame.Actors
         Body hiddenBody1;
         Body hiddenBody2;
         bool isActive;
-        ParticleEngine EffectParticles;
+        //ParticleEngine EffectParticles;
         #endregion
 
         #region Properties
@@ -33,8 +33,8 @@ namespace Synced.InGame.Actors
             : base(texture, Vector2.Zero, DrawingHelper.DrawingLevel.Low, game, world)
         {
             Color = color;
-            EffectParticles = new ParticleEngine(30, texture, Vector2.Zero, color, Vector2.Zero, 1, 0, 10, DrawingHelper.DrawingLevel.Top, game);
-            SyncedGameCollection.ComponentCollection.Add(EffectParticles);
+            //EffectParticles = new ParticleEngine(30, texture, Vector2.Zero, color, Vector2.Zero, 1, 0, 10, DrawingHelper.DrawingLevel.Top, game);
+            //SyncedGameCollection.ComponentCollection.Add(EffectParticles);
 
             // Units to follow
             _start = start;
@@ -86,31 +86,31 @@ namespace Synced.InGame.Actors
 
         public override bool OnCollision(Fixture f1, Fixture f2, FarseerPhysics.Dynamics.Contacts.Contact contact)
         {
-            CollidingSprite other = SyncedGameCollection.GetCollisionComponent(f2);
+            //CollidingSprite other = SyncedGameCollection.GetCollisionComponent(f2);
 
-            if (other != null)
-            {
-                if (other.Tag == TagCategories.CRYSTAL)
-                {
-                    Grabbable g_other = (Grabbable)other;
-                    if (g_other.HasOwner)
-                    {
-                        if (g_other.Owner.ID == _start.ID || g_other.Owner.ID == _end.ID)
-                        {
-                            return false;
-                        }
-                        else
-                        {
-                            g_other.ForcedRelease();
-                           return true;
-                        }
-                    }
-                    else
-                    {
-                        return true;
-                    }
-                }
-            }
+            //if (other != null)
+            //{
+            //    if (other.Tag == TagCategories.CRYSTAL)
+            //    {
+            //        Grabbable g_other = (Grabbable)other;
+            //        if (g_other.HasOwner)
+            //        {
+            //            if (g_other.Owner.ID == _start.ID || g_other.Owner.ID == _end.ID)
+            //            {
+            //                return false;
+            //            }
+            //            else
+            //            {
+            //                g_other.ForcedRelease();
+            //               return true;
+            //            }
+            //        }
+            //        else
+            //        {
+            //            return true;
+            //        }
+            //    }
+            //}
             return true;
         }
 
@@ -161,8 +161,8 @@ namespace Synced.InGame.Actors
                 _barrierBodies[i].Enabled = false;
                 positions.Add(ConvertUnits.ToDisplayUnits(_barrierBodies[i].Position));
             }
-            EffectParticles.GenerateDynamicParticles(positions, 1, 10);
-            EffectParticles.ShatterParticles();
+            //EffectParticles.GenerateDynamicParticles(positions, 1, 10);
+            //EffectParticles.ShatterParticles();
 
             Library.Audio.PlaySoundEffect(Library.Audio.SoundEffects.BarrierBreak);
         }

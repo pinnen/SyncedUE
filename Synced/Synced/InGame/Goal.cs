@@ -93,28 +93,28 @@ namespace Synced.MapNameSpace
             Border.SetCollisionCategory(Category.Cat10);
             Border.SetCollideWithCategory(Category.All);
 
-            SyncedGameCollection.ComponentCollection.Add(OuterCircle);
-            SyncedGameCollection.ComponentCollection.Add(InnerCircle);
-            SyncedGameCollection.ComponentCollection.Add(Border);
+            //SyncedGameCollection.ComponentCollection.Add(OuterCircle);
+            //SyncedGameCollection.ComponentCollection.Add(InnerCircle);
+            //SyncedGameCollection.ComponentCollection.Add(Border);
         }
 
         public bool OnCollision(Fixture f1, Fixture f2, Contact contact)
         {
-            CollidingSprite crystal = SyncedGameCollection.GetCollisionComponent(f2);
+            //CollidingSprite crystal = SyncedGameCollection.GetCollisionComponent(f2);
 
-            if (crystal.Tag == TagCategories.CRYSTAL)
-            {
-                if (Scored != null)
-                {
-                    PlayerIndex p = (crystal as Crystal).GetPlayerIndex();
-                    if ((int)p != -1)
-                    {
-                        Scored(p);
-                        Library.Audio.PlaySoundEffect(Library.Audio.SoundEffects.Score);
-                    }
-                }
-                return false;
-            }
+            //if (crystal.Tag == TagCategories.CRYSTAL)
+            //{
+            //    if (Scored != null)
+            //    {
+            //        PlayerIndex p = (crystal as Crystal).GetPlayerIndex();
+            //        if ((int)p != -1)
+            //        {
+            //            Scored(p);
+            //            Library.Audio.PlaySoundEffect(Library.Audio.SoundEffects.Score);
+            //        }
+            //    }
+            //    return false;
+            //}
             return true;
         }
 

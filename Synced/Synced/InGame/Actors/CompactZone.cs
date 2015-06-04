@@ -42,7 +42,7 @@ namespace Synced.InGame.Actors
             Tag = TagCategories.COMPACTZONE;
             _isShot = false;
             _shape = shape;
-            _tail = null;
+            //_tail = null;
             _detonationTime = 70;
             _timer = _detonationTime;
 
@@ -77,7 +77,7 @@ namespace Synced.InGame.Actors
         public void Detonate() 
         {
             world.RemoveBody(RigidBody);
-            SyncedGameCollection.ComponentCollection.Remove(this);
+            //SyncedGameCollection.ComponentCollection.Remove(this);
         }
     }
 }

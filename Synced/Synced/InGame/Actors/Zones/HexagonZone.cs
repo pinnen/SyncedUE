@@ -22,7 +22,7 @@ namespace Synced.InGame.Actors.Zones
         List<EvilUnit> _evilUnitList;
 
         float _waitTime;
-        ParticleEngine _particleEffects;
+        //ParticleEngine _particleEffects;
 
         public HexagonZone(Texture2D texture, Vector2 position, float rotation, Color color, Game game, World world)
             : base(texture, position, rotation, color, game, world)
@@ -35,8 +35,8 @@ namespace Synced.InGame.Actors.Zones
             _maximumBunshin = 15;
             _waitTime = 0.4f;
 
-            _particleEffects = new ParticleEngine(100, Library.Particle.trailTexture, position, color * 0.005f, Vector2.Zero, 0.2f, 0.0f, 0.5f, DrawingHelper.DrawingLevel.Medium, game);
-            SyncedGameCollection.ComponentCollection.Add(_particleEffects);
+            //_particleEffects = new ParticleEngine(100, Library.Particle.trailTexture, position, color * 0.005f, Vector2.Zero, 0.2f, 0.0f, 0.5f, DrawingHelper.DrawingLevel.Medium, game);
+            //SyncedGameCollection.ComponentCollection.Add(_particleEffects);
         }
 
         public override void Update(GameTime gameTime)
@@ -57,40 +57,40 @@ namespace Synced.InGame.Actors.Zones
         }
         public override bool OnCollision(Fixture f1, Fixture f2, FarseerPhysics.Dynamics.Contacts.Contact contact)
         {
-            CollidingSprite other = SyncedGameCollection.GetCollisionComponent(f2);
+            //CollidingSprite other = SyncedGameCollection.GetCollisionComponent(f2);
 
-            if (other != null)
-            {
-                if (other is IVictim)
-                {
-                    if (!_victims.Contains((IVictim)other))
-                    {
-                        if (other is Unit)
-                        {
-                            if (_evilCrystalList.Count + _evilUnitList.Count > _maximumBunshin && _evilUnitList.Count > 0)
-                            {
-                                world.RemoveBody(_evilUnitList[0].RigidBody);
-                                SyncedGameCollection.ComponentCollection.Remove(_evilUnitList[0]);
-                                _evilUnitList.RemoveAt(0);
-                            }
-                            CreateVictimBunshin((IVictim) other);
-                            _victims.Add((IVictim)other);
-                        }
-                        else if (other is Crystal)
-                        {
-                            if (_evilCrystalList.Count + _evilUnitList.Count > _maximumBunshin && _evilCrystalList.Count > 0) 
-                            {
-                                world.RemoveBody(_evilCrystalList[0].RigidBody);
-                                SyncedGameCollection.ComponentCollection.Remove(_evilCrystalList[0]);
-                                _evilCrystalList.RemoveAt(0);
-                            }
-                            CreateVictimBunshin((IVictim) other);
-                            _victims.Add((IVictim)other);
-                        }
-                    }
-                }
+            //if (other != null)
+            //{
+            //    if (other is IVictim)
+            //    {
+            //        if (!_victims.Contains((IVictim)other))
+            //        {
+            //            if (other is Unit)
+            //            {
+            //                if (_evilCrystalList.Count + _evilUnitList.Count > _maximumBunshin && _evilUnitList.Count > 0)
+            //                {
+            //                    world.RemoveBody(_evilUnitList[0].RigidBody);
+            //                    SyncedGameCollection.ComponentCollection.Remove(_evilUnitList[0]);
+            //                    _evilUnitList.RemoveAt(0);
+            //                }
+            //                CreateVictimBunshin((IVictim) other);
+            //                _victims.Add((IVictim)other);
+            //            }
+            //            else if (other is Crystal)
+            //            {
+            //                if (_evilCrystalList.Count + _evilUnitList.Count > _maximumBunshin && _evilCrystalList.Count > 0) 
+            //                {
+            //                    world.RemoveBody(_evilCrystalList[0].RigidBody);
+            //                    SyncedGameCollection.ComponentCollection.Remove(_evilCrystalList[0]);
+            //                    _evilCrystalList.RemoveAt(0);
+            //                }
+            //                CreateVictimBunshin((IVictim) other);
+            //                _victims.Add((IVictim)other);
+            //            }
+            //        }
+            //    }
 
-            }
+            //}
             return false;
 
         }
@@ -105,7 +105,7 @@ namespace Synced.InGame.Actors.Zones
                 tempEvilCrystal.Direction = randomDirection;
                 tempEvilCrystal.LinearVelocity = victim.VictimLinearVelocity;
                 _evilCrystalList.Add(tempEvilCrystal);
-                SyncedGameCollection.ComponentCollection.Add(tempEvilCrystal);
+                //SyncedGameCollection.ComponentCollection.Add(tempEvilCrystal);
             }
 
             else if(victim is Unit)
@@ -114,7 +114,7 @@ namespace Synced.InGame.Actors.Zones
                 EvilUnit tempEvilUnit = new EvilUnit(victim.VictimTexture, victim.Position, victim.Color, _game, _world, DrawingHelper.DrawingLevel.Medium, (Unit)victim,randomAngleOffset);
 
                 _evilUnitList.Add(tempEvilUnit);
-                SyncedGameCollection.ComponentCollection.Add(tempEvilUnit);
+                //SyncedGameCollection.ComponentCollection.Add(tempEvilUnit);
 
             }
         }
@@ -129,7 +129,7 @@ namespace Synced.InGame.Actors.Zones
                 //_particleEffects.GenerateClusterParticles();
                 //_particleEffects.ShatterParticles(50, 5);
                 //_particleEffects.ExpandAndRotate();
-                SyncedGameCollection.ComponentCollection.Remove(_evilCrystalList[0]);
+                //SyncedGameCollection.ComponentCollection.Remove(_evilCrystalList[0]);
                 _evilCrystalList.RemoveAt(0);
             }
             _evilCrystalList.Clear();
@@ -141,7 +141,7 @@ namespace Synced.InGame.Actors.Zones
                 //_particleEffects.GenerateClusterParticles();
                 //_particleEffects.ShatterParticles(50, 5);
                 //_particleEffects.ExpandAndRotate();
-                SyncedGameCollection.ComponentCollection.Remove(_evilUnitList[0]);
+                //SyncedGameCollection.ComponentCollection.Remove(_evilUnitList[0]);
                 _evilUnitList.RemoveAt(0);
             }
             _evilUnitList.Clear();

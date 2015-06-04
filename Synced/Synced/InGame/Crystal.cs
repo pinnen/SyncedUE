@@ -36,9 +36,9 @@ namespace Synced.InGame
             /* Setting up Crystal */
             Tag = TagCategories.CRYSTAL;
 
-            _tail = new ParticleEngine(1, Library.Particle.trailTexture, position, color, Origin, 1.0f, 0.0f, 0.2f, DrawingHelper.DrawingLevel.Low, game);
-            SyncedGameCollection.ComponentCollection.Add(_tail);
-            _tail.ParticleColor = Color.LightGray;
+            //_tail = new ParticleEngine(1, Library.Particle.trailTexture, position, color, Origin, 1.0f, 0.0f, 0.2f, DrawingHelper.DrawingLevel.Low, game);
+            //SyncedGameCollection.ComponentCollection.Add(_tail);
+            //_tail.ParticleColor = Color.LightGray;
             IsActive = true;
         }
 
@@ -46,8 +46,8 @@ namespace Synced.InGame
         {
             if (IsActive)
             {
-                _tail.UpdatePosition(Position);
-                _tail.GenerateTrailParticles();
+                //_tail.UpdatePosition(Position);
+                //_tail.GenerateTrailParticles();
             }
             else
             {
@@ -69,12 +69,12 @@ namespace Synced.InGame
         public void ChangeColor(Color newColor) 
         {
             this.Color = newColor;
-            _tail.ParticleColor = newColor;
+            //_tail.ParticleColor = newColor;
         }
         public void ResetColor() 
         {
             this.Color = Color.White;
-            _tail.ParticleColor = Color.LightGray;
+            //_tail.ParticleColor = Color.LightGray;
         }
 
         public void DeactivateCrystal(Vector2 position) //TODO: weird with position. 

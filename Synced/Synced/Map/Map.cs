@@ -93,11 +93,11 @@ namespace Synced.MapNamespace
                     TexturePolygon tmp = (TexturePolygon)mapObject.GetComponent(game, World);
                     tmp.SetCollisionCategory(Category.All);
                     tmp.SetCollideWithCategory(Category.All);
-                    SyncedGameCollection.ComponentCollection.Add(tmp);
+                    //SyncedGameCollection.ComponentCollection.Add(tmp);
                 }
                 else
                 {
-                    SyncedGameCollection.ComponentCollection.Add(mapObject.GetComponent(game, World));
+                    //SyncedGameCollection.ComponentCollection.Add(mapObject.GetComponent(game, World));
                 }
             }
             SetupPlayers(playerinfo);
@@ -111,14 +111,14 @@ namespace Synced.MapNamespace
 
         private void SetupPlayers(List<Library.Character.Name> playerinfo)
         {
-            for (int i = 0; i < playerinfo.Count; i++)
-            {
-                SyncedGameCollection.ComponentCollection.Add(new Player(playerStartData[i].PlayerIndex, playerinfo[i], (Library.Colors.ColorName)i, Game, World, playerStartData[i].Position, playerStartData[i].Position2)); //TODO: get color from menuscreen
-            }
+            //for (int i = 0; i < playerinfo.Count; i++)
+            //{
+            //    SyncedGameCollection.ComponentCollection.Add(new Player(playerStartData[i].PlayerIndex, playerinfo[i], (Library.Colors.ColorName)i, Game, World, playerStartData[i].Position, playerStartData[i].Position2)); //TODO: get color from menuscreen
+            //}
         }
         private void SetupCrystal()
         {
-            SyncedGameCollection.ComponentCollection.Add(new Crystal(Library.Crystal.Texture, crystalSpawnList[CrystalStartIndex].Position, DrawingHelper.DrawingLevel.Medium, Game, World, Color.LightGray));
+            //SyncedGameCollection.ComponentCollection.Add(new Crystal(Library.Crystal.Texture, crystalSpawnList[CrystalStartIndex].Position, DrawingHelper.DrawingLevel.Medium, Game, World, Color.LightGray));
         }
     }
 }

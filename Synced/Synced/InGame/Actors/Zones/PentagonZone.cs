@@ -19,8 +19,8 @@ namespace Synced.InGame.Actors.Zones
             : base(texture, position,rotation, color, game,world)
         {
             _invisibilityAlphaFadeAmount = 0.02f;
-            _victimParticles = new ParticleEngine(1, Library.Particle.questionSignTexture, position, Color.White, Vector2.Zero, 1.0f, 0.0f, 0.5f, DrawingHelper.DrawingLevel.Medium, game);
-            SyncedGameCollection.ComponentCollection.Add(_victimParticles);
+            //_victimParticles = new ParticleEngine(1, Library.Particle.questionSignTexture, position, Color.White, Vector2.Zero, 1.0f, 0.0f, 0.5f, DrawingHelper.DrawingLevel.Medium, game);
+            //SyncedGameCollection.ComponentCollection.Add(_victimParticles);
         }
 
         public override void Update(GameTime gameTime)
@@ -39,7 +39,7 @@ namespace Synced.InGame.Actors.Zones
                         else
                         {
                             _victims[i].InvisibilityAlpha -= _invisibilityAlphaFadeAmount;
-                            if (_victims[i].TrailEngine != null){ _victims[i].TrailEngine.SetParticleFadeAlpha(_victims[i].InvisibilityAlpha / 2.0f);}
+                            //if (_victims[i].TrailEngine != null){ _victims[i].TrailEngine.SetParticleFadeAlpha(_victims[i].InvisibilityAlpha / 2.0f);}
                             
                         }
                     }
@@ -52,23 +52,23 @@ namespace Synced.InGame.Actors.Zones
                         else
                         {
                             _victims[i].InvisibilityAlpha += _invisibilityAlphaFadeAmount;
-                            if (_victims[i].TrailEngine != null){_victims[i].TrailEngine.SetParticleFadeAlpha(_victims[i].InvisibilityAlpha/2.0f);}
+                            //if (_victims[i].TrailEngine != null){_victims[i].TrailEngine.SetParticleFadeAlpha(_victims[i].InvisibilityAlpha/2.0f);}
                         }
                     }
 
-                    _victimParticles.UpdatePosition(_victims[i].Position);
-                    _victimParticles.ParticleColor = _victims[i].Color;
-                    _victimParticles.SetParticleFadeAlpha(_victims[i].InvisibilityAlpha);
-                    _victimParticles.GenerateEffectParticles(1.0f, 0.2f);
+                    //_victimParticles.UpdatePosition(_victims[i].Position);
+                    //_victimParticles.ParticleColor = _victims[i].Color;
+                    //_victimParticles.SetParticleFadeAlpha(_victims[i].InvisibilityAlpha);
+                    //_victimParticles.GenerateEffectParticles(1.0f, 0.2f);
 
                     if (this._zoneState == ZoneState.Despawn)
                     {
                         MakeVisible(_victims[i]);
-                        if (_victims[i].TrailEngine != null) 
-                        {
-                            _victims[i].TrailEngine.SetParticleFadeAlpha(1.0f);
-                            _victims[i].TrailEngine.GenerateTrailParticles();
-                        }
+                        //if (_victims[i].TrailEngine != null) 
+                        //{
+                        //    _victims[i].TrailEngine.SetParticleFadeAlpha(1.0f);
+                        //    _victims[i].TrailEngine.GenerateTrailParticles();
+                        //}
                     }
                    
                 }
@@ -77,19 +77,19 @@ namespace Synced.InGame.Actors.Zones
         }
         public override bool OnCollision(Fixture f1, Fixture f2, FarseerPhysics.Dynamics.Contacts.Contact contact)
         {
-            CollidingSprite other = SyncedGameCollection.GetCollisionComponent(f2);
+            //CollidingSprite other = SyncedGameCollection.GetCollisionComponent(f2);
 
-            if (other != null)
-            {
-                if (other is IVictim) 
-                {
-                    if (!_victims.Contains((IVictim)other))
-                    {
-                        _victims.Add((IVictim)other);
-                    } 
-                }
+            //if (other != null)
+            //{
+            //    if (other is IVictim) 
+            //    {
+            //        if (!_victims.Contains((IVictim)other))
+            //        {
+            //            _victims.Add((IVictim)other);
+            //        } 
+            //    }
                 
-            }
+            //}
             return false;
 
         }
@@ -101,7 +101,7 @@ namespace Synced.InGame.Actors.Zones
 
         public override void Delete()
         {
-            _victimParticles.DeleteParticleEngine();
+            //_victimParticles.DeleteParticleEngine();
             base.Delete();
         }
 

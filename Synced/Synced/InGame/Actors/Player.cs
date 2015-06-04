@@ -77,9 +77,9 @@ namespace Synced.Actors
             _zoneCreationCooldown = 10.0f;
             _canCreateZone = true;
 
-            SyncedGameCollection.ComponentCollection.Add(Left);
-            SyncedGameCollection.ComponentCollection.Add(Right);
-            SyncedGameCollection.ComponentCollection.Add(_barrier);
+            //SyncedGameCollection.ComponentCollection.Add(Left);
+            //SyncedGameCollection.ComponentCollection.Add(Right);
+            //SyncedGameCollection.ComponentCollection.Add(_barrier);
         }
 
         private float GetDistanceBetweenUnits()
@@ -160,12 +160,12 @@ namespace Synced.Actors
                 case Library.Zone.Name.Circle:
                     CircleZone circleZ = new CircleZone(Library.Zone.Texture[shape], ConvertUnits.ToDisplayUnits(position), rotation, color, Game, _world);
                     _zones.Add(circleZ);
-                    SyncedGameCollection.ComponentCollection.Add(circleZ);
+                    //SyncedGameCollection.ComponentCollection.Add(circleZ);
                     break;
                 case Library.Zone.Name.Triangle:
                     TriangleZone triangleZ = new TriangleZone(Library.Zone.Texture[shape], ConvertUnits.ToDisplayUnits(position), rotation, color, Game, _world);
                     _zones.Add(triangleZ);
-                    SyncedGameCollection.ComponentCollection.Add(triangleZ);
+                    //SyncedGameCollection.ComponentCollection.Add(triangleZ);
                     break;
                 //case Library.Zone.Name.Square:
                 //    SquareZone squareZ = new SquareZone(Library.Zone.Texture[shape], ConvertUnits.ToDisplayUnits(position), rotation, color, Game, _world);
@@ -175,12 +175,12 @@ namespace Synced.Actors
                 case Library.Zone.Name.Pentagon:
                     PentagonZone pentagonZ = new PentagonZone(Library.Zone.Texture[shape], ConvertUnits.ToDisplayUnits(position), rotation, color, Game, _world);
                     _zones.Add(pentagonZ);
-                    SyncedGameCollection.ComponentCollection.Add(pentagonZ);
+                    //SyncedGameCollection.ComponentCollection.Add(pentagonZ);
                     break;
                 case Library.Zone.Name.Hexagon:
                     HexagonZone hexagonZ = new HexagonZone(Library.Zone.Texture[shape], ConvertUnits.ToDisplayUnits(position), rotation, color, Game, _world);
                     _zones.Add(hexagonZ);
-                    SyncedGameCollection.ComponentCollection.Add(hexagonZ);
+                    //SyncedGameCollection.ComponentCollection.Add(hexagonZ);
                     break;
                 default:
                     break;
@@ -301,7 +301,7 @@ namespace Synced.Actors
                 {
                     Vector2 spawnPosition = new Vector2((Left.RigidBody.Position.X + Right.RigidBody.Position.X)/2.0f,(Left.RigidBody.Position.Y + Right.RigidBody.Position.Y)/2.0f);
                     _compactZone = new CompactZone(Library.Zone.CompactTexture[shape], ConvertUnits.ToDisplayUnits(spawnPosition), DrawingHelper.DrawingLevel.Medium, Game, _world, Library.Colors.getColor[Tuple.Create(_teamColor, Library.Colors.ColorVariation.Other)],shape);
-                    SyncedGameCollection.ComponentCollection.Add(_compactZone);
+                    //SyncedGameCollection.ComponentCollection.Add(_compactZone);
                     _compactZones.Add(_compactZone);
                     _canCreateZone = false;
                     Library.Audio.PlaySoundEffect(Library.Audio.SoundEffects.ZoneSpawn);

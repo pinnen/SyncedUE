@@ -16,8 +16,8 @@ namespace Synced.InGame.Actors.Zones
     class EvilUnit : MovableCollidable
     {
          #region Variables
-        ParticleEngine _trail;
-        float _trailParticleLifetime;
+        //ParticleEngine _trail;
+        //float _trailParticleLifetime;
 
         Vector2 lastNonZeroDirection;
         Unit _copyOf;
@@ -26,11 +26,11 @@ namespace Synced.InGame.Actors.Zones
         #endregion
 
         #region Properties
-        public float TrailParticleLifetime
-        {
-            get { return _trailParticleLifetime; }
-            set { _trailParticleLifetime = value; }
-        }
+        //public float TrailParticleLifetime
+        //{
+        //    get { return _trailParticleLifetime; }
+        //    set { _trailParticleLifetime = value; }
+        //}
         
         public Vector2 LastNonZeroDirection
         {
@@ -54,10 +54,10 @@ namespace Synced.InGame.Actors.Zones
 
             acceleration = 40;
             Color = color;
-            _trailParticleLifetime = 0.2f;
-            _trail = new ParticleEngine(1, Library.Particle.trailTexture, position, color, Origin, 1.0f, 0.0f, _trailParticleLifetime, DrawingHelper.DrawingLevel.Low, game);
+            //_trailParticleLifetime = 0.2f;
+            //_trail = new ParticleEngine(1, Library.Particle.trailTexture, position, color, Origin, 1.0f, 0.0f, _trailParticleLifetime, DrawingHelper.DrawingLevel.Low, game);
 
-            SyncedGameCollection.ComponentCollection.Add(_trail);
+            //SyncedGameCollection.ComponentCollection.Add(_trail);
             Tag = TagCategories.UNDEFINED;
 
             _copyOf = copyOf;
@@ -81,10 +81,10 @@ namespace Synced.InGame.Actors.Zones
             }
 
             // Update Trail
-            _trailParticleLifetime = _copyOf.ParticleLifetime;
-            _trail.UpdatePosition(Position);
-            _trail.GenerateTrailParticles(_trailParticleLifetime);
-            _trailParticleLifetime = 0.2f;
+            //_trailParticleLifetime = _copyOf.ParticleLifetime;
+            //_trail.UpdatePosition(Position);
+            //_trail.GenerateTrailParticles(_trailParticleLifetime);
+            //_trailParticleLifetime = 0.2f;
 
             base.Update(gameTime);
         }

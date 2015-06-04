@@ -27,10 +27,10 @@ namespace Synced.Interface
         public GameScreen(Game game, List<Library.Character.Name> playerinfo) // TODO: tmp added world to parameters, might solve in a different way later. 
             : base(game)
         {
-            SyncedGameCollection.InitializeSyncedGameCollection(game);
+            //SyncedGameCollection.InitializeSyncedGameCollection(game);
             world = new World(Vector2.Zero);
 
-            GameComponents.Add(SyncedGameCollection.Instance);
+            //GameComponents.Add(SyncedGameCollection.Instance);
 
             _map = new Map(Library.Map.Path[Library.Map.Name.Paper], game, world);
             GameComponents.Add(_map);
@@ -46,13 +46,13 @@ namespace Synced.Interface
 
             _map.LoadMap(game, playerinfo); // send in player information
 
-            foreach (var ob in SyncedGameCollection.ComponentCollection)
-            {
-                if (ob is Goal)
-                {
-                    (ob as Goal).Scored += GameScreen_Scored;
-                }
-            }
+            //foreach (var ob in SyncedGameCollection.ComponentCollection)
+            //{
+            //    if (ob is Goal)
+            //    {
+            //        (ob as Goal).Scored += GameScreen_Scored;
+            //    }
+            //}
         }
 
         public bool Winner(ref Library.Colors.ColorName winner)
@@ -82,14 +82,14 @@ namespace Synced.Interface
                         (ob as ScoreLabel).IncreaseScore();
 
                         // Move Crystal
-                        foreach (var crys in SyncedGameCollection.ComponentCollection)
-                        {
-                            if (crys is Crystal)
-                            {
-                                (crys as Crystal).DeactivateCrystal(Map.crystalSpawnList[new Random().Next(0,Map.crystalSpawnList.Count)].Position);
-                                break;
-                            }
-                        }
+                        //foreach (var crys in SyncedGameCollection.ComponentCollection)
+                        //{
+                        //    if (crys is Crystal)
+                        //    {
+                        //        (crys as Crystal).DeactivateCrystal(Map.crystalSpawnList[new Random().Next(0,Map.crystalSpawnList.Count)].Position);
+                        //        break;
+                        //    }
+                        //}
 
                     }
                 }
@@ -124,7 +124,7 @@ namespace Synced.Interface
         }
         public void ResetGame()
         {
-            SyncedGameCollection.ComponentCollection.Clear();
+            //SyncedGameCollection.ComponentCollection.Clear();
             world.Clear();
             GameComponents.Clear();
         }

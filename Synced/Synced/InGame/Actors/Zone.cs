@@ -30,8 +30,8 @@ namespace Synced.Actors
 
         // Effects
         float _scaleTarget;
-        ParticleEngine _particleEffects;
-        protected ParticleEngine _victimParticles;
+        //ParticleEngine _particleEffects;
+        //protected ParticleEngine _victimParticles;
         protected List<IVictim> _victims;
 
         public Zone(Texture2D texture, Vector2 position,float rotation, Color color,Game game, World world) 
@@ -48,8 +48,8 @@ namespace Synced.Actors
             Scale = 0.05f;
             Alpha = 0.5f;
             _scaleTarget = 1.0f;
-            _particleEffects = new ParticleEngine(100,Library.Particle.trailTexture,position,color*0.05f,Vector2.Zero,5.0f,0.0f,0.5f,DrawingHelper.DrawingLevel.Medium,game);
-            SyncedGameCollection.ComponentCollection.Add(_particleEffects);
+            //_particleEffects = new ParticleEngine(100,Library.Particle.trailTexture,position,color*0.05f,Vector2.Zero,5.0f,0.0f,0.5f,DrawingHelper.DrawingLevel.Medium,game);
+            //SyncedGameCollection.ComponentCollection.Add(_particleEffects);
             _victims = new List<IVictim>();
             
         }
@@ -79,10 +79,10 @@ namespace Synced.Actors
                     Scale -= 0.1f;
                     if (Scale <= 0.05f)
                     {
-                        _particleEffects.GenerateClusterParticles();
-                        _particleEffects.ShatterParticles(50,15);
-                        _particleEffects.ExpandAndRotate();
-                        _particleEffects.SetParticleEngineOneShot(4);
+                        //_particleEffects.GenerateClusterParticles();
+                        //_particleEffects.ShatterParticles(50,15);
+                        //_particleEffects.ExpandAndRotate();
+                        //_particleEffects.SetParticleEngineOneShot(4);
 
                         _zoneState = ZoneState.Delete;
                         _timeSinceSpawn = 0;
@@ -105,7 +105,7 @@ namespace Synced.Actors
             world.RemoveBody(RigidBody);
             
             //SyncedGameCollection.ComponentCollection.Remove(_particleEffects);
-            SyncedGameCollection.ComponentCollection.Remove(this);      
+            //SyncedGameCollection.ComponentCollection.Remove(this);      
         }
 
     }

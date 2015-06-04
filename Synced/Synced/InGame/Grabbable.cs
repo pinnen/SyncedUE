@@ -23,7 +23,7 @@ namespace Synced.InGame
 
         #region Variables
         protected Unit owner = null;
-        protected ParticleEngine _tail;
+        //protected ParticleEngine _tail;
         
         float _shootForce;
         float _cooldownTimer;
@@ -104,7 +104,7 @@ namespace Synced.InGame
             owner = null;
             maxAcceleration = 20;
             this.Color = Color.White;
-            _tail.ParticleColor = Color.LightGray;
+            //_tail.ParticleColor = Color.LightGray;
             direction = Vector2.Zero;
         }
 
@@ -163,12 +163,12 @@ namespace Synced.InGame
 
         public override bool OnCollision(Fixture f1, Fixture f2, Contact contact)
         {
-            CollidingSprite other = SyncedGameCollection.GetCollisionComponent(f2);
+            //CollidingSprite other = SyncedGameCollection.GetCollisionComponent(f2);
 
-            if (other.Tag == TagCategories.UNIT)
-            {
-                return false;
-            }
+            //if (other.Tag == TagCategories.UNIT)
+            //{
+            //    return false;
+            //}
 
             return true;
         }
@@ -187,10 +187,10 @@ namespace Synced.InGame
         public float PentagonEffectTimer { get { return _pentagonEffectTimer; } set { _pentagonEffectTimer = value; } }
         public bool FadeOut { get { return _fadeOut; } set { _fadeOut = value; } }
         public Texture2D VictimTexture { get { return this.Texture; } }
-        public float ParticleLifetime { get { return _tail.ParticleLifetime; } }
+        //public float ParticleLifetime { get { return _tail.ParticleLifetime; } }
         public float LocalTimeScale { get { return accelerationScaling; } set { accelerationScaling = value; } }
         public float InvisibilityAlpha { get { return this.Alpha; } set { this.Alpha = value; } }
-        public ParticleEngine TrailEngine { get { return _tail; } }
+        //public ParticleEngine TrailEngine { get { return _tail; } }
         public Vector2 VictimLinearVelocity { get { return LinearVelocity; } }
     }
 }
