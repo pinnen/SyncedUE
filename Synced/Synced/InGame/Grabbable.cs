@@ -20,29 +20,29 @@ namespace Synced.InGame
 {
     abstract class Grabbable : MovableCollidable, IVictim
     {
-
         #region Variables
-        protected Unit owner = null;
-        //protected ParticleEngine _tail;
-        
+        protected Body owner = null;
+
         float _shootForce;
         float _cooldownTimer;
         float _cooldownInSeconds;
         #endregion
 
         #region Properties
-        public Unit Owner
+        public Body Owner
         {
             get { return owner; }
+            set { owner = value; }
         }
-        public Unit PreviousOwner
+        public Body PreviousOwner
         {
             get;
             set;
         }
         public bool HasOwner
         {
-            get {
+            get
+            {
                 if (owner == null)
                 {
                     return false;
@@ -63,7 +63,7 @@ namespace Synced.InGame
             RigidBody.BodyType = BodyType.Dynamic;
             RigidBody.CollisionCategories = Category.Cat5;
             RigidBody.CollidesWith = Category.All ^ Category.Cat9;
-            RigidBody.Mass = 1f; 
+            RigidBody.Mass = 1f;
             RigidBody.LinearDamping = 0.5f;
             RigidBody.Restitution = 1f;
             Origin = new Vector2(Texture.Width / 2, Texture.Height / 2);
@@ -73,24 +73,17 @@ namespace Synced.InGame
             _shootForce = 2000f;
             _cooldownInSeconds = 0.5f;
             Color = color;
-            
         }
 
-        public virtual Grabbable PickUp(Unit own, Library.Colors.ColorName teamColor) //TODO: only let it be stolen or picked up if some conditions are met. 
+        public virtual Grabbable PickUp(Body own) //TODO: only let it be stolen or picked up if some conditions are met. 
         {
             if (_cooldownTimer > _cooldownInSeconds)
             {
-                if (owner != null)
-                {
-                    // its a steal!
-                    owner.SetItem(null);
-                }
-
                 owner = own;
                 maxAcceleration = 100;
                 RigidBody.LinearDamping = 10f;
                 Library.Audio.PlaySoundEffect(Library.Audio.SoundEffects.CrystalGrab);
-                Color =  Library.Colors.getColor[Tuple.Create(teamColor, Library.Colors.ColorVariation.Other)];
+                // Set color
                 _cooldownTimer = 0;
 
                 return this;
@@ -100,11 +93,10 @@ namespace Synced.InGame
 
         public void ForcedRelease()
         {
-            owner.ForcedRelease();
             owner = null;
             maxAcceleration = 20;
             this.Color = Color.White;
-            //_tail.ParticleColor = Color.LightGray;
+            // Set tail color
             direction = Vector2.Zero;
         }
 
@@ -137,39 +129,11 @@ namespace Synced.InGame
             if (_cooldownTimer < _cooldownInSeconds)
                 _cooldownTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-            if (owner != null)
-            {
-                Vector2 ownerOffsetPosition = Vector2.Zero;
-
-                if (owner.Direction != Vector2.Zero)
-                {
-                    ownerOffsetPosition = new Vector2(owner.SimPosition.X + -(owner.LastNonZeroDirection.X / 4), owner.SimPosition.Y + (owner.LastNonZeroDirection.Y / 4));
-                }
-                else
-                {
-                    ownerOffsetPosition = new Vector2(owner.SimPosition.X + -(owner.LastNonZeroDirection.X), owner.SimPosition.Y + (owner.LastNonZeroDirection.Y));
-                }
-                
-                float distance = (SimPosition.X - ownerOffsetPosition.X) * (SimPosition.X - ownerOffsetPosition.X) + (SimPosition.Y - ownerOffsetPosition.Y) * (SimPosition.Y - ownerOffsetPosition.Y);
-                acceleration = maxAcceleration * distance;
-
-                direction = new Vector2(ownerOffsetPosition.X - this.SimPosition.X, -(ownerOffsetPosition.Y - this.SimPosition.Y));
-                direction.Normalize();
-            }
-
-            
             base.Update(gameTime);
         }
 
         public override bool OnCollision(Fixture f1, Fixture f2, Contact contact)
         {
-            //CollidingSprite other = SyncedGameCollection.GetCollisionComponent(f2);
-
-            //if (other.Tag == TagCategories.UNIT)
-            //{
-            //    return false;
-            //}
-
             return true;
         }
 
@@ -180,17 +144,15 @@ namespace Synced.InGame
         float _pentagonEffectTimer = 0.12f;
         bool _fadeOut = false;
 
-
+        // TODO wtf is this
         public float CircleEffectTimer { get { return _circleEffectTimer; } set { _circleEffectTimer = value; } }
         public float TriangleEffectTimer { get { return _triangleEffectTimer; } set { _triangleEffectTimer = value; } }
         public float HexagonEffectTimer { get { return _hexagonEffectTimer; } set { _hexagonEffectTimer = value; } }
         public float PentagonEffectTimer { get { return _pentagonEffectTimer; } set { _pentagonEffectTimer = value; } }
         public bool FadeOut { get { return _fadeOut; } set { _fadeOut = value; } }
         public Texture2D VictimTexture { get { return this.Texture; } }
-        //public float ParticleLifetime { get { return _tail.ParticleLifetime; } }
         public float LocalTimeScale { get { return accelerationScaling; } set { accelerationScaling = value; } }
         public float InvisibilityAlpha { get { return this.Alpha; } set { this.Alpha = value; } }
-        //public ParticleEngine TrailEngine { get { return _tail; } }
         public Vector2 VictimLinearVelocity { get { return LinearVelocity; } }
     }
 }

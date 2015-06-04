@@ -31,7 +31,7 @@ namespace Synced.MapNamespace
             set { _objects = value; }
         }
 
-        // TODO Temporary ctor for first map file // TODO: had to comment everything
+        // TODO Temporary ctor for first map file 
         public MapData()
         {
             _objects = new List<MapObjectData>();

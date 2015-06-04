@@ -41,12 +41,13 @@ namespace Synced.MapNameSpace
         public Goal(Texture2D goalTexture, Texture2D borderTexture, Vector2 position, GoalDirections direction, DrawingHelper.DrawingLevel drawingLevel, Game game, World world)
             : base(game)
         {
+            // TODO: Fråga dennis vad i helvete ----------------------------v
             _innerCircle = new DummyCircle(position, ((goalTexture.Width / 2) / 2) / 2, game, world);
-            _innerCircle.setOnCollisionFunction(OnCollision);
             _innerCircle.SetCollisionCategory(Category.Cat10);
+            _innerCircle.RigidBody.CollisionGroup = (short)CollisionCategory.GOAL;
+
             OuterCircle = new Circle(goalTexture, position, goalTexture.Width / 2, game, world);
             OuterCircle.RigidBody.CollisionCategories = Category.Cat9;
-            //OuterCircle.setOnCollisionFunction(OnCollision);
 
             float borderRotation = 0;
             Vector2 borderPosition = Vector2.Zero;
@@ -92,34 +93,12 @@ namespace Synced.MapNameSpace
             Border = new TexturePolygon(borderTexture, borderPosition, borderRotation, DrawingHelper.DrawingLevel.High, game, world, false);
             Border.SetCollisionCategory(Category.Cat10);
             Border.SetCollideWithCategory(Category.All);
-
-            //SyncedGameCollection.ComponentCollection.Add(OuterCircle);
-            //SyncedGameCollection.ComponentCollection.Add(InnerCircle);
-            //SyncedGameCollection.ComponentCollection.Add(Border);
         }
 
         public bool OnCollision(Fixture f1, Fixture f2, Contact contact)
         {
-            //CollidingSprite crystal = SyncedGameCollection.GetCollisionComponent(f2);
-
-            //if (crystal.Tag == TagCategories.CRYSTAL)
-            //{
-            //    if (Scored != null)
-            //    {
-            //        PlayerIndex p = (crystal as Crystal).GetPlayerIndex();
-            //        if ((int)p != -1)
-            //        {
-            //            Scored(p);
-            //            Library.Audio.PlaySoundEffect(Library.Audio.SoundEffects.Score);
-            //        }
-            //    }
-            //    return false;
-            //}
             return true;
         }
 
-        public delegate void IncreaseScore(PlayerIndex playerIndex);
-
-        public event IncreaseScore Scored;
     }
 }

@@ -76,10 +76,6 @@ namespace Synced.Actors
             _zones = new List<Zone>();
             _zoneCreationCooldown = 10.0f;
             _canCreateZone = true;
-
-            //SyncedGameCollection.ComponentCollection.Add(Left);
-            //SyncedGameCollection.ComponentCollection.Add(Right);
-            //SyncedGameCollection.ComponentCollection.Add(_barrier);
         }
 
         private float GetDistanceBetweenUnits()
@@ -155,36 +151,7 @@ namespace Synced.Actors
 
         public void CreateZone(Library.Zone.Name zoneshape, Vector2 position, float rotation, Color color)
         {
-            switch (zoneshape)
-            {
-                case Library.Zone.Name.Circle:
-                    CircleZone circleZ = new CircleZone(Library.Zone.Texture[shape], ConvertUnits.ToDisplayUnits(position), rotation, color, Game, _world);
-                    _zones.Add(circleZ);
-                    //SyncedGameCollection.ComponentCollection.Add(circleZ);
-                    break;
-                case Library.Zone.Name.Triangle:
-                    TriangleZone triangleZ = new TriangleZone(Library.Zone.Texture[shape], ConvertUnits.ToDisplayUnits(position), rotation, color, Game, _world);
-                    _zones.Add(triangleZ);
-                    //SyncedGameCollection.ComponentCollection.Add(triangleZ);
-                    break;
-                //case Library.Zone.Name.Square:
-                //    SquareZone squareZ = new SquareZone(Library.Zone.Texture[shape], ConvertUnits.ToDisplayUnits(position), rotation, color, Game, _world);
-                //    _zones.Add(squareZ);
-                //    SyncedGameCollection.ComponentCollection.Add(squareZ);
-                //    break;
-                case Library.Zone.Name.Pentagon:
-                    PentagonZone pentagonZ = new PentagonZone(Library.Zone.Texture[shape], ConvertUnits.ToDisplayUnits(position), rotation, color, Game, _world);
-                    _zones.Add(pentagonZ);
-                    //SyncedGameCollection.ComponentCollection.Add(pentagonZ);
-                    break;
-                case Library.Zone.Name.Hexagon:
-                    HexagonZone hexagonZ = new HexagonZone(Library.Zone.Texture[shape], ConvertUnits.ToDisplayUnits(position), rotation, color, Game, _world);
-                    _zones.Add(hexagonZ);
-                    //SyncedGameCollection.ComponentCollection.Add(hexagonZ);
-                    break;
-                default:
-                    break;
-            }
+            // Create Zone
             Library.Audio.PlaySoundEffect(Library.Audio.SoundEffects.ZoneExpand);
         }
         
@@ -200,83 +167,41 @@ namespace Synced.Actors
                 Right.Direction = InputManager.RightStickDirection(_playerIndex);
 
                 // Switch unit positions
-                if (InputManager.IsButtonPressed(Buttons.LeftStick, _playerIndex) && InputManager.IsButtonPressed(Buttons.RightStick, _playerIndex) && !_haveSwitched)
+                if ((InputManager.IsButtonPressed(_playerIndex, Buttons.LeftStick) && InputManager.IsButtonDown(_playerIndex, Buttons.RightStick) && !_haveSwitched)
+                || InputManager.IsButtonDown(_playerIndex, Buttons.LeftStick) && InputManager.IsButtonPressed(_playerIndex, Buttons.RightStick) && !_haveSwitched)
                 {
                     _haveSwitched = true;
                     Vector2 tmp = Left.Position;
                     Left.Position = Right.Position;
                     Right.Position = tmp;
                 }
-                else if (!InputManager.IsButtonPressed(Buttons.LeftStick, _playerIndex) && !InputManager.IsButtonPressed(Buttons.RightStick, _playerIndex))
+                else if (!InputManager.IsButtonPressed(_playerIndex, Buttons.LeftStick) && !InputManager.IsButtonPressed(_playerIndex, Buttons.RightStick))
                 {
                     _haveSwitched = false;
                 }
 
-                if (InputManager.IsButtonPressed(Buttons.LeftShoulder, _playerIndex))
+                if (InputManager.IsButtonPressed(_playerIndex, Buttons.LeftShoulder))
                 {
                     DetonateZones();
                     Left.Shoot();
                 }
 
-                if (InputManager.IsButtonPressed(Buttons.RightShoulder,_playerIndex))
+                if (InputManager.IsButtonPressed(_playerIndex, Buttons.RightShoulder))
                 {
                     DetonateZones();
                     Right.Shoot();
-                }
-
-                if (InputManager.RightTriggerValue(_playerIndex) != 0.0f)                    
-                {
-                    Right.TrailParticleLifetime += (1.5f * InputManager.RightTriggerValue(_playerIndex));
-                }
-                if (InputManager.LeftTriggerValue(_playerIndex) != 0.0f)
-                {
-                    Left.TrailParticleLifetime += (1.5f * InputManager.LeftTriggerValue(_playerIndex));
-                }
-                _areTrailsActive = false;
-                if ((InputManager.RightTriggerValue(_playerIndex) > 0.0f) && (InputManager.LeftTriggerValue(_playerIndex) > 0.0f))
-                {
-                    _areTrailsActive = true;
                 }
                 #endregion
 
                 #region SpeedUp
                 Left.Acceleration = 40.0f;
                 Right.Acceleration = 40.0f;
-                Left.UseEffectParticles = false;
-                Right.UseEffectParticles = false;
                 if (AreTrailsActive && ConvertUnits.ToSimUnits(GetDistanceBetweenUnits()) < 2.0f)
                 {
                     Left.Acceleration = 70.0f;
                     Right.Acceleration = 70.0f;
-                    Left.UseEffectParticles = true;
-                    Right.UseEffectParticles = true;
                 }
-                //if (AreTrailsActive)
-                //{
-                //    if (ConvertUnits.ToSimUnits(GetDistanceBetweenUnits()) < 2.0f)
-                //    {
-                //        Left.Acceleration = 70.0f;
-                //        Right.Acceleration = 70.0f;
-                //        Left.UseEffectParticles = true;
-                //        Right.UseEffectParticles = true;
-                //    }
-                //    else
-                //    {
-                //        Left.Acceleration = 40.0f;
-                //        Right.Acceleration = 40.0f;
-                //        Left.UseEffectParticles = false;
-                //        Right.UseEffectParticles = false;
-                //    }
-                //}
-                //else
-                //{
-                //    Left.Acceleration = 40.0f;
-                //    Right.Acceleration = 40.0f;
-                //    Left.UseEffectParticles = false;
-                //    Right.UseEffectParticles = false;
-                //}
                 #endregion
-
                 #region Barrier
                 if (!isBarrierActive)
                 {
@@ -297,11 +222,10 @@ namespace Synced.Actors
                 #endregion
 
                 #region Zones
-                if (InputManager.IsButtonPressed(Buttons.B, _playerIndex) && _canCreateZone) // TODO: Remove. This is for testing
+                if (InputManager.IsButtonPressed(_playerIndex, Buttons.B) && _canCreateZone) // TODO: Remove. This is for testing
                 {
                     Vector2 spawnPosition = new Vector2((Left.RigidBody.Position.X + Right.RigidBody.Position.X)/2.0f,(Left.RigidBody.Position.Y + Right.RigidBody.Position.Y)/2.0f);
                     _compactZone = new CompactZone(Library.Zone.CompactTexture[shape], ConvertUnits.ToDisplayUnits(spawnPosition), DrawingHelper.DrawingLevel.Medium, Game, _world, Library.Colors.getColor[Tuple.Create(_teamColor, Library.Colors.ColorVariation.Other)],shape);
-                    //SyncedGameCollection.ComponentCollection.Add(_compactZone);
                     _compactZones.Add(_compactZone);
                     _canCreateZone = false;
                     Library.Audio.PlaySoundEffect(Library.Audio.SoundEffects.ZoneSpawn);
@@ -322,8 +246,6 @@ namespace Synced.Actors
                 _zoneCreationCooldown -= (float)gameTime.ElapsedGameTime.TotalSeconds;
                 if (_zoneCreationCooldown <= 0)
                 {
-                    Left.TrailEngine.ParticleColor = Library.Colors.getColor[Tuple.Create(_teamColor, Library.Colors.ColorVariation.Left)];
-                    Right.TrailEngine.ParticleColor = Library.Colors.getColor[Tuple.Create(_teamColor, Library.Colors.ColorVariation.Right)];
                     _canCreateZone = true;
                     _zoneCreationCooldown = 10.0f;
                 }

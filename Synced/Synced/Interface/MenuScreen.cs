@@ -73,8 +73,8 @@ namespace Synced.Interface
 
         public override void Update(GameTime gameTime)
         {
-            if (IsEveryoneReady() && NewGame != null 
-                && InputManager.IsButtonPressed(Buttons.Start, PlayerIndex.One))
+            if (IsEveryoneReady() && NewGame != null
+                && InputManager.IsButtonPressed(PlayerIndex.One, Buttons.Start))
             {
                 foreach (var item in GameComponents)
                 {

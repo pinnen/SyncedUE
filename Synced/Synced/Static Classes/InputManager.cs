@@ -21,7 +21,7 @@ namespace Synced.Static_Classes
         }
 
         // Button press
-        public static bool IsButtonPressed(Buttons button, PlayerIndex playerIndex)
+        public static bool IsButtonPressed(PlayerIndex playerIndex, Buttons button)
         {
             return (GamePad.GetState(playerIndex).IsButtonDown(button) && _LastStates[playerIndex].IsButtonUp(button));
         }
@@ -36,22 +36,22 @@ namespace Synced.Static_Classes
         public static bool LeftStickLeft(PlayerIndex playerIndex)
         {
             return ((GamePad.GetState(playerIndex).ThumbSticks.Left.X > 0f && _LastStates[playerIndex].ThumbSticks.Left.X <= 0f))
-                || (IsButtonPressed(Buttons.DPadLeft, playerIndex));
+                || (IsButtonPressed(playerIndex, Buttons.DPadLeft));
         }
         public static bool LeftStickRight(PlayerIndex playerIndex)
         {
             return ((GamePad.GetState(playerIndex).ThumbSticks.Left.X < 0f && _LastStates[playerIndex].ThumbSticks.Left.X >= 0f))
-                || (IsButtonPressed(Buttons.DPadRight, playerIndex));
+                || (IsButtonPressed(playerIndex, Buttons.DPadRight));
         }
         public static bool LeftStickUp(PlayerIndex playerIndex)
         {
             return (GamePad.GetState(playerIndex).ThumbSticks.Left.Y > 0f && _LastStates[playerIndex].ThumbSticks.Left.Y <= 0f)
-                || (IsButtonPressed(Buttons.DPadUp, playerIndex));
+                || (IsButtonPressed(playerIndex, Buttons.DPadUp));
         }
         public static bool LeftStickDown(PlayerIndex playerIndex)
         {
             return (GamePad.GetState(playerIndex).ThumbSticks.Left.Y < 0f && _LastStates[playerIndex].ThumbSticks.Left.Y >= 0f)
-                || (IsButtonPressed(Buttons.DPadDown, playerIndex));
+                || (IsButtonPressed(playerIndex, Buttons.DPadDown));
         }
         public static float LeftTriggerValue(PlayerIndex playerIndex)
         {

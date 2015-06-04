@@ -14,7 +14,7 @@ using FarseerPhysics;
 using FarseerPhysics.Dynamics.Contacts;
 using Synced.Actors;
 
-public enum TagCategories
+public enum CollisionCategory 
 {
     UNDEFINED,
     CRYSTAL,
@@ -33,7 +33,6 @@ namespace Synced.InGame.Actors
         protected World world;
         Body rigidBody;
         Guid id;
-        TagCategories tag;
         #endregion
 
         #region Properties       
@@ -67,11 +66,6 @@ namespace Synced.InGame.Actors
         {
             get { return id; }
         }
-        public TagCategories Tag
-        {
-            get { return tag; }
-            set { tag = value; }
-        }
         #endregion
 
         /// <summary>
@@ -85,7 +79,6 @@ namespace Synced.InGame.Actors
 
             /* Setting up CollidingSprite */
             id = Guid.NewGuid();
-            tag = TagCategories.UNDEFINED;
         }
         
         /// <summary>

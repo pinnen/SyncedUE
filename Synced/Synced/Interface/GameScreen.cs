@@ -28,10 +28,7 @@ namespace Synced.Interface
         public GameScreen(Game game, List<Library.Character.Name> playerinfo) // TODO: tmp added world to parameters, might solve in a different way later. 
             : base(game)
         {
-            //SyncedGameCollection.InitializeSyncedGameCollection(game);
             world = new World(Vector2.Zero);
-
-            //GameComponents.Add(SyncedGameCollection.Instance);
 
             _map = new Map(Library.Map.Path[Library.Map.Name.Paper], game, world);
             foreach (var item in _map.Components)
@@ -59,9 +56,9 @@ namespace Synced.Interface
 
             foreach (var ob in GameComponents)
             {
-                if (ob is Goal)
+                if (ob is Crystal)
                 {
-                    (ob as Goal).Scored += GameScreen_Scored;
+                    (ob as Crystal).Scored += GameScreen_Scored;
                 }
             }
         }
@@ -91,17 +88,6 @@ namespace Synced.Interface
                     if ((ob as ScoreLabel).PlayerIndex == playerIndex)
                     {
                         (ob as ScoreLabel).IncreaseScore();
-
-                        //Move Crystal
-                        foreach (var crys in GameComponents)
-                        {
-                            if (crys is Crystal)
-                            {
-                                (crys as Crystal).DeactivateCrystal(_map.crystalSpawnPosition);
-                                break;
-                            }
-                        }
-
                     }
                 }
             }
@@ -135,7 +121,6 @@ namespace Synced.Interface
         }
         public void ResetGame()
         {
-            //SyncedGameCollection.ComponentCollection.Clear();
             world.Clear();
             GameComponents.Clear();
         }

@@ -39,15 +39,13 @@ namespace Synced.InGame.Actors
             : base(texture, position, drawingLevel, game, world, color) 
         {
             _game = game;
-            Tag = TagCategories.COMPACTZONE;
+            RigidBody.CollisionGroup = (short)CollisionCategory.COMPACTZONE;
             _isShot = false;
             _shape = shape;
-            //_tail = null;
             _detonationTime = 70;
             _timer = _detonationTime;
 
         }
-
 
         public override void Shoot()
         {
@@ -71,13 +69,11 @@ namespace Synced.InGame.Actors
             
             }
             return false;
-
         }
 
         public void Detonate() 
         {
             world.RemoveBody(RigidBody);
-            //SyncedGameCollection.ComponentCollection.Remove(this);
         }
     }
 }

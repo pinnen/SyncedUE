@@ -12,9 +12,6 @@ namespace Synced.MapNamespace
     [Serializable]
     public class ObstacleData : MapObjectData
     {
-        //[XmlElement("World")]
-        //public World world;
-
         [XmlElement("CollisionCategory")]
         public Category CollisionCategory;    
     }

@@ -1,4 +1,5 @@
-﻿// Crystal.cs
+﻿using FarseerPhysics;
+// Crystal.cs
 // Introduced: 2015-04-14
 // Last edited: 2015-05-23
 // Edited by:
@@ -14,7 +15,6 @@ using Synced.InGame.Actors;
 using Synced.Static_Classes;
 using System;
 
-
 namespace Synced.InGame
 {
     class Crystal : Grabbable
@@ -23,83 +23,93 @@ namespace Synced.InGame
         Category defaultCollisiosCategory;
         bool IsActive;
         float inactiveTime;
-        Vector2 nextSpawnPosition;
+        Vector2 spawnPosition;
         #endregion
+
+        public delegate void IncreaseScore(PlayerIndex playerIndex);
+        public event IncreaseScore Scored;
 
         public Crystal(Texture2D texture, Vector2 position, DrawingHelper.DrawingLevel drawingLevel, Game game, World world, Color color)
             : base(texture, position, drawingLevel, game, world, color)
         {
-            RigidBody.CollisionCategories = Category.Cat5;
+            // Store original position
+            spawnPosition = position;
+
             /* Setting up Farseer physics */
+            RigidBody.CollisionCategories = Category.Cat5;
             RigidBody.CollidesWith = defaultCollisiosCategory = Category.All ^ Category.Cat9;
+            RigidBody.CollisionGroup = (short)CollisionCategory.CRYSTAL;
+            RigidBody.OnCollision += CrystalOnCollision;
 
-            /* Setting up Crystal */
-            Tag = TagCategories.CRYSTAL;
-
-            //_tail = new ParticleEngine(1, Library.Particle.trailTexture, position, color, Origin, 1.0f, 0.0f, 0.2f, DrawingHelper.DrawingLevel.Low, game);
-            //SyncedGameCollection.ComponentCollection.Add(_tail);
-            //_tail.ParticleColor = Color.LightGray;
             IsActive = true;
+        }
+
+        bool CrystalOnCollision(Fixture fixtureA, Fixture fixtureB, Contact contact)
+        {
+            if (fixtureB.CollisionGroup == (short)CollisionCategory.GOAL)
+            {
+                if (Scored != null)
+                {
+                    Scored(GetPlayerIndex());
+                    Library.Audio.PlaySoundEffect(Library.Audio.SoundEffects.Score);
+                    deactivateCrystal();
+                }
+                return false;
+            }
+            else if (fixtureB.CollisionGroup == (short)CollisionCategory.UNIT)
+            {
+                PickUp(fixtureB.Body);
+            }
+            return false;
         }
 
         public override void Update(GameTime gameTime)
         {
+            if (Owner != null)
+            {
+                Position = ConvertUnits.ToDisplayUnits(Owner.Position);
+            }
+
+            #region Trail
             if (IsActive)
             {
-                //_tail.UpdatePosition(Position);
-                //_tail.GenerateTrailParticles();
+                // Update trail
             }
             else
             {
                 inactiveTime -= (float)gameTime.ElapsedGameTime.TotalSeconds;
                 if (inactiveTime <= 0)
                 {
-                    ActivateCrystal();
+                    activateCrystal();
                 }
             }
+            #endregion
 
             base.Update(gameTime);
         }
 
         public PlayerIndex GetPlayerIndex() // TODO: fix this
         {
-            return (PreviousOwner!=null)? PreviousOwner.PlayerIndex : (PlayerIndex)(-1);
+            return (PreviousOwner != null) ? /* */(PlayerIndex)(-1) : (PlayerIndex)(-1);
         }
-
-        public void ChangeColor(Color newColor) 
-        {
-            this.Color = newColor;
-            //_tail.ParticleColor = newColor;
-        }
-        public void ResetColor() 
-        {
-            this.Color = Color.White;
-            //_tail.ParticleColor = Color.LightGray;
-        }
-
-        public void DeactivateCrystal(Vector2 position) //TODO: weird with position. 
+        void deactivateCrystal()
         {
             RigidBody.CollisionCategories = Category.None;
-            nextSpawnPosition = position;
             RigidBody.LinearDamping = 100;
-            //RigidBody.BodyType = BodyType.Static;
             Visible = false;
             // cool particle effect! TODO: 
             IsActive = false;
             inactiveTime = 2;
             PreviousOwner = null;
             owner = null;
-            
-            ResetColor();
         }
-        public void ActivateCrystal()
+        void activateCrystal()
         {
             RigidBody.CollisionCategories = defaultCollisiosCategory;
             Visible = true;
             IsActive = true;
-            Position = nextSpawnPosition;
+            Position = spawnPosition;
             RigidBody.LinearDamping = 0.5f; // TODO: hardcoded value
-            //RigidBody.BodyType = BodyType.Dynamic;
         }
     }
 }

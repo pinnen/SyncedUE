@@ -102,7 +102,7 @@ namespace Synced
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            if (Keyboard.GetState().IsKeyDown(Keys.Escape) && _lastState.IsKeyUp(Keys.Escape) || InputManager.IsButtonPressed(Buttons.Back, PlayerIndex.One))
+            if (Keyboard.GetState().IsKeyDown(Keys.Escape) && _lastState.IsKeyUp(Keys.Escape) || InputManager.IsButtonPressed(PlayerIndex.One, Buttons.Back))
                 ScreenManager.Instance.HandleBackEvent();
 
             #region Debug
@@ -123,8 +123,6 @@ namespace Synced
         protected override void Draw(GameTime gameTime)
         {
             ResolutionManager.BeginDraw(); // Clear and viewport fix
-            
-
             base.Draw(gameTime);
         }
     }

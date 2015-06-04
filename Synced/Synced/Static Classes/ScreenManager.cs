@@ -61,13 +61,6 @@ namespace Synced.Static_Classes
             //screen.Activated();
             //_screenManager.AddScreen(screen);
             //_screenManager.CurrentState = ScreenState.SplashScreen;
-
-            //------------------------------------------------------------------------
-            // **********************Game Screen**************************************
-            //FOR DEBUG
-            //------------------------------------------------------------------------
-            //_screenManager.AddScreen(Instance.GameScreen);
-            //TODO: Add this functionality properly. 
         }
 
         /// <summary>

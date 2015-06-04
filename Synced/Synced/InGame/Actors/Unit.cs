@@ -27,10 +27,6 @@ namespace Synced.Actors
     class Unit : MovableCollidable, IVictim
     {
         #region Variables
-        ParticleEngine _trail;
-        float _trailParticleLifetime;
-        ParticleEngine _effectParticles;
-        bool _useEffectParticles;
         Library.Colors.ColorName _teamColor;
         Texture2D _texture;
         Vector2 lastNonZeroDirection; 
@@ -38,16 +34,6 @@ namespace Synced.Actors
         #endregion
 
         #region Properties
-        public float TrailParticleLifetime
-        {
-            get { return _trailParticleLifetime; }
-            set { _trailParticleLifetime = value; }
-        }
-        public bool UseEffectParticles
-        {
-            get { return _useEffectParticles; }
-            set { _useEffectParticles = value; }
-        }
         public Vector2 LastNonZeroDirection
         {
             get { return lastNonZeroDirection; }
@@ -57,10 +43,9 @@ namespace Synced.Actors
             get;
             private set;
         }
-
+        public Body Item { get; set; }
         #endregion
 
-        public Grabbable Item { get; set; }
         public Unit(PlayerIndex playerIndex, Texture2D texture, Vector2 position, Color color, Game game, World world,Library.Colors.ColorName teamColor)
             : base(texture, position, DrawingHelper.DrawingLevel.Medium, game, world)
         {
@@ -73,20 +58,14 @@ namespace Synced.Actors
             RigidBody.CollidesWith = Category.All ^ Category.Cat1;         
             RigidBody.Mass = 10f;                          
             RigidBody.LinearDamping = 5f;                  
-            RigidBody.Restitution = 0.1f;                  
+            RigidBody.Restitution = 0.1f;
+            RigidBody.CollisionGroup = (short)CollisionCategory.UNIT;
             Origin = new Vector2(texture.Width / 2, texture.Height / 2);
 
             /* Setting up Unit */
             acceleration = 40;
             Color = color;
-            _trailParticleLifetime = 0.2f;
-            _trail = new ParticleEngine(1, Library.Particle.trailTexture, position, color, Origin, 1.0f, 0.0f, _trailParticleLifetime, DrawingHelper.DrawingLevel.Low, game);
-            _effectParticles = new ParticleEngine(1, Library.Particle.plusSignTexture, position, color, Origin, 0.7f, 0.0f, 0.5f, DrawingHelper.DrawingLevel.High, game);
-            _useEffectParticles = false;
             _teamColor = teamColor;
-            //SyncedGameCollection.ComponentCollection.Add(_trail);
-            //SyncedGameCollection.ComponentCollection.Add(_effectParticles);
-            Tag = TagCategories.UNIT;
             _texture = texture;
         }
 
@@ -100,48 +79,15 @@ namespace Synced.Actors
 
         public void Shoot()
         {
-            if (Item != null)
-            {
-                Item.Shoot();
-                Item = null;
-            }
         }
 
-        public void SetItem(Grabbable item)
+        public void SetItem(Body item)
         {
             Item = item;
         }
 
         public override bool OnCollision(Fixture f1, Fixture f2, Contact contact)
         {
-            //CollidingSprite other = SyncedGameCollection.GetCollisionComponent(f2);
-
-            //if (other.Tag == TagCategories.CRYSTAL)
-            //{
-            //    if (Item == null)
-            //    {
-            //        Crystal crystal = other as Crystal;
-            //        Item = crystal.PickUp(this, _teamColor);
-            //    }
-            //    return false;
-            //}
-            //else if (other.Tag == TagCategories.UNIT)
-            //{
-            //    return false;
-            //}
-            //else if (other.Tag == TagCategories.COMPACTZONE)
-            //{
-            //    if (Item == null)
-            //    {
-            //        CompactZone compactzone = other as CompactZone;
-            //        Item = compactzone.PickUp(this, _teamColor);
-            //    }
-            //}
-            //else if (other.Tag == TagCategories.BARRIER)
-            //{
-            //    return false;
-            //}
-
             return true;
         }
 
@@ -152,16 +98,6 @@ namespace Synced.Actors
                 lastNonZeroDirection = direction;
                 RigidBody.Rotation = (float)Math.Atan2(RigidBody.LinearVelocity.Y, RigidBody.LinearVelocity.X);
                 
-            }
-
-            // Update Trail
-            _trail.UpdatePosition(Position);
-            _trail.GenerateTrailParticles(_trailParticleLifetime);
-            _trailParticleLifetime = 0.2f;
-            if (_useEffectParticles)
-            {
-                _effectParticles.UpdatePosition(Position);
-                _effectParticles.GenerateEffectParticles();
             }
 
             base.Update(gameTime);
@@ -181,10 +117,8 @@ namespace Synced.Actors
         public float PentagonEffectTimer {get{return _pentagonEffectTimer;} set{_pentagonEffectTimer = value;}}
         public bool FadeOut { get { return _fadeOut; } set { _fadeOut = value; } }
         public Texture2D VictimTexture{ get { return _texture; }}
-        public float ParticleLifetime { get { return _trailParticleLifetime; } }
         public float LocalTimeScale { get { return accelerationScaling; } set { accelerationScaling = value; } }
         public float InvisibilityAlpha { get { return this.Alpha; } set { this.Alpha = value; } }
-        public ParticleEngine TrailEngine { get { return _trail; } }
         public Vector2 VictimLinearVelocity { get { return LinearVelocity; } }
     }
 }

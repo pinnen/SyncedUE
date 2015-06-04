@@ -91,7 +91,6 @@ namespace Synced.InGame.Actors
             _timeSinceStart += elapsedTime;
             _procentualLifetime = _timeSinceStart / _lifetime;
             _colorStrength = 1.0f - _procentualLifetime;
-            //_scale = 1.0f - (-_procentualLifetime / 2.0f);
 
             if (_isMoving)
             {
@@ -104,10 +103,6 @@ namespace Synced.InGame.Actors
             _spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.LinearWrap, DepthStencilState.None, RasterizerState.CullNone, null, ResolutionManager.GetTransformationMatrix());
             _spriteBatch.Draw(Texture, Position, null, (Color * _colorStrength * Alpha), Rotation, Origin, Scale, SpriteEffects.None, 1.0f); // TODO: use body pos/rot or Sprite pos/rot? 
             _spriteBatch.End();
-
-            //_spriteBatch.Begin(SpriteSortMode.FrontToBack, BlendState.AlphaBlend);
-            //_spriteBatch.Draw(_texture, _position, null, (_color * _colorStrength * _fadeAlpha), _rotation, _origin, _scale, SpriteEffects.None, 1.0f);
-            //_spriteBatch.End();
         }
 
         public void SetMovement(Vector2 direction, float speed) 
@@ -117,7 +112,6 @@ namespace Synced.InGame.Actors
             _speed = speed;
             _isMoving = true;
         }
-
         #endregion
     }
 }

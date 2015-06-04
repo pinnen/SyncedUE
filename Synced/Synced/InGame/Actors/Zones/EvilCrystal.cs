@@ -14,8 +14,7 @@ namespace Synced.InGame.Actors.Zones
 {
     class EvilCrystal : MovableCollidable
     {
-        //ParticleEngine _tail;
-
+        
         public EvilCrystal(Texture2D texture, Vector2 position, DrawingHelper.DrawingLevel drawingLevel, Game game, World world, Color color)
             : base(texture, position, drawingLevel, game, world)
         {
@@ -26,40 +25,16 @@ namespace Synced.InGame.Actors.Zones
             RigidBody.Mass = 1f;
             RigidBody.LinearDamping = 0.5f;
             RigidBody.Restitution = 1f;
+            RigidBody.CollisionGroup = (short)CollisionCategory.UNDEFINED;
             Origin = new Vector2(Texture.Width / 2, Texture.Height / 2);
-            Tag = TagCategories.UNDEFINED;
-
-            //_tail = new ParticleEngine(1, Library.Particle.trailTexture, position, color, Origin, 1.0f, 0.0f, 0.2f, DrawingHelper.DrawingLevel.Low, game);
-            //SyncedGameCollection.ComponentCollection.Add(_tail);
-            //if(color == Color.White)_tail.ParticleColor = Color.LightGray;
 
             acceleration = maxAcceleration = 20;
             Color = color;
         }
 
-        //public override bool OnCollision(Fixture f1, Fixture f2, FarseerPhysics.Dynamics.Contacts.Contact contact)
-        //{
-        //    //return false;
-        //}
-
         public override void Update(GameTime gameTime)
         {
-            //_tail.UpdatePosition(Position);
-            //_tail.GenerateTrailParticles();
-
             base.Update(gameTime);
-        }
-
-
-        public void ChangeColor(Color newColor)
-        {
-            this.Color = newColor;
-            //_tail.ParticleColor = newColor;
-        }
-        public void ResetColor()
-        {
-            this.Color = Color.White;
-            //_tail.ParticleColor = Color.LightGray;
         }
     }
 }

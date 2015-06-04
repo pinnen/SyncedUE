@@ -91,20 +91,20 @@ namespace Synced.Interface
                     if (GamePad.GetState(PlayerIndex).IsConnected) _connect();
                     break;
                 case State.Connected:
-                    if (InputManager.IsButtonPressed(Buttons.A, PlayerIndex))
+                    if (InputManager.IsButtonPressed(PlayerIndex, Buttons.A))
                     {
                         _join();
                     }
                     break;
                 case State.Joined:
-                    if (InputManager.IsButtonPressed(Buttons.A, PlayerIndex))
+                    if (InputManager.IsButtonPressed(PlayerIndex, Buttons.A))
                     {
                         _ready();
                     }
                     _readInput();
                     break;
                 case State.Ready:
-                    if (InputManager.IsButtonPressed(Buttons.B, PlayerIndex))
+                    if (InputManager.IsButtonPressed(PlayerIndex, Buttons.B))
                     {
                         _join();
                     }

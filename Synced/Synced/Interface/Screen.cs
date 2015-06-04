@@ -1,12 +1,15 @@
-﻿// CharacterSelector.cs
+﻿using FarseerPhysics.Dynamics;
+// CharacterSelector.cs
 // Introduced: 2015-04-29
 // Last edited: 2015-04-30
 // Edited by:
 // Robin Calmegård
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Synced.CollisionShapes;
 using Synced.Content;
 using Synced.InGame;
+using Synced.InGame.Actors;
 using Synced.Static_Classes;
 using System;
 using System.Linq;
@@ -120,7 +123,7 @@ namespace Synced.Interface
 
         }
         #endregion
-        
+
         #region DrawableGameComponents Methods
         public override void Initialize()
         {

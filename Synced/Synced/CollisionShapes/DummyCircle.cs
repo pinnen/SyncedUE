@@ -15,14 +15,7 @@ namespace Synced.CollisionShapes
     class DummyCircle : Circle
     {
         public DummyCircle(Vector2 position, float r, Game game, World world)
-            :base (null, position, r, game, world)
-        {
-        }
-
-        public void SetTag(TagCategories tag)
-        {
-            Tag = tag;
-        }
+            : base(null, position, r, game, world) { }
 
         public override void Draw(GameTime gameTime)
         {

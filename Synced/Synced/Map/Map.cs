@@ -23,7 +23,6 @@ namespace Synced.MapNamespace
     class Map : DrawableGameComponent
     {
         #region Variables
-        int CrystalStartIndex;
         public Vector2 crystalSpawnPosition;
         public List<PlayerStartData> playerStartData;
         public List<DrawableGameComponent> Components;
@@ -56,9 +55,8 @@ namespace Synced.MapNamespace
 
         }
 
-        void processData() // playerData
+        void processData()
         {
-            //Process data
             foreach (var mapObject in Data.Objects)
             {
                 if (mapObject is CrystalSpawnData)
@@ -74,41 +72,20 @@ namespace Synced.MapNamespace
                     TexturePolygon tmp = (TexturePolygon)mapObject.GetComponent(Game, World);
                     tmp.SetCollisionCategory(Category.All);
                     tmp.SetCollideWithCategory(Category.All);
-                    //SyncedGameCollection.ComponentCollection.Add(tmp);
                     Components.Add(tmp);
                 }
                 else if (mapObject is GoalData)
                 {
                     Goal tmp = (Goal)mapObject.GetComponent(Game, World);
-                    //SyncedGameCollection.ComponentCollection.Add(tmp);
                     Components.Add(tmp);
                     Components.Add(tmp.Border);
                     Components.Add(tmp.OuterCircle);
                 }
                 else
                 {
-                    //SyncedGameCollection.ComponentCollection.Add(mapObject.GetComponent(game, World));
                     Components.Add(mapObject.GetComponent(Game, World));
                 }
             }
-            //SetupPlayers(playerinfo);
-            SetupCrystal();
-        }
-        public void ClearData()
-        {
-            playerStartData.Clear();
-        }
-
-        private void SetupPlayers(List<Library.Character.Name> playerinfo)
-        {
-            //for (int i = 0; i < playerinfo.Count; i++)
-            //{
-            //    SyncedGameCollection.ComponentCollection.Add(new Player(playerStartData[i].PlayerIndex, playerinfo[i], (Library.Colors.ColorName)i, Game, World, playerStartData[i].Position, playerStartData[i].Position2)); //TODO: get color from menuscreen
-            //}
-        }
-        private void SetupCrystal()
-        {
-            //SyncedGameCollection.ComponentCollection.Add(new Crystal(Library.Crystal.Texture, crystalSpawnList[CrystalStartIndex].Position, DrawingHelper.DrawingLevel.Medium, Game, World, Color.LightGray));
         }
     }
 }

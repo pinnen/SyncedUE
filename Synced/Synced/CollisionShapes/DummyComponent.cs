@@ -11,16 +11,16 @@ namespace Synced.CollisionShapes
     {
         public DummyComponent(): base(null, Vector2.Zero, Static_Classes.DrawingHelper.DrawingLevel.Back, null, null)
         {
-            Tag = TagCategories.UNDEFINED;
+            RigidBody.CollisionGroup = (short)CollisionCategory.UNDEFINED;
         }
 
         public override void Update(GameTime gameTime)
         {
-            // a DummyComponent does nothing
+            // No base call
         }
         public override void Draw(GameTime gameTime)
         {
-            // a DummyComponent draws nothing
+            // No base call
         }
     }
 }

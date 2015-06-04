@@ -119,7 +119,6 @@ namespace Synced.InGame.Actors
         /// <summary>
         /// Starts the particle engine for effects.
         /// </summary>
-        /// 
         public void GenerateEffectParticles() 
         {
             GenerateEffectParticles(_particleScale, _particleLifetime);
@@ -136,7 +135,6 @@ namespace Synced.InGame.Actors
                     Vector2 randomPosition = new Vector2(_particlePosition.X + (float)random.Next(-effectSize,effectSize),_particlePosition.Y + (float)random.Next(-effectSize*50,effectSize*50));
                     Particle tempP = new Particle(_particleTexture,randomPosition,_particleColor,_particleOrigin,scale,0.0f,lifetime,dLevel,Game);
                     _particles.Add(tempP);
-                    //SyncedGameCollection.ComponentCollection.Add(tempP);
                     continue;
                 }
                 currentParticle = _sleepingParticles.Dequeue();
@@ -192,7 +190,6 @@ namespace Synced.InGame.Actors
                 float randomRotation = random.Next();
                 Particle tempP = new Particle(_particleTexture, randomPosition, _particleColor, _particleOrigin, _particleScale, randomRotation, _particleLifetime, dLevel, Game);
                 _particles.Add(tempP);
-                //SyncedGameCollection.ComponentCollection.Add(tempP);
             }
 
         }
@@ -207,7 +204,6 @@ namespace Synced.InGame.Actors
                 {
                     Particle tempP = new Particle(_particleTexture, positions[i], _particleColor, _particleOrigin, scale, 0.0f, lifetime, dLevel, Game);
                     _particles.Add(tempP);
-                    //SyncedGameCollection.ComponentCollection.Add(tempP);
                 }
                 else
                 {
@@ -221,7 +217,6 @@ namespace Synced.InGame.Actors
         /// <summary>
         /// Shatters the particles
         /// </summary>
-        /// 
         public void ShatterParticles() 
         {
             ShatterParticles(100, 20);
@@ -301,10 +296,7 @@ namespace Synced.InGame.Actors
         }
         public override void Draw(GameTime gameTime)
         {
-            //for (int i = 0; i < _particles.Count; i++)
-            //{
-            //    _particles[i].Draw(gameTime);
-            //}           
+            // No base call (?)
         }
 
         public void SetParticleEngineOneShot(float _timeSeconds)
@@ -317,28 +309,17 @@ namespace Synced.InGame.Actors
             // delete all particles
             while (_particles.Count > 0)
             {
-                //SyncedGameCollection.ComponentCollection.Remove(_particles[0]);
                 _particles.RemoveAt(0);
-            }
-            foreach (Particle p in _sleepingParticles)
-            {
-                //SyncedGameCollection.ComponentCollection.Remove(p);
             }
             _particles.Clear();
             _sleepingParticles.Clear();
-            //SyncedGameCollection.ComponentCollection.Remove(this);
         }
         public void DeleteParticleEngine()
         {
             // delete all particles
             while (_particles.Count > 0)
             {
-                //SyncedGameCollection.ComponentCollection.Remove(_particles[0]);
                 _particles.RemoveAt(0);
-            }
-            foreach (Particle p in _sleepingParticles)
-            {
-                //SyncedGameCollection.ComponentCollection.Remove(p);
             }
             _particles.Clear();
             _sleepingParticles.Clear();

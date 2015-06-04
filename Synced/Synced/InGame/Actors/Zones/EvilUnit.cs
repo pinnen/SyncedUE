@@ -16,9 +16,6 @@ namespace Synced.InGame.Actors.Zones
     class EvilUnit : MovableCollidable
     {
          #region Variables
-        //ParticleEngine _trail;
-        //float _trailParticleLifetime;
-
         Vector2 lastNonZeroDirection;
         Unit _copyOf;
         float _offset;
@@ -26,12 +23,6 @@ namespace Synced.InGame.Actors.Zones
         #endregion
 
         #region Properties
-        //public float TrailParticleLifetime
-        //{
-        //    get { return _trailParticleLifetime; }
-        //    set { _trailParticleLifetime = value; }
-        //}
-        
         public Vector2 LastNonZeroDirection
         {
             get { return lastNonZeroDirection; }
@@ -49,16 +40,12 @@ namespace Synced.InGame.Actors.Zones
             RigidBody.Mass = 10f;
             RigidBody.LinearDamping = 5f;
             RigidBody.Restitution = 0.1f;
+            RigidBody.CollisionGroup = (short)CollisionCategory.UNDEFINED;
         
             Origin = new Vector2(texture.Width / 2, texture.Height / 2);
 
             acceleration = 40;
             Color = color;
-            //_trailParticleLifetime = 0.2f;
-            //_trail = new ParticleEngine(1, Library.Particle.trailTexture, position, color, Origin, 1.0f, 0.0f, _trailParticleLifetime, DrawingHelper.DrawingLevel.Low, game);
-
-            //SyncedGameCollection.ComponentCollection.Add(_trail);
-            Tag = TagCategories.UNDEFINED;
 
             _copyOf = copyOf;
             _offset = offset;
@@ -79,13 +66,7 @@ namespace Synced.InGame.Actors.Zones
                 lastNonZeroDirection = direction;
                 RigidBody.Rotation = (float)Math.Atan2(RigidBody.LinearVelocity.Y, RigidBody.LinearVelocity.X);
             }
-
-            // Update Trail
-            //_trailParticleLifetime = _copyOf.ParticleLifetime;
-            //_trail.UpdatePosition(Position);
-            //_trail.GenerateTrailParticles(_trailParticleLifetime);
-            //_trailParticleLifetime = 0.2f;
-
+            
             base.Update(gameTime);
         }
 

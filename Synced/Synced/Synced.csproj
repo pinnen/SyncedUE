@@ -66,11 +66,10 @@
     <Compile Include="Interface\Label.cs" />
     <Compile Include="Interface\LoadingScreen.cs" />
     <Compile Include="Content\Library.cs" />
-    <Compile Include="InGame\Actors\Ability.cs" />
     <Compile Include="InGame\Actors\ParticleEngine.cs" />
     <Compile Include="InGame\Actors\Player.cs" />
     <Compile Include="InGame\Actors\Unit.cs" />
-    <Compile Include="InGame\Actors\Zone.cs" />
+    <Compile Include="InGame\Actors\Zones\Zone.cs" />
     <Compile Include="InGame\Actors\Sprite.cs" />
     <Compile Include="Interface\ScoreLabel.cs" />
     <Compile Include="Interface\SettingsScreen.cs" />
@@ -92,7 +91,6 @@
     <Compile Include="Interface\MenuScreen.cs" />
     <Compile Include="Interface\Screen.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Static Classes\DebuggingHelper.cs" />
     <Compile Include="Static Classes\DrawingHelper.cs" />
     <Compile Include="Static Classes\InputManager.cs" />
     <Compile Include="Static Classes\ResolutionManager.cs" />
@@ -117,9 +115,7 @@
   <ItemGroup>
     <MonoGameContentReference Include="Content\Content.mgcb" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Interface\GameControls\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Content.Builder.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
