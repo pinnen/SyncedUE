@@ -6,12 +6,10 @@
 // Lina Juuso
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Synced.Interface;
-using Synced.Static_Classes;
 
-namespace Synced.Actors
+namespace SevenEngine.Drawing
 {
-    class Sprite : DrawableGameComponent, IDrawableObject
+    public class Sprite : DrawableGameComponent, IDrawableObject
     {
         // Provide access to the spritebatch through game services. 
         protected SpriteBatch _spriteBatch
@@ -26,7 +24,7 @@ namespace Synced.Actors
         public float Scale { get; set; }
         public float Alpha { get; set; }
 
-        public Sprite(Texture2D texture, Vector2 position, Color color, DrawingHelper.DrawingLevel drawingLevel, bool centered, Game game)
+        public Sprite(Texture2D texture, Vector2 position, Color color, DrawHelper.DrawingLevel drawingLevel, bool centered, Game game)
             : base(game)
         {
             Color = color;
@@ -39,7 +37,7 @@ namespace Synced.Actors
 
             DrawOrder = (int)drawingLevel;
         }
-        public Sprite(Texture2D texture, Vector2 position, DrawingHelper.DrawingLevel drawingLevel, Game game)
+        public Sprite(Texture2D texture, Vector2 position, DrawHelper.DrawingLevel drawingLevel, Game game)
             : this(texture, position, Color.White, drawingLevel, false, game) { }
 
         public override void Draw(GameTime gameTime)

@@ -12,6 +12,7 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Synced.Static_Classes;
+using SevenEngine.Drawing;
 
 namespace Synced.InGame.Actors
 {
@@ -46,11 +47,11 @@ namespace Synced.InGame.Actors
         
 
         Particle currentParticle;
-        DrawingHelper.DrawingLevel dLevel;
+        DrawHelper.DrawingLevel dLevel;
         #endregion
 
         #region Constructors
-        public ParticleEngine(int particleAmount, Texture2D particleTexture, Vector2 position, Color color, Vector2 origin, float scale, float rotation, float lifetime, DrawingHelper.DrawingLevel drawingLevel, Game game)
+        public ParticleEngine(int particleAmount, Texture2D particleTexture, Vector2 position, Color color, Vector2 origin, float scale, float rotation, float lifetime, DrawHelper.DrawingLevel drawingLevel, Game game)
             : base(game)
         {
             Initialize();

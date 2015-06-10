@@ -7,6 +7,7 @@
 using FarseerPhysics.Dynamics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using SevenEngine.Drawing;
 using Synced.InGame.Actors;
 using Synced.Static_Classes;
 
@@ -43,7 +44,7 @@ namespace Synced.InGame
         /// <summary>
         /// Creates a default MovableCollidable
         /// </summary>
-        public MovableCollidable(Texture2D texture, Vector2 position, DrawingHelper.DrawingLevel drawingLevel, Game game, World world)
+        public MovableCollidable(Texture2D texture, Vector2 position, DrawHelper.DrawingLevel drawingLevel, Game game, World world)
             : base(texture, position, drawingLevel, game, world)
         {
             /* Setting up MovableCollidable */

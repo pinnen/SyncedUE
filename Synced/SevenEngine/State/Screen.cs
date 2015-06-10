@@ -1,46 +1,42 @@
-﻿using FarseerPhysics.Dynamics;
-// CharacterSelector.cs
-// Introduced: 2015-04-29
-// Last edited: 2015-04-30
-// Edited by:
-// Robin Calmegård
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Synced.CollisionShapes;
-using Synced.Content;
-using Synced.InGame;
-using Synced.InGame.Actors;
-using Synced.Static_Classes;
+using SevenEngine.Drawing;
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
-namespace Synced.Interface
+namespace SevenEngine.State
 {
     class ScreenEventArgs : EventArgs
     {
         ScreenManager.ScreenState State { get; set; }
     }
-    abstract class Screen : DrawableGameComponent, IDrawableObject, IActive
+    public abstract class Screen : DrawableGameComponent, IDrawableObject
     {
-        #region Delegates & Events & Raisers 
+        #region Delegates & Events & Raisers
         public delegate void OnScreenActivateEventHandler(Screen screen, EventArgs e);
         public delegate void OnScreenDeactivateEventHandler(Screen screen, EventArgs e);
         public delegate void OnScreenTransitionEventHandler(Screen screen, EventArgs e);
-        public delegate void OnScreenExitEventHandler(Screen screen, EventArgs e);
-        //Special event for new game 
-        public delegate void StartNewGame(MenuScreen screen, EventArgs e);
-
-        public delegate void EndGame(Library.Colors.ColorName color, EventArgs e);
+        public delegate void OnScreenExitEventHandler(EventArgs e);
+        public delegate void OnScreenStartEventHandler(Screen screen, EventArgs e);
 
         public event OnScreenActivateEventHandler OnActivated;
         public event OnScreenDeactivateEventHandler OnDeactivated;
         public event OnScreenTransitionEventHandler OnTransition;
-        public event OnScreenExitEventHandler OnScreenExit;
 
-        protected void OnExitScreen(Screen screen, EventArgs e)
+        public event OnScreenExitEventHandler OnExit;
+        public event OnScreenStartEventHandler OnStart;
+
+        public void OnStartScreen(Screen screen, EventArgs e)
         {
-            if (OnScreenExit!= null)
-                OnScreenExit(screen, e);
+            if (OnStart != null)
+                OnStart(screen, e);
+        }
+        public void OnExitScreen(EventArgs e)
+        {
+            if (OnExit != null)
+                OnExit(e);
         }
         protected void OnActivadedScreen(Screen screen, EventArgs e)
         {
@@ -54,7 +50,7 @@ namespace Synced.Interface
         }
         protected void OnTransitionScreen(Screen screen, EventArgs e)
         {
-            if (OnTransition!=null)
+            if (OnTransition != null)
                 OnTransition(screen, e);
         }
         #endregion
@@ -91,8 +87,8 @@ namespace Synced.Interface
         /// Used to check if this screen is Initialized.
         /// </summary>
         public bool Initialized
-        { 
-            get; 
+        {
+            get;
             private set;
         }
 
@@ -120,7 +116,6 @@ namespace Synced.Interface
             : base(game)
         {
             GameComponents = new GameComponentCollection();
-
         }
         #endregion
 
@@ -157,33 +152,33 @@ namespace Synced.Interface
         #endregion
 
         #region IActive
-        /// <summary>
-        /// Virtual method, this method is called when a screen is activated 
-        /// </summary>
-        public virtual void Activated()
-        {
-            this.Enabled = true;
-            this.Visible = true;
-            foreach (DrawableGameComponent gc in GameComponents)
-            {
-                gc.Enabled = true;
-                gc.Visible = true;
-            }
-        }
+        ///// <summary>
+        ///// Virtual method, this method is called when a screen is activated 
+        ///// </summary>
+        //public virtual void Activated()
+        //{
+        //    this.Enabled = true;
+        //    this.Visible = true;
+        //    foreach (DrawableGameComponent gc in GameComponents)
+        //    {
+        //        gc.Enabled = true;
+        //        gc.Visible = true;
+        //    }
+        //}
 
-        /// <summary>
-        /// Virtual method, this method is called when a screen is deactivated 
-        /// </summary>
-        public virtual void Deactivated()
-        {
-            this.Enabled = false;
-            this.Visible = false;
-            foreach (DrawableGameComponent gc in GameComponents)
-            {
-                gc.Enabled = false;
-                gc.Visible = false;
-            }
-        }
+        ///// <summary>
+        ///// Virtual method, this method is called when a screen is deactivated 
+        ///// </summary>
+        //public virtual void Deactivated()
+        //{
+        //    this.Enabled = false;
+        //    this.Visible = false;
+        //    foreach (DrawableGameComponent gc in GameComponents)
+        //    {
+        //        gc.Enabled = false;
+        //        gc.Visible = false;
+        //    }
+        //}
         #endregion
     }
 }

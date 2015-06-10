@@ -7,6 +7,7 @@ using FarseerPhysics.Dynamics;
 using FarseerPhysics.Dynamics.Contacts;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using SevenEngine.Drawing;
 using Synced.CollisionShapes;
 using Synced.Content;
 using Synced.InGame;
@@ -38,7 +39,7 @@ namespace Synced.MapNameSpace
         public Circle OuterCircle;
         public TexturePolygon Border;
 
-        public Goal(Texture2D goalTexture, Texture2D borderTexture, Vector2 position, GoalDirections direction, DrawingHelper.DrawingLevel drawingLevel, Game game, World world)
+        public Goal(Texture2D goalTexture, Texture2D borderTexture, Vector2 position, GoalDirections direction, DrawHelper.DrawingLevel drawingLevel, Game game, World world)
             : base(game)
         {
             // TODO: Fråga dennis vad i helvete ----------------------------v
@@ -90,7 +91,7 @@ namespace Synced.MapNameSpace
             }
             #endregion
 
-            Border = new TexturePolygon(borderTexture, borderPosition, borderRotation, DrawingHelper.DrawingLevel.High, game, world, false);
+            Border = new TexturePolygon(borderTexture, borderPosition, borderRotation, DrawHelper.DrawingLevel.High, game, world, false);
             Border.SetCollisionCategory(Category.Cat10);
             Border.SetCollideWithCategory(Category.All);
         }

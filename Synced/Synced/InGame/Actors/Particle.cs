@@ -15,6 +15,7 @@ using Synced.Static_Classes;
 using FarseerPhysics;
 using Synced.Interface;
 using Synced.Actors;
+using SevenEngine.Drawing;
 
 namespace Synced.InGame.Actors
 {
@@ -39,7 +40,7 @@ namespace Synced.InGame.Actors
         #endregion
 
         #region Constructors
-        public Particle(Texture2D texture, Vector2 position, Color color, Vector2 origin, float scale, float rotation, float lifetime, DrawingHelper.DrawingLevel drawingLevel, Game game)
+        public Particle(Texture2D texture, Vector2 position, Color color, Vector2 origin, float scale, float rotation, float lifetime, DrawHelper.DrawingLevel drawingLevel, Game game)
             : base(texture, position, drawingLevel, game)
         {
             _lifetime = lifetime;

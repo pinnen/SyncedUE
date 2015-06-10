@@ -1,6 +1,7 @@
 ﻿using FarseerPhysics.Dynamics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using SevenEngine.Drawing;
 using Synced.CollisionShapes;
 using Synced.Static_Classes;
 using System;
@@ -15,7 +16,7 @@ namespace Synced.MapNamespace
     {
         public override DrawableGameComponent GetComponent(Game game, World world)
         {
-            return new TexturePolygon(game.Content.Load<Texture2D>(TexturePath), Position, 0, (DrawingHelper.DrawingLevel)drawingLevel, game, world, false);
+            return new TexturePolygon(game.Content.Load<Texture2D>(TexturePath), Position, 0, (DrawHelper.DrawingLevel)drawingLevel, game, world, false);
         }
     }
 }

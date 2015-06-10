@@ -5,6 +5,7 @@ using FarseerPhysics.Dynamics;
 using FarseerPhysics.Factories;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using SevenEngine.Drawing;
 using Synced.Actors;
 using Synced.Content;
 using Synced.Static_Classes;
@@ -15,7 +16,7 @@ using System.Text;
 
 namespace Synced.InGame.Actors
 {
-    class Barrier : CollidingSprite, IActive
+    class Barrier : CollidingSprite
     {
         #region Variables
         List<Body> _barrierBodies;
@@ -30,10 +31,10 @@ namespace Synced.InGame.Actors
         #endregion
 
         public Barrier(Texture2D texture, Unit start, Unit end, World world,Game game, Color color) 
-            : base(texture, Vector2.Zero, DrawingHelper.DrawingLevel.Low, game, world)
+            : base(texture, Vector2.Zero, DrawHelper.DrawingLevel.Low, game, world)
         {
             Color = color;
-            //EffectParticles = new ParticleEngine(30, texture, Vector2.Zero, color, Vector2.Zero, 1, 0, 10, DrawingHelper.DrawingLevel.Top, game);
+            //EffectParticles = new ParticleEngine(30, texture, Vector2.Zero, color, Vector2.Zero, 1, 0, 10, DrawHelper.DrawingLevel.Top, game);
             //SyncedGameCollection.ComponentCollection.Add(EffectParticles);
 
             // Units to follow

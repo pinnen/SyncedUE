@@ -25,9 +25,9 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Synced.Static_Classes
+namespace SevenEngine.Drawing
 {
-    static class ResolutionManager
+    public static class ResolutionManager
     {
         static private GraphicsDeviceManager _Device = null;
 

@@ -57,22 +57,17 @@
     <Compile Include="InGame\Actors\Zones\SquareZone.cs" />
     <Compile Include="InGame\Actors\Zones\TriangleZone.cs" />
     <Compile Include="InGame\Crystal.cs" />
-    <Compile Include="InGame\IActive.cs" />
     <Compile Include="InGame\Grabbable.cs" />
     <Compile Include="InGame\IVictim.cs" />
     <Compile Include="InGame\Movable.cs" />
     <Compile Include="InGame\MovableCollidable.cs" />
-    <Compile Include="Interface\ExitScreen.cs" />
-    <Compile Include="Interface\Label.cs" />
     <Compile Include="Interface\LoadingScreen.cs" />
     <Compile Include="Content\Library.cs" />
     <Compile Include="InGame\Actors\ParticleEngine.cs" />
     <Compile Include="InGame\Actors\Player.cs" />
     <Compile Include="InGame\Actors\Unit.cs" />
     <Compile Include="InGame\Actors\Zones\Zone.cs" />
-    <Compile Include="InGame\Actors\Sprite.cs" />
     <Compile Include="Interface\ScoreLabel.cs" />
-    <Compile Include="Interface\SettingsScreen.cs" />
     <Compile Include="Interface\SplashScreen.cs" />
     <Compile Include="Interface\WinScreen.cs" />
     <Compile Include="Map\BorderData.cs" />
@@ -85,16 +80,10 @@
     <Compile Include="Map\PlayerStartData.cs" />
     <Compile Include="Map\ObstacleData.cs" />
     <Compile Include="Interface\CharacterSelector.cs" />
-    <Compile Include="Interface\Controls.cs" />
     <Compile Include="Interface\GameScreen.cs" />
-    <Compile Include="Interface\IDrawableObject.cs" />
     <Compile Include="Interface\MenuScreen.cs" />
-    <Compile Include="Interface\Screen.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Static Classes\DrawingHelper.cs" />
     <Compile Include="Static Classes\InputManager.cs" />
-    <Compile Include="Static Classes\ResolutionManager.cs" />
-    <Compile Include="Static Classes\ScreenManager.cs" />
     <Compile Include="SyncedGame.cs" />
     <Compile Include="Program.cs" />
   </ItemGroup>
@@ -115,7 +104,12 @@
   <ItemGroup>
     <MonoGameContentReference Include="Content\Content.mgcb" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\SevenEngine\SevenEngine.csproj">
+      <Project>{5cf6fb48-294c-4153-9b17-6bad12d9c256}</Project>
+      <Name>SevenEngine</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Content.Builder.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

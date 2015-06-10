@@ -6,6 +6,7 @@
 // Pontus Magnusson
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using SevenEngine.Drawing;
 using Synced.Actors;
 using Synced.Static_Classes;
 using System;
@@ -23,7 +24,7 @@ namespace Synced.MapNamespace
         public string TexturePath;
 
         [XmlElement("DrawingLevel")]
-        public DrawingHelper.DrawingLevel drawingLevel; /* Low 1- 5 High */
+        public DrawHelper.DrawingLevel drawingLevel; /* Low 1- 5 High */
 
         public virtual DrawableGameComponent GetComponent(Game game, World world)
         {

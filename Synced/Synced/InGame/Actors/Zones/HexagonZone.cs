@@ -1,6 +1,7 @@
 ﻿using FarseerPhysics.Dynamics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using SevenEngine.Drawing;
 using Synced.Actors;
 using Synced.Content;
 using Synced.Static_Classes;
@@ -60,7 +61,7 @@ namespace Synced.InGame.Actors.Zones
             {
                 Vector2 randomDirection = new Vector2(_random.Next(-30,30),_random.Next(-30,30));
                 randomDirection.Normalize();
-                EvilCrystal tempEvilCrystal = new EvilCrystal(victim.VictimTexture, victim.Position, DrawingHelper.DrawingLevel.Medium, _game, _world, victim.Color);
+                EvilCrystal tempEvilCrystal = new EvilCrystal(victim.VictimTexture, victim.Position, DrawHelper.DrawingLevel.Medium, _game, _world, victim.Color);
                 tempEvilCrystal.Direction = randomDirection;
                 tempEvilCrystal.LinearVelocity = victim.VictimLinearVelocity;
                 _evilCrystalList.Add(tempEvilCrystal);
@@ -69,7 +70,7 @@ namespace Synced.InGame.Actors.Zones
             else if(victim is Unit)
             {
                 float randomAngleOffset = (_random.Next(-180,180)/10);
-                EvilUnit tempEvilUnit = new EvilUnit(victim.VictimTexture, victim.Position, victim.Color, _game, _world, DrawingHelper.DrawingLevel.Medium, (Unit)victim,randomAngleOffset);
+                EvilUnit tempEvilUnit = new EvilUnit(victim.VictimTexture, victim.Position, victim.Color, _game, _world, DrawHelper.DrawingLevel.Medium, (Unit)victim,randomAngleOffset);
 
                 _evilUnitList.Add(tempEvilUnit);
 

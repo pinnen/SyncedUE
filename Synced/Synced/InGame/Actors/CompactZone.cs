@@ -1,6 +1,7 @@
 ﻿using FarseerPhysics.Dynamics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using SevenEngine.Drawing;
 using Synced.Actors;
 using Synced.Content;
 using Synced.Static_Classes;
@@ -35,7 +36,7 @@ namespace Synced.InGame.Actors
         }
         #endregion
 
-        public CompactZone(Texture2D texture, Vector2 position, DrawingHelper.DrawingLevel drawingLevel, Game game, World world,Color color, Library.Zone.Name shape)
+        public CompactZone(Texture2D texture, Vector2 position, DrawHelper.DrawingLevel drawingLevel, Game game, World world,Color color, Library.Zone.Name shape)
             : base(texture, position, drawingLevel, game, world, color) 
         {
             _game = game;

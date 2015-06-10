@@ -11,6 +11,7 @@ using FarseerPhysics.Dynamics;
 using FarseerPhysics.Factories;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using SevenEngine.Drawing;
 using Synced.InGame.Actors;
 using Synced.Static_Classes;
 using System.Collections.Generic;
@@ -19,7 +20,7 @@ namespace Synced.CollisionShapes
 {
     class TexturePolygon : CollidingSprite
     {
-        public TexturePolygon(Texture2D texture, Vector2 position, float rotation, DrawingHelper.DrawingLevel drawingLevel, Game game, World world, bool textureCenter)
+        public TexturePolygon(Texture2D texture, Vector2 position, float rotation, DrawHelper.DrawingLevel drawingLevel, Game game, World world, bool textureCenter)
             : base(texture, position, drawingLevel, game, world)
         {
             // Fetch Texure data

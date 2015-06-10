@@ -5,6 +5,8 @@
 // Pontus Magnusson
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
+using SevenEngine.Drawing;
+using SevenEngine.State;
 using Synced.Actors;
 using Synced.Content;
 using Synced.Static_Classes;
@@ -17,7 +19,6 @@ namespace Synced.Interface
     {
         #region Delegates & Event & Raisers
 
-        public event StartNewGame NewGame;
 
         #endregion
 
@@ -37,7 +38,7 @@ namespace Synced.Interface
             : base(game)
         {
             //Menu background 
-            DrawOrder = (int)DrawingHelper.DrawingLevel.Back;
+            DrawOrder = (int)DrawHelper.DrawingLevel.Back;
             // Temporary screen variables (Half of screen)
             int w = ResolutionManager.GetCenterPointWidth;
             int h = ResolutionManager.GetCenterPointHeight;
@@ -48,7 +49,7 @@ namespace Synced.Interface
             GameComponents.Add(new CharacterSelector(PlayerIndex.Three, new Rectangle(0, h, w, h), Color.Red, Game));
             GameComponents.Add(new CharacterSelector(PlayerIndex.Four, new Rectangle(w, h, w, h), Color.Yellow, Game));
             // Background
-            GameComponents.Add(new Sprite(Library.Interface.MenuBackground, Vector2.Zero, DrawingHelper.DrawingLevel.Back, game));
+            GameComponents.Add(new Sprite(Library.Interface.MenuBackground, Vector2.Zero, DrawHelper.DrawingLevel.Back, game));
 
             Library.Audio.PlaySong(Library.Audio.Songs.MenuSong1);
         }
@@ -73,21 +74,21 @@ namespace Synced.Interface
 
         public override void Update(GameTime gameTime)
         {
-            if (IsEveryoneReady() && NewGame != null
-                && InputManager.IsButtonPressed(PlayerIndex.One, Buttons.Start))
-            {
-                foreach (var item in GameComponents)
-                {
-                    if (item is CharacterSelector)
-                    {
-                        if ((item as CharacterSelector).IsReady())
-                        {
-                            SelectedCharacter.Add((item as CharacterSelector).SelectedCharacter);
-                        }
-                    }
-                }
-                NewGame(this, new EventArgs());
-            }
+            //if (IsEveryoneReady() && NewGame != null
+            //    && InputManager.IsButtonPressed(PlayerIndex.One, Buttons.Start))
+            //{
+            //    foreach (var item in GameComponents)
+            //    {
+            //        if (item is CharacterSelector)
+            //        {
+            //            if ((item as CharacterSelector).IsReady())
+            //            {
+            //                SelectedCharacter.Add((item as CharacterSelector).SelectedCharacter);
+            //            }
+            //        }
+            //    }
+            //    NewGame(this, new EventArgs());
+            //}
             base.Update(gameTime);
         }
     }

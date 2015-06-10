@@ -1,22 +1,17 @@
-﻿// Drawinghelper.cs
-// Introduced: 2015-04-26
-// Last edited: 2015-04-26
-// Edited by:
-// Pontus Magnusson
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 
-namespace Synced.Static_Classes
+namespace SevenEngine.Drawing
 {
-    public static class DrawingHelper
+    public static class DrawHelper
     {
-        public enum DrawingLevel { Back = 1, Low = 2, Medium = 3 , High = 4, Top = 5 }
-        
+        public enum DrawingLevel { Back = 1, Low = 2, Medium = 3, High = 4, Top = 5 }
+
         [Flags]
         public enum Alignment { Center = 0, Left = 1, Right = 2, Top = 4, Bottom = 8 }
 
-        public static void DrawString(SpriteBatch spritebatch, SpriteFont font, string text, Rectangle bounds, Alignment align, float scale, Color color)
+        public static void DrawString(Game game, SpriteFont font, string text, Rectangle bounds, Alignment align, float scale, Color color)
         {
             Vector2 size = font.MeasureString(text);
             Vector2 pos = new Vector2(bounds.Center.X, bounds.Center.Y);
@@ -34,7 +29,11 @@ namespace Synced.Static_Classes
             else if (align.HasFlag(Alignment.Bottom))
                 origin.Y -= bounds.Height / 2 - size.Y / 2;
 
-            spritebatch.DrawString(font, text, pos, color, 0, origin, scale, SpriteEffects.None, 0);
+            DrawHelper.SpriteBatch(game).DrawString(font, text, pos, color, 0, origin, scale, SpriteEffects.None, 0);
+        }
+        public static SpriteBatch SpriteBatch(Game game)
+        {
+            return (SpriteBatch)game.Services.GetService(typeof(SpriteBatch));
         }
     }
 }

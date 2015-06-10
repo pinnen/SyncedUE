@@ -14,6 +14,7 @@ using FarseerPhysics.Dynamics;
 using Synced.InGame.Actors;
 using FarseerPhysics;
 using Synced.InGame.Actors.Zones;
+using SevenEngine.Drawing;
 
 namespace Synced.Actors
 {
@@ -225,7 +226,7 @@ namespace Synced.Actors
                 if (InputManager.IsButtonPressed(_playerIndex, Buttons.B) && _canCreateZone) // TODO: Remove. This is for testing
                 {
                     Vector2 spawnPosition = new Vector2((Left.RigidBody.Position.X + Right.RigidBody.Position.X)/2.0f,(Left.RigidBody.Position.Y + Right.RigidBody.Position.Y)/2.0f);
-                    _compactZone = new CompactZone(Library.Zone.CompactTexture[shape], ConvertUnits.ToDisplayUnits(spawnPosition), DrawingHelper.DrawingLevel.Medium, Game, _world, Library.Colors.getColor[Tuple.Create(_teamColor, Library.Colors.ColorVariation.Other)],shape);
+                    _compactZone = new CompactZone(Library.Zone.CompactTexture[shape], ConvertUnits.ToDisplayUnits(spawnPosition), DrawHelper.DrawingLevel.Medium, Game, _world, Library.Colors.getColor[Tuple.Create(_teamColor, Library.Colors.ColorVariation.Other)],shape);
                     _compactZones.Add(_compactZone);
                     _canCreateZone = false;
                     Library.Audio.PlaySoundEffect(Library.Audio.SoundEffects.ZoneSpawn);

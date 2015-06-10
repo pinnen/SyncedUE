@@ -5,16 +5,38 @@ VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Synced", "Synced\Synced.csproj", "{8864B9DF-5BA2-470A-A36A-0CE808D20C43}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SevenEngine", "SevenEngine\SevenEngine.csproj", "{5CF6FB48-294C-4153-9B17-6BAD12D9C256}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|Mixed Platforms = Debug|Mixed Platforms
 		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|Mixed Platforms = Release|Mixed Platforms
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8864B9DF-5BA2-470A-A36A-0CE808D20C43}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{8864B9DF-5BA2-470A-A36A-0CE808D20C43}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{8864B9DF-5BA2-470A-A36A-0CE808D20C43}.Debug|Mixed Platforms.Build.0 = Debug|x86
 		{8864B9DF-5BA2-470A-A36A-0CE808D20C43}.Debug|x86.ActiveCfg = Debug|x86
 		{8864B9DF-5BA2-470A-A36A-0CE808D20C43}.Debug|x86.Build.0 = Debug|x86
+		{8864B9DF-5BA2-470A-A36A-0CE808D20C43}.Release|Any CPU.ActiveCfg = Release|x86
+		{8864B9DF-5BA2-470A-A36A-0CE808D20C43}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{8864B9DF-5BA2-470A-A36A-0CE808D20C43}.Release|Mixed Platforms.Build.0 = Release|x86
 		{8864B9DF-5BA2-470A-A36A-0CE808D20C43}.Release|x86.ActiveCfg = Release|x86
 		{8864B9DF-5BA2-470A-A36A-0CE808D20C43}.Release|x86.Build.0 = Release|x86
+		{5CF6FB48-294C-4153-9B17-6BAD12D9C256}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5CF6FB48-294C-4153-9B17-6BAD12D9C256}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5CF6FB48-294C-4153-9B17-6BAD12D9C256}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{5CF6FB48-294C-4153-9B17-6BAD12D9C256}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{5CF6FB48-294C-4153-9B17-6BAD12D9C256}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{5CF6FB48-294C-4153-9B17-6BAD12D9C256}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5CF6FB48-294C-4153-9B17-6BAD12D9C256}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5CF6FB48-294C-4153-9B17-6BAD12D9C256}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{5CF6FB48-294C-4153-9B17-6BAD12D9C256}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{5CF6FB48-294C-4153-9B17-6BAD12D9C256}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

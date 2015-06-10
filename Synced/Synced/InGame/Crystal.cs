@@ -10,6 +10,7 @@ using FarseerPhysics.Dynamics;
 using FarseerPhysics.Dynamics.Contacts;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using SevenEngine.Drawing;
 using Synced.Content;
 using Synced.InGame.Actors;
 using Synced.Static_Classes;
@@ -29,7 +30,7 @@ namespace Synced.InGame
         public delegate void IncreaseScore(PlayerIndex playerIndex);
         public event IncreaseScore Scored;
 
-        public Crystal(Texture2D texture, Vector2 position, DrawingHelper.DrawingLevel drawingLevel, Game game, World world, Color color)
+        public Crystal(Texture2D texture, Vector2 position, DrawHelper.DrawingLevel drawingLevel, Game game, World world, Color color)
             : base(texture, position, drawingLevel, game, world, color)
         {
             // Store original position

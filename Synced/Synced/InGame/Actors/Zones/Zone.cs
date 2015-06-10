@@ -1,6 +1,7 @@
 ﻿using FarseerPhysics.Dynamics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using SevenEngine.Drawing;
 using Synced.CollisionShapes;
 using Synced.Content;
 using Synced.InGame;
@@ -33,7 +34,7 @@ namespace Synced.InGame.Actors.Zones
         protected List<IVictim> _victims;
 
         public Zone(Texture2D texture, Vector2 position,float rotation, Color color,Game game, World world) 
-            : base(texture,position, rotation ,DrawingHelper.DrawingLevel.Medium,game,world,false)
+            : base(texture,position, rotation, DrawHelper.DrawingLevel.Medium,game,world,false)
         {
             Color = color;
 

@@ -5,6 +5,7 @@
 // Pontus Magnusson
 using FarseerPhysics.Dynamics;
 using Microsoft.Xna.Framework;
+using SevenEngine.Drawing;
 using Synced.MapNameSpace;
 using Synced.Static_Classes;
 using System;
@@ -40,7 +41,7 @@ namespace Synced.MapNamespace
             _objects.Add(new PlayerStartData()
             {
                 TexturePath = "",
-                drawingLevel = DrawingHelper.DrawingLevel.Medium,
+                drawingLevel = DrawHelper.DrawingLevel.Medium,
                 PlayerIndex = PlayerIndex.One,
                 Position = new Vector2(400, 400),
                 Position2 = new Vector2(400, 450),
@@ -49,7 +50,7 @@ namespace Synced.MapNamespace
             _objects.Add(new PlayerStartData()
             {
                 TexturePath = "",
-                drawingLevel = DrawingHelper.DrawingLevel.Medium,
+                drawingLevel = DrawHelper.DrawingLevel.Medium,
                 PlayerIndex = PlayerIndex.Two,
                 Position = new Vector2(1920 - 400, 400),
                 Position2 = new Vector2(1920 - 400, 450),
@@ -58,7 +59,7 @@ namespace Synced.MapNamespace
             _objects.Add(new PlayerStartData()
             {
                 TexturePath = "",
-                drawingLevel = DrawingHelper.DrawingLevel.Medium,
+                drawingLevel = DrawHelper.DrawingLevel.Medium,
                 PlayerIndex = PlayerIndex.Three,
                 Position = new Vector2(400, 1080 - 400),
                 Position2 = new Vector2(400, 1080 - 450),
@@ -67,7 +68,7 @@ namespace Synced.MapNamespace
             _objects.Add(new PlayerStartData()
             {
                 TexturePath = "",
-                drawingLevel = DrawingHelper.DrawingLevel.Medium,
+                drawingLevel = DrawHelper.DrawingLevel.Medium,
                 PlayerIndex = PlayerIndex.Four,
                 Position = new Vector2(1920 - 400, 1080 - 400),
                 Position2 = new Vector2(1920 - 400, 1080 - 450),
@@ -79,7 +80,7 @@ namespace Synced.MapNamespace
             _objects.Add(new CrystalSpawnData()
             {
                 TexturePath = "GameObjects/Crystal",
-                drawingLevel = DrawingHelper.DrawingLevel.Medium,
+                drawingLevel = DrawHelper.DrawingLevel.Medium,
                 Position = new Vector2(1920 / 2, 1080 / 2),
                 IsStart = true,
             });
@@ -90,13 +91,13 @@ namespace Synced.MapNamespace
             {
                 Position = new Vector2(129, 111),
                 TexturePath = "Maps/Paper/background",
-                drawingLevel = DrawingHelper.DrawingLevel.Low,
+                drawingLevel = DrawHelper.DrawingLevel.Low,
             });
             _objects.Add(new BorderData()
             {
                 Position = new Vector2(1920 / 2, 1080 / 2),
                 TexturePath = "Maps/Paper/Frame2",
-                drawingLevel = DrawingHelper.DrawingLevel.Medium,
+                drawingLevel = DrawHelper.DrawingLevel.Medium,
             });
             #endregion
 
@@ -106,7 +107,7 @@ namespace Synced.MapNamespace
                 Position = new Vector2(300, 1080 / 2),
                 TexturePath = "Maps/Paper/Goal",
                 Texture2Path = "GameObjects/GoalBorder",
-                drawingLevel = DrawingHelper.DrawingLevel.Medium,
+                drawingLevel = DrawHelper.DrawingLevel.Medium,
                 Direction = GoalDirections.West,
             });
             _objects.Add(new GoalData()
@@ -114,7 +115,7 @@ namespace Synced.MapNamespace
                 Position = new Vector2(1920 - 300, 1080 / 2),
                 TexturePath = "GameObjects/Goal",
                 Texture2Path = "GameObjects/GoalBorder",
-                drawingLevel = DrawingHelper.DrawingLevel.Medium,
+                drawingLevel = DrawHelper.DrawingLevel.Medium,
                 Direction = GoalDirections.East,
             });
             #endregion

@@ -6,6 +6,7 @@
 using FarseerPhysics.Dynamics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using SevenEngine.Drawing;
 using Synced.Actors;
 using Synced.Static_Classes;
 
@@ -30,7 +31,7 @@ namespace Synced.InGame
         }
         #endregion
 
-        public Movable(Texture2D texture, Vector2 position, DrawingHelper.DrawingLevel drawingLevel, Game game, World world, Vector2 direction, float constantForce)
+        public Movable(Texture2D texture, Vector2 position, DrawHelper.DrawingLevel drawingLevel, Game game, World world, Vector2 direction, float constantForce)
             : base(texture, position, drawingLevel, game)
         {
             this.direction = direction;

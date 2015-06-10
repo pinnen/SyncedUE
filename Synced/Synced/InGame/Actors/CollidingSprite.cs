@@ -13,6 +13,7 @@ using FarseerPhysics.Collision.Shapes;
 using FarseerPhysics;
 using FarseerPhysics.Dynamics.Contacts;
 using Synced.Actors;
+using SevenEngine.Drawing;
 
 public enum CollisionCategory 
 {
@@ -27,7 +28,7 @@ public enum CollisionCategory
 
 namespace Synced.InGame.Actors
 {
-    abstract class CollidingSprite : Sprite // TODO: Add a Collidable interface
+    abstract class CollidingSprite : Sprite// TODO: Add a Collidable interface
     {
         #region Variables
         protected World world;
@@ -71,7 +72,7 @@ namespace Synced.InGame.Actors
         /// <summary>
         /// Creates a default Colliding Sprite. 
         /// </summary>
-        public CollidingSprite(Texture2D texture, Vector2 position, DrawingHelper.DrawingLevel drawingLevel, Game game, World world)
+        public CollidingSprite(Texture2D texture, Vector2 position, DrawHelper.DrawingLevel drawingLevel, Game game, World world)
             : base(texture, position, drawingLevel, game)
         {
             /* Setting up Farseer Physics*/

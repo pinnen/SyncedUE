@@ -3,6 +3,7 @@ using FarseerPhysics.Dynamics;
 using FarseerPhysics.Factories;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using SevenEngine.Drawing;
 using Synced.Actors;
 using Synced.Content;
 using Synced.Static_Classes;
@@ -29,7 +30,7 @@ namespace Synced.InGame.Actors.Zones
         }
         #endregion
 
-        public EvilUnit(Texture2D texture, Vector2 position, Color color, Game game, World world, DrawingHelper.DrawingLevel drawingLevel, Unit copyOf, float offset)
+        public EvilUnit(Texture2D texture, Vector2 position, Color color, Game game, World world, DrawHelper.DrawingLevel drawingLevel, Unit copyOf, float offset)
             : base(texture, position, drawingLevel, game, world)
         {
 ;

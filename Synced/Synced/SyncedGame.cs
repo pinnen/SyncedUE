@@ -8,10 +8,13 @@ using FarseerPhysics.Dynamics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using SevenEngine.Drawing;
+using SevenEngine.State;
 using Synced.Actors;
 using Synced.CollisionShapes;
 using Synced.Content;
 using Synced.InGame;
+using Synced.Interface;
 using Synced.MapNamespace;
 using Synced.MapNameSpace;
 using Synced.Static_Classes;
@@ -72,6 +75,8 @@ namespace Synced
             // Adds menu screen to ScreenManager
             // ------------------------------------------------------------
             ScreenManager.InitializeScreenManager(this);
+            ScreenManager.Instance.AddScreen(new SplashScreen(Library.Screens.SplashSeven, this));
+            ScreenManager.Instance.AddScreen(new SplashScreen(Library.Screens.SplashAlpha, this));
             Components.Add(ScreenManager.Instance);
 
             base.Initialize(); // Initializes all components

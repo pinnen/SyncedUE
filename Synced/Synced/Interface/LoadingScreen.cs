@@ -1,4 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
+using SevenEngine.Drawing;
+using SevenEngine.State;
 using Synced.Actors;
 using Synced.Content;
 using Synced.Static_Classes;
@@ -13,7 +15,7 @@ namespace Synced.Interface
     {
         public LoadingScreen(Game game) : base(game)
         {
-            GameComponents.Add(new Sprite(Library.Screens.LoadScreen, Vector2.Zero, DrawingHelper.DrawingLevel.Top, game));
+            GameComponents.Add(new Sprite(Library.Screens.LoadScreen, Vector2.Zero, DrawHelper.DrawingLevel.Top, game));
         }
     }
 }

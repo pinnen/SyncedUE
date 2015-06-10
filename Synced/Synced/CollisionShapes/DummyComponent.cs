@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using SevenEngine.Drawing;
 using Synced.InGame.Actors;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ namespace Synced.CollisionShapes
 {
     class DummyComponent : CollidingSprite
     {
-        public DummyComponent(): base(null, Vector2.Zero, Static_Classes.DrawingHelper.DrawingLevel.Back, null, null)
+        public DummyComponent(): base(null, Vector2.Zero, DrawHelper.DrawingLevel.Back, null, null)
         {
             RigidBody.CollisionGroup = (short)CollisionCategory.UNDEFINED;
         }

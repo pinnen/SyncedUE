@@ -7,6 +7,8 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using SevenEngine.Drawing;
+using SevenEngine.Interface;
 using Synced.Actors;
 using Synced.Content;
 using Synced.Static_Classes;
@@ -56,7 +58,7 @@ namespace Synced.Interface
             _currentState = State.Unconnected;
             _rectangle = rectangle;
             PlayerIndex = playerIndex;
-            DrawOrder = (int)DrawingHelper.DrawingLevel.Top;
+            DrawOrder = (int)DrawHelper.DrawingLevel.Top;
         }
 
         public override void Initialize()
@@ -70,9 +72,9 @@ namespace Synced.Interface
             Rectangle abilityTextRectangle = new Rectangle(posX, posY + 50, 0, 0);
             Vector2 arrowPosition = characterPosition;
 
-            _characterHolder = new Sprite(Library.Character.InterfaceTexture[(Library.Character.Name)0], characterPosition, _color, DrawingHelper.DrawingLevel.Top, true, Game);
+            _characterHolder = new Sprite(Library.Character.InterfaceTexture[(Library.Character.Name)0], characterPosition, _color, DrawHelper.DrawingLevel.Top, true, Game);
             _abilityTextHolder = new Label("", abilityTextRectangle, Game);
-            _arrowHolder = new Sprite(Library.Interface.Arrows, arrowPosition, _color, DrawingHelper.DrawingLevel.Top, true, Game);
+            _arrowHolder = new Sprite(Library.Interface.Arrows, arrowPosition, _color, DrawHelper.DrawingLevel.Top, true, Game);
             _stateText = new Label("Unconnected!", new Rectangle(posX, posY, 0, 0), Game);
 
             base.Initialize();

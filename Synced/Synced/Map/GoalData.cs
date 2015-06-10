@@ -1,6 +1,7 @@
 ﻿using FarseerPhysics.Dynamics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using SevenEngine.Drawing;
 using Synced.MapNameSpace;
 using Synced.Static_Classes;
 // Goal.cs
@@ -24,7 +25,7 @@ namespace Synced.MapNamespace
 
         public override DrawableGameComponent GetComponent(Microsoft.Xna.Framework.Game game, World world)
         {
-            return new Goal(game.Content.Load<Texture2D>(TexturePath), game.Content.Load<Texture2D>(Texture2Path), Position, Direction, (DrawingHelper.DrawingLevel)drawingLevel, game, world);
+            return new Goal(game.Content.Load<Texture2D>(TexturePath), game.Content.Load<Texture2D>(Texture2Path), Position, Direction, (DrawHelper.DrawingLevel)drawingLevel, game, world);
         }
     }
 }

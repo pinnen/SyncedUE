@@ -21,6 +21,7 @@ using FarseerPhysics;
 using Synced.InGame.Actors;
 using Synced.MapNamespace;
 using Synced.Interface;
+using SevenEngine.Drawing;
 
 namespace Synced.Actors
 {
@@ -47,7 +48,7 @@ namespace Synced.Actors
         #endregion
 
         public Unit(PlayerIndex playerIndex, Texture2D texture, Vector2 position, Color color, Game game, World world,Library.Colors.ColorName teamColor)
-            : base(texture, position, DrawingHelper.DrawingLevel.Medium, game, world)
+            : base(texture, position, DrawHelper.DrawingLevel.Medium, game, world)
         {
             PlayerIndex = playerIndex;
 

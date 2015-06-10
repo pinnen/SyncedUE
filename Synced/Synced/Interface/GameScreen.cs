@@ -7,6 +7,8 @@
 // Robin Calmegård
 using FarseerPhysics.Dynamics;
 using Microsoft.Xna.Framework;
+using SevenEngine.Drawing;
+using SevenEngine.State;
 using Synced.Actors;
 using Synced.Content;
 using Synced.InGame;
@@ -21,7 +23,6 @@ namespace Synced.Interface
     class GameScreen : Screen
     {
         public int GameScore = 5;
-        public event EndGame GameEnded;
         Map _map;
         World world;
 
@@ -49,7 +50,7 @@ namespace Synced.Interface
             }
 
             // Crystal
-            GameComponents.Add(new Crystal(Library.Crystal.Texture, _map.crystalSpawnPosition, DrawingHelper.DrawingLevel.Medium, Game, world, Color.LightGray));
+            GameComponents.Add(new Crystal(Library.Crystal.Texture, _map.crystalSpawnPosition, DrawHelper.DrawingLevel.Medium, Game, world, Color.LightGray));
 
             // Audio
             Library.Audio.PlaySong(Library.Audio.Songs.GameSong3);
@@ -107,11 +108,11 @@ namespace Synced.Interface
             world.Step(Math.Min((float)gameTime.ElapsedGameTime.TotalSeconds, (1f / 30f)));
 
             // Have we won?
-            Library.Colors.ColorName color = Library.Colors.ColorName.Blue;
-            if (Winner(ref color))
-            {
-                GameEnded(color, new EventArgs());
-            }
+            //Library.Colors.ColorName color = Library.Colors.ColorName.Blue;
+            //if (Winner(ref color))
+            //{
+            //    GameEnded(color, new EventArgs());
+            //}
 
             base.Update(gameTime);
         }
